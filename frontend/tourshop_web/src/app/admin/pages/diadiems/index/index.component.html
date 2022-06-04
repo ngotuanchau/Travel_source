@@ -1,0 +1,100 @@
+<div class="row">
+    <!-- ==================================-->
+    <!-- ======= Basic Nav ===== -->
+    <!-- ==================================-->
+    <div class="col-12">
+        <div class="card">
+            <div class="p-3">
+                <h4 class="card-title mb-0">QUẢN LÝ ĐỊA ĐIỂM</h4>
+            </div>
+            <div class="p-3">
+                <p class="card-description">
+                    <a [routerLink]="['create']"><button type="button" class="btn btn-success btn-rounded btn-fw">Thêm
+              mới + </button></a>
+                </p>
+            </div>
+
+            <div class="card-body border-top">
+                <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+                    <li [ngbNavItem]="1">
+                        <a ngbNavLink>Tất cả</a>
+                        <ng-template ngbNavContent>
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Tất cả tour</h4>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered align-middle text-nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-dark font-medium fs-4">STT</th>
+                                                    <th class="text-dark font-medium fs-4">Tên địa điểm</th>
+                                                    <th class="text-dark font-medium fs-4">Miền</th>
+                                                    <th class="text-dark font-medium fs-4">Số tour</th>
+                                                    <th class="text-dark font-medium fs-4">Trạng thái</th>
+                                                    <th class="text-dark font-medium fs-4"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let tr of trow; index as i">
+                                                    <td>
+                                                        {{ i + 1 }}
+                                                    </td>
+                                                    <td>
+                                                        {{tr.ten}}
+                                                    </td>
+                                                    <td>
+                                                        {{tr.mien}}
+                                                    </td>
+                                                    <td>
+                                                        {{tr.sotour}}
+                                                    </td>
+                                                    <td>
+                                                        {{tr.trangthai}}
+                                                    </td>
+
+                                                    <td>
+                                                        <a [routerLink]="['detail']"><button type="button" class="btn btn-inverse-info btn-icon"
+                                onclick="">
+                                <i class="bi bi-eye"></i></button></a>
+                                                        <a [routerLink]="['update']"><button type="button" class="btn btn-inverse-info btn-icon"
+                                onclick="">
+                                <i class="bi bi-pen"></i></button></a>
+                                                        <button type="button" class="btn btn-inverse-info btn-icon" onclick="">
+                              <i class="bi bi-trash"></i></button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </ng-template>
+                    </li>
+                    <li [ngbNavItem]=" 2 ">
+                        <a ngbNavLink>Bắc</a>
+                        <ng-template ngbNavContent>
+
+                        </ng-template>
+                    </li>
+                    <li [ngbNavItem]="3 ">
+                        <a ngbNavLink>Trung</a>
+                        <ng-template ngbNavContent>
+
+                        </ng-template>
+                    </li>
+                    <li [ngbNavItem]="4 ">
+                        <a ngbNavLink>Nam</a>
+                        <ng-template ngbNavContent>
+
+                        </ng-template>
+                    </li>
+                </ul>
+
+                <div [ngbNavOutlet]="nav " class="mt-2 "></div>
+            </div>
+        </div>
+
+    </div>
+</div>

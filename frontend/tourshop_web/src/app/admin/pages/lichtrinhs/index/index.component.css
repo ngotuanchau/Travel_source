@@ -1,0 +1,17 @@
+table {
+    width: 100%;
+}
+
+.text-nowrap {
+    white-space: unset !important;
+}
+
+tbody td p {
+    word-break: keep-all;
+    -webkit-line-clamp: 4!important;
+    line-height: 25px;
+    height: 100px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

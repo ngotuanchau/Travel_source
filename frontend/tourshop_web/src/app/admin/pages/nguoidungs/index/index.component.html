@@ -1,0 +1,82 @@
+<div class="row">
+    <!-- ==================================-->
+    <!-- ======= Basic Nav ===== -->
+    <!-- ==================================-->
+    <div class="col-12">
+        <div class="card">
+            <div class="p-3">
+                <h4 class="card-title mb-0">QUẢN LÝ NGƯỜI DÙNG</h4>
+            </div>
+            <div class="p-3">
+                <p class="card-description">
+                    <a [routerLink]="['create']"><button type="button" class="btn btn-success btn-rounded btn-fw">Thêm
+              mới + </button></a>
+                </p>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered align-middle text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th class="text-dark font-medium fs-4">STT</th>
+                                    <th class="text-dark font-medium fs-4">Username</th>
+                                    <th class="text-dark font-medium fs-4">Email</th>
+                                    <th class="text-dark font-medium fs-4">Avatar</th>
+                                    <th class="text-dark font-medium fs-4">Họ tên</th>
+                                    <th class="text-dark font-medium fs-4">CMND</th>
+                                    <th class="text-dark font-medium fs-4">SĐT</th>
+                                    <th class="text-dark font-medium fs-4">Ngày sinh</th>
+                                    <th class="text-dark font-medium fs-4">Trạng thái</th>
+                                    <th class="text-dark font-medium fs-4"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let tr of trow; index as i">
+                                    <td>
+                                        {{ i + 1 }}
+                                    </td>
+                                    <td>
+                                        {{tr.username}}
+                                    </td>
+                                    <td>
+                                        {{tr.email}}
+                                    </td>
+                                    <td>
+                                        {{tr.avater}}
+                                    </td>
+                                    <td>
+                                        {{tr.hoten}}
+                                    </td>
+                                    <td>
+                                        {{tr.cmnd}}
+                                    </td>
+                                    <td>
+                                        {{tr.sdt}}
+                                    </td>
+                                    <td>
+                                        {{tr.ngaysinh}}
+                                    </td>
+                                    <td>
+                                        {{tr.trangthai}}
+                                    </td>
+                                    <td>
+                                        <a [routerLink]="['detail']"><button type="button" class="btn btn-inverse-info btn-icon"
+              onclick="">
+              <i class="bi bi-eye"></i></button></a>
+                                        <a [routerLink]="['update']"><button type="button" class="btn btn-inverse-info btn-icon"
+              onclick="">
+              <i class="bi bi-pen"></i></button></a>
+                                        <button type="button" class="btn btn-inverse-info btn-icon" onclick="">
+            <i class="bi bi-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

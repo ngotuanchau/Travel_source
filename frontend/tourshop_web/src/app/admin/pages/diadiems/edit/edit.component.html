@@ -1,0 +1,60 @@
+<a class="btn-back" [routerLink]="['../']"><button type="button" class="btn btn-success btn-rounded btn-fw">Xem danh
+  sách địa điểm
+</button></a>
+<div class="col-12 grid-margin">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Thêm địa điểm</h4>
+            <form class="form-sample">
+                <div class="col-12 grid-margin grid-child">
+                    <p class="card-description">Thông tin địa điểm</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Tên địa điểm</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" placeholder="Nhập tên địa điểm" value="Tên địa điểm" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Thông tin</label>
+                                <div class="col-sm-9">
+                                    <textarea class="form-control" id="exampleTextarea1" rows="5" placeholder="Thông tin về địa điểm" value="Thông tin về địa điểm"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Vùng miền</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control">
+                <option>Miền Bắc</option>
+                <option>Miền Trung</option>
+                <option>Miền Nam</option>
+              </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-12 grid-margin grid-child">
+                    <p class="card-description">Ảnh</p>
+                    <div class="card">
+                        <label class="btn btn-default"><i class="bi bi-upload"></i>
+                      Chọn <input type="file" hidden>
+                  </label>
+
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mr-2"> Xác nhận </button>
+                <button class="btn btn-light">Hủy</button>
+            </form>
+        </div>
+    </div>
+</div>
