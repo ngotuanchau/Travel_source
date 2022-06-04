@@ -1,0 +1,126 @@
+<div class="col col-xl-10">
+    <div class="card">
+        <div class="row g-0">
+            <div class="col-md-6 col-lg-7 d-none d-md-block">
+                <img src="../../../assets/images/bg/bg3.jpg" alt="login form" class="img-fluid" />
+            </div>
+            <div class="col-md-6 col-lg-5 d-flex align-items-center">
+                <div class="card-body p-4 p-lg-5 text-black">
+                    <!--Đăng ký thành công-->
+                    <!-- <div *ngIf="alert" class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Đăng ký thành công!</strong>
+                        <button (click)="closeAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+                    </div> -->
+                    <form (ngSubmit)="onSubmit()" [formGroup]="infoUser" #form="ngForm">
+                        <div class="d-flex align-items-center mb-3 pb-1">
+                            <i class="bi bi-building"></i>
+                            <span class="h1 fw-bold mb-0">Đăng ký</span>
+                        </div>
+                        <h5 class="fw-normal mb-3 pb-3">Đăng ký dịch vụ của chúng tôi để có trải nghiệm tốt nhất</h5>
+                        <div class="row form-group">
+                            <div class="col-md-6 mb-4">
+                                <div class="form-outline">
+                                    <label class="form-label" for="form2Example1">Username</label>
+                                    <input type="text" for="tenNguoiDung" formControlName="tenNguoiDung" [(ngModel)]="nguoiDung.tenNguoiDung" class="form-control" />
+                                    <div *ngIf="f.tenNguoiDung.invalid && (f.tenNguoiDung.dirty||f.tenNguoiDung.touched)">
+                                        <div *ngIf="f.tenNguoiDung.errors">
+                                            <div *ngIf="f.tenNguoiDung.errors.required">
+                                                <small>Bạn chưa nhập Username</small>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-6 mb-4">
+                                <div class="form-outline">
+                                    <label class="form-label" for="form2Example1">CMND/CCCD</label>
+                                    <input type="text" for="cmnd" formControlName="cmnd" [(ngModel)]="nguoiDung.cmnd" class="form-control" />
+                                    <div *ngIf="f.cmnd.invalid && (f.cmnd.dirty||f.cmnd.touched)">
+                                        <div *ngIf="f.cmnd.errors">
+                                            <div *ngIf="f.cmnd.errors.required">
+                                                <small>Bạn chưa nhập CMND/CCCD</small>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="form-outline">
+                                    <label class="form-label" for="form2Example2">Số điện thoại</label>
+                                    <input type="text" for="sdt" formControlName="sdt" [(ngModel)]="nguoiDung.sdt" class="form-control" />
+                                    <div *ngIf="f.sdt.invalid && (f.sdt.dirty||f.sdt.touched)">
+                                        <div *ngIf="f.sdt.errors">
+                                            <div *ngIf="f.sdt.errors.required">
+                                                <small>Bạn chưa nhập Số điện thoại</small>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-outline mb-4 form-group">
+                            <label class="form-label" for="form2Example3">Họ Tên</label>
+                            <input type="email" for="hoTen" formControlName="hoTen" [(ngModel)]="nguoiDung.hoTen" class="form-control form-control-lg" />
+                            <div *ngIf="f.hoTen.invalid && (f.hoTen.dirty||f.hoTen.touched)">
+                                <div *ngIf="f.hoTen.errors">
+                                    <div *ngIf="f.hoTen.errors.required">
+                                        <small>Bạn chưa nhập Họ tên</small>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-outline mb-4 form-group">
+                            <label class="form-label" for="form2Example3">Email</label>
+                            <input type="email" for="email" formControlName="email" placeholder="abc@gmail.com" [(ngModel)]="nguoiDung.email" class="form-control form-control-lg" />
+                            <div *ngIf="f.email.invalid && (f.email.dirty||f.email.touched)">
+                                <div *ngIf="f.email.errors">
+                                    <div *ngIf="f.email.errors.required">
+                                        <small>Bạn chưa nhập email</small>
+                                    </div>
+
+                                    <div *ngIf="f.email.errors.email">
+                                        <small>Email chưa đúng định dạng</small>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-outline mb-4 form-group">
+                            <label class="form-label" for="form2Example4">Mật khẩu</label>
+                            <input type="password" for="matKhau" formControlName="matKhau" [(ngModel)]="nguoiDung.matKhau" class="form-control form-control-lg" />
+                            <div *ngIf="f.matKhau.invalid && (f.matKhau.dirty||f.matKhau.touched)">
+                                <div *ngIf="f.matKhau.errors">
+                                    <div *ngIf="f.matKhau.errors.required">
+                                        <small>Bạn chưa nhập mật khẩu</small>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="infoUser.valid">
+                            <div class="pt-1 mb-4 form-group">
+                                <button class="btn btn-dark btn-lg btn-block "> Đăng ký
+                </button>
+                            </div>
+                        </div>
+                        <p class="mb-5 pb-lg-2">Bạn đã có tài khoản?
+                            <a [routerLink]="['../login']">Đăng nhập</a>
+                        </p>
+                        <a href="#! " class="small text-muted ">Điều khoản sử dụng.</a>
+                        <a href="#! " class="small text-muted ">Chính sách hỗ trợ</a>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

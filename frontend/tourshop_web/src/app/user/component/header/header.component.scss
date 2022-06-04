@@ -1,0 +1,30 @@
+.navbar {
+    &__container {
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 99999999;
+    }
+    &__background {
+        color: #000;
+    }
+}
+
+.slider {
+    &__title {
+        font-family: 'Times New Roman', Times;
+        font-size: 80px;
+        font-weight: bold;
+        letter-spacing: 0;
+        text-align: left;
+        padding-left: 70px;
+        line-height: 1;
+    }
+    &__description {
+        padding-left: 80px;
+        font-weight: normal;
+        text-align: left;
+        font-size: 22px;
+    }
+}
