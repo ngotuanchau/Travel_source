@@ -1,0 +1,54 @@
+.ftco-section {
+    margin: 3em 0;
+    position: relative;
+    background: #FAF0EE;
+    padding: 20px;
+}
+
+a {
+    color: #E76F51;
+}
+
+.heading-section h2 {
+    font-family: 'Times New Roman', Times;
+    font-size: 36px;
+    font-weight: bold;
+    letter-spacing: 0;
+    text-align: center;
+    line-height: 1;
+    color: #E76F51;
+    margin: 5px
+}
+
+.row {
+    gap: 20px;
+}
+
+.col-md-4 {
+    padding: 10px;
+    width: 32%;
+    background: #fff;
+    border-radius: 10px;
+}
+
+.box-item {
+    border-radius: 10px;
+}
+
+.name-item {
+    width: 100%;
+    padding: 10px;
+    background: rgba($color: #000, $alpha: 0.4);
+    text-align: center;
+}
+
+.name-item p {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.name-item span {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+}

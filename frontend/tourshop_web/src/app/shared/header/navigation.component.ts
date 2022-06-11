@@ -13,7 +13,7 @@ export class NavigationComponent implements AfterViewInit {
 
   public config: PerfectScrollbarConfigInterface = {};
 
-  public showSearch = false;
+  public showSearch = true;
 
   constructor(private modalService: NgbModal) {
   }

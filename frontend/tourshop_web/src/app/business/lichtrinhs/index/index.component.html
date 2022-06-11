@@ -1,0 +1,64 @@
+<div class="row">
+    <!-- ==================================-->
+    <!-- ======= Basic Nav ===== -->
+    <!-- ==================================-->
+    <div class="col-12">
+        <div class="card">
+            <div class="p-3">
+                <h4 class="card-title mb-0">Lịch trình</h4>
+            </div>
+            <div class="card-body border-top">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered align-middle text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th class="text-dark font-medium fs-4">Ngày</th>
+                                        <th class="text-dark font-medium fs-4">Sáng</th>
+                                        <th class="text-dark font-medium fs-4">Trưa</th>
+                                        <th class="text-dark font-medium fs-4">Chiều</th>
+                                        <th class="text-dark font-medium fs-4">Cập nhật</th>
+                                        <th class="text-dark font-medium fs-4"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let tr of trow; index as i">
+                                        <td>
+                                            {{ i + 1 }}
+                                        </td>
+                                        <td>
+                                            <p>{{tr.sang}}
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p>{{tr.trua}}</p>
+                                        </td>
+                                        <td>
+                                            <p>{{tr.chieu}}</p>
+                                        </td>
+                                        <td>
+                                            <p>{{tr.capnhat}}</p>
+                                        </td>
+                                        <td>
+                                            <a [routerLink]="['detail']"><button type="button" class="btn btn-inverse-info btn-icon"
+                onclick="">
+                <i class="bi bi-eye"></i></button></a>
+                                            <a [routerLink]="['update']"><button type="button" class="btn btn-inverse-info btn-icon"
+                onclick="">
+                <i class="bi bi-pen"></i></button></a>
+                                            <button type="button" class="btn btn-inverse-info btn-icon" onclick="">
+              <i class="bi bi-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
