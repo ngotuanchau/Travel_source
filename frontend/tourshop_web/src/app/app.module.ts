@@ -19,7 +19,6 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 
 import { Approutes } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SpinnerComponent } from './shared/spinner.component';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
@@ -29,6 +28,8 @@ import { AuthLayoutComponent } from './layouts/auth/auth.component';
 import { UserLayoutComponent } from './layouts/user-layout/user-layout.component';
 import { HeaderComponent } from './user/component/header/header.component';
 import { FooterComponent } from './user/component/footer/footer.component';
+import { BusinessComponent } from './layouts/business/business.component';
+import { SidebarBusinessComponent } from './shared/sidebar-business/sidebar.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -40,14 +41,15 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 @NgModule({
   declarations: [
     AppComponent,
-    SpinnerComponent,
     FullComponent,
     NavigationComponent,
     SidebarComponent,
+    SidebarBusinessComponent,
     AuthLayoutComponent,
     UserLayoutComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    BusinessComponent,
   ],
   imports: [
     CommonModule,

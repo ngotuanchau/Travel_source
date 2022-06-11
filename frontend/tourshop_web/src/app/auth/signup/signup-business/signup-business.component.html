@@ -1,0 +1,90 @@
+<form (ngSubmit)="onSubmit_bus()" [formGroup]="infoBusiness" #form="ngForm">
+    <div class="d-flex align-items-center mb-3 pb-1">
+        <i class="bi bi-building"></i>
+        <span class="h1 fw-bold mb-0">Đăng ký</span>
+    </div>
+    <h5 class="fw-normal mb-3 pb-3">Đăng ký dịch vụ của chúng tôi để có trải nghiệm tốt nhất</h5>
+
+    <div class="form-outline mb-4 form-group">
+        <label class="form-label" for="form2Example1">Tên công ty</label>
+        <input type="text" for="tenCongTy" formControlName="tenCongTy" [(ngModel)]="congTy.tenCongTy" class="form-control" />
+        <div *ngIf="b.tenCongTy.invalid && (b.tenCongTy.dirty||b.tenCongTy.touched)">
+            <div *ngIf="b.tenCongTy.errors">
+                <div *ngIf="b.tenCongTy.errors.required">
+                    <small>Bạn chưa nhập Tên công ty</small>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="form-outline mb-4 form-group">
+        <label class="form-label" for="form2Example3">Email</label>
+        <input type="email" for="email" formControlName="email" placeholder="abc@gmail.com" [(ngModel)]="congTy.email" class="form-control form-control-lg" />
+        <div *ngIf="b.email.invalid && (b.email.dirty||b.email.touched)">
+            <div *ngIf="b.email.errors">
+                <div *ngIf="b.email.errors.required">
+                    <small>Bạn chưa nhập email</small>
+                </div>
+
+                <div *ngIf="b.email.errors.email">
+                    <small>Email chưa đúng định dạng</small>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="form-outline mb-4 form-group">
+        <label class="form-label" for="khuVuc">Khu vực</label><br>
+        <select class="form-control" for="khuVuc" formControlName="khuVuc" [(ngModel)]="congTy.khuVuc" required>
+      <option *ngFor="let khuVuc of khuVucList" [value]="khuVuc">{{khuVuc}}</option>
+    </select>
+    </div>
+    <div class="form-outline mb-4 form-group">
+        <label class="form-label" for="form2Example1">Số điện thoại</label>
+        <input type="text" for="sdt" formControlName="sdt" [(ngModel)]="congTy.sdt" class="form-control" />
+        <div *ngIf="b.sdt.invalid && (b.sdt.dirty||b.sdt.touched)">
+            <div *ngIf="b.sdt.errors">
+                <div *ngIf="b.sdt.errors.required">
+                    <small>Bạn chưa nhập Số điện thoại</small>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="form-outline mb-4 form-group">
+        <label class="form-label" for="form2Example4">Mật khẩu</label>
+        <input type="password" for="matKhau" formControlName="matKhau" [(ngModel)]="congTy.matKhau" class="form-control form-control-lg" />
+        <div *ngIf="b.matKhau.invalid && (b.matKhau.dirty||b.matKhau.touched)">
+            <div *ngIf="b.matKhau.errors">
+                <div *ngIf="b.matKhau.errors.required">
+                    <small>Bạn chưa nhập mật khẩu</small>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="form-outline mb-4 form-group">
+        <label class="form-label" for="form2Example1">Văn phòng</label>
+        <input type="text" for="vanPhong" formControlName="vanPhong" [(ngModel)]="congTy.vanPhong" class="form-control" />
+        <div *ngIf="b.vanPhong.invalid && (b.vanPhong.dirty||b.vanPhong.touched)">
+            <div *ngIf="b.vanPhong.errors">
+                <div *ngIf="b.vanPhong.errors.required">
+                    <small>Bạn chưa nhập Địa chỉ văn phòng</small>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div *ngIf="infoBusiness.valid">
+        <div class="pt-1 mb-4 form-group">
+            <button class="btn btn-dark btn-lg btn-block "> Đăng ký
+      </button>
+        </div>
+    </div>
+
+    <p class="mb-5 pb-lg-2">Bạn đã có tài khoản?
+        <a [routerLink]="['../login']">Đăng nhập</a>
+    </p>
+    <a href="#! " class="small text-muted ">Điều khoản sử dụng.</a>
+    <a href="#! " class="small text-muted ">Chính sách hỗ trợ</a>
+</form>

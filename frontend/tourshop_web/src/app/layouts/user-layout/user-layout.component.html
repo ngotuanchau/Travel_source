@@ -1,3 +1,22 @@
+<nav class="navbar navbar__container navbar__background navbar-expand-lg ftco_navbar bg-dark bg-dark px-lg-4 scrolled awake" id="ftco-navbar">
+    <div class="container container-fluid bg-none">
+        <a class="navbar-brand font-weight-bold  text-light" href="index.html">TourShop</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="oi oi-menu"></span> Menu
+    </button>
+        <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active"><a [routerLink]="['./']" class="nav-link font-weight-normal text-light">Trang
+            chủ</a>
+                </li>
+                <li class="nav-item"><a href="about.html" class="nav-link font-weight-normal text-light">Tours</a></li>
+                <li class="nav-item"><a href="blog.html" class="nav-link font-weight-normal text-light">Tin tức</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link font-weight-normal text-light">Liên hệ</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- END nav -->
 <app-header></app-header>
 <router-outlet></router-outlet>
 <app-footer></app-footer>

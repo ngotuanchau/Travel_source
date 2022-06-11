@@ -7,7 +7,7 @@ import { NguoiDung } from '../models/nguoidung.model';
   providedIn:'root'
 })
 export class LoginsService{
-  baseUrl='https://localhost:44361/api';
+  baseUrl='http://localhost:40998/api';
   constructor(private http:HttpClient){}
 
   //Login for users

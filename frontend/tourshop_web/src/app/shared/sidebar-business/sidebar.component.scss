@@ -1,0 +1,13 @@
+.sidebar-nav ul .sidebar-item.active>.sidebar-link {
+    background: rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    font-weight: bold;
+}
+
+.btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+    color: #E76F51;
+    background-color: #fff;
+    border-color: #E76F51;
+    font-weight: bold;
+}

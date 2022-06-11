@@ -1,0 +1,34 @@
+.intro h3,
+.intro h3 span {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    font-size: 24px;
+}
+
+.intro p {
+    text-align: justify;
+}
+
+.intro:hover {
+    background: #FAF0EE;
+}
+
+.intro:hover>h3 {
+    color: #E76F51;
+}
+
+.intro {
+    border: 1px solid #E76F51;
+    padding: 10px;
+    border-radius: 25px;
+}
+
+.ftco-section {
+    padding: 0px !important;
+}
+
+.bg-light {
+    background-color: #fff !important;
+}

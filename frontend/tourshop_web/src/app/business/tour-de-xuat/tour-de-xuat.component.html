@@ -1,0 +1,60 @@
+<div class="row">
+    <!-- ==================================-->
+    <!-- ======= Basic Nav ===== -->
+    <!-- ==================================-->
+    <div class="col-12">
+        <div class="card">
+            <div class="p-3">
+                <h4 class="card-title mb-0">DANH SÁCH TOUR ĐƯỢC ĐỀ XUẤT</h4>
+            </div>
+
+
+            <div class="card-body border-top">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered align-middle text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th class="text-dark font-medium fs-4">STT</th>
+                                        <th class="text-dark font-medium fs-4">Tên tour</th>
+                                        <th class="text-dark font-medium fs-4">Ngày khởi hành</th>
+                                        <th class="text-dark font-medium fs-4">Ngày kết thúc</th>
+                                        <th class="text-dark font-medium fs-4">Điểm khởi hành</th>
+                                        <th class="text-dark font-medium fs-4"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let tr of trow; index as i">
+                                        <td>
+                                            {{ i + 1 }}
+                                        </td>
+                                        <td>
+                                            {{tr.tentour}}
+                                        </td>
+                                        <td>
+                                            {{tr.ngaykhoihanh}}
+                                        </td>
+                                        <td>
+                                            {{tr.ngayketthuc}}
+                                        </td>
+                                        <td>
+                                            {{tr.diadiemkhoihanh}}
+                                        </td>
+                                        <td>
+
+                                            <button>Nhận tour</button>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

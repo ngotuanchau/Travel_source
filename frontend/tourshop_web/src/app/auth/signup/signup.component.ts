@@ -2,7 +2,9 @@ import { NONE_TYPE } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, NgForm, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { NgbNavChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 import { EMPTY } from 'rxjs';
+import { CongTy } from '../../models/congty.model';
 import { NguoiDung } from '../../models/nguoidung.model';
 import { SignUpsService } from '../../service/signups.service';
 @Component({
@@ -11,6 +13,7 @@ import { SignUpsService } from '../../service/signups.service';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
+
   alert:boolean=false;
   danger:boolean=false;
   title='Đăng ký';
@@ -71,4 +74,5 @@ export class SignupComponent implements OnInit {
   closeAlert(){
     this.alert=false;
   }
+
 }

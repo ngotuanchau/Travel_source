@@ -1,0 +1,26 @@
+.navbar {
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+    &__container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 99999999;
+    }
+    &__background {
+        color: #000;
+    }
+}
+
+.nav-link {
+    padding: 15px 20px !important;
+    text-transform: uppercase;
+    font-weight: bold !important;
+}
+
+.nav-item a:hover,
+.navbar-nav .active {
+    background: #E76F51;
+    color: #ffffff;
+}

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Tours,TopSelling, t1, Employee} from '../tour-data';
+import {Tours, Employee} from '../tour-data';
 import {NgbNavChangeEvent} from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -8,15 +8,10 @@ import {NgbNavChangeEvent} from '@ng-bootstrap/ng-bootstrap';
     templateUrl: 'index.component.html'
 })
 export class ToursIndexComponent {
-  topSelling:t1[];
-
-  trow:Tours[];
+  tours:Tours[];
 
   constructor() {
-
-    this.topSelling=TopSelling;
-
-    this.trow=Employee;
+    this.tours=Employee;
   }
   //Nav
   currentJustify = 'start';

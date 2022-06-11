@@ -1,0 +1,9 @@
+.max-width {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+#main-wrapper[data-layout=vertical] .left-sidebar[data-sidebarbg=skin5],
+#main-wrapper[data-layout=vertical] .topbar .top-navbar .navbar-header[data-logobg=skin5] {
+    background: #e76f51;
+}

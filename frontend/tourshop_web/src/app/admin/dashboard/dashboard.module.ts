@@ -5,11 +5,9 @@ import { Routes, RouterModule } from "@angular/router";
 import { NgApexchartsModule } from "ng-apexcharts";
 import { DashboardComponent } from "./dashboard.component";
 import { FeedsComponent } from "./dashboard-components/feeds/feeds.component";
-import { TopSellingComponent } from "./dashboard-components/top-selling/top-selling.component";
-import { TopCardsComponent } from "./dashboard-components/top-cards/top-cards.component";
-import { BlogCardsComponent } from "./dashboard-components/blog-cards/blog-cards.component";
-
-
+import { BlogCardsComponent } from "./dashboard-components/top-diadiem/blog-diadiems.component";
+import { TopThongKeComponent } from './dashboard-components/top-thong-ke/top-thong-ke.component';
+import { TopCongTyComponent } from "./dashboard-components/top-congty/top-congty.component";
 const routes: Routes = [
   {
     path: "",
@@ -32,9 +30,9 @@ const routes: Routes = [
   declarations: [
     DashboardComponent,
     FeedsComponent,
-    TopSellingComponent,
-    TopCardsComponent,
-    BlogCardsComponent
+    BlogCardsComponent,
+    TopThongKeComponent,
+    TopCongTyComponent
   ],
 })
 export class DashboardModule {}
