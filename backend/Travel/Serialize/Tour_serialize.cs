@@ -52,6 +52,7 @@ namespace Travel.Serialize
         public string NgayVe { get; set; }
         public decimal Gia { get; set; }
         public int SLMax { get; set; }
+        public int SLDat { get; set; }
     }
 
 }
