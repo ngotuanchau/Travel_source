@@ -50,6 +50,18 @@ namespace Travel.Controllers
                 _context.SaveChanges();
                 int idtour = tour.Id;
 
+                //Insert table GiaTreEm
+                foreach (var cdte in tour_Serialize.CheDoTreEm)
+                {
+                    var giatreem = new GiaTreEm();
+                    giatreem.TourId = idtour;
+                    giatreem.DoTuoi = cdte.Dotuoi;
+                    giatreem.GiaVe = cdte.Gia;
+                    giatreem.TrangThai = 1;
+                    _context.Add(giatreem);
+                    _context.SaveChanges();
+                }
+
                 //Insert table DiaDiem_Tour
                 foreach (var dd in tour_Serialize.Nhungdiadiem)
                 {
@@ -129,6 +141,98 @@ namespace Travel.Controllers
             }
 
         }
-        
+
+        [HttpGet]
+        [Route("get_all_tour")]
+        [Authorize(Roles = "Business")]
+        [ActionName("getallTour")]
+        public async Task<IActionResult> getallTour()
+        {
+            try
+            {
+                List<Tour_serialize> result = new List<Tour_serialize>();
+                List<Tour> tours = _context.Tours.Include(t => t.TheLoai).Include(t => t.CongTy).Include(t => t.PhanVung).Where(t => t.TrangThai == 1).ToList();
+                foreach (var tour in tours)
+                {
+                    Tour_serialize gt = new Tour_serialize();
+                    gt.Tentour = tour.TenTour;
+                    gt.Theloai = tour.TheLoaiId;
+                    gt.Anuong = tour.AnUong;
+                    gt.NoiO = tour.NoiO;
+                    gt.Phanvung = tour.PhanVungId;
+                    gt.Phuongtien = tour.PhuongTien;
+                    gt.Mota = tour.MoTa;
+                    gt.Congty = tour.CongTyId;
+
+                    List<Hinhanh> hinhanhs = new List<Hinhanh>();
+                    List<AnhTour> anhtour = _context.AnhTours.Where(p => p.TourId == tour.Id && p.TrangThai == 1).ToList();
+                    foreach (var at in anhtour)
+                    {
+                        Hinhanh hinhanh = new Hinhanh();
+                        hinhanh.tenanh = at.Anh;
+                        hinhanhs.Add(hinhanh);
+                    }
+                    gt.Hinhanh = hinhanhs;
+
+                    List<CheDoTreEm> cheDoTreEms = new List<CheDoTreEm>();
+                    List<GiaTreEm> giaTreEms = _context.GiaTreEms.Where(p => p.TourId == tour.Id && p.TrangThai == 1).ToList();
+                    foreach (var gte in giaTreEms)
+                    {
+                        CheDoTreEm cheDoTreEm = new CheDoTreEm();
+                        cheDoTreEm.Dotuoi = gte.DoTuoi;
+                        cheDoTreEm.Gia = gte.GiaVe;
+                        cheDoTreEms.Add(cheDoTreEm);
+                    }
+                    gt.CheDoTreEm = cheDoTreEms;
+
+                    List<NhungNgayKhoiHanh> nhungNgayKhoiHanhs = new List<NhungNgayKhoiHanh>();
+                    List<ThoiGian> thoiGians = _context.ThoiGians.Where(p => p.TourId == tour.Id && p.TrangThai == 1).ToList();
+                    foreach (var tg in thoiGians)
+                    {
+                        NhungNgayKhoiHanh nhungNgayKhoiHanh = new NhungNgayKhoiHanh();
+                        nhungNgayKhoiHanh.NgayKh = tg.NgayDi.ToString();
+                        nhungNgayKhoiHanh.NgayVe = tg.NgayVe.ToString();
+                        nhungNgayKhoiHanh.Gia = tg.Gia;
+                        nhungNgayKhoiHanh.SLMax = tg.SoLuongMax;
+                        nhungNgayKhoiHanh.SLDat = tg.SoLuongDat;
+                        nhungNgayKhoiHanhs.Add(nhungNgayKhoiHanh);
+                    }
+                    gt.NhungNgayKhoiHanh = nhungNgayKhoiHanhs;
+
+                    List<Nhungdiadiem> nhungdiadiems = new List<Nhungdiadiem>();
+                    List<DiaDiem_Tour> diaDiem_Tours = _context.DiaDiem_Tours.Where(p => p.TourId == tour.Id && p.TrangThai == 1).ToList();
+                    foreach (var dd in diaDiem_Tours)
+                    {
+                        Nhungdiadiem nhungdiadiem = new Nhungdiadiem();
+                        nhungdiadiem.Thutu = dd.ThuTu;
+                        nhungdiadiem.diadiem = dd.DiaDiemId;
+                        nhungdiadiems.Add(nhungdiadiem);
+                    }
+                    gt.Nhungdiadiem = nhungdiadiems;
+
+                    List<Lichtrinh> lichtrinhs = new List<Lichtrinh>();
+                    List<Models.LichTrinh> mlichTrinhs = _context.LichTrinhs.Where(p => p.TourId == tour.Id && p.TrangThai == 1).ToList();
+                    foreach (var lt in mlichTrinhs)
+                    {
+                        Serialize.Lichtrinh lichTrinh = new Serialize.Lichtrinh();
+                        lichTrinh.Ngay = lt.Ngay;
+                        lichTrinh.Sang = lt.Sang;
+                        lichTrinh.Trua = lt.Trua;
+                        lichTrinh.Toi = lt.Toi;
+
+                        lichtrinhs.Add(lichTrinh);
+                    }
+                    gt.Lichtrinh = lichtrinhs;
+                    result.Add(gt);
+                }
+                return Json(result);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = "error occurred" });
+            }
+
+        }
+
     }
 }
