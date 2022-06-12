@@ -10,9 +10,10 @@ namespace Travel.Models
         public int Id { get; set; }
         public int TourId { get; set; }
         public Tour Tour { set; get; }
+        public int Ngay { set; get; }
         public string Sang { get; set; }
         public string Trua { get; set; }
-        public string Chieu { get; set; }
+        public string Toi { get; set; }
         public DateTime NgayTao { get; set; } = DateTime.Now;
         public DateTime NgaySua { get; set; } = DateTime.Now;
         public DateTime? NgayXoa { get; set; }

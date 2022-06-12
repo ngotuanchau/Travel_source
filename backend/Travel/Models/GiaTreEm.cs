@@ -13,7 +13,6 @@ namespace Travel.Models
         public int DoTuoi { get; set; }
         public int GiaVe { get; set; }
         public DateTime NgayTao { get; set; } = DateTime.Now;
-
         public DateTime NgaySua { get; set; } = DateTime.Now;
         public DateTime? NgayXoa { get; set; }
         public int TrangThai { get; set; } = 1;

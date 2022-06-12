@@ -14,12 +14,9 @@ namespace Travel.Data
         {
         }
         
-        public DbSet<AnhDd> AnhDds { get; set; }
         public DbSet<AnhTour> AnhTours { get; set; }
-        public DbSet<ChiTietDichVu> ChiTietDichVus { get; set; }
         public DbSet<CongTy> CongTies { get; set; }
         public DbSet<DiaDiem> DiaDiems { get; set; }
-        public DbSet<GhiChu> GhiChus { get; set; }
         public DbSet<GiaTreEm> GiaTreEms { get; set; }
         public DbSet<HoaDon> HoaDons { get; set; }
         public DbSet<KhuyenMai> KhuyenMais { get; set; }
