@@ -12,7 +12,6 @@ namespace Travel.Models
         public Tour Tour { get; set; }
         public string Anh { get; set; }
         public DateTime NgayTao { get; set; } = DateTime.Now;
-
         public DateTime NgaySua { get; set; } = DateTime.Now;
         public DateTime? NgayXoa { get; set; }
         public int TrangThai { get; set; } = 1;

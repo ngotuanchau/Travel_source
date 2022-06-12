@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Travel.Migrations
 {
-    public partial class update_admin : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,6 +13,7 @@ namespace Travel.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Tencongty = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     MatKhau = table.Column<string>(maxLength: 255, nullable: true),
                     Sdt = table.Column<string>(nullable: true),
@@ -28,6 +29,23 @@ namespace Travel.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CongTies", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DiaDiems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Ten = table.Column<string>(nullable: true),
+                    NgayTao = table.Column<DateTime>(nullable: false),
+                    NgaySua = table.Column<DateTime>(nullable: false),
+                    NgayXoa = table.Column<DateTime>(nullable: true),
+                    TrangThai = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DiaDiems", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -47,11 +65,29 @@ namespace Travel.Migrations
                     NgayTao = table.Column<DateTime>(nullable: false),
                     NgaySua = table.Column<DateTime>(nullable: false),
                     NgayXoa = table.Column<DateTime>(nullable: true),
-                    TrangThai = table.Column<int>(nullable: false)
+                    TrangThai = table.Column<int>(nullable: false),
+                    isAdmin = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_NguoiDungs", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PhanVung",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TenVung = table.Column<string>(nullable: true),
+                    NgayTao = table.Column<DateTime>(nullable: false),
+                    NgaySua = table.Column<DateTime>(nullable: false),
+                    NgayXoa = table.Column<DateTime>(nullable: true),
+                    TrangThai = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PhanVung", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -109,10 +145,12 @@ namespace Travel.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CongTyId = table.Column<int>(nullable: false),
                     TheLoaiId = table.Column<int>(nullable: false),
+                    PhanVungId = table.Column<int>(nullable: false),
                     TenTour = table.Column<string>(nullable: true),
+                    AnUong = table.Column<string>(nullable: true),
+                    NoiO = table.Column<string>(nullable: true),
+                    PhuongTien = table.Column<string>(nullable: true),
                     MoTa = table.Column<string>(nullable: true),
-                    CanChuanBi = table.Column<string>(nullable: true),
-                    DiemNoiBat = table.Column<string>(nullable: true),
                     NgayTao = table.Column<DateTime>(nullable: false),
                     NgaySua = table.Column<DateTime>(nullable: false),
                     NgayXoa = table.Column<DateTime>(nullable: true),
@@ -125,6 +163,12 @@ namespace Travel.Migrations
                         name: "FK_Tours_CongTies_CongTyId",
                         column: x => x.CongTyId,
                         principalTable: "CongTies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Tours_PhanVung_PhanVungId",
+                        column: x => x.PhanVungId,
+                        principalTable: "PhanVung",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -160,39 +204,14 @@ namespace Travel.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ChiTietDichVus",
+                name: "DiaDiem_Tour",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TourId = table.Column<int>(nullable: false),
-                    CoTrongVe = table.Column<string>(nullable: true),
-                    KhongTrongVe = table.Column<string>(nullable: true),
-                    CheDoTreEm = table.Column<string>(nullable: true),
-                    NgayTao = table.Column<DateTime>(nullable: false),
-                    NgaySua = table.Column<DateTime>(nullable: false),
-                    NgayXoa = table.Column<DateTime>(nullable: true),
-                    TrangThai = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ChiTietDichVus", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ChiTietDichVus_Tours_TourId",
-                        column: x => x.TourId,
-                        principalTable: "Tours",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "DiaDiems",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TourId = table.Column<int>(nullable: false),
-                    Ten = table.Column<string>(nullable: true),
+                    DiaDiemId = table.Column<int>(nullable: false),
+                    ThuTu = table.Column<int>(nullable: false),
                     NgayTao = table.Column<DateTime>(nullable: false),
                     NgaySua = table.Column<DateTime>(nullable: false),
                     NgayXoa = table.Column<DateTime>(nullable: true),
@@ -200,34 +219,15 @@ namespace Travel.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DiaDiems", x => x.Id);
+                    table.PrimaryKey("PK_DiaDiem_Tour", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DiaDiems_Tours_TourId",
-                        column: x => x.TourId,
-                        principalTable: "Tours",
+                        name: "FK_DiaDiem_Tour_DiaDiems_DiaDiemId",
+                        column: x => x.DiaDiemId,
+                        principalTable: "DiaDiems",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "GhiChus",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TourId = table.Column<int>(nullable: false),
-                    TieuDe = table.Column<string>(nullable: true),
-                    NoiDung = table.Column<string>(nullable: true),
-                    NgayTao = table.Column<DateTime>(nullable: false),
-                    NgaySua = table.Column<DateTime>(nullable: false),
-                    NgayXoa = table.Column<DateTime>(nullable: true),
-                    TrangThai = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_GhiChus", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_GhiChus_Tours_TourId",
+                        name: "FK_DiaDiem_Tour_Tours_TourId",
                         column: x => x.TourId,
                         principalTable: "Tours",
                         principalColumn: "Id",
@@ -326,9 +326,10 @@ namespace Travel.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TourId = table.Column<int>(nullable: false),
+                    Ngay = table.Column<int>(nullable: false),
                     Sang = table.Column<string>(nullable: true),
                     Trua = table.Column<string>(nullable: true),
-                    Chieu = table.Column<string>(nullable: true),
+                    Toi = table.Column<string>(nullable: true),
                     NgayTao = table.Column<DateTime>(nullable: false),
                     NgaySua = table.Column<DateTime>(nullable: false),
                     NgayXoa = table.Column<DateTime>(nullable: true),
@@ -353,9 +354,10 @@ namespace Travel.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TourId = table.Column<int>(nullable: false),
                     NgayDi = table.Column<DateTime>(nullable: false),
-                    GiaDefaut = table.Column<int>(nullable: false),
+                    Gia = table.Column<int>(nullable: false),
                     NgayVe = table.Column<DateTime>(nullable: false),
                     SoLuongMax = table.Column<int>(nullable: false),
+                    SoLuongDat = table.Column<int>(nullable: false),
                     NgayTao = table.Column<DateTime>(nullable: false),
                     NgaySua = table.Column<DateTime>(nullable: false),
                     NgayXoa = table.Column<DateTime>(nullable: true),
@@ -372,43 +374,9 @@ namespace Travel.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "AnhDds",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DiaDiemId = table.Column<int>(nullable: false),
-                    Anh = table.Column<string>(nullable: true),
-                    NgayTao = table.Column<DateTime>(nullable: false),
-                    NgaySua = table.Column<DateTime>(nullable: false),
-                    NgayXoa = table.Column<DateTime>(nullable: true),
-                    TrangThai = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AnhDds", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AnhDds_DiaDiems_DiaDiemId",
-                        column: x => x.DiaDiemId,
-                        principalTable: "DiaDiems",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AnhDds_DiaDiemId",
-                table: "AnhDds",
-                column: "DiaDiemId");
-
             migrationBuilder.CreateIndex(
                 name: "IX_AnhTours_TourId",
                 table: "AnhTours",
-                column: "TourId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ChiTietDichVus_TourId",
-                table: "ChiTietDichVus",
                 column: "TourId");
 
             migrationBuilder.CreateIndex(
@@ -422,13 +390,13 @@ namespace Travel.Migrations
                 column: "NguoiDungId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DiaDiems_TourId",
-                table: "DiaDiems",
-                column: "TourId");
+                name: "IX_DiaDiem_Tour_DiaDiemId",
+                table: "DiaDiem_Tour",
+                column: "DiaDiemId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GhiChus_TourId",
-                table: "GhiChus",
+                name: "IX_DiaDiem_Tour_TourId",
+                table: "DiaDiem_Tour",
                 column: "TourId");
 
             migrationBuilder.CreateIndex(
@@ -467,6 +435,11 @@ namespace Travel.Migrations
                 column: "CongTyId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Tours_PhanVungId",
+                table: "Tours",
+                column: "PhanVungId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Tours_TheLoaiId",
                 table: "Tours",
                 column: "TheLoaiId");
@@ -475,19 +448,13 @@ namespace Travel.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AnhDds");
-
-            migrationBuilder.DropTable(
                 name: "AnhTours");
-
-            migrationBuilder.DropTable(
-                name: "ChiTietDichVus");
 
             migrationBuilder.DropTable(
                 name: "DeXuatTours");
 
             migrationBuilder.DropTable(
-                name: "GhiChus");
+                name: "DiaDiem_Tour");
 
             migrationBuilder.DropTable(
                 name: "GiaTreEms");
@@ -515,6 +482,9 @@ namespace Travel.Migrations
 
             migrationBuilder.DropTable(
                 name: "CongTies");
+
+            migrationBuilder.DropTable(
+                name: "PhanVung");
 
             migrationBuilder.DropTable(
                 name: "TheLoais");
