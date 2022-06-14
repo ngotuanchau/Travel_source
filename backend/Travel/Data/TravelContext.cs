@@ -17,7 +17,6 @@ namespace Travel.Data
         public DbSet<AnhTour> AnhTours { get; set; }
         public DbSet<CongTy> CongTies { get; set; }
         public DbSet<DiaDiem> DiaDiems { get; set; }
-        public DbSet<GiaTreEm> GiaTreEms { get; set; }
         public DbSet<HoaDon> HoaDons { get; set; }
         public DbSet<KhuyenMai> KhuyenMais { get; set; }
         public DbSet<LichTrinh> LichTrinhs { get; set; }
