@@ -14,6 +14,7 @@ namespace Travel.Models
         public decimal GiaNguoiLon { get; set; }
         public decimal GiaTreEm { get; set; }
         public decimal GiaTreNho { get; set; }
+        public int VeDaDat { get; set; }
         public DateTime NgayTao { get; set; } = DateTime.Now;
         public DateTime NgaySua { get; set; } = DateTime.Now;
         public DateTime? NgayXoa { get; set; }

@@ -40,27 +40,25 @@ namespace Travel.Controllers
                 tour.TheLoaiId = tour_Serialize.Theloai;
                 tour.PhanVungId = tour_Serialize.Phanvung;
                 tour.TenTour = tour_Serialize.Tentour;
-                tour.AnUong = tour_Serialize.Anuong;
-                tour.NoiO = tour_Serialize.NoiO;
+                tour.SoNgay = tour_Serialize.SoNgay;
+                tour.SoDem = tour_Serialize.SoDem;
+                tour.VeDoiDa = tour_Serialize.VeToiDa;
+                tour.VeToiThieu = tour_Serialize.VeToiThieu;
+                tour.DiemDi = tour_Serialize.DiemDi;
+                tour.DiemDen = tour_Serialize.DiemDen;
+                tour.AmThuc = tour_Serialize.AmThuc;
+                tour.LuuTru = tour_Serialize.LuuTru;
                 tour.PhuongTien = tour_Serialize.Phuongtien;
                 tour.MoTa = tour_Serialize.Mota;
+                DateTime now = DateTime.Now;
+                string tenanh = now.ToString("yyMMddhhmmss") + "_" + tour_Serialize.AnhTour;
+                tour.AnhTour = tenanh;
                 tour.TrangThai = 1;
         
                 _context.Tours.Add(tour);
                 _context.SaveChanges();
                 int idtour = tour.Id;
 
-                //Insert table GiaTreEm
-                foreach (var cdte in tour_Serialize.CheDoTreEm)
-                {
-                    var giatreem = new GiaTreEm();
-                    giatreem.TourId = idtour;
-                    giatreem.DoTuoi = cdte.Dotuoi;
-                    giatreem.GiaVe = cdte.Gia;
-                    giatreem.TrangThai = 1;
-                    _context.Add(giatreem);
-                    _context.SaveChanges();
-                }
 
                 //Insert table DiaDiem_Tour
                 foreach (var dd in tour_Serialize.Nhungdiadiem)
@@ -77,16 +75,14 @@ namespace Travel.Controllers
                 foreach (var tt in tour_Serialize.NhungNgayKhoiHanh)
                 {
                     var thoigian = new ThoiGian();
-                    DateTime ngaykhoihanh = DateTime.ParseExact(tt.NgayKh, "dd/MM/yyyy",
-                                System.Globalization.CultureInfo.InvariantCulture);
-                    DateTime ngayve = DateTime.ParseExact(tt.NgayVe, "dd/MM/yyyy",
-                                System.Globalization.CultureInfo.InvariantCulture);
+                    DateTime ngaykh = DateTime.ParseExact(tt.NgayKh, "dd/MM/yyyy",
+                                       System.Globalization.CultureInfo.InvariantCulture);
                     thoigian.TourId = idtour;
-                    thoigian.NgayDi = ngaykhoihanh;
-                    thoigian.NgayVe = ngayve;
-                    thoigian.SoLuongMax = tt.SLMax;
-                    thoigian.SoLuongDat = 0;
-                    thoigian.Gia = tt.Gia;
+                    thoigian.NgayDi = ngaykh;
+                    thoigian.GiaNguoiLon = tt.GiaNguoiLon;
+                    thoigian.GiaTreEm = tt.GiaTreEn;
+                    thoigian.GiaTreNho = tt.GiaTreNho;
+                    thoigian.VeDaDat = 0;
                     thoigian.TrangThai = 1;
 
                     _context.Add(thoigian);
@@ -99,8 +95,10 @@ namespace Travel.Controllers
                     var lichtrinh = new LichTrinh();
                     lichtrinh.TourId = idtour;
                     lichtrinh.Ngay = lt.Ngay;
+                    lichtrinh.MoTa = lt.MoTa;
                     lichtrinh.Sang = lt.Sang;
                     lichtrinh.Trua = lt.Trua;
+                    lichtrinh.Chieu = lt.Chieu;
                     lichtrinh.Toi = lt.Toi;
                     lichtrinh.TrangThai = 1;
 
@@ -109,27 +107,13 @@ namespace Travel.Controllers
                 }
 
 
-                //insert table AnhTour
-                List<string> Anh = new List<string>();
-                foreach (var at in tour_Serialize.Hinhanh)
-                {
-                    var anhtour = new AnhTour();
-                    DateTime now = DateTime.Now;
-                    string tenanh = idtour.ToString() + "_" + now.ToString("yyMMddhhmmss") + "_" + at.tenanh;
-                    anhtour.TourId = idtour;
-                    anhtour.Anh = tenanh;
-
-                    Anh.Add(tenanh);
-                    _context.Add(anhtour);
-                    _context.SaveChanges();
-
-                }
+             
                 // Commit transaction if all commands succeed, transaction will auto-rollback
                 // when disposed if either commands fails
                 transaction.Commit();
                 return Ok(new {
                     message = "Create tour success",
-                    listAnh = Anh
+                    AnhTour = tenanh
                 });
             }
             catch (Exception)
@@ -157,8 +141,8 @@ namespace Travel.Controllers
                     Tour_serialize gt = new Tour_serialize();
                     gt.Tentour = tour.TenTour;
                     gt.Theloai = tour.TheLoaiId;
-                    gt.Anuong = tour.AnUong;
-                    gt.NoiO = tour.NoiO;
+                    //gt.Anuong = tour.AnUong;
+                    //gt.NoiO = tour.NoiO;
                     gt.Phanvung = tour.PhanVungId;
                     gt.Phuongtien = tour.PhuongTien;
                     gt.Mota = tour.MoTa;
@@ -174,27 +158,18 @@ namespace Travel.Controllers
                     }
                     gt.Hinhanh = hinhanhs;
 
-                    List<CheDoTreEm> cheDoTreEms = new List<CheDoTreEm>();
-                    List<GiaTreEm> giaTreEms = _context.GiaTreEms.Where(p => p.TourId == tour.Id && p.TrangThai == 1).ToList();
-                    foreach (var gte in giaTreEms)
-                    {
-                        CheDoTreEm cheDoTreEm = new CheDoTreEm();
-                        cheDoTreEm.Dotuoi = gte.DoTuoi;
-                        cheDoTreEm.Gia = gte.GiaVe;
-                        cheDoTreEms.Add(cheDoTreEm);
-                    }
-                    gt.CheDoTreEm = cheDoTreEms;
+                    
 
                     List<NhungNgayKhoiHanh> nhungNgayKhoiHanhs = new List<NhungNgayKhoiHanh>();
                     List<ThoiGian> thoiGians = _context.ThoiGians.Where(p => p.TourId == tour.Id && p.TrangThai == 1).ToList();
                     foreach (var tg in thoiGians)
                     {
                         NhungNgayKhoiHanh nhungNgayKhoiHanh = new NhungNgayKhoiHanh();
-                        nhungNgayKhoiHanh.NgayKh = tg.NgayDi.ToString();
-                        nhungNgayKhoiHanh.NgayVe = tg.NgayVe.ToString();
-                        nhungNgayKhoiHanh.Gia = tg.Gia;
-                        nhungNgayKhoiHanh.SLMax = tg.SoLuongMax;
-                        nhungNgayKhoiHanh.SLDat = tg.SoLuongDat;
+                        //nhungNgayKhoiHanh.NgayKh = tg.NgayDi.ToString();
+                        //nhungNgayKhoiHanh.NgayVe = tg.NgayVe.ToString();
+                        //nhungNgayKhoiHanh.Gia = tg.Gia;
+                        //nhungNgayKhoiHanh.SLMax = tg.SoLuongMax;
+                        //nhungNgayKhoiHanh.SLDat = tg.SoLuongDat;
                         nhungNgayKhoiHanhs.Add(nhungNgayKhoiHanh);
                     }
                     gt.NhungNgayKhoiHanh = nhungNgayKhoiHanhs;
