@@ -26,5 +26,6 @@ namespace Travel.Data
         public DbSet<Tour> Tours { get; set; }
         public DbSet<DeXuatTour> DeXuatTours { get; set; }
         public DbSet<DiaDiem_Tour> DiaDiem_Tours { get; set; }
+        public DbSet<PhanVung> PhanVungs { get; set; }
     }
 }

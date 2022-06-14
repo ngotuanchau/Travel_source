@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Travel.Data;
 
 namespace Travel.Migrations
 {
     [DbContext(typeof(TravelContext))]
-    partial class TravelContextModelSnapshot : ModelSnapshot
+    [Migration("20220614160900_update_vedat")]
+    partial class update_vedat
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -405,7 +407,7 @@ namespace Travel.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PhanVungs");
+                    b.ToTable("PhanVung");
                 });
 
             modelBuilder.Entity("Travel.Models.TheLoai", b =>
