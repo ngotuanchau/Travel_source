@@ -198,41 +198,6 @@ namespace Travel.Migrations
                     b.ToTable("DiaDiem_Tours");
                 });
 
-            modelBuilder.Entity("Travel.Models.GiaTreEm", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("DoTuoi")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("GiaVe")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("NgaySua")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("NgayTao")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("NgayXoa")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("TourId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TrangThai")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TourId");
-
-                    b.ToTable("GiaTreEms");
-                });
-
             modelBuilder.Entity("Travel.Models.HoaDon", b =>
                 {
                     b.Property<int>("Id")
@@ -323,6 +288,12 @@ namespace Travel.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Chieu")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MoTa")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Ngay")
                         .HasColumnType("int");
@@ -471,7 +442,13 @@ namespace Travel.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("Gia")
+                    b.Property<decimal>("GiaNguoiLon")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("GiaTreEm")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("GiaTreNho")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("NgayDi")
@@ -483,17 +460,8 @@ namespace Travel.Migrations
                     b.Property<DateTime>("NgayTao")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("NgayVe")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime?>("NgayXoa")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("SoLuongDat")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SoLuongMax")
-                        .HasColumnType("int");
 
                     b.Property<int>("TourId")
                         .HasColumnType("int");
@@ -515,11 +483,23 @@ namespace Travel.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AnUong")
+                    b.Property<string>("AmThuc")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AnhTour")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CongTyId")
                         .HasColumnType("int");
+
+                    b.Property<int>("DiemDen")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DiemDi")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LuuTru")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MoTa")
                         .HasColumnType("nvarchar(max)");
@@ -533,14 +513,17 @@ namespace Travel.Migrations
                     b.Property<DateTime?>("NgayXoa")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("NoiO")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("PhanVungId")
                         .HasColumnType("int");
 
                     b.Property<string>("PhuongTien")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SoDem")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SoNgay")
+                        .HasColumnType("int");
 
                     b.Property<string>("TenTour")
                         .HasColumnType("nvarchar(max)");
@@ -549,6 +532,12 @@ namespace Travel.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("TrangThai")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VeDoiDa")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VeToiThieu")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -596,15 +585,6 @@ namespace Travel.Migrations
 
                     b.HasOne("Travel.Models.Tour", "Tour")
                         .WithMany("DiaDiem_Tours")
-                        .HasForeignKey("TourId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Travel.Models.GiaTreEm", b =>
-                {
-                    b.HasOne("Travel.Models.Tour", "Tour")
-                        .WithMany("GiaTreEms")
                         .HasForeignKey("TourId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

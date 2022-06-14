@@ -147,10 +147,17 @@ namespace Travel.Migrations
                     TheLoaiId = table.Column<int>(nullable: false),
                     PhanVungId = table.Column<int>(nullable: false),
                     TenTour = table.Column<string>(nullable: true),
-                    AnUong = table.Column<string>(nullable: true),
-                    NoiO = table.Column<string>(nullable: true),
+                    SoNgay = table.Column<int>(nullable: false),
+                    SoDem = table.Column<int>(nullable: false),
+                    VeDoiDa = table.Column<int>(nullable: false),
+                    VeToiThieu = table.Column<int>(nullable: false),
+                    DiemDi = table.Column<int>(nullable: false),
+                    DiemDen = table.Column<int>(nullable: false),
+                    AmThuc = table.Column<string>(nullable: true),
+                    LuuTru = table.Column<string>(nullable: true),
                     PhuongTien = table.Column<string>(nullable: true),
                     MoTa = table.Column<string>(nullable: true),
+                    AnhTour = table.Column<string>(nullable: true),
                     NgayTao = table.Column<DateTime>(nullable: false),
                     NgaySua = table.Column<DateTime>(nullable: false),
                     NgayXoa = table.Column<DateTime>(nullable: true),
@@ -204,7 +211,7 @@ namespace Travel.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DiaDiem_Tour",
+                name: "DiaDiem_Tours",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -219,40 +226,15 @@ namespace Travel.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DiaDiem_Tour", x => x.Id);
+                    table.PrimaryKey("PK_DiaDiem_Tours", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DiaDiem_Tour_DiaDiems_DiaDiemId",
+                        name: "FK_DiaDiem_Tours_DiaDiems_DiaDiemId",
                         column: x => x.DiaDiemId,
                         principalTable: "DiaDiems",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_DiaDiem_Tour_Tours_TourId",
-                        column: x => x.TourId,
-                        principalTable: "Tours",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "GiaTreEms",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TourId = table.Column<int>(nullable: false),
-                    DoTuoi = table.Column<int>(nullable: false),
-                    GiaVe = table.Column<int>(nullable: false),
-                    NgayTao = table.Column<DateTime>(nullable: false),
-                    NgaySua = table.Column<DateTime>(nullable: false),
-                    NgayXoa = table.Column<DateTime>(nullable: true),
-                    TrangThai = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_GiaTreEms", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_GiaTreEms_Tours_TourId",
+                        name: "FK_DiaDiem_Tours_Tours_TourId",
                         column: x => x.TourId,
                         principalTable: "Tours",
                         principalColumn: "Id",
@@ -327,8 +309,10 @@ namespace Travel.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TourId = table.Column<int>(nullable: false),
                     Ngay = table.Column<int>(nullable: false),
+                    MoTa = table.Column<string>(nullable: true),
                     Sang = table.Column<string>(nullable: true),
                     Trua = table.Column<string>(nullable: true),
+                    Chieu = table.Column<string>(nullable: true),
                     Toi = table.Column<string>(nullable: true),
                     NgayTao = table.Column<DateTime>(nullable: false),
                     NgaySua = table.Column<DateTime>(nullable: false),
@@ -354,10 +338,9 @@ namespace Travel.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TourId = table.Column<int>(nullable: false),
                     NgayDi = table.Column<DateTime>(nullable: false),
-                    Gia = table.Column<int>(nullable: false),
-                    NgayVe = table.Column<DateTime>(nullable: false),
-                    SoLuongMax = table.Column<int>(nullable: false),
-                    SoLuongDat = table.Column<int>(nullable: false),
+                    GiaNguoiLon = table.Column<decimal>(nullable: false),
+                    GiaTreEm = table.Column<decimal>(nullable: false),
+                    GiaTreNho = table.Column<decimal>(nullable: false),
                     NgayTao = table.Column<DateTime>(nullable: false),
                     NgaySua = table.Column<DateTime>(nullable: false),
                     NgayXoa = table.Column<DateTime>(nullable: true),
@@ -390,18 +373,13 @@ namespace Travel.Migrations
                 column: "NguoiDungId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DiaDiem_Tour_DiaDiemId",
-                table: "DiaDiem_Tour",
+                name: "IX_DiaDiem_Tours_DiaDiemId",
+                table: "DiaDiem_Tours",
                 column: "DiaDiemId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DiaDiem_Tour_TourId",
-                table: "DiaDiem_Tour",
-                column: "TourId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_GiaTreEms_TourId",
-                table: "GiaTreEms",
+                name: "IX_DiaDiem_Tours_TourId",
+                table: "DiaDiem_Tours",
                 column: "TourId");
 
             migrationBuilder.CreateIndex(
@@ -454,10 +432,7 @@ namespace Travel.Migrations
                 name: "DeXuatTours");
 
             migrationBuilder.DropTable(
-                name: "DiaDiem_Tour");
-
-            migrationBuilder.DropTable(
-                name: "GiaTreEms");
+                name: "DiaDiem_Tours");
 
             migrationBuilder.DropTable(
                 name: "HoaDons");
