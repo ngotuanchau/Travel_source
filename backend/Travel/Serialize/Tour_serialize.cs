@@ -45,7 +45,6 @@ namespace Travel.Serialize
         public List<Nhungdiadiem> Nhungdiadiem { get; set; }
         [Required]
         public List<Lichtrinh> Lichtrinh { get; set; }
-        [Required]
         public List<Hinhanh> Hinhanh { get; set; }
     }
 
