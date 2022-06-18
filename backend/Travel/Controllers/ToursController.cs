@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Travel.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ToursController : Controller
@@ -27,7 +27,7 @@ namespace Travel.Controllers
         }
         [HttpPost]
         [Route("create")]
-        [Authorize(Roles = "Business")]
+        //[Authorize(Roles = "Business")]
         [ActionName("createTour")]
         public async Task<IActionResult> createTour([FromBody] Tour_serialize tour_Serialize)
         {
@@ -36,25 +36,33 @@ namespace Travel.Controllers
             {
                 // Insert table Tour
                 var tour = new Tour();
-                tour.CongTyId = tour_Serialize.Congty;
-                tour.TheLoaiId = tour_Serialize.Theloai;
-                tour.PhanVungId = tour_Serialize.Phanvung;
-                tour.TenTour = tour_Serialize.Tentour;
-                tour.SoNgay = tour_Serialize.SoNgay;
-                tour.SoDem = tour_Serialize.SoDem;
-                tour.VeDoiDa = tour_Serialize.VeToiDa;
-                tour.VeToiThieu = tour_Serialize.VeToiThieu;
-                tour.DiemDi = tour_Serialize.DiemDi;
-                tour.DiemDen = tour_Serialize.DiemDen;
-                tour.AmThuc = tour_Serialize.AmThuc;
-                tour.LuuTru = tour_Serialize.LuuTru;
-                tour.PhuongTien = tour_Serialize.Phuongtien;
-                tour.MoTa = tour_Serialize.Mota;
-                DateTime now = DateTime.Now;
-                string tenanh = now.ToString("yyMMddhhmmss") + "_" + tour_Serialize.AnhTour;
-                tour.AnhTour = tenanh;
-                tour.TrangThai = 1;
-        
+                string tenanh = "";
+                try
+                {
+                   
+                    tour.CongTyId = tour_Serialize.Congty;
+                    tour.TheLoaiId = tour_Serialize.Theloai;
+                    tour.PhanVungId = tour_Serialize.Phanvung;
+                    tour.TenTour = tour_Serialize.Tentour;
+                    tour.SoNgay = tour_Serialize.SoNgay;
+                    tour.SoDem = tour_Serialize.SoDem;
+                    tour.VeDoiDa = tour_Serialize.VeToiDa;
+                    tour.VeToiThieu = tour_Serialize.VeToiThieu;
+                    tour.DiemDi = tour_Serialize.DiemDi;
+                    tour.DiemDen = tour_Serialize.DiemDen;
+                    tour.AmThuc = tour_Serialize.AmThuc;
+                    tour.LuuTru = tour_Serialize.LuuTru;
+                    tour.PhuongTien = tour_Serialize.Phuongtien;
+                    tour.MoTa = tour_Serialize.Mota;
+                    DateTime now = DateTime.Now;
+                    tenanh = now.ToString("yyMMddhhmmss") + "_" + tour_Serialize.AnhTour;
+                    tour.AnhTour = tenanh;
+                    tour.TrangThai = 1;
+                }
+                catch
+                {
+                    throw new BadHttpRequestException("Bad request");
+                }
                 _context.Tours.Add(tour);
                 _context.SaveChanges();
                 int idtour = tour.Id;
@@ -64,9 +72,16 @@ namespace Travel.Controllers
                 foreach (var dd in tour_Serialize.Nhungdiadiem)
                 {
                     var diadiem_tour = new DiaDiem_Tour();
-                    diadiem_tour.TourId = idtour;
-                    diadiem_tour.ThuTu = dd.Thutu;
-                    diadiem_tour.DiaDiemId = dd.diadiem;
+                    try
+                    {
+                        diadiem_tour.TourId = idtour;
+                        diadiem_tour.ThuTu = dd.Thutu;
+                        diadiem_tour.DiaDiemId = dd.diadiem;
+                    }
+                    catch
+                    {
+                        throw new BadHttpRequestException("Bad request");
+                    }
                     _context.Add(diadiem_tour);
                     _context.SaveChanges();
                 }
@@ -75,16 +90,23 @@ namespace Travel.Controllers
                 foreach (var tt in tour_Serialize.NhungNgayKhoiHanh)
                 {
                     var thoigian = new ThoiGian();
-                    DateTime ngaykh = DateTime.ParseExact(tt.NgayKh, "dd/MM/yyyy",
-                                       System.Globalization.CultureInfo.InvariantCulture);
-                    thoigian.TourId = idtour;
-                    thoigian.NgayDi = ngaykh;
-                    thoigian.GiaNguoiLon = tt.GiaNguoiLon;
-                    thoigian.GiaTreEm = tt.GiaTreEn;
-                    thoigian.GiaTreNho = tt.GiaTreNho;
-                    thoigian.VeDaDat = 0;
-                    thoigian.TrangThai = 1;
 
+                    try
+                    {
+                        DateTime ngaykh = DateTime.ParseExact(tt.NgayKh, "dd/MM/yyyy",
+                                           System.Globalization.CultureInfo.InvariantCulture);
+                        thoigian.TourId = idtour;
+                        thoigian.NgayDi = ngaykh;
+                        thoigian.GiaNguoiLon = tt.GiaNguoiLon;
+                        thoigian.GiaTreEm = tt.GiaTreEn;
+                        thoigian.GiaTreNho = tt.GiaTreNho;
+                        thoigian.VeDaDat = 0;
+                        thoigian.TrangThai = 1;
+                    }
+                    catch
+                    {
+                        throw new BadHttpRequestException("Bad request");
+                    }
                     _context.Add(thoigian);
                     _context.SaveChanges();
                 }
@@ -93,15 +115,21 @@ namespace Travel.Controllers
                 foreach (var lt in tour_Serialize.Lichtrinh)
                 {
                     var lichtrinh = new LichTrinh();
-                    lichtrinh.TourId = idtour;
-                    lichtrinh.Ngay = lt.Ngay;
-                    lichtrinh.MoTa = lt.MoTa;
-                    lichtrinh.Sang = lt.Sang;
-                    lichtrinh.Trua = lt.Trua;
-                    lichtrinh.Chieu = lt.Chieu;
-                    lichtrinh.Toi = lt.Toi;
-                    lichtrinh.TrangThai = 1;
-
+                    try
+                    {
+                        lichtrinh.TourId = idtour;
+                        lichtrinh.Ngay = lt.Ngay;
+                        lichtrinh.MoTa = lt.MoTa;
+                        lichtrinh.Sang = lt.Sang;
+                        lichtrinh.Trua = lt.Trua;
+                        lichtrinh.Chieu = lt.Chieu;
+                        lichtrinh.Toi = lt.Toi;
+                        lichtrinh.TrangThai = 1;
+                    }
+                    catch
+                    {
+                        throw new BadHttpRequestException("Bad request");
+                    }
                     _context.Add(lichtrinh);
                     _context.SaveChanges();
                 }
@@ -116,12 +144,17 @@ namespace Travel.Controllers
                     AnhTour = tenanh
                 });
             }
+            catch (BadHttpRequestException)
+            {
+                transaction.Rollback();
+                return BadRequest("Bad request");
+            }
             catch (Exception)
             {
                 // TODO: Handle failure
                 transaction.Rollback();
-                return BadRequest("Create tour fail");
-                
+                return StatusCode(500, "Internal Server Error");
+
             }
 
         }
