@@ -5,154 +5,97 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Tạo tour</h4>
-            <form class="form-sample">
+            <form class="form-sample" [formGroup]="form">
                 <div class="col-12 grid-margin grid-child">
                     <p class="card-description">Thông tin tour</p>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-9">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Tên tour</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" value="tên tour" placeholder="Tên tour" />
+                                <label class="col-sm-2 col-form-label">Tên tour</label>
+                                <div class="col-sm-10">
+                                    <input [formControlName]="FormField.tentour" type="text" class="form-control" value="tên tour" placeholder="Tên tour" />
+                                    <div class="text-danger" *ngIf="isControlError(FormField.tentour, 'required')">
+                                        Tên tour không được để trống
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Điểm nổi bật</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" value="Điểm nổi bật của tour" placeholder="Điểm nổi bật của tour" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Loại tour</label>
-                                <div class="col-sm-9">
-                                    <select class="form-control">
-                    <option>Tour gia đình</option>
-                    <option>Team building</option>
-                    <option>Tour ...</option>
-                  </select>
-                                </div>
-                            </div>
-                        </div>
 
-                    </div>
-                </div>
-                <div class="col-12 grid-margin grid-child">
-                    <p class="card-description">Thời gian</p>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Ngày khởi hành</label>
-                                <div class="col-sm-9">
-                                    <input type="date" class="form-control" placeholder="dd/mm/yyyy" />
-                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Ngày về</label>
-                                <div class="col-sm-9">
-                                    <input type="date" class="form-control" placeholder="dd/mm/yyyy" />
+                                <div class="col-sm-7"><button type="submit " class="btn btn-primary mr-2 " (click)="onSubmit()"> Xác
+                    nhận </button></div>
+                                <div class="col-sm-5 pd"><button class="btn btn-light ">Hủy</button>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
 
-                </div>
-                <div class="col-12 grid-margin grid-child">
-                    <p class="card-description">Địa điểm</p>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Điểm khởi hành</label>
-                                <div class="col-sm-9">
-                                    <select class="form-control">
-                    <option>TP Hồ Chí Minh</option>
-                    <option>Hà Nội</option>
-                    <option>Đà Nẵng</option>
-                  </select>
+                                <label class="col-sm-3 col-form-label pd">Số ngày</label>
+                                <div class="col-sm-7 pd">
+                                    <input [(ngModel)]="songay" #ngay (keyup)="getSoNgay(ngay.value)" type="text" (keypress)="numberOnly($event)" class="form-control" value="1" placeholder="" hint="ngày" />
+                                    <div class="text-danger" *ngIf="isControlError(FormField.soNgay, 'required')">aaaa</div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Điểm đến</label>
-                                <div class="col-sm-9">
-                                    <select class="form-control">
-                    <option>TP Hồ Chí Minh</option>
-                    <option>Hà Nội</option>
-                    <option>Đà Nẵng</option>
-                  </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 grid-margin grid-child">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Mô tả</label>
-                                <div class="col-sm-9">
-                                    <textarea class="form-control" id="exampleTextarea1" rows="5" value="Mô tả tour" placeholder="Mô tả tour"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Cần chuẩn bị</label>
-                                <div class="col-sm-9">
-                                    <textarea class="form-control" id="exampleTextarea1" rows="5" value="Cần chuẩn bị" placeholder="Cần chuẩn bị"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 grid-margin grid-child">
-                    <p class="card-description">Chế độ trẻ em</p>
-                    <div class="card">
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">0-2 tuổi</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="1.000.000 đ" value="" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">3-5 tuổi</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="2.000.000 đ" value="" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">5-12 tuổi</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="3.000.000 đ" value="" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 grid-margin grid-child">
-                    <p class="card-description">Ảnh</p>
-                    <div class="card">
-                        <label class="btn btn-default"><i class="bi bi-upload"></i>
-              Chọn <input type="file" hidden>
-            </label>
 
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <!-- Số lượng -->
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label pd">Số đêm</label>
+                                <div class="col-sm-7 pd">
+                                    <input [(ngModel)]="sodem" #dem (keyup)="getSoDem(dem.value)" type="text" (keypress)="numberOnly($event)" min="1" class="form-control" value="0" placeholder="" />
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Tối đa</label>
+                                <div class="col-sm-7">
+                                    <input [formControlName]="FormField.veToiDa" type="number" class="form-control" (keypress)="numberOnly($event)" step="1" value="1" min="1" placeholder="" />
+                                    <div class="text-danger" *ngIf="isControlError(FormField.veToiDa, 'required')">
+                                        Chưa nhập số vé tối đa
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <!-- Số lượng -->
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Tối thiểu</label>
+                                <div class="col-sm-7">
+                                    <input [formControlName]="FormField.veToiThieu" (keypress)="numberOnly($event)" type="number" class="form-control" min="1" value="0" placeholder="" />
+                                    <div class="text-danger" *ngIf="isControlError(FormField.veToiThieu, 'required')">
+                                        Chưa nhập số vé tối thiểu
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary mr-2"> Xác nhận </button>
-                <button class="btn btn-light">Hủy</button>
+                <app-thong-tin [form]="form" [diemdi]="FormField.diemDi" [diemden]="FormField.diemDen" [phanvung]="FormField.phanvung" [theloai]="FormField.theloai"></app-thong-tin>
+                <app-dia-diem [form]="form" [name]="FormField.nhungdiadiem"></app-dia-diem>
+                <div class="col-12 grid-margin grid-child desc">
+                    <div class="row">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Mô tả</label>
+                            <div class="col-sm-9">
+                                <ckeditor [formControlName]="FormField.mota"></ckeditor>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <app-dich-vu [form]="form" [nameAT]="FormField.amThuc" [nameLT]="FormField.luuTru" [namePT]="FormField.phuongtien">
+                </app-dich-vu>
+                <app-ngay-khoi-hanh [form]="form" [name]="FormField.nhungNgayKhoiHanh"></app-ngay-khoi-hanh>
+                <app-lich-trinh [form]="form" [name]="FormField.lichtrinh"></app-lich-trinh>
+                <app-anh-tour [form]="form" [name]="FormField.anhTour"></app-anh-tour>
+                <button type="submit " class="btn btn-primary mr-2 " (click)="onSubmit()"> Xác nhận </button>
+                <button class="btn btn-light ">Hủy</button>
             </form>
         </div>
     </div>
