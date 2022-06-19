@@ -5,6 +5,8 @@ import { BusinessComponent } from './layouts/business/business.component';
 
 import { FullComponent } from './layouts/full/full.component';
 import { UserLayoutComponent } from './layouts/user-layout/user-layout.component';
+import { AuthGuard } from './shared/auth.guard';
+import { RoleGuard } from './shared/role.guard';
 
 export const Approutes: Routes = [
   {
@@ -35,7 +37,8 @@ export const Approutes: Routes = [
         path:'',
         loadChildren:()=>import('./business/business.module').then(m=>m.BusinessModule),
       }
-    ]
+    ],
+    canActivate:[AuthGuard]
   },
   {
     path:'',

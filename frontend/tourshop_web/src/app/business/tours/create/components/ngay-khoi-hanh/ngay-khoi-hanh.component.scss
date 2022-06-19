@@ -1,0 +1,53 @@
+//che do tre em
+.cdte .card {
+    margin-bottom: 0px;
+}
+
+.card-description {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.grid-child {
+    // background: #ccc;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+//table
+.table> :not(caption)>*>* {
+    padding: 10px;
+}
+
+.table th {
+    font-size: 18px !important;
+}
+
+.mat-form-field-prefix span {
+    font-size: 24px;
+}
+
+//input che do tre em
+.example-form {
+    min-width: 100%;
+    max-width: 100%;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
+}
+
+.form-control {
+    font-size: 16px;
+}
+
+.tt {
+    width: 70px;
+}
+
+.mat-flat-button {
+    padding: 5px 30px;
+}

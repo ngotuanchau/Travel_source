@@ -1,0 +1,22 @@
+<div class="col-12 grid-margin grid-child ">
+    <p class="card-description">Ảnh</p>
+    <div class="row">
+        <div class="col-md-6 col-lg-3">
+            <div class="card max-width scale-img" *ngIf="url!=''">
+                <img [src]="url" alt="blogs" class="card-img-top">
+            </div>
+        </div>
+    </div>
+    <!-- <div class="card">
+        <label class="btn btn-default">
+      <input type="file" [(ngModel)]="anhTour" (change)="onSelectedFile($event)" id="anhTour"
+        accept=".png, .jpg, .jpeg, .pdf">
+    </label>
+    </div> -->
+    <div class="card">
+        <label class="btn btn-default">Chọn <i class="bi bi-upload"></i>
+      <input type="file" style="display: none;" class="btn btn-sucess btn-sm" accept=".png, .jpg, .jpeg, .pdf"
+        [(ngModel)]="fileName" (change)="selectedImage($event)">
+    </label>
+    </div>
+</div>

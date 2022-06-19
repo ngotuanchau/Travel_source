@@ -1,0 +1,48 @@
+.card-description {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.grid-child {
+    // background: #ccc;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.col-form-label {
+    padding-top: 0px;
+    font-weight: bold;
+}
+
+.mat-radio-button {
+    min-width: 20%;
+    margin-right: 30px;
+}
+
+.form-control {
+    font-size: 16px;
+}
+
+//table
+.table> :not(caption)>*>* {
+    padding: 10px;
+}
+
+.table th {
+    font-size: 18px !important;
+}
+
+.example-section {
+    margin: 12px 0;
+}
+
+.example-margin {
+    margin: 0 12px;
+}
+
+ul {
+    list-style-type: none;
+    margin-top: 4px;
+}

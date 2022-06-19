@@ -1,21 +1,17 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
-import {Validator, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthRoutingModule } from './auth-routing.module';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatSelectModule} from '@angular/material/select';
-import { SignupBusinessComponent } from './signup/signup-business/signup-business.component';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { AuthRoutingModule } from "./auth-routing.module";
+import { LoginComponent } from "./login/login.component";
+import { SignupComponent } from "./signup/signup.component";
+import { MatTabsModule } from "@angular/material/tabs";
+import { MatRadioModule } from "@angular/material/radio";
+import { MatSelectModule } from "@angular/material/select";
+import { SignupBusinessComponent } from "./signup/signup-business/signup-business.component";
 
 @NgModule({
-  declarations: [
-    LoginComponent,
-    SignupComponent,
-    SignupBusinessComponent,
-  ],
+  declarations: [LoginComponent, SignupComponent, SignupBusinessComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,
@@ -23,7 +19,7 @@ import { SignupBusinessComponent } from './signup/signup-business/signup-busines
     ReactiveFormsModule,
     MatTabsModule,
     MatRadioModule,
-    MatSelectModule
-  ]
+    MatSelectModule,
+  ],
 })
-export class AuthModule { }
+export class AuthModule {}

@@ -13,7 +13,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
                   </div> -->
-                    <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()">
+                    <form ngForm="loginForm" [formGroup]="loginForm" (ngSubmit)="submitForm()" autocomplete="off">
                         <div class="d-flex align-items-center mb-3 pb-1">
                             <i class="bi bi-building"></i>
                             <span class="h1 fw-bold mb-0">Đăng nhập</span>
@@ -22,7 +22,7 @@
                         <div class="form-outline mb-4 form-group">
                             <label class="form-label" for="form2Example3">Email</label>
                             <input type="email" for="Email" formControlName="Email" class="form-control form-control-lg" />
-                            <div *ngIf="Email.invalid && (Email.dirty||Email.touched)">
+                            <!-- <div *ngIf="Email.valid && (Email.dirty||Email.touched)">
                                 <div *ngIf="Email.errors">
                                     <div *ngIf="Email.errors.required">
                                         <small>Bạn chưa nhập email</small>
@@ -33,12 +33,12 @@
                                     </div>
 
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="form-outline mb-4 form-group">
                             <label class="form-label" for="form2Example4">Mật khẩu</label>
-                            <input type="password" for="Password" formControlName="Password" class="form-control form-control-lg" />
-                            <div *ngIf="Password.invalid && (Password.dirty||Password.touched)">
+                            <input type="password" for="MatKhau" formControlName="MatKhau" class="form-control form-control-lg" />
+                            <!-- <div *ngIf="Password.invalid && (Password.dirty||Password.touched)">
                                 <div *ngIf="Password.errors">
                                     <div *ngIf="Password.errors?.['minlength']">
                                         <small>Mật khẩu phải có ít nhất 6 ký tự</small>
@@ -48,11 +48,12 @@
                                     </div>
 
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
-
+                        <div class="form-outline mb-4 form-group">
+                        </div>
                         <div class="pt-1 mb-4 form-group">
-                            <button class="btn btn-dark btn-lg btn-block " [disabled]="!loginForm.valid"> Đăng nhập
+                            <button class="btn btn-dark btn-lg btn-block " type="submit" [disabled]="!loginForm.valid"> Đăng nhập
               </button>
                         </div>
 
@@ -62,7 +63,6 @@
                         <a href="#! " class="small text-muted ">Điều khoản sử dụng.</a>
                         <a href="#! " class="small text-muted ">Chính sách hỗ trợ</a>
                     </form>
-
                 </div>
             </div>
         </div>

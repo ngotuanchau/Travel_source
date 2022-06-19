@@ -1,0 +1,24 @@
+<section class="ftco-section">
+    <div class="width-box">
+        <div class="row justify-content-center pb-3">
+            <div class="col-md-7 heading-section text-center ">
+                <h2 class="">CÁC KHU VỰC</h2>
+                <p>Điểm đến thú vị, vui chơi thỏa thích</p>
+            </div>
+        </div>
+
+        <div class="row max-width">
+            <div class="col-md-3" *ngFor="let dl of dlats">
+                <a href="{{dl.route}}">
+                    <div class="box-item relative scale-img">
+                        <img class="relative" src="../../../assets/web/images/DLAT/{{dl.img}}">
+                        <div class=" name-item absolute">
+                            <p class="title">{{dl.title}}</p>
+                            <p class="subTitle">{{dl.subTitle}} - <span>{{dl.soTour}} tours</span></p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

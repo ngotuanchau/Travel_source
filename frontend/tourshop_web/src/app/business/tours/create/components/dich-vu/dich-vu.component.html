@@ -1,0 +1,24 @@
+<div class="col-12 grid-margin grid-child cdte">
+    <p class="card-description">Chi tiết dịch vụ</p>
+    <div class="form-group row">
+        <div class="col-sm-4">
+            <label class="col-form-label">Ẩm thực</label>
+            <div *ngFor="let at of lstAmThuc">
+                <input type="checkbox" [value]="at.id" [checked]="at.completed" (change)="onChangeAT($event)"><label class="col-sm-1"></label><label>{{at.name}}</label>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <label class="col-form-label">Lưu trú</label>
+            <div *ngFor="let at of lstLuuTru">
+                <input type="checkbox" [value]="at.id" [checked]="at.completed" (change)="onChangeLT($event)"><label class="col-sm-1"></label><label>{{at.name}}</label>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <label class="col-form-label">Phương tiện</label>
+            <div *ngFor="let at of lstPhuongTien">
+                <input type="checkbox" [value]="at.id" [checked]="at.completed" (change)="onChangePT($event)"><label class="col-sm-1"></label><label>{{at.name}}</label>
+            </div>
+        </div>
+    </div>
+
+</div>

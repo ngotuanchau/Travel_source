@@ -6,4 +6,6 @@
 #main-wrapper[data-layout=vertical] .left-sidebar[data-sidebarbg=skin5],
 #main-wrapper[data-layout=vertical] .topbar .top-navbar .navbar-header[data-logobg=skin5] {
     background: #e76f51;
+    // z-index: -1;
+    position: fixed;
 }

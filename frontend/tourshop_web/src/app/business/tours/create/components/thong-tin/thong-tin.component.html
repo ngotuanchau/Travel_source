@@ -1,0 +1,49 @@
+<div class="col-12 grid-margin grid-child">
+    <!-- <p class="card-description">Thoong tin</p> -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Điểm đi</label>
+                <div class="col-sm-9">
+                    <select class="form-control" [(ngModel)]="diemDi" for="" required>
+            <option *ngFor="let dd of diadiems" [value]="dd.id">{{dd.ten}}</option>
+          </select>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Điểm đến</label>
+                <div class="col-sm-9">
+                    <select class="form-control" [(ngModel)]="diemDen" for="" required>
+            <option *ngFor="let dd of diadiems" [value]="dd.id">{{dd.ten}}</option>
+          </select>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Thể loại</label>
+                <div class="col-sm-9">
+                    <select class="form-control" for="" required [(ngModel)]="theLoai">
+            <option *ngFor="let tl of theloais" [value]="tl.id">{{tl.tenLoai}}</option>
+          </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Phân vùng</label>
+                <div class="col-sm-9">
+                    <select class="form-control" [(ngModel)]="phanVung" for="" required>
+            <option *ngFor="let pv of phanvungs" [value]="pv.id">Miền {{pv.tenVung}}</option>
+          </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

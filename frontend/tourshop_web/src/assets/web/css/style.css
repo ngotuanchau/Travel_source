@@ -57,7 +57,7 @@ html {
 }
 
 .width-box {
-    max-width: 100%;
+    max-width: 1200px;
     width: 100%;
     margin: 0 auto;
 }
@@ -10506,7 +10506,7 @@ h5,
 }
 
 .heading-section p {
-    font-family: 'Times New Roman', Times;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 18px;
 }
 

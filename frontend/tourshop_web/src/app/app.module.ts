@@ -6,7 +6,7 @@ import {
 } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -30,6 +30,8 @@ import { HeaderComponent } from './user/component/header/header.component';
 import { FooterComponent } from './user/component/footer/footer.component';
 import { BusinessComponent } from './layouts/business/business.component';
 import { SidebarBusinessComponent } from './shared/sidebar-business/sidebar.component';
+import {CookieService} from 'ngx-cookie-service';
+import { TokenInterceptorService } from './service/token-interceptor.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -72,6 +74,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    },
+    CookieService,
+    {
+      provide:HTTP_INTERCEPTORS, useClass:TokenInterceptorService,
+      multi:true
     }
   ],
   bootstrap: [AppComponent]
