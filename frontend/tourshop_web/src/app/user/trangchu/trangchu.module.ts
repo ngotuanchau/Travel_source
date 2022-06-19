@@ -1,30 +1,33 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { TimkiemComponent } from './trangchu-component/timkiem/timkiem.component';
-import { TrangchuComponent } from './trangchu.component';
-import { TienichComponent } from './trangchu-component/tienich/tienich.component';
-import { DiadanhComponent } from './trangchu-component/diadanh/diadanh.component';
-import { GioithieuComponent } from './trangchu-component/gioithieu/gioithieu.component';
-import { UudiemComponent } from './trangchu-component/uudiem/uudiem.component';
-import { BestsellingtoursComponent } from './trangchu-component/bestsellingtours/bestsellingtours.component';
-import { NewtoursComponent } from './trangchu-component/newtours/newtours.component';
-import { TintucComponent } from './trangchu-component/tintuc/tintuc.component';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { TimkiemComponent } from "./trangchu-component/timkiem/timkiem.component";
+import { TrangchuComponent } from "./trangchu.component";
+import { TienichComponent } from "./trangchu-component/tienich/tienich.component";
 
+import { GioithieuComponent } from "./trangchu-component/gioithieu/gioithieu.component";
+import { UudiemComponent } from "./trangchu-component/uudiem/uudiem.component";
+import { BestsellingtoursComponent } from "./trangchu-component/bestsellingtours/bestsellingtours.component";
+import { NewtoursComponent } from "./trangchu-component/newtours/newtours.component";
+import { TintucComponent } from "./trangchu-component/tintuc/tintuc.component";
+import { DuLichAnToanComponent } from "./trangchu-component/du-lich-an-toan/du-lich-an-toan.component";
+import { UuDaiTotNhatComponent } from "./trangchu-component/uu-dai-tot-nhat/uu-dai-tot-nhat.component";
+import { DiaDiemYeuThichComponent } from "./trangchu-component/dia-diem-yeu-thich/dia-diem-yeu-thich.component";
+import { MatGridListModule } from "@angular/material/grid-list";
 
 @NgModule({
   declarations: [
     TimkiemComponent,
     TrangchuComponent,
     TienichComponent,
-    DiadanhComponent,
+    DuLichAnToanComponent,
     GioithieuComponent,
     UudiemComponent,
     BestsellingtoursComponent,
     NewtoursComponent,
-    TintucComponent
+    TintucComponent,
+    UuDaiTotNhatComponent,
+    DiaDiemYeuThichComponent,
   ],
-  imports: [
-    CommonModule,
-  ]
+  imports: [CommonModule, MatGridListModule],
 })
-export class TrangchuModule { }
+export class TrangchuModule {}
