@@ -1,0 +1,64 @@
+import { Component, OnInit, Input } from "@angular/core";
+import { FormGroup } from "@angular/forms";
+import { DiadiemsService } from "../../../../../service/diadiems.service";
+@Component({
+  selector: "app-dia-diem",
+  templateUrl: "./dia-diem.component.html",
+  styleUrls: ["./dia-diem.component.scss"],
+})
+export class DiaDiemComponent implements OnInit {
+  @Input() form: FormGroup;
+  @Input() name: string;
+
+  get listDD() {
+    return this.form?.controls?.[this.name]?.value || [];
+  }
+
+  set listDD(data) {
+    this.form.patchValue({
+      [this.name]: data,
+    });
+  }
+
+  thutu: string;
+  dd: string;
+
+  diadiems: any;
+  //Lay tat ca dia diem
+  getAllDiaDiem() {
+    this.diadiemService.getAllDiaDiem().subscribe((response) => {
+      this.diadiems = response.listDiaDiem;
+    });
+  }
+
+  constructor(private diadiemService: DiadiemsService) {
+    this.getAllDiaDiem();
+  }
+
+  ngOnInit(): void {}
+  onAdd() {
+    if (this.thutu == null) {
+      console.log("chua chon so thu tu");
+    } else if (this.dd == null) {
+      console.log("chua chon dia diem");
+    } else {
+      const list = this.listDD;
+      list.push({
+        thutu: parseInt(this.thutu),
+        diadiem: parseInt(this.dd),
+      });
+      this.listDD = list;
+    }
+  }
+
+  onRemove(stt: number) {
+    this.listDD = this.listDD.filter((item: any) => item.stt != stt);
+  }
+
+  findDDById(id: number) {
+    return this.diadiems.find((item: any) => item.id == id)?.ten;
+  }
+  getSTT(value: any) {
+    this.thutu = value;
+  }
+}
