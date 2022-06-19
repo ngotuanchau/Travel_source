@@ -1,53 +1,46 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { NguoiDung } from '../../models/nguoidung.model';
-import { LoginsService } from '../../service/logins.service';
-
+import { Component, OnInit } from "@angular/core";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { AuthService } from "../../service/auth.service";
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
+  messageclass = "";
+  measage = "";
+  businessid: any;
+  editdata: any;
+  resposedata: any;
 
-  ngOnInit(): void {
-
+  constructor(private router: Router, private service: AuthService) {
+    localStorage.clear();
   }
-
-  constructor(private loginService: LoginsService){}
-
   loginForm = new FormGroup({
-    Email: new FormControl("",[Validators.required,Validators.email]),
-    Password: new FormControl("",[Validators.required,Validators.minLength(6)]),
+    Email: new FormControl("", [Validators.required, Validators.email]),
+    MatKhau: new FormControl("", [Validators.required]),
   });
-get Email(): FormControl{
-  return this.loginForm.get('Email') as FormControl;
-}
-get Password(): FormControl{
-  return this.loginForm.get('Password') as FormControl;
-}
-Date = new Date(Date.now());
-nguoiDung: NguoiDung = {
-  tenNguoiDung: '',
-  email:this.loginForm.value.Email,
-  matKhau: this.loginForm.value.Password,
-  cmnd: '',
-  sdt: '',
-  avt: '',
-  hoTen: '',
-  ngayTao: this.Date,
-  ngaySua: this.Date,
-  trangThai: 1,
-  isAdmin: false,
-  id: 0,
-}
-isUserValid: boolean =false;
-loginSubmit(){
-this.loginService.logInUser(this.nguoiDung ).subscribe(
-  res=>{
-    this.isUserValid=true;
-    alert(this.isUserValid+"Thành công")
+  ngOnInit(): void {}
+  submitForm() {
+    if (this.loginForm.valid) {
+      this.service.proceedLogin(this.loginForm.value).subscribe((result) => {
+        if (result != null) {
+          this.resposedata = result;
+          localStorage.setItem("token", this.resposedata.token);
+          localStorage.setItem("id", this.resposedata.id);
+          localStorage.setItem("email", this.resposedata.email);
+          localStorage.setItem("avt", this.resposedata.avt);
+          this.router.navigate(["/ql-tours"]);
+        }
+      });
+    }
   }
-);
-}
+  isControlError(field: FormControl, ...types: string[]) {
+    const control = this.loginForm.controls[field.value];
+    if (control.invalid && (control.touched || control.dirty)) {
+      return types.some((type) => !!control?.errors?.[type]);
+    }
+    return false;
+  }
 }
