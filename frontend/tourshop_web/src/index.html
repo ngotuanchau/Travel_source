@@ -26,14 +26,36 @@
     <link rel="stylesheet" href="assets/web/css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="assets/web/css/jquery.timepicker.css">
 
-
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,400i|Nunito:300,300i" rel="stylesheet">
     <link rel="stylesheet" href="assets/web/css/flaticon.css">
     <link rel="stylesheet" href="assets/web/css/icomoon.css">
     <link rel="stylesheet" href="assets/web/css/style.css">
+    <style>
+        #myBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            z-index: 99;
+            font-size: 30px;
+            border: none;
+            outline: none;
+            background-color: #E76F51;
+            color: white;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 4px;
+        }
+        
+        #myBtn:hover {
+            background-color: #555;
+        }
+    </style>
 </head>
 
 <body class="mat-typography">
     <app-root></app-root>
+    <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="bi bi-arrow-up-circle"></i></button>
     <script src="assets/web/js/jquery.min.js"></script>
     <script src="assets/web/js/jquery-migrate-3.0.1.min.js"></script>
     <script src="assets/web/js/popper.min.js"></script>
@@ -51,6 +73,29 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
     <script src="assets/web/js/google-map.js"></script>
     <script src="assets/web/js/main.js"></script>
+    <script>
+        //Get the button
+        var mybutton = document.getElementById("myBtn");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function() {
+            scrollFunction()
+        };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
 </body>
 
 </html>
