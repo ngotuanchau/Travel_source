@@ -9,9 +9,11 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatSelectModule } from "@angular/material/select";
 import { SignupBusinessComponent } from "./signup/signup-business/signup-business.component";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
+import { LoginadminComponent } from './login/loginadmin/loginadmin.component';
 
 @NgModule({
-  declarations: [LoginComponent, SignupComponent, SignupBusinessComponent],
+  declarations: [LoginComponent, SignupComponent, SignupBusinessComponent, LoginadminComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,
@@ -20,6 +22,7 @@ import { SignupBusinessComponent } from "./signup/signup-business/signup-busines
     MatTabsModule,
     MatRadioModule,
     MatSelectModule,
+    MatSlideToggleModule,
   ],
 })
 export class AuthModule {}

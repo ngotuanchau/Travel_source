@@ -47,7 +47,7 @@ export class ToursCreateComponent {
       [FormField.nhungNgayKhoiHanh]: [[], Validators.required], //16
       [FormField.lichtrinh]: [[], Validators.required], //17,
       [FormField.anhTour]: [null, Validators.required], //18
-      [FormField.congty]: [1, Validators.required], //19
+      [FormField.congty]: [null, Validators.required], //19
     });
   }
 
@@ -55,6 +55,11 @@ export class ToursCreateComponent {
     this.getAllDiaDiem();
     this.getPhanVung();
     this.getTheLoai();
+    // this.form.patchValue({
+    //   [FormField.soNgay]: this.idCty,
+    // });
+    this.getId();
+    console.log("Đây là id: " + this.idCty);
   }
 
   isControlError(field: FormField, ...types: string[]) {
@@ -91,6 +96,19 @@ export class ToursCreateComponent {
       this.theloais = response.listTheLoai;
     });
   }
+  getId() {
+    const id = this.idCty;
+    this.form.patchValue({ [FormField.congty]: id });
+    console.log(id);
+  }
+  get idCty() {
+    return localStorage.getItem("id");
+  }
+  // set idCty(data) {
+  //   this.form.patchValue({
+  //     [FormField.congty]: data,
+  //   });
+  // }
 
   get songay() {
     return this.form?.controls?.[FormField.soNgay]?.value || 0;
@@ -110,6 +128,7 @@ export class ToursCreateComponent {
       [FormField.soDem]: parseInt(data),
     });
   }
+
   // get vetoida() {
   //   return this.form?.controls?.[FormField.veToiDa]?.value || 0;
   // }
@@ -146,16 +165,7 @@ export class ToursCreateComponent {
   getSoDem(value: any) {
     this.sodem = value;
   }
-  parseInt(a: string) {
-    this.parseInt(a);
-  }
-  isNumber(evt: any) {
-    evt = evt ? evt : window.event;
-    let charCode = evt.which ? evt.which : evt.keyCode;
-    if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 46) {
-      evt.preventDefault();
-    } else {
-      return true;
-    }
+  parseInta(a: string) {
+    return parseInt(a);
   }
 }
