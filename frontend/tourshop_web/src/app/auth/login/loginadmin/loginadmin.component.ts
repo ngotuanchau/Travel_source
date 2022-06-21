@@ -20,7 +20,10 @@ export class LoginadminComponent implements OnInit {
   }
   loginForm = new FormGroup({
     Email: new FormControl("", [Validators.required, Validators.email]),
-    MatKhau: new FormControl("", [Validators.required]),
+    MatKhau: new FormControl("", [
+      Validators.required,
+      Validators.minLength(6),
+    ]),
   });
   ngOnInit(): void {}
   ProceedLogin() {

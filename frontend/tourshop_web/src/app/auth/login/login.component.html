@@ -7,12 +7,12 @@
             <div class="col-md-6 col-lg-5 d-flex align-items-center">
                 <div class="card-body p-4 p-lg-5 text-black">
                     <!--Đăng ký thành công-->
-                    <!-- <div *ngIf="alert" class="alert alert-success alert-dismissible fade show" role="alert">
-                      <strong>Đăng ký thành công!</strong>
-                      <button (click)="closeAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-                  </div> -->
+                    <div *ngIf="isSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Thông tin đăng nhập không đúng!</strong>
+                        <button (click)="closeAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+                    </div>
                     <form ngForm="loginForm" [formGroup]="loginForm" (ngSubmit)="ProceedLogin()" autocomplete="off">
                         <div class="d-flex align-items-center mb-3 pb-1">
                             <i class="bi bi-building"></i>
@@ -22,33 +22,32 @@
                         <div class="form-outline mb-4 form-group">
                             <label class="form-label" for="form2Example3">Email</label>
                             <input type="email" for="Email" formControlName="Email" class="form-control form-control-lg" />
-                            <!-- <div *ngIf="Email.valid && (Email.dirty||Email.touched)">
-                                <div *ngIf="Email.errors">
-                                    <div *ngIf="Email.errors.required">
+                            <div *ngIf="loginForm.controls.Email.invalid && (loginForm.controls.Email.dirty||loginForm.controls.Email.touched)">
+                                <div *ngIf="loginForm.controls.Email.errors">
+                                    <div *ngIf="loginForm.controls.Email.errors.email">
+                                        <small>Email chưa đúng định dạng</small>
+                                    </div>
+                                    <div *ngIf="loginForm.controls.Email.errors.required">
                                         <small>Bạn chưa nhập email</small>
                                     </div>
 
-                                    <div *ngIf="Email.errors.email">
-                                        <small>Email chưa đúng định dạng</small>
-                                    </div>
-
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
                         <div class="form-outline mb-4 form-group">
                             <label class="form-label" for="form2Example4">Mật khẩu</label>
                             <input type="password" for="MatKhau" formControlName="MatKhau" class="form-control form-control-lg" />
-                            <!-- <div *ngIf="Password.invalid && (Password.dirty||Password.touched)">
-                                <div *ngIf="Password.errors">
-                                    <div *ngIf="Password.errors?.['minlength']">
+                            <div *ngIf="loginForm.controls.MatKhau.invalid && (loginForm.controls.MatKhau.dirty||loginForm.controls.MatKhau.touched)">
+                                <div *ngIf="loginForm.controls.MatKhau.errors">
+                                    <div *ngIf="loginForm.controls.MatKhau.errors?.['minlength']">
                                         <small>Mật khẩu phải có ít nhất 6 ký tự</small>
                                     </div>
-                                    <div *ngIf="Password.errors.required">
+                                    <div *ngIf="loginForm.controls.MatKhau.errors.required">
                                         <small>Bạn chưa nhập mật khẩu</small>
                                     </div>
 
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
 
                         <div class="form-outline mb-4 form-group">

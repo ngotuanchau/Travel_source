@@ -20,18 +20,21 @@ export class LoginComponent implements OnInit {
   businessid: any;
   editdata: any;
   resposedata: any;
-
+  isSuccess = false;
   constructor(private router: Router, private service: AuthService) {
     localStorage.clear();
   }
   loginForm = new FormGroup({
     Email: new FormControl("", [Validators.required, Validators.email]),
-    MatKhau: new FormControl("", [Validators.required]),
+    MatKhau: new FormControl("", [
+      Validators.required,
+      Validators.minLength(6),
+    ]),
   });
   ngOnInit(): void {}
   ProceedLogin() {
-    if (this.loginForm.valid) {
-      if (this.isChecked) {
+    if (this.isChecked) {
+      if (this.loginForm.valid) {
         this.service
           .proceedLoginBusiness(this.loginForm.value)
           .subscribe((result) => {
@@ -45,7 +48,9 @@ export class LoginComponent implements OnInit {
               this.router.navigate(["/ql-tours"]);
             }
           });
-      } else {
+      }
+    } else {
+      if (this.loginForm.valid) {
         this.service
           .proceedLoginUser(this.loginForm.value)
           .subscribe((result) => {
@@ -61,5 +66,8 @@ export class LoginComponent implements OnInit {
           });
       }
     }
+  }
+  closeAlert() {
+    this.isSuccess = false;
   }
 }

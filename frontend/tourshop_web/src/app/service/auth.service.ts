@@ -36,7 +36,6 @@ export class AuthService {
     var _atobdata = atob(_extractedtoken);
     //chuyen du lieu json
     var _finaldata = JSON.parse(_atobdata);
-    console.log(_finaldata);
     if (_finaldata.role == "Business") {
       return true;
     }
@@ -52,7 +51,6 @@ export class AuthService {
     var _atobdata = atob(_extractedtoken);
     //chuyen du lieu json
     var _finaldata = JSON.parse(_atobdata);
-    console.log(_finaldata);
     if (_finaldata.role == "Admin") {
       return true;
     }

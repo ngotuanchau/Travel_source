@@ -40,7 +40,7 @@ export class SignupComponent implements OnInit {
   infoUser = this.signUpForm.group({
     tenNguoiDung: ["", [Validators.required]],
     email: ["", [Validators.required, Validators.email]],
-    matKhau: ["", Validators.required],
+    matKhau: ["", [Validators.required, Validators.minLength(6)]],
     cmnd: ["", Validators.required],
     sdt: ["", Validators.required],
     hoTen: ["", Validators.required],
@@ -71,5 +71,12 @@ export class SignupComponent implements OnInit {
   }
   closeAlert() {
     this.alert = false;
+  }
+  numberOnly(event: any): boolean {
+    const charCode = event.which ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
   }
 }

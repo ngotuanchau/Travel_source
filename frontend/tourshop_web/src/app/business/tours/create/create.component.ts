@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { PhanvungsService } from "../../../service/phanvungs.service";
 import { DiadiemsService } from "../../../service/diadiems.service";
 import { TheloaisService } from "../../../service/theloais.service";
@@ -10,6 +10,7 @@ import {
 } from "@angular/forms";
 import { ToursService } from "../../../service/tours.service";
 import { FormField } from "./components/model";
+import { LichTrinhComponent } from "./components/lich-trinh/lich-trinh.component";
 @Component({
   selector: "app-tours-create",
   templateUrl: "./create.component.html",
@@ -35,7 +36,7 @@ export class ToursCreateComponent {
       [FormField.soNgay]: [1, Validators.required], //3
       [FormField.soDem]: [0, Validators.required], //4
       [FormField.veToiDa]: [1, Validators.required], //5
-      [FormField.veToiThieu]: [1, Validators.required], //6
+      [FormField.veToiThieu]: [1, [Validators.required]], //6
       [FormField.diemDi]: [1, Validators.required], //7
       [FormField.diemDen]: [1, Validators.required], //8
       [FormField.nhungdiadiem]: [[], Validators.required], //9

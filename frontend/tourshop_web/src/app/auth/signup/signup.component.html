@@ -40,7 +40,7 @@
                                     <div class="col-md-12 mb-4">
                                         <div class="form-outline">
                                             <label class="form-label" for="form2Example1">CMND/CCCD</label>
-                                            <input type="text" for="cmnd" formControlName="cmnd" [(ngModel)]="nguoiDung.cmnd" class="form-control" />
+                                            <input type="text" for="cmnd" formControlName="cmnd" (keypress)="numberOnly($event)" [(ngModel)]="nguoiDung.cmnd" class="form-control" />
                                             <div *ngIf="f.cmnd.invalid && (f.cmnd.dirty||f.cmnd.touched)">
                                                 <div *ngIf="f.cmnd.errors">
                                                     <div *ngIf="f.cmnd.errors.required">
@@ -54,7 +54,7 @@
                                     <div class="col-md-12">
                                         <div class="form-outline">
                                             <label class="form-label" for="form2Example2">Số điện thoại</label>
-                                            <input type="text" for="sdt" formControlName="sdt" [(ngModel)]="nguoiDung.sdt" class="form-control" />
+                                            <input type="text" for="sdt" formControlName="sdt" (keypress)="numberOnly($event)" [(ngModel)]="nguoiDung.sdt" class="form-control" />
                                             <div *ngIf="f.sdt.invalid && (f.sdt.dirty||f.sdt.touched)">
                                                 <div *ngIf="f.sdt.errors">
                                                     <div *ngIf="f.sdt.errors.required">
@@ -99,6 +99,9 @@
                                     <input type="password" for="matKhau" formControlName="matKhau" [(ngModel)]="nguoiDung.matKhau" class="form-control form-control-lg" />
                                     <div *ngIf="f.matKhau.invalid && (f.matKhau.dirty||f.matKhau.touched)">
                                         <div *ngIf="f.matKhau.errors">
+                                            <div *ngIf="f.matKhau.errors?.['minlength']">
+                                                <small>Mật khẩu phải có ít nhất 6 ký tự</small>
+                                            </div>
                                             <div *ngIf="f.matKhau.errors.required">
                                                 <small>Bạn chưa nhập mật khẩu</small>
                                             </div>
