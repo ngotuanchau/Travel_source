@@ -22,27 +22,25 @@
                                 </div>
                                 <h5 class="fw-normal mb-3 pb-3">Đăng ký dịch vụ của chúng tôi để có trải nghiệm tốt nhất</h5>
                                 <div class="row form-group">
-                                    <div class="col-md-6 mb-4">
-                                        <div class="form-outline">
-                                            <label class="form-label" for="form2Example1">Username</label>
-                                            <input type="text" for="tenNguoiDung" formControlName="tenNguoiDung" [(ngModel)]="nguoiDung.tenNguoiDung" class="form-control" />
-                                            <div *ngIf="f.tenNguoiDung.invalid && (f.tenNguoiDung.dirty||f.tenNguoiDung.touched)">
-                                                <div *ngIf="f.tenNguoiDung.errors">
-                                                    <div *ngIf="f.tenNguoiDung.errors.required">
-                                                        <small>Bạn chưa nhập Username</small>
-                                                    </div>
 
+                                    <div class="form-outline">
+                                        <label class="form-label" for="form2Example1">Username</label>
+                                        <input type="text" for="tenNguoiDung" formControlName="tenNguoiDung" [(ngModel)]="nguoiDung.tenNguoiDung" class="form-control" />
+                                        <div *ngIf="f.tenNguoiDung.invalid && (f.tenNguoiDung.dirty||f.tenNguoiDung.touched)">
+                                            <div *ngIf="f.tenNguoiDung.errors">
+                                                <div *ngIf="f.tenNguoiDung.errors.required">
+                                                    <small>Bạn chưa nhập Username</small>
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                                 <div class="row form-group">
-                                    <div class="col-md-6 mb-4">
+                                    <div class="col-md-12 mb-4">
                                         <div class="form-outline">
                                             <label class="form-label" for="form2Example1">CMND/CCCD</label>
-                                            <input type="text" for="cmnd" formControlName="cmnd" [(ngModel)]="nguoiDung.cmnd" class="form-control" />
+                                            <input type="text" for="cmnd" formControlName="cmnd" (keypress)="numberOnly($event)" [(ngModel)]="nguoiDung.cmnd" class="form-control" />
                                             <div *ngIf="f.cmnd.invalid && (f.cmnd.dirty||f.cmnd.touched)">
                                                 <div *ngIf="f.cmnd.errors">
                                                     <div *ngIf="f.cmnd.errors.required">
@@ -53,10 +51,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 mb-4">
+                                    <div class="col-md-12">
                                         <div class="form-outline">
                                             <label class="form-label" for="form2Example2">Số điện thoại</label>
-                                            <input type="text" for="sdt" formControlName="sdt" [(ngModel)]="nguoiDung.sdt" class="form-control" />
+                                            <input type="text" for="sdt" formControlName="sdt" (keypress)="numberOnly($event)" [(ngModel)]="nguoiDung.sdt" class="form-control" />
                                             <div *ngIf="f.sdt.invalid && (f.sdt.dirty||f.sdt.touched)">
                                                 <div *ngIf="f.sdt.errors">
                                                     <div *ngIf="f.sdt.errors.required">
@@ -68,7 +66,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-outline mb-4 form-group">
+                                <div class="form-outline form-group">
                                     <label class="form-label" for="form2Example3">Họ Tên</label>
                                     <input type="email" for="hoTen" formControlName="hoTen" [(ngModel)]="nguoiDung.hoTen" class="form-control form-control-lg" />
                                     <div *ngIf="f.hoTen.invalid && (f.hoTen.dirty||f.hoTen.touched)">
@@ -80,7 +78,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-outline mb-4 form-group">
+                                <div class="form-outline form-group">
                                     <label class="form-label" for="form2Example3">Email</label>
                                     <input type="email" for="email" formControlName="email" placeholder="abc@gmail.com" [(ngModel)]="nguoiDung.email" class="form-control form-control-lg" />
                                     <div *ngIf="f.email.invalid && (f.email.dirty||f.email.touched)">
@@ -96,11 +94,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-outline mb-4 form-group">
+                                <div class="form-outline form-group">
                                     <label class="form-label" for="form2Example4">Mật khẩu</label>
                                     <input type="password" for="matKhau" formControlName="matKhau" [(ngModel)]="nguoiDung.matKhau" class="form-control form-control-lg" />
                                     <div *ngIf="f.matKhau.invalid && (f.matKhau.dirty||f.matKhau.touched)">
                                         <div *ngIf="f.matKhau.errors">
+                                            <div *ngIf="f.matKhau.errors?.['minlength']">
+                                                <small>Mật khẩu phải có ít nhất 6 ký tự</small>
+                                            </div>
                                             <div *ngIf="f.matKhau.errors.required">
                                                 <small>Bạn chưa nhập mật khẩu</small>
                                             </div>
@@ -108,9 +109,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div *ngIf="infoUser.valid">
+                                <div>
                                     <div class="pt-1 mb-4 form-group">
-                                        <button class="btn btn-dark btn-lg btn-block "> Đăng ký
+                                        <button class="btn btn-dark btn-lg btn-block" [disabled]="!infoUser.valid"> Đăng ký
                     </button>
                                     </div>
                                 </div>

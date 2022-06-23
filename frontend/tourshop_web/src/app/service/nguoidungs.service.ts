@@ -1,12 +1,10 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { NguoiDung } from '../models/nguoidung.model';
+import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 
 @Injectable({
-  providedIn:'root'
+  providedIn: "root",
 })
-export class NguoiDungsService{
-  baseUrl='https://localhost:44361/api/Users';
-  constructor(private http:HttpClient){}
+export class NguoiDungsService {
+  baseUrl = "https://localhost:40998/api/Users";
+  constructor(private http: HttpClient) {}
 }

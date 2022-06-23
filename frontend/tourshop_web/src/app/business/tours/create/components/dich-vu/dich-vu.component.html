@@ -3,21 +3,33 @@
     <div class="form-group row">
         <div class="col-sm-4">
             <label class="col-form-label">Ẩm thực</label>
+            <div class="text-danger" *ngIf="this.listAT==''">
+                Chưa chọn dịch vụ ẩm thực
+            </div>
             <div *ngFor="let at of lstAmThuc">
                 <input type="checkbox" [value]="at.id" [checked]="at.completed" (change)="onChangeAT($event)"><label class="col-sm-1"></label><label>{{at.name}}</label>
             </div>
+
         </div>
         <div class="col-sm-4">
             <label class="col-form-label">Lưu trú</label>
+            <div class="text-danger" *ngIf="this.listAT==''">
+                Chưa chọn dịch vụ lưu trú
+            </div>
             <div *ngFor="let at of lstLuuTru">
                 <input type="checkbox" [value]="at.id" [checked]="at.completed" (change)="onChangeLT($event)"><label class="col-sm-1"></label><label>{{at.name}}</label>
             </div>
+
         </div>
         <div class="col-sm-4">
             <label class="col-form-label">Phương tiện</label>
+            <div class="text-danger" *ngIf="this.listAT==''">
+                Chưa chọn dịch vụ phương tiện
+            </div>
             <div *ngFor="let at of lstPhuongTien">
                 <input type="checkbox" [value]="at.id" [checked]="at.completed" (change)="onChangePT($event)"><label class="col-sm-1"></label><label>{{at.name}}</label>
             </div>
+
         </div>
     </div>
 

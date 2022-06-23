@@ -35,3 +35,21 @@ label {
     position: absolute;
     z-index: 2;
 }
+
+img {
+    height: 300px;
+}
+
+label {
+    position: relative;
+}
+
+.btn-sucess::-webkit-file-upload-button {
+    visibility: hidden;
+    position: relative;
+}
+
+i {
+    position: absolute;
+    top: calc(50% - 18px);
+}

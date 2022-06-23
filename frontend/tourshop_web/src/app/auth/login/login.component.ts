@@ -8,39 +8,66 @@ import { AuthService } from "../../service/auth.service";
   styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
+  title = "Đăng nhập";
+  isChecked = false;
+
+  checkToggel() {
+    this.isChecked = !this.isChecked;
+    console.log(this.isChecked);
+  }
   messageclass = "";
   measage = "";
   businessid: any;
   editdata: any;
   resposedata: any;
-
+  isSuccess = false;
   constructor(private router: Router, private service: AuthService) {
     localStorage.clear();
   }
   loginForm = new FormGroup({
     Email: new FormControl("", [Validators.required, Validators.email]),
-    MatKhau: new FormControl("", [Validators.required]),
+    MatKhau: new FormControl("", [
+      Validators.required,
+      Validators.minLength(6),
+    ]),
   });
   ngOnInit(): void {}
-  submitForm() {
-    if (this.loginForm.valid) {
-      this.service.proceedLogin(this.loginForm.value).subscribe((result) => {
-        if (result != null) {
-          this.resposedata = result;
-          localStorage.setItem("token", this.resposedata.token);
-          localStorage.setItem("id", this.resposedata.id);
-          localStorage.setItem("email", this.resposedata.email);
-          localStorage.setItem("avt", this.resposedata.avt);
-          this.router.navigate(["/ql-tours"]);
-        }
-      });
+  ProceedLogin() {
+    if (this.isChecked) {
+      if (this.loginForm.valid) {
+        this.service
+          .proceedLoginBusiness(this.loginForm.value)
+          .subscribe((result) => {
+            if (result != null) {
+              this.resposedata = result;
+              localStorage.setItem("token", this.resposedata.token);
+              localStorage.setItem("id", this.resposedata.id);
+              localStorage.setItem("email", this.resposedata.email);
+              localStorage.setItem("hoTen", this.resposedata.hoTen);
+              localStorage.setItem("avt", this.resposedata.avt);
+              this.router.navigate(["/ql-tours"]);
+            }
+          });
+      }
+    } else {
+      if (this.loginForm.valid) {
+        this.service
+          .proceedLoginUser(this.loginForm.value)
+          .subscribe((result) => {
+            if (result != null) {
+              this.resposedata = result;
+              localStorage.setItem("token", this.resposedata.token);
+              localStorage.setItem("id", this.resposedata.id);
+              localStorage.setItem("email", this.resposedata.email);
+              localStorage.setItem("hoTen", this.resposedata.hoTen);
+              localStorage.setItem("avt", this.resposedata.avt);
+              this.router.navigate(["/home"]);
+            }
+          });
+      }
     }
   }
-  isControlError(field: FormControl, ...types: string[]) {
-    const control = this.loginForm.controls[field.value];
-    if (control.invalid && (control.touched || control.dirty)) {
-      return types.some((type) => !!control?.errors?.[type]);
-    }
-    return false;
+  closeAlert() {
+    this.isSuccess = false;
   }
 }
