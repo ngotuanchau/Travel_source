@@ -38,8 +38,6 @@ namespace Travel.Serialize
         [Required]
         public string Phuongtien { get; set; }
         [Required]
-        public string AnhTour { get; set; }
-        [Required]
         public List<NhungNgayKhoiHanh> NhungNgayKhoiHanh { get; set; }
         [Required]
         public List<Nhungdiadiem> Nhungdiadiem { get; set; }
