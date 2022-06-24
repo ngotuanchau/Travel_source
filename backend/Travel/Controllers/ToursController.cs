@@ -248,13 +248,17 @@ namespace Travel.Controllers
         {
             try
             {
-                Tour tour = _context.Tours.Where(t => t.Id == update_Anh_Serialize.idtour).FirstOrDefault();
-                if (tour == null)
+                foreach (var anh in update_Anh_Serialize.Anhs)
                 {
-                    throw new BadHttpRequestException("Bad request");
+                    Tour tour = _context.Tours.Where(t => t.Id == anh.idtour).FirstOrDefault();
+                    if (tour == null)
+                    {
+                        throw new BadHttpRequestException("Bad request");
+                    }
+                    tour.AnhTour = anh.tenanh;
+                    _context.SaveChanges();
                 }
-                tour.AnhTour = update_Anh_Serialize.tenanh;
-                _context.SaveChanges();
+                
 
                 return Ok(new
                 {
