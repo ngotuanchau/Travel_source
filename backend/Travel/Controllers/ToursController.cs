@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Travel.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ToursController : Controller
@@ -27,7 +27,7 @@ namespace Travel.Controllers
         }
         [HttpPost]
         [Route("create")]
-        //[Authorize(Roles = "Business")]
+        [Authorize(Roles = "Business")]
         [ActionName("createTour")]
         public async Task<IActionResult> createTour([FromBody] Tour_serialize tour_Serialize)
         {
@@ -54,8 +54,6 @@ namespace Travel.Controllers
                     tour.LuuTru = tour_Serialize.LuuTru;
                     tour.PhuongTien = tour_Serialize.Phuongtien;
                     tour.MoTa = tour_Serialize.Mota;
-                    DateTime now = DateTime.Now;
-                    tenanh = now.ToString("yyMMddhhmmss") + "_" + tour_Serialize.AnhTour;
                     tour.AnhTour = tenanh;
                     tour.TrangThai = 1;
                 }
@@ -141,7 +139,7 @@ namespace Travel.Controllers
                 transaction.Commit();
                 return Ok(new {
                     message = "Create tour success",
-                    AnhTour = tenanh
+                    IdTour = idtour
                 });
             }
             catch (BadHttpRequestException)
@@ -240,6 +238,41 @@ namespace Travel.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new { message = "error occurred" });
             }
 
+        }
+
+        [HttpPost]
+        [Route("update_anh")]
+        [Authorize(Roles = "Business")]
+        [ActionName("updateAnh")]
+        public async Task<IActionResult> updateAnh([FromBody] update_anh_serialize update_Anh_Serialize)
+        {
+            try
+            {
+                foreach (var anh in update_Anh_Serialize.Anhs)
+                {
+                    Tour tour = _context.Tours.Where(t => t.Id == anh.idtour).FirstOrDefault();
+                    if (tour == null)
+                    {
+                        throw new BadHttpRequestException("Bad request");
+                    }
+                    tour.AnhTour = anh.tenanh;
+                    _context.SaveChanges();
+                }
+                
+
+                return Ok(new
+                {
+                    message = "Success",
+                });
+            }
+            catch (BadHttpRequestException)
+            {
+                return StatusCode(404, "Tour not found");
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
         }
 
     }
