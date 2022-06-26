@@ -1,5 +1,9 @@
 const express = require('express')
 
+const http = require('http');
+
+const axios = require('axios');
+
 const multer = require('multer')
 
 const cors = require('cors')
@@ -20,35 +24,39 @@ var storage = multer.diskStorage({
     destination: function(req, file, cb) {
         cb(null, "uploads");
     },
-    filename: function(req, file, cb) {
 
-        cb(null, Date.now() + '_' + file.originalname); //Appending extension
+    filename: function(req, file, cb) {
+        console.log(file);
+        cb(null, "abc" + '_' + Date.now() + '_' + file.originalname);
     },
 });
+
 
 var upload = multer({ storage: storage }).single('file');
 
 var UploadImages = multer({ storage: storage }).array('files')
 
-app.post('/', (req, res) => {
+
+app.listen(3000, () => {
+    console.log("Port: 3000")
+})
+
+app.post('/node-js/upload-image', (req, res) => {
     upload(req, res, (err) => {
         if (err) {
-            console.log(err)
+            console.log("this is error log: " + err)
         }
-        // console.log(req.file.path)
         res.json({
             path: req.file.filename
         })
     })
 })
 
-app.post('/uploadimages', (req, res) => {
+app.post('/node-js/create-images', (req, res) => {
     UploadImages(req, res, (err) => {
         if (err) {
-            console.log(err)
+            console.log("this is error log: " + err)
         }
-        // console.log(req.files)
-
         let img = []
 
         req.files.forEach(file => {
@@ -58,10 +66,5 @@ app.post('/uploadimages', (req, res) => {
         res.json({
             path: img
         })
-
     })
-})
-
-app.listen(3000, () => {
-    console.log("Port: 3000")
 })

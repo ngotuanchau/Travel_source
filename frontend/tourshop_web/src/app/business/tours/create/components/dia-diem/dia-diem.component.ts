@@ -38,9 +38,9 @@ export class DiaDiemComponent implements OnInit {
   ngOnInit(): void {}
   onAdd() {
     if (this.thutu == null) {
-      console.log("chua chon so thu tu");
+      alert("Chưa chọn số thứ tự");
     } else if (this.dd == null) {
-      console.log("chua chon dia diem");
+      alert("Chưa chọn địa điểm");
     } else {
       const list = this.listDD;
       list.push({

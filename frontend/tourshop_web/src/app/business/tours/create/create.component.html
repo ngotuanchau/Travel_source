@@ -98,8 +98,10 @@
                 </app-dich-vu>
                 <app-ngay-khoi-hanh [form]="form" [name]="FormField.nhungNgayKhoiHanh"></app-ngay-khoi-hanh>
                 <app-lich-trinh [form]="form" [name]="FormField.lichtrinh" [sngay]="this.songay"></app-lich-trinh>
-                <app-anh-tour [form]="form" [name]="FormField.anhTour"></app-anh-tour>
-                <button type="submit " class="btn btn-primary mr-2 " (click)="onSubmit()"> Xác nhận </button>
+                <app-anh-tour [formha]="form" [imageMain]="FormField.hinhanh" (onselects)="selectsimage($event)"></app-anh-tour>
+                <button type="submit " class="btn btn-primary mr-2 " (click)="saveImagesToLocalByNodeJS($event)"> Xác
+          nhận
+        </button>
                 <button class="btn btn-light ">Hủy</button>
             </form>
         </div>

@@ -2,15 +2,11 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { PhanvungsService } from "../../../service/phanvungs.service";
 import { DiadiemsService } from "../../../service/diadiems.service";
 import { TheloaisService } from "../../../service/theloais.service";
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ToursService } from "../../../service/tours.service";
 import { FormField } from "./components/model";
-import { LichTrinhComponent } from "./components/lich-trinh/lich-trinh.component";
+import { HttpClient } from "@angular/common/http";
+import { AnhsService } from "../../../service/anhs.service";
 @Component({
   selector: "app-tours-create",
   templateUrl: "./create.component.html",
@@ -22,13 +18,19 @@ export class ToursCreateComponent {
   theloais: any;
   Date = new Date(Date.now());
   form: FormGroup;
+  idTour: number;
+  ha: any;
+  image: any;
+  lstAnh = [];
   readonly FormField = FormField;
   constructor(
     private diadiemService: DiadiemsService,
     private phanvungService: PhanvungsService,
     private theloaiService: TheloaisService,
     private tourService: ToursService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private anhService: AnhsService,
+    private http: HttpClient
   ) {
     this.form = this.formBuilder.group({
       [FormField.tentour]: [null, Validators.required], //1
@@ -47,7 +49,7 @@ export class ToursCreateComponent {
       [FormField.phuongtien]: ["", Validators.required], //15
       [FormField.nhungNgayKhoiHanh]: [[], Validators.required], //16
       [FormField.lichtrinh]: [[], Validators.required], //17,
-      [FormField.anhTour]: [null, Validators.required], //18
+      [FormField.hinhanh]: [[]], //18
       [FormField.congty]: [null, Validators.required], //19
     });
   }
@@ -60,7 +62,6 @@ export class ToursCreateComponent {
     //   [FormField.soNgay]: this.idCty,
     // });
     this.getId();
-    console.log("Đây là id: " + this.idCty);
   }
 
   isControlError(field: FormField, ...types: string[]) {
@@ -70,15 +71,98 @@ export class ToursCreateComponent {
     }
     return false;
   }
-
+  selectsimage(multipleImages: any) {
+    this.ha = multipleImages;
+  }
   //Tao tour
   onSubmit() {
-    const value = this.form.value;
-    this.tourService.createTour(value).subscribe((response) => {
-      console.log("Tao tour thanh cong");
+    //Get image from field
+    const imageMain = this.form?.controls?.[FormField.hinhanh]?.value;
+    //Get images detail
+    var imageDetail = this.ha;
+    console.log("Hinh ảnh chi tiết: " + imageDetail);
+    //Set filed to = []
+    this.form.patchValue({ [FormField.hinhanh]: [] });
+    //Cal API create tour to database
+    this.tourService.createTour(this.form.value).subscribe((response) => {
+      if (response != null) {
+        var idTour = response.idTour;
+        //Save image to local
+        this.saveImageToLocalByNodeJS(idTour, imageMain[0]).subscribe(
+          (response) => {
+            //console.log("Chạy vao đây: " + response);
+            //Check save success
+            if (response == null) {
+              console.log("Không thể lưu ảnh tour");
+              return;
+            }
+            //add image saved to list with format {idtour, tenanh}
+            var imageMainSubmit: any = [];
+            imageMainSubmit.push({
+              idTour: idTour,
+              tenanh: response.path,
+            });
+            console.log("abc" + imageMainSubmit);
+            //Call API update image to database
+            this.tourService
+              .updateImage(imageMainSubmit)
+              .subscribe((response) => {
+                if (response != null) {
+                  alert("Tạo tour thành công!");
+                } else {
+                  console.log("Không thể lưu ảnh vào database");
+                }
+              });
+          }
+        );
+      } else {
+        console.log("Không thể tạo tour");
+      }
     });
   }
 
+  saveImageToLocalByNodeJS(idTour: any, imageMain: any) {
+    var formData = new FormData();
+    var extension = imageMain.name.split(".").pop();
+    var newName = idTour + "." + extension;
+    formData.append("file", imageMain, newName);
+    return this.http.post<any>(
+      "http://localhost:3000/node-js/upload-image",
+      formData
+    );
+  }
+  saveImagesToLocalByNodeJS(idTour: any) {
+    const formdata = new FormData();
+
+    for (let img of this.ha) {
+      formdata.append("files", img);
+    }
+    console.log(formdata);
+
+    this.http
+      .post<any>("http://localhost:3000/node-js/create-images", formdata)
+      .subscribe((res) => {
+        console.log(res);
+        const data = res.path;
+        this.lstAnh = data;
+        var imageDetailSubmit: any = [];
+        for (let dt of data) {
+          const anh = dt;
+          var extension = anh.name.split(".").pop();
+          var newName = idTour + "." + extension;
+          imageDetailSubmit.push({
+            idTour: idTour,
+            tenanh: newName,
+          });
+          console.log(dt);
+        }
+        this.lstAnh = imageDetailSubmit;
+        console.log("Data: " + data);
+      });
+  }
+
+  //Update image
+  update() {}
   //Lay tat ca dia diem
   getAllDiaDiem() {
     this.diadiemService.getAllDiaDiem().subscribe((response) => {
@@ -130,24 +214,6 @@ export class ToursCreateComponent {
     });
   }
 
-  // get vetoida() {
-  //   return this.form?.controls?.[FormField.veToiDa]?.value || 0;
-  // }
-
-  // set vetoida(data) {
-  //   this.form.patchValue({
-  //     [this.FormField.veToiDa]: parseInt(data),
-  //   });
-  // }
-  // get vetoithieu() {
-  //   return this.form?.controls?.[FormField.veToiThieu]?.value || 0;
-  // }
-
-  // set vetoithieu(data) {
-  //   this.form.patchValue({
-  //     [FormField.veToiThieu]: parseInt(data),
-  //   });
-  // }
   numberOnly(event: any): boolean {
     const charCode = event.which ? event.which : event.keyCode;
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {

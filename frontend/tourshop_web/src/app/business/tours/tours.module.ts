@@ -15,7 +15,6 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { CheDoTreEmComponent } from "./create/components/bang-gia/bang-gia";
 import { NgayKhoiHanhComponent } from "./create/components/ngay-khoi-hanh/ngay-khoi-hanh.component";
 import { DichVuComponent } from "./create/components/dich-vu/dich-vu.component";
 import { MatRadioModule } from "@angular/material/radio";
@@ -24,6 +23,7 @@ import { DiaDiemComponent } from "./create/components/dia-diem/dia-diem.componen
 import { AnhTourComponent } from "./create/components/anh-tour/anh-tour.component";
 import { MatCardModule } from "@angular/material/card";
 import { ThongTinComponent } from "./create/components/thong-tin/thong-tin.component";
+import { CheDoTreEmComponent } from "./create/components/bang-gia/bang-gia";
 @NgModule({
   declarations: [
     ToursIndexComponent,
@@ -32,10 +32,10 @@ import { ThongTinComponent } from "./create/components/thong-tin/thong-tin.compo
     ToursDetailComponent,
     LichTrinhsIndexComponent,
     NguoiDungsComponent,
-    CheDoTreEmComponent,
     NgayKhoiHanhComponent,
     DichVuComponent,
     LichTrinhComponent,
+    CheDoTreEmComponent,
     DiaDiemComponent,
     AnhTourComponent,
     ThongTinComponent,

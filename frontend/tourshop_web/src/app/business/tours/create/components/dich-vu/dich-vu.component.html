@@ -13,7 +13,7 @@
         </div>
         <div class="col-sm-4">
             <label class="col-form-label">Lưu trú</label>
-            <div class="text-danger" *ngIf="this.listAT==''">
+            <div class="text-danger" *ngIf="this.listLT==''">
                 Chưa chọn dịch vụ lưu trú
             </div>
             <div *ngFor="let at of lstLuuTru">
@@ -23,7 +23,7 @@
         </div>
         <div class="col-sm-4">
             <label class="col-form-label">Phương tiện</label>
-            <div class="text-danger" *ngIf="this.listAT==''">
+            <div class="text-danger" *ngIf="this.listPT==''">
                 Chưa chọn dịch vụ phương tiện
             </div>
             <div *ngFor="let at of lstPhuongTien">
