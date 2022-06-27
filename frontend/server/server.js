@@ -20,14 +20,14 @@ app.use(bodyparser.urlencoded({ extended: false }))
 app.use(bodyparser.json())
 
 app.use(cors())
+
 var storage = multer.diskStorage({
     destination: function(req, file, cb) {
         cb(null, "uploads");
     },
-
     filename: function(req, file, cb) {
         console.log(file);
-        cb(null, "abc" + '_' + Date.now() + '_' + file.originalname);
+        cb(null, Date.now() + '_' + file.originalname);
     },
 });
 
@@ -42,6 +42,7 @@ app.listen(3000, () => {
 })
 
 app.post('/node-js/upload-image', (req, res) => {
+
     upload(req, res, (err) => {
         if (err) {
             console.log("this is error log: " + err)
@@ -53,6 +54,7 @@ app.post('/node-js/upload-image', (req, res) => {
 })
 
 app.post('/node-js/create-images', (req, res) => {
+
     UploadImages(req, res, (err) => {
         if (err) {
             console.log("this is error log: " + err)
