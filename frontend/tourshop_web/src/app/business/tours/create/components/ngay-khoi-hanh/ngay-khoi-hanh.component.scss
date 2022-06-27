@@ -51,3 +51,10 @@
 .mat-flat-button {
     padding: 5px 30px;
 }
+
+@media (max-width:768px) {
+    .cdte .col-md-9,
+    .cdte .col-md-3 {
+        width: 100%;
+    }
+}

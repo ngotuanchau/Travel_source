@@ -48,7 +48,7 @@ export class ToursCreateComponent {
       [FormField.luuTru]: ["", Validators.required], //14
       [FormField.phuongtien]: ["", Validators.required], //15
       [FormField.nhungNgayKhoiHanh]: [[], Validators.required], //16
-      [FormField.lichtrinh]: [[], Validators.required], //17,
+      [FormField.lichtrinh]: [[]], //17,
       [FormField.hinhanh]: [[]], //18
       [FormField.congty]: [null, Validators.required], //19
     });
@@ -87,34 +87,70 @@ export class ToursCreateComponent {
     this.tourService.createTour(this.form.value).subscribe((response) => {
       if (response != null) {
         var idTour = response.idTour;
-        //Save image to local
-        this.saveImageToLocalByNodeJS(idTour, imageMain[0]).subscribe(
-          (response) => {
-            //console.log("Chạy vao đây: " + response);
-            //Check save success
-            if (response == null) {
-              console.log("Không thể lưu ảnh tour");
-              return;
+        if (imageMain[0] != null) {
+          //Save image to local
+          this.saveImageToLocalByNodeJS(idTour, imageMain[0]).subscribe(
+            (response) => {
+              //console.log("Chạy vao đây: " + response);
+              //Check save success
+              if (response == null) {
+                console.log("Không thể lưu ảnh tour");
+                return;
+              }
+              //add image saved to list with format {idtour, tenanh}
+              var imageMainSubmit: any = [];
+              imageMainSubmit.push({
+                idTour: idTour,
+                tenanh: response.path,
+              });
+              console.log("abc" + imageMainSubmit);
+              //Call API update image to database
+              this.tourService
+                .updateImage(imageMainSubmit)
+                .subscribe((response) => {
+                  if (response != null) {
+                    console.log("Lưu ảnh đại diện thành công");
+                  } else {
+                    console.log("Không thể lưu ảnh vào database");
+                  }
+                });
             }
-            //add image saved to list with format {idtour, tenanh}
-            var imageMainSubmit: any = [];
-            imageMainSubmit.push({
-              idTour: idTour,
-              tenanh: response.path,
-            });
-            console.log("abc" + imageMainSubmit);
-            //Call API update image to database
-            this.tourService
-              .updateImage(imageMainSubmit)
+          );
+        }
+        if (this.ha != null) {
+          this.saveImagesToLocalByNodeJS().subscribe((response) => {
+            if (response == null) {
+              console.log("Không thể lưu ảnh chi tiết");
+              return;
+            } else {
+              console.log("Res: " + response);
+              const data = response.path;
+              this.lstAnh = data;
+              // console.log("this.lstAnh: " + this.lstAnh);
+              var imageDetailSubmit: any = [];
+              for (let dt of this.lstAnh) {
+                const anh = dt;
+                console.log("anh: " + anh);
+                //add image saved to list with format {idtour, tenanh}
+                imageDetailSubmit.push({
+                  idTour: idTour,
+                  tenanh: anh,
+                });
+              }
+            }
+            this.lstAnh = imageDetailSubmit;
+            return this.anhService
+              .createImage(this.lstAnh)
               .subscribe((response) => {
                 if (response != null) {
-                  alert("Tạo tour thành công!");
-                } else {
-                  console.log("Không thể lưu ảnh vào database");
+                  console.log("Res:");
+                  console.log(response);
                 }
               });
-          }
-        );
+          });
+        } else {
+          alert("Tạo tour thành công!");
+        }
       } else {
         console.log("Không thể tạo tour");
       }
@@ -131,7 +167,8 @@ export class ToursCreateComponent {
       formData
     );
   }
-  saveImagesToLocalByNodeJS(idTour: any) {
+
+  saveImagesToLocalByNodeJS() {
     const formdata = new FormData();
 
     for (let img of this.ha) {
@@ -139,30 +176,58 @@ export class ToursCreateComponent {
     }
     console.log(formdata);
 
-    this.http
-      .post<any>("http://localhost:3000/node-js/create-images", formdata)
-      .subscribe((res) => {
-        console.log(res);
-        const data = res.path;
-        this.lstAnh = data;
-        var imageDetailSubmit: any = [];
-        for (let dt of data) {
-          const anh = dt;
-          var extension = anh.name.split(".").pop();
-          var newName = idTour + "." + extension;
-          imageDetailSubmit.push({
-            idTour: idTour,
-            tenanh: newName,
-          });
-          console.log(dt);
-        }
-        this.lstAnh = imageDetailSubmit;
-        console.log("Data: " + data);
-      });
+    return this.http.post<any>(
+      "http://localhost:3000/node-js/create-images",
+      formdata
+    );
   }
 
+  // saveImagesToLocalByNodeJS(idTour: any) {
+  //   const formdata = new FormData();
+
+  //   for (let img of this.ha) {
+  //     formdata.append("files", img);
+  //   }
+  //   console.log(formdata);
+
+  //   this.http
+  //     .post<any>("http://localhost:3000/node-js/create-images", formdata)
+  //     .subscribe((res) => {
+  //       // console.log("Res: " + res);
+  //       const data = res.path;
+  //       this.lstAnh = data;
+  //       // console.log("this.lstAnh: " + this.lstAnh);
+  //       var imageDetailSubmit: any = [];
+  //       var i = 0;
+  //       for (let dt of this.lstAnh) {
+  //         const anh = dt;
+  //         // console.log("anh: " + anh);
+  //         var extension = String(anh).split(".").pop();
+  //         idTour = 123;
+  //         var newName = idTour + "_" + i + "." + extension;
+  //         // console.log("newName: " + newName);
+  //         imageDetailSubmit.push({
+  //           idTour: idTour,
+  //           tenanh: newName,
+  //         });
+  //         // console.log("imageDetailSubmit: " + imageDetailSubmit);
+  //       }
+  //       this.lstAnh = imageDetailSubmit;
+  //       console.log("This.lstAnh: ");
+  //       console.log(this.lstAnh);
+  //       return this.anhService
+  //         .createImage(this.lstAnh)
+  //         .subscribe((response) => {
+  //           if (response != null) {
+  //             console.log("Res:");
+  //             console.log(response);
+  //           }
+  //         });
+  //     });
+  // }
+
   //Update image
-  update() {}
+
   //Lay tat ca dia diem
   getAllDiaDiem() {
     this.diadiemService.getAllDiaDiem().subscribe((response) => {

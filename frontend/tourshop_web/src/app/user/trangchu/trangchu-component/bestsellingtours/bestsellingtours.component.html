@@ -1,252 +1,40 @@
-<!-- <section class="ftco-section">
-    <div class="width-box">
-        <div class="row justify-content-center pb-3">
-            <div class="col-md-7 heading-section text-center ">
-                <h2 class="">{{title}}</h2>
-                <p>{{subTitle}}</p>
-            </div>
+<div class="width-box mt-5 mb-5">
+    <div class="row justify-content-center pb-3">
+        <div class="col-md-7 heading-section text-center ">
+            <h2 class="">{{title}}</h2>
+            <p>{{subTitle}}</p>
         </div>
     </div>
-</section> -->
-<section class="dark">
-    <div class="container py-4">
-        <div class="width-box">
-            <!-- <h1 class="h1 text-center" id="pageHeaderTitle">My Cards Dark</h1> -->
-            <div class="row justify-content-center pb-3">
-                <div class="col-md-7 heading-section text-center ">
-                    <h2 class="">{{title}}</h2>
-                    <p>{{subTitle}}</p>
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-10 box" *ngFor="let tour of lstBS">
+            <div class="row p-2 bg-white border rounded">
+                <div class="col-md-4 mt-1 scale-img"><img class="img-fluid img-responsive rounded product-image" src="../../../../../assets/web/images/diadiem/{{tour.anh}}"></div>
+                <div class="col-md-6 mt-1">
+                    <h5>Loại: <span>{{tour.loai}}</span></h5>
+                    <h1>{{tour.ten}}</h1>
+                    <div class="d-flex flex-row">
+                        <div class="mt-1 mb-1 spec-1">Ngày khởi hành: <span> {{tour.ngayKH}}</span></div>
+                    </div>
+                    <div class="d-flex flex-row">
+                        <div class="mt-1 mb-1 spec-1">Thời gian: <span> {{tour.ngay}} ngày {{tour.dem}} đêm</span></div>
+                    </div>
+                    <div class="d-flex flex-row">
+                        <div class="mt-1 mb-1 spec-1">Còn lại: <span> {{tour.trong}} chỗ</span></div>
+                    </div>
+                    <div class="mt-1 mb-1 spec-1"><span class="dot dot-r"></span><span class="r">Hot</span><span class="dot"></span><span>{{tour.dd}}</span><span class="dot"></span><span>{{tour.den}}<br></span></div>
+                    <p class="text-justify text-truncate para mb-0">{{tour.mota}}<br><br></p>
+                </div>
+                <div class="align-items-center align-content-center col-md-2 border-left mt-1">
+                    <div class="d-flex flex-row align-items-center">
+                        <h1 class="price">{{tour.gia}} đ</h1>
+                        <!-- <h4 class="mr-1">$13.99</h4><span class="strike-text">$20.99</span> -->
+                    </div>
+                    <!-- <h6 class="text-success">Free shipping</h6> -->
+                    <div class="d-flex flex-column mt-4"><button class="btn btn-primary btn-sm" type="button">Chi
+              tiết</button><button class="btn btn-outline-primary btn-sm mt-2" type="button">Đặt ngay</button></div>
                 </div>
             </div>
-            <div *ngFor="let tour of lstBS">
-                <article class="postcard dark blue">
-                    <a class="postcard__img_link" href="#">
-                        <img class="postcard__img" src="../../../../../assets/web/images/diadiem/{{tour.anh}}" alt="{{tour.ten}}" />
-                    </a>
-                    <div class="postcard__text">
-                        <h1 class="postcard__title blue"><a href="#">{{tour.ten}}</a></h1>
-                        <h1 class=" postcard__price green"><a href="#">Giá: <span>{{tour.gia}} đ</span></a></h1>
-                        <div class="postcard__subtitle small">
-                            <time datetime="2020-05-25 12:00:00">
-                <i class="fas fa-calendar-alt mr-2"></i>Ngày khởi hành: {{tour.ngayKH}}
-              </time>
-                        </div>
-                        <div class="postcard__bar"></div>
-                        <!-- <div class="postcard__preview-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, fugiat asperiores inventore beatae accusamus odit minima enim, commodi quia, doloribus eius! Ducimus nemo accusantium maiores velit corrupti tempora reiciendis
-                            molestiae repellat vero. Eveniet ipsam adipisci illo iusto quibusdam, sunt neque nulla unde ipsum dolores nobis enim quidem excepturi, illum quos!</div> -->
-                        <ul class="postcard__tagbox">
-                            <li class="tag__item"><i class="fas fa-tag mr-2"></i>Thời gian: {{tour.ngay}} ngày {{tour.dem}} đêm</li>
-                            <li class="tag__item"><i class="fas fa-clock mr-2"></i>Loại: {{tour.loai}}</li>
-                            <li class="tag__item play blue">
-                                <a href="#"><i class="fas fa-play mr-2"></i>Hot</a>
-                            </li>
-                        </ul>
-                    </div>
-                </article>
-            </div>
+
         </div>
     </div>
-</section>
-
-
-<!-- <section class="ftco-section">
-    <div class="container">
-        <div class="row justify-content-center mb-5 pb-3">
-            <div class="col-md-7 heading-section text-center  ">
-                <h2 class="mb-4">TOUR ĐANG HOT</h2>
-
-            </div>
-        </div>
-    </div>
-    <div class="row max-width">
-        <div class="col-md-3">
-            <div class="box-item relative">
-                <div class=" scale-img relative"> <img class="img-it" src="../../../assets/web/images/destination-1.jpg">
-                    <div class="price-item absolute">3 000 000 đ
-                    </div>
-                </div>
-
-            </div>
-            <div class="property">
-                <div class="cut_string2">
-                    <div class="name-item">
-                        Du lịch Cao Bằng Du lịch Cao Bằng</div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 left"><i class="material-icons">place</i>TP. Hồ Chí Minh</div>
-                    <div class="col-md-4 right">Còn:<span>5 vé</span></div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 left"><i class="material-icons">alarm</i>15/07/2022</div>
-                    <div class="col-md-4 right">3 ngày 2 đêm</div>
-                </div>
-                <div class="buttons">
-                    <button (click)="viewAll()">Xem chi tiết</button>
-                    <button>Đặt ngay</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="box-item relative">
-                <div class=" scale-img relative"> <img class="img-it" src="../../../assets/web/images/destination-1.jpg">
-                    <div class="price-item absolute">3 000 000 đ
-                    </div>
-                </div>
-
-            </div>
-            <div class="property">
-                <div class="cut_string2">
-                    <div class="name-item">
-                        Du lịch Cao Bằng Du lịch Cao Bằng</div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 left"><i class="material-icons">place</i>TP. Hồ Chí Minh</div>
-                    <div class="col-md-4 right">Còn:<span>5 vé</span></div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 left"><i class="material-icons">alarm</i>15/07/2022</div>
-                    <div class="col-md-4 right">3 ngày 2 đêm</div>
-                </div>
-                <div class="buttons">
-                    <button>Xem chi tiết</button>
-                    <button>Đặt ngay</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="box-item relative">
-                <div class=" scale-img relative"> <img class="img-it" src="../../../assets/web/images/destination-1.jpg">
-                    <div class="price-item absolute">3 000 000 đ
-                    </div>
-                </div>
-
-            </div>
-            <div class="property">
-                <div class="cut_string2">
-                    <div class="name-item">
-                        Du lịch Cao Bằng Du lịch Cao Bằng</div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 left"><i class="material-icons">place</i>TP. Hồ Chí Minh</div>
-                    <div class="col-md-4 right">Còn:<span>5 vé</span></div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 left"><i class="material-icons">alarm</i>15/07/2022</div>
-                    <div class="col-md-4 right">3 ngày 2 đêm</div>
-                </div>
-                <div class="buttons">
-                    <button>Xem chi tiết</button>
-                    <button>Đặt ngay</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="box-item relative">
-                <div class=" scale-img relative"> <img class="img-it" src="../../../assets/web/images/destination-1.jpg">
-                    <div class="price-item absolute">3 000 000 đ
-                    </div>
-                </div>
-
-            </div>
-            <div class="property">
-                <div class="cut_string2">
-                    <div class="name-item">
-                        Du lịch Cao Bằng Du lịch Cao Bằng</div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 left"><i class="material-icons">place</i>TP. Hồ Chí Minh</div>
-                    <div class="col-md-4 right">Còn:<span>5 vé</span></div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 left"><i class="material-icons">alarm</i>15/07/2022</div>
-                    <div class="col-md-4 right">3 ngày 2 đêm</div>
-                </div>
-                <div class="buttons">
-                    <button>Xem chi tiết</button>
-                    <button>Đặt ngay</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="box-item relative">
-                <div class=" scale-img relative"> <img class="img-it" src="../../../assets/web/images/destination-1.jpg">
-                    <div class="price-item absolute">3 000 000 đ
-                    </div>
-                </div>
-
-            </div>
-            <div class="property">
-                <div class="cut_string2">
-                    <div class="name-item">
-                        Du lịch Cao Bằng Du lịch Cao Bằng</div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 left"><i class="material-icons">place</i>TP. Hồ Chí Minh</div>
-                    <div class="col-md-4 right">Còn:<span>5 vé</span></div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 left"><i class="material-icons">alarm</i>15/07/2022</div>
-                    <div class="col-md-4 right">3 ngày 2 đêm</div>
-                </div>
-                <div class="buttons">
-                    <button>Xem chi tiết</button>
-                    <button>Đặt ngay</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="box-item relative">
-                <div class=" scale-img relative"> <img class="img-it" src="../../../assets/web/images/destination-1.jpg">
-                    <div class="price-item absolute">3 000 000 đ
-                    </div>
-                </div>
-
-            </div>
-            <div class="property">
-                <div class="cut_string2">
-                    <div class="name-item">
-                        Du lịch Cao Bằng Du lịch Cao Bằng</div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 left"><i class="material-icons">place</i>TP. Hồ Chí Minh</div>
-                    <div class="col-md-4 right">Còn:<span>5 vé</span></div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 left"><i class="material-icons">alarm</i>15/07/2022</div>
-                    <div class="col-md-4 right">3 ngày 2 đêm</div>
-                </div>
-                <div class="buttons">
-                    <button>Xem chi tiết</button>
-                    <button>Đặt ngay</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="box-item relative">
-                <div class=" scale-img relative"> <img class="img-it" src="../../../assets/web/images/destination-1.jpg">
-                    <div class="price-item absolute">3 000 000 đ
-                    </div>
-                </div>
-
-            </div>
-            <div class="property">
-                <div class="cut_string2">
-                    <div class="name-item">
-                        Du lịch Cao Bằng Du lịch Cao Bằng</div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 left"><i class="material-icons">place</i>TP. Hồ Chí Minh</div>
-                    <div class="col-md-4 right">Còn:<span>5 vé</span></div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 left"><i class="material-icons">alarm</i>15/07/2022</div>
-                    <div class="col-md-4 right">3 ngày 2 đêm</div>
-                </div>
-                <div class="buttons">
-                    <button>Xem chi tiết</button>
-                    <button>Đặt ngay</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> -->
+</div>

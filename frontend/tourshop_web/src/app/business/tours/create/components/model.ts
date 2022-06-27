@@ -13,8 +13,9 @@ export enum FormField {
   amThuc = "amThuc",
   luuTru = "luuTru",
   phuongtien = "phuongtien",
-  anhTour = "anhTour",
+  hinhanh = "hinhanh",
   nhungNgayKhoiHanh = "nhungNgayKhoiHanh",
   nhungdiadiem = "nhungdiadiem",
   lichtrinh = "lichtrinh",
 }
+

@@ -1,35 +1,80 @@
 <div class="col-12 grid-margin grid-child ">
-    <p class="card-description">Ảnh</p>
-    <div class="card">
-        <div class="row">
-            <div class="col-4"></div>
-            <div class="col-3"><label class="btn btn-default">
-          <i class="bi bi-upload">Chọn</i>
-          <input #multipleInput type="file" name="images" multiple (change)="selectMultipleImage($event)"
-            class="btn btn-sucess btn-sm" accept=".png, .jpg, .jpeg, .pdf">
-        </label></div>
-        </div>
-        <div class="row">
-            <div class="col-5"></div>
-            <div class="col-4">
-                <button class="btn btn-success btn-sm" (click)="onMultipleSubmit()">
-          Upload
-        </button>
+    <p class="card-description">Ảnh đại diện</p>
+    <form class="form-sample" [formGroup]="form">
+        <div class="card">
+            <div class="row">
+                <!-- Ảnh đại diện -->
+                <div class="col-4"></div>
+                <div class="col-3"><label class="btn btn-default">
+            <i class="bi bi-upload">Chọn</i>
+            <input #singleInput type="file" name="images" (change)="selectMainImage($event)"
+              class="btn btn-sucess btn-sm" accept=".png, .jpg, .jpeg, .pdf">
+          </label></div>
             </div>
+            <ng-template [ngIf]="displaySingleImage">
+                <div class="row">
+                    <div class="col-md-6 col-lg-3" *ngFor='let image of displaySingleImageArray'>
+                        <div class="card max-width scale-img">
+                            <img src="http://localhost:3000/{{image}}" alt="blogs" class="card-img-top">
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
         </div>
-    </div>
-    <ng-template [ngIf]="displayMultipleImages" [ngIfElse]="elseMultipleImagesTemplate">
-        <div class="row">
-            <div class="col-md-6 col-lg-3" *ngFor='let image of displayMultipleImageArray'>
-                <div class="card max-width scale-img">
-                    <img src="http://localhost:3000/{{image}}" alt="blogs" class="card-img-top">
+    </form>
+</div>
+
+
+<div class="col-12 grid-margin grid-child ">
+    <p class="card-description">Ảnh chi tiết</p>
+    <form class="form-sample" [formGroup]="forms">
+        <div class="card">
+            <!-- Ảnh chi tiết -->
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-3"><label class="btn btn-default">
+            <i class="bi bi-upload">Chọn</i>
+            <input #multipleInput type="file" name="images" multiple (change)="selectMultipleImage($event)"
+              class="btn btn-sucess btn-sm" accept=".png, .jpg, .jpeg, .pdf">
+          </label></div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<!-- <ng-template [ngIf]="displayMultipleImages">
+            <div class="row">
+                <div class="col-md-6 col-lg-3" *ngFor='let image of displayMultipleImageArray'>
+                    <div class="card max-width scale-img">
+                        <img src="http://localhost:3000/{{image}}" alt="blogs" class="card-img-top">
+                    </div>
                 </div>
             </div>
-        </div>
-    </ng-template>
-    <ng-template #elseMultipleImagesTemplate>
-        <br /><br />
-        <div>Hãy chọn ảnh</div>
-    </ng-template>
+        </ng-template> -->
+<!-- <ng-template #elseMultipleImagesTemplate>
+            <br /><br />
+            <div>Hãy chọn ảnh</div>
+        </ng-template> -->
 
+<!-- </form>
+</div> -->
+
+
+<!-- </div>
+<div class="row">
+  <div class="col-5"></div>
+  <div class="col-4">
+      <button class="btn btn-success btn-sm" (click)="onMultipleSubmit()">
+  Xác nhận
+</button>
+  </div>
 </div>
+<ng-template [ngIf]="displayMultipleImages">
+  <div class="row">
+      <div class="col-md-6 col-lg-3" *ngFor='let image of displayMultipleImageArray'>
+          <div class="card max-width scale-img">
+              <img src="http://localhost:3000/{{image}}" alt="blogs" class="card-img-top">
+          </div>
+      </div>
+  </div>
+</ng-template> -->
