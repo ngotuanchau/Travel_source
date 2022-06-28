@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Travel.Controllers
 {
-    [Authorize]
+    
     [Route("api/[controller]")]
     [ApiController]
     public class ToursController : Controller
@@ -25,6 +25,7 @@ namespace Travel.Controllers
             _context = context;
             _configuration = configuration;
         }
+        [Authorize]
         [HttpPost]
         [Route("create")]
         [Authorize(Roles = "Business")]
@@ -159,7 +160,6 @@ namespace Travel.Controllers
 
         [HttpGet]
         [Route("get_all_tour")]
-        [Authorize(Roles = "Business")]
         [ActionName("getallTour")]
         public async Task<IActionResult> getallTour()
         {
@@ -239,7 +239,7 @@ namespace Travel.Controllers
             }
 
         }
-
+        [Authorize]
         [HttpPost]
         [Route("update_anh")]
         [Authorize(Roles = "Business")]
@@ -276,7 +276,6 @@ namespace Travel.Controllers
         }
         [HttpGet]
         [Route("get_tour_new")]
-        [Authorize(Roles = "Business")]
         [ActionName("gettour_moi")]
         public async Task<IActionResult> gettour_moi()
         {
