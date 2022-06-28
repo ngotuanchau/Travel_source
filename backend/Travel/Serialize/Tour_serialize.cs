@@ -13,10 +13,13 @@ namespace Travel.Serialize
         public string Tentour { get; set; }
         [Required]
         public int Theloai { get; set; }
+        public string Tentheloai { get; set; }
         [Required]
         public int Phanvung { get; set; }
+        public string Tenphanvung { get; set; }
         [Required]
         public int Congty { get; set; }
+        public string Tencongty { get; set; }
         [Required]
         public int VeToiDa { get; set; }
         [Required]
@@ -27,8 +30,10 @@ namespace Travel.Serialize
         public int SoDem { get; set; }
         [Required]
         public int DiemDi { get; set; }
+        public string Tendiemdi { get; set; }
         [Required]
         public int DiemDen { get; set; }
+        public string Tendiemden { get; set; }
         [Required]
         public string Mota { get; set; }
         [Required]
@@ -37,6 +42,8 @@ namespace Travel.Serialize
         public string LuuTru { get; set; }
         [Required]
         public string Phuongtien { get; set; }
+        public string Anhtour { get; set; }
+     
         [Required]
         public List<NhungNgayKhoiHanh> NhungNgayKhoiHanh { get; set; }
         [Required]
@@ -74,6 +81,7 @@ namespace Travel.Serialize
         public int Id { get; set; }
         [Required]
         public int diadiem { get; set; }
+        public string Tendiadiem { get; set; }
         [Required]
         public int Thutu { get; set; }
     }
@@ -89,6 +97,7 @@ namespace Travel.Serialize
         public decimal GiaTreEn { get; set; }
         [Required]
         public decimal GiaTreNho { get; set; }
+        public int Vedadat { get; set; }
     }
 
 }
