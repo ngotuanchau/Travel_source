@@ -148,9 +148,8 @@ export class ToursCreateComponent {
                 }
               });
           });
-        } else {
-          alert("Tạo tour thành công!");
         }
+        alert("Tạo tour thành công!");
       } else {
         console.log("Không thể tạo tour");
       }
