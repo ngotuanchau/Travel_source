@@ -6,10 +6,13 @@ import { RouterModule } from '@angular/router';
 import { TrangchuModule } from './trangchu/trangchu.module';
 import { TourDetailModule } from './pages/tour-detail/tour-detail.module';
 import { DatTourModule } from './pages/dat-tour/dat-tour.module';
+import { NewtoursComponent } from './pages/newtours/newtours.component';
 
 
 @NgModule({
   declarations: [
+  
+    NewtoursComponent
   ],
   imports: [
     CommonModule,

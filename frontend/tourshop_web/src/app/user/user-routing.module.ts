@@ -1,29 +1,36 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { DatTourComponent } from './pages/dat-tour/dat-tour.component';
-import { TourDetailComponent } from './pages/tour-detail/tour-detail.component';
-import { TrangchuComponent } from './trangchu/trangchu.component';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { DatTourComponent } from "./pages/dat-tour/dat-tour.component";
+import { NewtoursComponent } from "./pages/newtours/newtours.component";
+import { TourDetailComponent } from "./pages/tour-detail/tour-detail.component";
+import { TrangchuComponent } from "./trangchu/trangchu.component";
 
 const routes: Routes = [
   {
-    path:'',redirectTo:'home',pathMatch:'full'
+    path: "",
+    redirectTo: "home",
+    pathMatch: "full",
   },
   {
-    path:'home',
-    component:TrangchuComponent
+    path: "home",
+    component: TrangchuComponent,
   },
   {
-    path:'detail',
-    component:TourDetailComponent
+    path: "newtours",
+    component: NewtoursComponent,
   },
   {
-    path:'booking',
-    component:DatTourComponent
-  }
+    path: "detail",
+    component: TourDetailComponent,
+  },
+  {
+    path: "booking",
+    component: DatTourComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class UserRoutingModule { }
+export class UserRoutingModule {}

@@ -1,9 +1,9 @@
-import { Component, OnInit } from "@angular/core";
 import { DatePipe } from "@angular/common";
-import { Router } from "@angular/router";
-import { DiadiemsService } from "../../../../service/diadiems.service";
-import { TheloaisService } from "../../../../service/theloais.service";
-import { ToursService } from "../../../../service/tours.service";
+import { Component, OnInit } from "@angular/core";
+import { DiadiemsService } from "../../../service/diadiems.service";
+import { TheloaisService } from "../../../service/theloais.service";
+import { ToursService } from "../../../service/tours.service";
+
 @Component({
   selector: "app-newtours",
   templateUrl: "./newtours.component.html",
@@ -16,8 +16,7 @@ export class NewtoursComponent implements OnInit {
   constructor(
     private tourservice: ToursService,
     private theloaiService: TheloaisService,
-    private diadiemService: DiadiemsService,
-    private routes: Router
+    private diadiemService: DiadiemsService
   ) {}
 
   ngOnInit(): void {
@@ -28,15 +27,10 @@ export class NewtoursComponent implements OnInit {
 
   newtours: any;
   getNewTours() {
-    const size = 10;
     this.tourservice.getNewTours().subscribe((response) => {
-      this.newtours = response.slice(0, size);
+      this.newtours = response;
     });
-    // this.tourservice.getNewTours().subscribe((response) => {
-    //   this.newtours = response;
-    // });
   }
-
   findDateDisplay(id: number) {
     var nkhs = this.newtours.find(
       (item: any) => item.id == id
@@ -105,8 +99,5 @@ export class NewtoursComponent implements OnInit {
   }
   findDDById(id: number) {
     return this.diadiems.find((item: any) => item.id == id)?.ten;
-  }
-  viewAllNewTours() {
-    this.routes.navigate(["/newtours"]);
   }
 }

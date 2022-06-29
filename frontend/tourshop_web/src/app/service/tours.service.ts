@@ -29,11 +29,16 @@ export class ToursService {
     };
     return this.http.post<any[]>(this.baseUrl + "/update_anh", body);
   }
-
+  //Save image to server by nodejs
   saveImageToLocalByNodeJS(data: any): Observable<any> {
     return this.http.post<any[]>(
       this.baseURLNodeJS + "/node-js/upload-image",
       data
     );
+  }
+  //Get all new tours
+  //Get all Tour
+  getNewTours(): Observable<Tour[]> {
+    return this.http.get<Tour[]>(this.baseUrl + "/get_tour_new");
   }
 }
