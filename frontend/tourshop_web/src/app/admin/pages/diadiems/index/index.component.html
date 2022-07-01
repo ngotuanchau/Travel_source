@@ -29,30 +29,29 @@
                                                 <tr>
                                                     <th class="text-dark font-medium fs-4">STT</th>
                                                     <th class="text-dark font-medium fs-4">Tên địa điểm</th>
-                                                    <th class="text-dark font-medium fs-4">Miền</th>
                                                     <th class="text-dark font-medium fs-4">Số tour</th>
                                                     <th class="text-dark font-medium fs-4">Trạng thái</th>
                                                     <th class="text-dark font-medium fs-4"></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr *ngFor="let tr of trow; index as i">
+                                                <tr *ngFor="let tr of diadiems; index as i">
                                                     <td>
                                                         {{ i + 1 }}
                                                     </td>
                                                     <td>
                                                         {{tr.ten}}
                                                     </td>
-                                                    <td>
-                                                        {{tr.mien}}
-                                                    </td>
+
                                                     <td>
                                                         {{tr.sotour}}
                                                     </td>
-                                                    <td>
-                                                        {{tr.trangthai}}
+                                                    <td *ngIf="tr.trangThai==1" style="color: green;">
+                                                        Còn hoạt động
                                                     </td>
-
+                                                    <td *ngIf="tr.trangThai!=1" style="color: red;">
+                                                        Ngừng hoạt động
+                                                    </td>
                                                     <td>
                                                         <a [routerLink]="['detail']"><button type="button" class="btn btn-inverse-info btn-icon"
                                 onclick="">

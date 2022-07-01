@@ -65,14 +65,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatIconModule,
   ],
   providers: [
-    // {
-    //   provide: LocationStrategy,
-    //   useClass: PathLocationStrategy,
-    // },
-    // {
-    //   provide: PERFECT_SCROLLBAR_CONFIG,
-    //   useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
-    // },
     CookieService,
     {
       provide: HTTP_INTERCEPTORS,

@@ -14,18 +14,22 @@ const routes: Routes = [
   {
     path: "home",
     component: TrangchuComponent,
+    data: { title: "Trang chủ" },
   },
   {
     path: "newtours",
     component: NewtoursComponent,
+    data: { title: "Tour mới" },
   },
   {
     path: "detail",
     component: TourDetailComponent,
+    data: { title: "Chi tiết tour" },
   },
   {
     path: "booking",
     component: DatTourComponent,
+    data: { title: "Đặt tour" },
   },
 ];
 

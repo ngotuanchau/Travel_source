@@ -3,22 +3,87 @@ import { Component, OnInit } from "@angular/core";
 import { DiadiemsService } from "../../../service/diadiems.service";
 import { TheloaisService } from "../../../service/theloais.service";
 import { ToursService } from "../../../service/tours.service";
-
+import { FormGroup, FormControl } from "@angular/forms";
+import {
+  AmThuc,
+  lstAmThucs,
+  lstLuuTrus,
+  lstPhuongTiens,
+  LuuTru,
+  PhuongTien,
+} from "../dichvu-data";
 @Component({
   selector: "app-newtours",
   templateUrl: "./newtours.component.html",
   styleUrls: ["./newtours.component.scss"],
 })
 export class NewtoursComponent implements OnInit {
+  lstAmThuc: AmThuc[];
+  lstLuuTru: LuuTru[];
+  lstPhuongTien: PhuongTien[];
   title = "Tour mới";
   subTitle = "Cuộc sống là một cuộc phiêu lưu đầy táo bạo hoặc không là gì cả";
   pipe = new DatePipe("en-US");
+
   constructor(
     private tourservice: ToursService,
     private theloaiService: TheloaisService,
     private diadiemService: DiadiemsService
-  ) {}
+  ) {
+    this.lstAmThuc = lstAmThucs;
+    this.lstLuuTru = lstLuuTrus;
+    this.lstPhuongTien = lstPhuongTiens;
+  }
+  onChangeAT($event: any) {
+    const id = $event.target.value;
+    const isChecked = $event.target.checked;
 
+    this.lstAmThuc = this.lstAmThuc.map((d) => {
+      if (d.id == id) {
+        d.completed = isChecked;
+        return d;
+      }
+      return d;
+    });
+    const ids = this.lstAmThuc
+      .filter((item) => item.completed)
+      .map((item) => item.id);
+    // this.listAT = ids;
+    var str1 = ids.toString(); // Gives you "42,55"
+  }
+  onChangeLT($event: any) {
+    const id = $event.target.value;
+    const isChecked = $event.target.checked;
+
+    this.lstLuuTru = this.lstLuuTru.map((d) => {
+      if (d.id == id) {
+        d.completed = isChecked;
+        return d;
+      }
+      return d;
+    });
+
+    const ids = this.lstLuuTru
+      .filter((item) => item.completed)
+      .map((item) => item.id);
+    var str1 = ids.toString();
+  }
+  onChangePT($event: any) {
+    const id = $event.target.value;
+    const isChecked = $event.target.checked;
+
+    this.lstPhuongTien = this.lstPhuongTien.map((d) => {
+      if (d.id == id) {
+        d.completed = isChecked;
+        return d;
+      }
+      return d;
+    });
+    const ids = this.lstPhuongTien
+      .filter((item) => item.completed)
+      .map((item) => item.id);
+    var str1 = ids.toString();
+  }
   ngOnInit(): void {
     this.getNewTours();
     this.getTheLoai();
