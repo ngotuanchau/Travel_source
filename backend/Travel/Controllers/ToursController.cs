@@ -37,7 +37,7 @@ namespace Travel.Controllers
             {
                 // Insert table Tour
                 var tour = new Tour();
-                string tenanh = "";
+                string tenanh = "default.png";
                 try
                 {
 

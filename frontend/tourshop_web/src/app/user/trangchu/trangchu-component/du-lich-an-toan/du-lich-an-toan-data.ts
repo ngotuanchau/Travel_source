@@ -8,7 +8,7 @@ export interface DLAT {
 export const DuLichAnToan: DLAT[] = [
   {
     title: "Gia đình",
-    subTitle: "Du lịch chính là được sống.",
+    subTitle: "Hãy chỉ nhớ những kỷ niệm, và để lại những dấu chân.",
     soTour: 100,
     route: "",
     img: "giadinh.png",

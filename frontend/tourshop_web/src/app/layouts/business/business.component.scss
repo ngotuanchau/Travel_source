@@ -9,3 +9,9 @@
     // z-index: -1;
     position: fixed;
 }
+
+@media (max-width:1024px) {
+    #main-wrapper[data-layout=vertical] .left-sidebar[data-sidebarbg=skin5] {
+        display: none;
+    }
+}

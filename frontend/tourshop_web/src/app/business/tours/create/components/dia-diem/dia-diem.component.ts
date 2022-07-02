@@ -20,7 +20,7 @@ export class DiaDiemComponent implements OnInit {
     });
   }
 
-  thutu: string;
+  thutu: number = 1;
   dd: string;
 
   diadiems: any;
@@ -38,21 +38,23 @@ export class DiaDiemComponent implements OnInit {
   ngOnInit(): void {}
   onAdd() {
     if (this.thutu == null) {
-      console.log("chua chon so thu tu");
+      alert("Chưa chọn số thứ tự");
     } else if (this.dd == null) {
-      console.log("chua chon dia diem");
+      alert("Chưa chọn địa điểm");
     } else {
       const list = this.listDD;
       list.push({
-        thutu: parseInt(this.thutu),
+        thutu: this.thutu,
         diadiem: parseInt(this.dd),
       });
       this.listDD = list;
+      this.checkTT();
     }
   }
 
   onRemove(stt: number) {
-    this.listDD = this.listDD.filter((item: any) => item.stt != stt);
+    this.listDD = this.listDD.filter((item: any) => item.thutu != stt);
+    this.thutu = stt;
   }
 
   findDDById(id: number) {
@@ -60,5 +62,15 @@ export class DiaDiemComponent implements OnInit {
   }
   getSTT(value: any) {
     this.thutu = value;
+  }
+  checkTT() {
+    this.thutu =
+      Math.max.apply(
+        Math,
+        this.listDD.map(function (item: any) {
+          return item.thutu;
+        })
+      ) + 1;
+    console.log(this.thutu);
   }
 }

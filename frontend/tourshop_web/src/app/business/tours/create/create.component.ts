@@ -1,15 +1,12 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { PhanvungsService } from "../../../service/phanvungs.service";
 import { DiadiemsService } from "../../../service/diadiems.service";
 import { TheloaisService } from "../../../service/theloais.service";
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ToursService } from "../../../service/tours.service";
 import { FormField } from "./components/model";
+import { HttpClient } from "@angular/common/http";
+import { AnhsService } from "../../../service/anhs.service";
 @Component({
   selector: "app-tours-create",
   templateUrl: "./create.component.html",
@@ -21,13 +18,19 @@ export class ToursCreateComponent {
   theloais: any;
   Date = new Date(Date.now());
   form: FormGroup;
+  idTour: number;
+  ha: any;
+  image: any;
+  lstAnh = [];
   readonly FormField = FormField;
   constructor(
     private diadiemService: DiadiemsService,
     private phanvungService: PhanvungsService,
     private theloaiService: TheloaisService,
     private tourService: ToursService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private anhService: AnhsService,
+    private http: HttpClient
   ) {
     this.form = this.formBuilder.group({
       [FormField.tentour]: [null, Validators.required], //1
@@ -35,7 +38,7 @@ export class ToursCreateComponent {
       [FormField.soNgay]: [1, Validators.required], //3
       [FormField.soDem]: [0, Validators.required], //4
       [FormField.veToiDa]: [1, Validators.required], //5
-      [FormField.veToiThieu]: [1, Validators.required], //6
+      [FormField.veToiThieu]: [1, [Validators.required]], //6
       [FormField.diemDi]: [1, Validators.required], //7
       [FormField.diemDen]: [1, Validators.required], //8
       [FormField.nhungdiadiem]: [[], Validators.required], //9
@@ -45,9 +48,9 @@ export class ToursCreateComponent {
       [FormField.luuTru]: ["", Validators.required], //14
       [FormField.phuongtien]: ["", Validators.required], //15
       [FormField.nhungNgayKhoiHanh]: [[], Validators.required], //16
-      [FormField.lichtrinh]: [[], Validators.required], //17,
-      [FormField.anhTour]: [null, Validators.required], //18
-      [FormField.congty]: [1, Validators.required], //19
+      [FormField.lichtrinh]: [[]], //17,
+      [FormField.hinhanh]: [[]], //18
+      [FormField.congty]: [null, Validators.required], //19
     });
   }
 
@@ -55,6 +58,10 @@ export class ToursCreateComponent {
     this.getAllDiaDiem();
     this.getPhanVung();
     this.getTheLoai();
+    // this.form.patchValue({
+    //   [FormField.soNgay]: this.idCty,
+    // });
+    this.getId();
   }
 
   isControlError(field: FormField, ...types: string[]) {
@@ -64,14 +71,161 @@ export class ToursCreateComponent {
     }
     return false;
   }
-
+  selectsimage(multipleImages: any) {
+    this.ha = multipleImages;
+  }
   //Tao tour
   onSubmit() {
-    const value = this.form.value;
-    this.tourService.createTour(value).subscribe((response) => {
-      console.log("Tao tour thanh cong");
+    //Get image from field
+    const imageMain = this.form?.controls?.[FormField.hinhanh]?.value;
+    //Get images detail
+    var imageDetail = this.ha;
+    console.log("Hinh ảnh chi tiết: " + imageDetail);
+    //Set filed to = []
+    this.form.patchValue({ [FormField.hinhanh]: [] });
+    //Cal API create tour to database
+    this.tourService.createTour(this.form.value).subscribe((response) => {
+      if (response != null) {
+        var idTour = response.idTour;
+        if (imageMain[0] != null) {
+          //Save image to local
+          this.saveImageToLocalByNodeJS(idTour, imageMain[0]).subscribe(
+            (response) => {
+              //console.log("Chạy vao đây: " + response);
+              //Check save success
+              if (response == null) {
+                console.log("Không thể lưu ảnh tour");
+                return;
+              }
+              //add image saved to list with format {idtour, tenanh}
+              var imageMainSubmit: any = [];
+              imageMainSubmit.push({
+                idTour: idTour,
+                tenanh: response.path,
+              });
+              console.log("abc" + imageMainSubmit);
+              //Call API update image to database
+              this.tourService
+                .updateImage(imageMainSubmit)
+                .subscribe((response) => {
+                  if (response != null) {
+                    console.log("Lưu ảnh đại diện thành công");
+                  } else {
+                    console.log("Không thể lưu ảnh vào database");
+                  }
+                });
+            }
+          );
+        }
+        if (this.ha != null) {
+          this.saveImagesToLocalByNodeJS().subscribe((response) => {
+            if (response == null) {
+              console.log("Không thể lưu ảnh chi tiết");
+              return;
+            } else {
+              console.log("Res: " + response);
+              const data = response.path;
+              this.lstAnh = data;
+              // console.log("this.lstAnh: " + this.lstAnh);
+              var imageDetailSubmit: any = [];
+              for (let dt of this.lstAnh) {
+                const anh = dt;
+                console.log("anh: " + anh);
+                //add image saved to list with format {idtour, tenanh}
+                imageDetailSubmit.push({
+                  idTour: idTour,
+                  tenanh: anh,
+                });
+              }
+            }
+            this.lstAnh = imageDetailSubmit;
+            return this.anhService
+              .createImage(this.lstAnh)
+              .subscribe((response) => {
+                if (response != null) {
+                  console.log("Res:");
+                  console.log(response);
+                }
+              });
+          });
+        }
+        alert("Tạo tour thành công!");
+      } else {
+        console.log("Không thể tạo tour");
+      }
     });
   }
+
+  saveImageToLocalByNodeJS(idTour: any, imageMain: any) {
+    var formData = new FormData();
+    var extension = imageMain.name.split(".").pop();
+    var newName = idTour + "." + extension;
+    formData.append("file", imageMain, newName);
+    return this.http.post<any>(
+      "http://localhost:3000/node-js/upload-image",
+      formData
+    );
+  }
+
+  saveImagesToLocalByNodeJS() {
+    const formdata = new FormData();
+
+    for (let img of this.ha) {
+      formdata.append("files", img);
+    }
+    console.log(formdata);
+
+    return this.http.post<any>(
+      "http://localhost:3000/node-js/create-images",
+      formdata
+    );
+  }
+
+  // saveImagesToLocalByNodeJS(idTour: any) {
+  //   const formdata = new FormData();
+
+  //   for (let img of this.ha) {
+  //     formdata.append("files", img);
+  //   }
+  //   console.log(formdata);
+
+  //   this.http
+  //     .post<any>("http://localhost:3000/node-js/create-images", formdata)
+  //     .subscribe((res) => {
+  //       // console.log("Res: " + res);
+  //       const data = res.path;
+  //       this.lstAnh = data;
+  //       // console.log("this.lstAnh: " + this.lstAnh);
+  //       var imageDetailSubmit: any = [];
+  //       var i = 0;
+  //       for (let dt of this.lstAnh) {
+  //         const anh = dt;
+  //         // console.log("anh: " + anh);
+  //         var extension = String(anh).split(".").pop();
+  //         idTour = 123;
+  //         var newName = idTour + "_" + i + "." + extension;
+  //         // console.log("newName: " + newName);
+  //         imageDetailSubmit.push({
+  //           idTour: idTour,
+  //           tenanh: newName,
+  //         });
+  //         // console.log("imageDetailSubmit: " + imageDetailSubmit);
+  //       }
+  //       this.lstAnh = imageDetailSubmit;
+  //       console.log("This.lstAnh: ");
+  //       console.log(this.lstAnh);
+  //       return this.anhService
+  //         .createImage(this.lstAnh)
+  //         .subscribe((response) => {
+  //           if (response != null) {
+  //             console.log("Res:");
+  //             console.log(response);
+  //           }
+  //         });
+  //     });
+  // }
+
+  //Update image
 
   //Lay tat ca dia diem
   getAllDiaDiem() {
@@ -91,6 +245,19 @@ export class ToursCreateComponent {
       this.theloais = response.listTheLoai;
     });
   }
+  getId() {
+    const id = this.idCty;
+    this.form.patchValue({ [FormField.congty]: id });
+    console.log(id);
+  }
+  get idCty() {
+    return localStorage.getItem("id");
+  }
+  // set idCty(data) {
+  //   this.form.patchValue({
+  //     [FormField.congty]: data,
+  //   });
+  // }
 
   get songay() {
     return this.form?.controls?.[FormField.soNgay]?.value || 0;
@@ -110,24 +277,7 @@ export class ToursCreateComponent {
       [FormField.soDem]: parseInt(data),
     });
   }
-  // get vetoida() {
-  //   return this.form?.controls?.[FormField.veToiDa]?.value || 0;
-  // }
 
-  // set vetoida(data) {
-  //   this.form.patchValue({
-  //     [this.FormField.veToiDa]: parseInt(data),
-  //   });
-  // }
-  // get vetoithieu() {
-  //   return this.form?.controls?.[FormField.veToiThieu]?.value || 0;
-  // }
-
-  // set vetoithieu(data) {
-  //   this.form.patchValue({
-  //     [FormField.veToiThieu]: parseInt(data),
-  //   });
-  // }
   numberOnly(event: any): boolean {
     const charCode = event.which ? event.which : event.keyCode;
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
@@ -146,16 +296,7 @@ export class ToursCreateComponent {
   getSoDem(value: any) {
     this.sodem = value;
   }
-  parseInt(a: string) {
-    this.parseInt(a);
-  }
-  isNumber(evt: any) {
-    evt = evt ? evt : window.event;
-    let charCode = evt.which ? evt.which : evt.keyCode;
-    if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 46) {
-      evt.preventDefault();
-    } else {
-      return true;
-    }
+  parseInta(a: string) {
+    return parseInt(a);
   }
 }

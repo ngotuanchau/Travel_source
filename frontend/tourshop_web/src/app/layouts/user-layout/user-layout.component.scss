@@ -19,8 +19,27 @@
     font-weight: bold !important;
 }
 
-.nav-item a:hover,
+.nav-item:hover,
 .navbar-nav .active {
     background: #E76F51;
     color: #ffffff;
+}
+
+.login {
+    padding: 5px;
+}
+
+.login a {
+    color: #E76F51 !important;
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px !important;
+}
+
+.login a:hover {
+    color: #fff !important;
+}
+
+.dangnhap .dropdown-toggle::after {
+    display: none;
 }

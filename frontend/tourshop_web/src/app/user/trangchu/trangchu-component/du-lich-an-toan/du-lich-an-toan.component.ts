@@ -7,6 +7,8 @@ import { DLAT, DuLichAnToan } from "./du-lich-an-toan-data";
   styleUrls: ["./du-lich-an-toan.component.scss"],
 })
 export class DuLichAnToanComponent implements OnInit {
+  title = "Du lịch an toàn";
+  subTitle = "Điểm đến thú vị, vui chơi thỏa thích";
   dlats: DLAT[];
   constructor() {
     this.dlats = DuLichAnToan;

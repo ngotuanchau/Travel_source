@@ -1,0 +1,88 @@
+a {
+    color: #fff;
+}
+
+.heading-section h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 32px;
+    font-weight: bold;
+    letter-spacing: 0;
+    text-align: center;
+    line-height: 1;
+    color: #000;
+    margin: 5px
+}
+
+.box {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.ratings i {
+    font-size: 16px;
+    color: red
+}
+
+.strike-text {
+    color: red;
+    text-decoration: line-through
+}
+
+.product-image {
+    width: 100%
+}
+
+.dot {
+    height: 7px;
+    width: 7px;
+    margin-left: 6px;
+    margin-right: 6px;
+    margin-top: 3px;
+    background-color: blue;
+    border-radius: 50%;
+    display: inline-block
+}
+
+.dot-r {
+    background-color: red;
+}
+
+.r {
+    color: red
+}
+
+.spec-1 {
+    color: #938787;
+    font-size: 15px
+}
+
+h5 {
+    font-weight: 400
+}
+
+h1 {
+    font-weight: bold;
+}
+
+span {
+    color: darkcyan;
+    font-weight: bold;
+}
+
+.price {
+    font-weight: bold;
+    color: red;
+    text-align: center;
+}
+
+.para {
+    font-size: 16px
+}
+
+.col-md-10 {
+    flex: 0 0 auto;
+    width: 100%;
+}
+
+mat-form-field {
+    width: 100%;
+}

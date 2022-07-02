@@ -13,6 +13,9 @@ import { DuLichAnToanComponent } from "./trangchu-component/du-lich-an-toan/du-l
 import { UuDaiTotNhatComponent } from "./trangchu-component/uu-dai-tot-nhat/uu-dai-tot-nhat.component";
 import { DiaDiemYeuThichComponent } from "./trangchu-component/dia-diem-yeu-thich/dia-diem-yeu-thich.component";
 import { MatGridListModule } from "@angular/material/grid-list";
+import { MatButtonModule } from "@angular/material/button";
+import { MatSelectModule } from "@angular/material/select";
+import { MatDatepickerModule } from "@angular/material/datepicker";
 
 @NgModule({
   declarations: [
@@ -28,6 +31,12 @@ import { MatGridListModule } from "@angular/material/grid-list";
     UuDaiTotNhatComponent,
     DiaDiemYeuThichComponent,
   ],
-  imports: [CommonModule, MatGridListModule],
+  imports: [
+    CommonModule,
+    MatGridListModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatDatepickerModule,
+  ],
 })
 export class TrangchuModule {}
