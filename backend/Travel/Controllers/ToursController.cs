@@ -305,6 +305,7 @@ namespace Travel.Controllers
                     tour_Serialize.Tendiemdi = _context.DiaDiems.Where(d => d.Id == tour.DiemDi).FirstOrDefault().Ten;
                     tour_Serialize.DiemDen = tour.DiemDen;
                     tour_Serialize.Tendiemden = _context.DiaDiems.Where(d => d.Id == tour.DiemDen).FirstOrDefault().Ten;
+                    tour_Serialize.Mota = tour.MoTa;
                     tour_Serialize.AmThuc = tour.AmThuc;
                     tour_Serialize.LuuTru = tour.LuuTru;
                     tour_Serialize.Phuongtien = tour.PhuongTien;
@@ -361,6 +362,7 @@ namespace Travel.Controllers
                         Serialize.Lichtrinh lichTrinh = new Serialize.Lichtrinh();
                         lichTrinh.Id = lt.Id;
                         lichTrinh.Ngay = lt.Ngay;
+                        lichTrinh.MoTa = lt.MoTa;
                         lichTrinh.Sang = lt.Sang;
                         lichTrinh.Trua = lt.Trua;
                         lichTrinh.Toi = lt.Toi;
@@ -410,6 +412,7 @@ namespace Travel.Controllers
                 tour_Serialize.Tendiemdi = _context.DiaDiems.Where(d => d.Id == tour.DiemDi).FirstOrDefault().Ten;
                 tour_Serialize.DiemDen = tour.DiemDen;
                 tour_Serialize.Tendiemden = _context.DiaDiems.Where(d => d.Id == tour.DiemDen).FirstOrDefault().Ten;
+                tour_Serialize.Mota = tour.MoTa;
                 tour_Serialize.AmThuc = tour.AmThuc;
                 tour_Serialize.LuuTru = tour.LuuTru;
                 tour_Serialize.Phuongtien = tour.PhuongTien;
@@ -466,6 +469,7 @@ namespace Travel.Controllers
                     Serialize.Lichtrinh lichTrinh = new Serialize.Lichtrinh();
                     lichTrinh.Id = lt.Id;
                     lichTrinh.Ngay = lt.Ngay;
+                    lichTrinh.MoTa = lt.MoTa;
                     lichTrinh.Sang = lt.Sang;
                     lichTrinh.Trua = lt.Trua;
                     lichTrinh.Toi = lt.Toi;
