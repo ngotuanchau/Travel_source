@@ -1,17 +1,17 @@
 import { Component, OnInit } from "@angular/core";
 import { DatePipe } from "@angular/common";
 import { Router } from "@angular/router";
-import { DiadiemsService } from "../../../../service/diadiems.service";
-import { TheloaisService } from "../../../../service/theloais.service";
-import { ToursService } from "../../../../service/tours.service";
+import { DiadiemsService } from "../../../../../service/diadiems.service";
+import { TheloaisService } from "../../../../../service/theloais.service";
+import { ToursService } from "../../../../../service/tours.service";
 @Component({
-  selector: "app-bestsellingtours",
-  templateUrl: "./bestsellingtours.component.html",
-  styleUrls: ["./bestsellingtours.component.scss"],
+  selector: "app-tour-lien-quan",
+  templateUrl: "./tour-lien-quan.component.html",
+  styleUrls: ["./tour-lien-quan.component.scss"],
 })
-export class BestsellingtoursComponent implements OnInit {
-  title = "Tour đang hot";
-  subTitle = "Cuộc sống là một cuộc phiêu lưu đầy táo bạo hoặc không là gì cả";
+export class TourLienQuanComponent implements OnInit {
+  title = "Có thể bạn cần";
+  subTitle = "";
   pipe = new DatePipe("en-US");
   constructor(
     private tourservice: ToursService,
@@ -25,18 +25,13 @@ export class BestsellingtoursComponent implements OnInit {
     this.getTheLoai();
     this.getAllDiaDiem();
   }
-
   newtours: any;
   getNewTours() {
-    const size = 10;
+    const size = 3;
     this.tourservice.getNewTours().subscribe((response) => {
       this.newtours = response.slice(0, size);
     });
-    // this.tourservice.getNewTours().subscribe((response) => {
-    //   this.newtours = response;
-    // });
   }
-
   findDateDisplay(id: number) {
     var nkhs = this.newtours.find(
       (item: any) => item.id == id
@@ -106,10 +101,10 @@ export class BestsellingtoursComponent implements OnInit {
   findDDById(id: number) {
     return this.diadiems.find((item: any) => item.id == id)?.ten;
   }
-  viewAllNewTours() {
-    this.routes.navigate(["/newtours"]);
-  }
   viewDetail(id: number) {
     this.routes.navigate(["/tour/detail/" + id]);
+  }
+  viewAllNewTours() {
+    this.routes.navigate(["/newtours"]);
   }
 }

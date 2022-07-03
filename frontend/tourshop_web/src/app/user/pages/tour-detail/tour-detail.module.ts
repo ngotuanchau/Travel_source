@@ -1,19 +1,17 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { TourDetailComponent } from './tour-detail.component';
-import { ToursLienQuanComponent } from './components/tours-lien-quan/tours-lien-quan.component';
-import { LichTrinhChiTietComponent } from './components/lich-trinh-chi-tiet/lich-trinh-chi-tiet.component';
-
-
-
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { TourDetailComponent } from "./tour-detail.component";
+import { LichTrinhChiTietComponent } from "./components/lich-trinh-chi-tiet/lich-trinh-chi-tiet.component";
+import { BangGiaComponent } from "./components/bang-gia/bang-gia.component";
+import { TourLienQuanComponent } from "./components/tour-lien-quan/tour-lien-quan.component";
+import { MatButtonModule } from "@angular/material/button";
 @NgModule({
   declarations: [
     TourDetailComponent,
-    ToursLienQuanComponent,
     LichTrinhChiTietComponent,
+    BangGiaComponent,
+    TourLienQuanComponent,
   ],
-  imports: [
-    CommonModule
-  ]
+  imports: [CommonModule, MatButtonModule],
 })
-export class TourDetailModule { }
+export class TourDetailModule {}

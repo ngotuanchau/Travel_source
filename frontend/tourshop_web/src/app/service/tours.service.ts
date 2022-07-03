@@ -41,4 +41,8 @@ export class ToursService {
   getNewTours(): Observable<Tour[]> {
     return this.http.get<Tour[]>(this.baseUrl + "/get_tour_new");
   }
+  //Get detail
+  getDetailTour(id: any): Observable<Tour> {
+    return this.http.get<Tour>(this.baseUrl + "/get_a_tour/" + id);
+  }
 }

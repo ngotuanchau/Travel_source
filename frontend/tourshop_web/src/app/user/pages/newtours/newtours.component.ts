@@ -12,6 +12,7 @@ import {
   LuuTru,
   PhuongTien,
 } from "../dichvu-data";
+import { Router } from "@angular/router";
 @Component({
   selector: "app-newtours",
   templateUrl: "./newtours.component.html",
@@ -28,7 +29,8 @@ export class NewtoursComponent implements OnInit {
   constructor(
     private tourservice: ToursService,
     private theloaiService: TheloaisService,
-    private diadiemService: DiadiemsService
+    private diadiemService: DiadiemsService,
+    private routes: Router
   ) {
     this.lstAmThuc = lstAmThucs;
     this.lstLuuTru = lstLuuTrus;
@@ -164,5 +166,8 @@ export class NewtoursComponent implements OnInit {
   }
   findDDById(id: number) {
     return this.diadiems.find((item: any) => item.id == id)?.ten;
+  }
+  viewDetail(id: number) {
+    this.routes.navigate(["/tour/detail/" + id]);
   }
 }

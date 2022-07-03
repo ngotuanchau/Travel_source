@@ -1,74 +1,45 @@
-<section class="ftco-about d-md-flex">
-    <div class="one-half img max-width">
-        <div class="img-box">
-            <img src="../../../assets/web/images/destination-5.jpg">
-            <div class="d-md-flex flex-gap flex justifylex">
-                <div class="img-child"> <img src="../../../assets/web/images/destination-5.jpg"></div>
-                <div class="img-child"> <img src="../../../assets/web/images/destination-5.jpg"></div>
-                <div class="img-child"> <img src="../../../assets/web/images/destination-5.jpg"></div>
-                <div class="img-child"> <img src="../../../assets/web/images/destination-5.jpg"></div>
-            </div>
-        </div>
-        <div class="gia-tour">
-            <div class="gt-title">
-                GIÁ TOUR
-            </div>
-            <table style="width: 100%">
-                <tr>
-                    <th>Độ tuổi</th>
-                    <th class="td-r">Giá vé</th>
-                </tr>
-                <tr>
-                    <td>Người lớn (lớn hơn 12 tuổi)</td>
-                    <td class="td-r">4,999,000đ</td>
-                </tr>
-                <tr>
-                    <td>Trẻ em ( dưới 12 tuổi và trên 3 tuổi )</td>
-                    <td class="td-r">3,999,000đ</td>
-                </tr>
-                <tr>
-                    <td>Trẻ nhỏ ( dưới 3 tuổi)</td>
-                    <td class="td-r">0đ</td>
-                </tr>
-            </table>
-        </div>
-    </div>
-    <div class="one-half  ">
-        <div class="heading-section">
-            <div class="cut_string4">
-                <h1 class="mb-4">Tour du lịch Đà Nẵng - Bà Nà - Cầu Vàng - Sơn Trà - Biển Mỹ Khê - Hội An
-                </h1>
-            </div>
-        </div>
-        <div class="body-section">
-            <div class="info-tour">
-                <ul>
-                    <li>Xuất phát tại: <span>TP. Hồ Chí Minh</span></li>
-                    <li>Thời gian khởi hành: <span>25/07/2022</span></li>
-                    <li>Thời gian: <span>3 ngày 2 đêm</span></li>
-                    <li>Nơi tập trung: <span>Đang cập nhật</span></li>
-                    <li>Số chỗ trống: <span>10 chỗ</span></li>
-                </ul>
-            </div>
-            <div class="box-button flex justifylex">
-                <button (click)="datNgay()">ĐẶT NGAY</button>
-                <button>LIÊN HỆ TƯ VẤN</button>
-            </div>
-            <div class="dieu-kien">
-                <div class="dk-title">
-                    ĐIỀU KIỆN NHẬN KHÁCH
+<div class="width-box">
+    <section class="ftco-about d-md-flex row">
+        <div class="col-6 img max-width">
+            <div class="img-box">
+                <img src="http://localhost:3000/{{tour.anhtour}}">
+                <div class="d-md-flex flex-gap flex justifylex">
+                    <div class="img-child"> <img src="../../../assets/web/images/destination-5.jpg"></div>
+                    <div class="img-child"> <img src="../../../assets/web/images/destination-5.jpg"></div>
+                    <div class="img-child"> <img src="../../../assets/web/images/destination-5.jpg"></div>
+                    <div class="img-child"> <img src="../../../assets/web/images/destination-5.jpg"></div>
                 </div>
-                <ul>
-                    <li>
-                        <p>Thẻ xanh Covid (hoàn tất mũi 2 trước 14 ngày và không quá 12 tháng)</p>
-                    </li>
-                    <li>
-                        <p>Đảm bảo nguyên tắc 5K, khử khuẩn</p>
-                    </li>
-                </ul>
             </div>
         </div>
-    </div>
-</section>
-<app-lich-trinh-chi-tiet></app-lich-trinh-chi-tiet>
-<app-tours-lien-quan></app-tours-lien-quan>
+        <div class="col-6">
+            <div class="heading-section">
+                <div class="cut_string4">
+                    <h1 class="mb-4">{{tour.tentour}}</h1>
+                </div>
+            </div>
+            <div class="body-section">
+                <div class="info-tour">
+                    <ul>
+                        <li>Thể loại: <span>{{tour.tentheloai}}</span></li>
+                        <li>Xuất phát tại: <span>{{tour.tendiemdi}}</span></li>
+                        <li>Điểm đến: <span>{{tour.tendiemden}}</span></li>
+                        <li>Ngày khởi hành: <span>{{findDateDisplay(tour.id)}}</span></li>
+                        <li>Thời gian: <span *ngIf="tour.soDem!=0">{{tour.soNgay}} ngày {{tour.soDem}} đêm</span>
+                            <span *ngIf="tour.soDem==0">{{tour.soNgay}} ngày</span>
+                        </li>
+                        <li>Nơi tập trung: <span>Đang cập nhật</span></li>
+                    </ul>
+                </div>
+                <div class="box-button flex justifylex">
+                    <button (click)="datNgay()">ĐẶT NGAY</button>
+                    <button>LIÊN HỆ TƯ VẤN</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>
+<app-bang-gia [ngayKhs]="this.ngayKHs" [tour]="this.tour"></app-bang-gia>
+<app-lich-trinh-chi-tiet [lichtrinh]="this.lichtrinh" [tour]="this.tour" [diadiems]="this.diadiem">
+</app-lich-trinh-chi-tiet>
+<app-tour-lien-quan></app-tour-lien-quan>

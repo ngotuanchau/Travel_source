@@ -1,40 +1,48 @@
 <section class="ftco-about">
-    <div class="container">
-        <div class="row justify-content-center ">
-            <div class="col-md-7 heading-section text-center  ">
-                <h2 class="mb-4">LỊCH TRÌNH</h2>
+    <div class="width-box">
+        <div class="row">
+            <div class="col-9">
+                <div class="row justify-content-center ">
+                    <div class="col-md-7 heading-section text-center  ">
+                        <h2 class="mb-4">Lịch trình</h2>
+                    </div>
+                </div>
+                <div class="timeline">
+                    <div class="outer">
+                        <div class="card" *ngFor="let lt of lichtrinh">
+                            <div class="info">
+                                <h3 class="title">Ngày {{lt.ngay}} <span>{{lt.mota}}</span></h3>
+                                <ul>
+                                    <li *ngIf="lt.sang!=null">
+                                        Sáng: {{lt.sang}}
+                                    </li>
+                                    <li *ngIf="lt.trua!=null">Trưa: {{lt.trua}}</li>
+                                    <li *ngIf="lt.chieu!=null">Chiều: {{lt.chieu}}</li>
+                                    <li *ngIf="lt.toi!=null">Tối: {{lt.toi}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="timeline">
-            <div class="outer">
-                <div class="card">
-                    <div class="info">
-                        <h3 class="title">Ngày 1</h3>
-                        <p>Quý khách tập trung tại điểm hẹn, Ga đi trong nước, sân bay Tân Sơn Nhất. Hướng dẫn viên sẽ hỗ trợ làm thủ tục cho đoàn đáp chuyến bay đi Đà Nẵng. Tại sân bay Đà Nẵng xe và HDV đón đoàn đi tham quan: - Bán đảo Sơn Trà và viếng
-                            Chùa Linh Ứng: Nơi đây có tượng Phật Quan Thế Âm cao nhất Việt Nam, đứng nơi đây, Quý khách sẽ được chiêm ngưỡng toàn cảnh thành phố, núi rừng và biển đảo Sơn Trà một cách hoàn hảo nhất. - Ngũ Hành Sơn: Động Tàng Chơn, Động
-                            Hoa Nghiêm, Chùa Non Nước, Làng Đá Mỹ Nghệ,.. - Phố Cổ Hội An: Chùa Cầu, Nhà Cổ Phùng Hưng, Hội Quán Phước Kiến, Cơ sở Thủ Công Mỹ Nghệ,…Quý khách tự do dạo phố đèn lồng đầy màu sắc, cảm nhận sự yên bình cổ kính và lãng mạn
-                            Phố Cổ về đêm,... Buổi tối quý khách tự do dạo phố ngắm nhìn sự lung linh và phát triển của thành phố …. Nghỉ đêm tại Đà Nẵng.
-                        </p>
+            <div class="col-3">
+                <div class="row justify-content-center ">
+                    <div class="col-md-7 heading-section text-center  ">
+                        <h2 class="mb-4">Địa điểm</h2>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="info">
-                        <h3 class="title">Ngày 2</h3>
-                        <p>Dùng bữa sáng tại khách sạn. Xe đưa Quý khách đi tham quan: - Khu du lịch Bà Nà (chi phí cáp treo & Ăn trưa tự túc): tận hưởng không khí se lạnh của Đà Lạt tại miền Trung, đoàn tự do tham quan Chùa Linh Ứng, Hầm Rượu Debay, vườn
-                            hoa Le Jardin D’Amour, Khu Tâm linh mới của Bà Nà viếng Đền Lĩnh Chúa Linh Từ, khu vui chơi Fantasy Park, tự do chụp hình tại Cầu Vàng điểm tham quan mới siêu hot tại Bà Nà…Ăn trưa tại Bà Nà tự túc. Sau đó đoàn tiếp tục tham
-                            quan vui chơi đến giờ xuống cáp. - Bãi biển Mỹ Khê: Một trong những bãi biển quyến rũ nhất hành tinh. Quý khách tự do dạo biển, chụp hình.... Buổi tối Quý khách tự túc đi dạo phố, thưởng thức đặc sản địa phương; thưởng ngoạn
-                            cảnh đẹp của Đà Nẵng về đêm, ngắm nhìn Cầu Rồng, Cầu Tình Yêu, Cầu Trần Thị Lý, Trung Tâm Thương Mại, Khu phố ẩm thực, Café - Bar - Disco… Nghỉ đêm tại Đà Nẵng.
-                        </p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="info">
-                        <h3 class="title">Ngày 3</h3>
-                        <p>Dùng bữa sáng tại khách sạn. Xe tiễn Quý khách ra sân bay Đà Nẵng đón chuyến bay trở về Tp.Hồ Chí Minh. Chia tay Quý khách và kết thúc chương trình du lịch tại sân bay Tân Sơn Nhất
-                        </p>
-                    </div>
-                </div>
+                <div class="timeline">
+                    <div class="outer">
+                        <div class="card dd" *ngFor="let dd of diadiems">
+                            <div class="info">
+                                <h3 class="title">
+                                    {{dd.thutu}}<span> - {{dd.tendiadiem}}</span>
+                                </h3>
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

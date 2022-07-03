@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 import { TimkiemComponent } from "./trangchu-component/timkiem/timkiem.component";
 import { TrangchuComponent } from "./trangchu.component";
 import { TienichComponent } from "./trangchu-component/tienich/tienich.component";
-
+import { RouterModule, Routes } from "@angular/router";
 import { GioithieuComponent } from "./trangchu-component/gioithieu/gioithieu.component";
 import { UudiemComponent } from "./trangchu-component/uudiem/uudiem.component";
 import { BestsellingtoursComponent } from "./trangchu-component/bestsellingtours/bestsellingtours.component";
@@ -37,6 +37,8 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
     MatButtonModule,
     MatSelectModule,
     MatDatepickerModule,
+    RouterModule,
   ],
+  exports: [RouterModule],
 })
 export class TrangchuModule {}
