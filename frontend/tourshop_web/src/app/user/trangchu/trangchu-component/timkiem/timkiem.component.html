@@ -1,4 +1,5 @@
 <section class="ftco-section justify-content-end ftco-search">
+
     <div class="container-wrap ml-auto">
         <div class="row no-gutters">
             <div class="col-md-12 nav-link-wrap">
@@ -10,88 +11,89 @@
                     <a class="nav-link" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">...</a> -->
                 </div>
             </div>
+
             <div class="col-md-12 tab-wrap">
 
-                <div class="tab-content p-4 px-5" id="v-pills-tabContent">
+                <div class="tab-content p-4" id="v-pills-tabContent">
+                    <div class="width-box">
+                        <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
+                            <form action="#" class="search-destination">
+                                <div class="row">
+                                    <div class="col-md align-items-end">
+                                        <div class="form-group">
+                                            <label>Nơi khởi hành </label>
+                                            <div class="form-field">
+                                                <mat-form-field appearance="fill">
+                                                    <mat-label>Chọn điểm khởi hành</mat-label>
+                                                    <mat-select>
+                                                        <mat-option *ngFor="let dd of diadiems" [value]="dd.id">
+                                                            {{dd.ten}}
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md align-items-end">
+                                        <div class="form-group">
+                                            <label for="#">Điểm đến</label>
+                                            <div class="form-field">
+                                                <mat-form-field appearance="fill">
+                                                    <mat-label>Chọn điểm đến</mat-label>
+                                                    <mat-select>
+                                                        <mat-option *ngFor="let dd of diadiems" [value]="dd.id">
+                                                            {{dd.ten}}
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md align-items-end">
+                                        <div class="form-group">
+                                            <label for="#">Ngày khởi hành</label>
+                                            <div class="form-field">
+                                                <input type="date" class="form-control checkout_date" placeholder="Ngày khởi hành">
+                                                <div class="icon"><span class="icon-calendar"></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md align-items-end">
+                                        <div class="form-group">
+                                            <label for="#">Ngày về</label>
+                                            <div class="form-field">
+                                                <div class="icon"><span class="icon-calendar"></span></div>
+                                                <input type="date" class="form-control checkout_date" placeholder="Ngày về">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md align-items-end">
+                                        <div class="form-group">
+                                            <label for="#">Loại tour</label>
+                                            <div class="form-field">
+                                                <mat-form-field appearance="fill">
+                                                    <mat-label>Chọn loại tour</mat-label>
+                                                    <mat-select>
+                                                        <mat-option *ngFor="let dd of theloais" [value]="dd.id">
+                                                            {{dd.tenLoai}}
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md align-self-end">
+                                        <div class="form-group">
+                                            <div class="form-field">
+                                                <input type="submit" value="Tìm kiếm" class="form-control btn btn-primary">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
 
-                    <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
-                        <form action="#" class="search-destination">
-                            <div class="row">
-                                <div class="col-md align-items-end">
-                                    <div class="form-group">
-                                        <label>Nơi khởi hành </label>
-                                        <div class="form-field">
-                                            <mat-form-field appearance="fill">
-                                                <mat-label>Chọn điểm khởi hành</mat-label>
-                                                <mat-select>
-                                                    <mat-option *ngFor="let dd of diadiems" [value]="dd.id">
-                                                        {{dd.ten}}
-                                                    </mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md align-items-end">
-                                    <div class="form-group">
-                                        <label for="#">Điểm đến</label>
-                                        <div class="form-field">
-                                            <mat-form-field appearance="fill">
-                                                <mat-label>Chọn điểm đến</mat-label>
-                                                <mat-select>
-                                                    <mat-option *ngFor="let dd of diadiems" [value]="dd.id">
-                                                        {{dd.ten}}
-                                                    </mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md align-items-end">
-                                    <div class="form-group">
-                                        <label for="#">Ngày khởi hành</label>
-                                        <div class="form-field">
-                                            <input type="date" class="form-control checkout_date" placeholder="Ngày khởi hành">
-                                            <div class="icon"><span class="icon-calendar"></span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md align-items-end">
-                                    <div class="form-group">
-                                        <label for="#">Ngày về</label>
-                                        <div class="form-field">
-                                            <div class="icon"><span class="icon-calendar"></span></div>
-                                            <input type="date" class="form-control checkout_date" placeholder="Ngày về">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md align-items-end">
-                                    <div class="form-group">
-                                        <label for="#">Loại tour</label>
-                                        <div class="form-field">
-                                            <mat-form-field appearance="fill">
-                                                <mat-label>Chọn loại tour</mat-label>
-                                                <mat-select>
-                                                    <mat-option *ngFor="let dd of theloais" [value]="dd.id">
-                                                        {{dd.tenLoai}}
-                                                    </mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md align-self-end">
-                                    <div class="form-group">
-                                        <div class="form-field">
-                                            <input type="submit" value="Tìm kiếm" class="form-control btn btn-primary">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-                    <!-- <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-performance-tab">
+                        <!-- <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-performance-tab">
                         <form action="#" class="search-destination">
                             <div class="row">
                                 <div class="col-md align-items-end">
@@ -180,6 +182,7 @@
                             </div>
                         </form>
                     </div> -->
+                    </div>
                 </div>
             </div>
         </div>

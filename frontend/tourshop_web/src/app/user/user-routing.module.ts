@@ -22,7 +22,7 @@ const routes: Routes = [
     data: { title: "Tour mới" },
   },
   {
-    path: "detail",
+    path: "tour/detail/:id",
     component: TourDetailComponent,
     data: { title: "Chi tiết tour" },
   },

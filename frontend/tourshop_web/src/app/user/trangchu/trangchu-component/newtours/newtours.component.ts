@@ -109,4 +109,7 @@ export class NewtoursComponent implements OnInit {
   viewAllNewTours() {
     this.routes.navigate(["/newtours"]);
   }
+  viewDetail(id: number) {
+    this.routes.navigate(["/tour/detail/" + id]);
+  }
 }

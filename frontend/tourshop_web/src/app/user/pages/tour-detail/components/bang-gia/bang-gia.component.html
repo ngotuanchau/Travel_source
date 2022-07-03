@@ -1,0 +1,54 @@
+<div class="width-box">
+    <section class="ftco-about d-md-flex row">
+
+        <div class="col-7">
+            <div class="dieu-kien">
+                <div class="dk-title">
+                    GIÁ TOUR
+                </div>
+                <table style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Ngày khởi hành</th>
+                            <th>Người lớn</th>
+                            <th>Trẻ em</th>
+                            <th>Trẻ nhỏ</th>
+                            <th>Còn</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let n of ngayKhs; index as i">
+                            <td>{{i+1}}</td>
+                            <td>{{pipe.transform(n.ngayKh, "dd/MM/yyyy")}}</td>
+                            <td>{{n.giaNguoiLon}}</td>
+                            <td>{{n.giaTreEn}}</td>
+                            <td>{{n.giaTreNho}}</td>
+                            <td>{{findBlankDisplay(tour.id,tour.veToiDa)}} chỗ</td>
+                            <td><button (click)="datNgay()">ĐẶT NGAY</button></td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="dieu-kien">
+                <div class="dk-title">
+                    MÔ TẢ
+                </div>
+                {{tour.mota}}
+                <!-- <ul>
+                    <li>
+                        <p>Thẻ xanh Covid (hoàn tất mũi 2 trước 14 ngày và không quá 12 tháng)</p>
+                    </li>
+                    <li>
+                        <p>Đảm bảo nguyên tắc 5K, khử khuẩn</p>
+                    </li>
+                </ul> -->
+            </div>
+        </div>
+
+    </section>
+</div>

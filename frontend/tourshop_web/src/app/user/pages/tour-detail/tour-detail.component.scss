@@ -1,16 +1,22 @@
 .ftco-about {
-    margin: 0 25px;
+    margin: 0px;
+    margin-top: 20px;
 }
 
-.ftco-about .one-half {
-    padding: 2%;
+.ftco-about .one-half:nth-child(1) {
+    padding: 2% 2% 2% 0px;
+    width: 50%;
+}
+
+.ftco-about .one-half:nth-child(2) {
+    padding: 2% 0px 2% 2%;
     width: 50%;
 }
 
 .img-box {
     padding: 20px;
-    background: #FAF0EE;
     margin-bottom: 20px;
+    box-shadow: 2px 2px 2px 2px opacify($color: #5c5c5c, $amount: 0.2);
 }
 
 .img-child {
@@ -30,7 +36,7 @@
 }
 
 h1 {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     color: #000;
     font-size: 40px;
@@ -39,7 +45,7 @@ h1 {
 
 .body-section {
     color: #000;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
 }
 
@@ -54,8 +60,9 @@ h1 {
 .gia-tour,
 .dieu-kien {
     padding: 20px;
-    background: #FAF0EE;
+    box-shadow: 2px 2px 2px 2px opacify($color: #5c5c5c, $amount: 0.2);
     border-radius: 10px;
+    border: #5c5c5c 2px solid;
 }
 
 .dk-title {
@@ -92,7 +99,7 @@ td {
 .gia-tour {
     align-items: center;
     color: #000;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
 }
 
@@ -126,4 +133,10 @@ td {
     border-radius: 25px;
     background: #E76F51;
     color: #fff;
+}
+
+@media (max-width:768px) {
+    .col-6 {
+        width: 100%;
+    }
 }

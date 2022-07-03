@@ -31,7 +31,7 @@
     position: relative;
     margin: 0 0 20px 13px;
     padding: 20px;
-    background: #FAF0EE;
+    box-shadow: 2px 2px 2px 2px opacify($color: #5c5c5c, $amount: 0.2);
     color: #000;
     border-radius: 8px;
     /* max-width: 400px; */
@@ -67,4 +67,15 @@
     border-radius: 999px;
     left: -39px;
     border: 3px solid #E76F51;
+}
+
+span {
+    font-weight: bold;
+}
+
+@media (max-width:768px) {
+    .col-3,
+    .col-9 {
+        width: 100%;
+    }
 }
