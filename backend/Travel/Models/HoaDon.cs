@@ -12,6 +12,7 @@ namespace Travel.Models
         public NguoiDung NguoiDung { get; set; }
         public int TourId { get; set; }
         public Tour Tour { get; set; }
+        public int ThoiGianId { get; set; }
         public int TongSoVeNl { get; set; }
         public int TongSoVeTe { get; set; }
         public int TongTien { get; set; }

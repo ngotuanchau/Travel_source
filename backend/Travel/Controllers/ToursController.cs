@@ -487,5 +487,48 @@ namespace Travel.Controllers
                 return StatusCode(500, "Internal Server Error");
             }
         }
+
+        //[Authorize]
+        [HttpPost]
+        [Route("dat_tour")]
+        [ActionName("dattour")]
+        public async Task<IActionResult> dattour([FromBody] dattour_serialize dattour_Serialize)
+        {
+            using var transaction = _context.Database.BeginTransaction();
+            try
+            {
+                HoaDon hoaDon = new HoaDon();
+                hoaDon.NguoiDungId = dattour_Serialize.nguoidungid;
+                hoaDon.TourId = dattour_Serialize.tourid;
+                hoaDon.TongSoVeNl = dattour_Serialize.sovenguoilon;
+                hoaDon.TongSoVeTe = dattour_Serialize.sovetreem;
+                hoaDon.ThoiGianId = dattour_Serialize.thoigianid;
+                hoaDon.TrangThai = 1;
+                _context.Add(hoaDon);
+                _context.SaveChanges();
+
+                ThoiGian thoiGian = _context.ThoiGians.Where(t => t.Id == dattour_Serialize.id && t.TrangThai == 1).FirstOrDefault();
+                thoiGian.VeDaDat = dattour_Serialize.sovenguoilon + dattour_Serialize.sovetreem;
+                _context.Add(thoiGian);
+                _context.SaveChanges();
+
+                transaction.Commit();
+                return Ok(new
+                {
+                    message = "Success",
+                });
+            }
+            catch (BadHttpRequestException)
+            {
+                transaction.Rollback();
+                return StatusCode(404, "Tour not found");
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
     }
 }
