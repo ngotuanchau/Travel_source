@@ -1,15 +1,7 @@
 <div class="width-box">
     <section class="ftco-about d-md-flex row">
         <div class="col-6 img max-width">
-            <div class="img-box">
-                <img src="http://localhost:3000/{{tour.anhtour}}">
-                <div class="d-md-flex flex-gap flex justifylex">
-                    <div class="img-child"> <img src="../../../assets/web/images/destination-5.jpg"></div>
-                    <div class="img-child"> <img src="../../../assets/web/images/destination-5.jpg"></div>
-                    <div class="img-child"> <img src="../../../assets/web/images/destination-5.jpg"></div>
-                    <div class="img-child"> <img src="../../../assets/web/images/destination-5.jpg"></div>
-                </div>
-            </div>
+            <app-anh-tour [tour]="this.tour" [hinhanh]="this.hinhanh"></app-anh-tour>
         </div>
         <div class="col-6">
             <div class="heading-section">

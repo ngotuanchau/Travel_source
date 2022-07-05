@@ -33,6 +33,7 @@ export class TourDetailComponent implements OnInit {
   ngayKHs: any;
   lichtrinh: any;
   diadiem: any;
+  hinhanh: any;
   //Get detail
   getDetail(id: any) {
     this.tourService.getDetailTour(id).subscribe((res) => {
@@ -44,6 +45,8 @@ export class TourDetailComponent implements OnInit {
       this.lichtrinh = this.tour.lichtrinh;
       //get array diadiem
       this.diadiem = this.tour.nhungdiadiem;
+      //get array image detail
+      this.hinhanh = this.tour.hinhanh;
     });
   }
   findDateDisplay(id: number) {
