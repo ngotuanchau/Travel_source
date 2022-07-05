@@ -157,86 +157,111 @@ namespace Travel.Controllers
             }
 
         }
-
+        [Authorize]
+        [Authorize(Roles = "Business")]
         [HttpGet]
-        [Route("get_all_tour")]
-        [ActionName("getallTour")]
-        public async Task<IActionResult> getallTour()
+        [Route("get_all_tour_bussiness/{id:int}")]
+        [ActionName("getallTour_bussiness")]
+        public async Task<IActionResult> getallTour_bussiness([FromRoute] int id)
         {
             try
             {
                 List<Tour_serialize> result = new List<Tour_serialize>();
-                List<Tour> tours = _context.Tours.Include(t => t.TheLoai).Include(t => t.CongTy).Include(t => t.PhanVung).Where(t => t.TrangThai == 1).ToList();
+                List<Tour> tours = _context.Tours.Include(t => t.TheLoai).Include(t => t.CongTy).Include(t => t.PhanVung).Where(t => t.CongTyId == id).OrderByDescending(t => t.NgayTao).ToList();
                 foreach (var tour in tours)
                 {
-                    Tour_serialize gt = new Tour_serialize();
-                    gt.Tentour = tour.TenTour;
-                    gt.Theloai = tour.TheLoaiId;
-                    //gt.Anuong = tour.AnUong;
-                    //gt.NoiO = tour.NoiO;
-                    gt.Phanvung = tour.PhanVungId;
-                    gt.Phuongtien = tour.PhuongTien;
-                    gt.Mota = tour.MoTa;
-                    gt.Congty = tour.CongTyId;
+                    // Get information tour
+                    Tour_serialize tour_Serialize = new Tour_serialize();
+                    tour_Serialize.Id = tour.Id;
+                    tour_Serialize.Tentour = tour.TenTour;
+                    tour_Serialize.Theloai = tour.TheLoaiId;
+                    tour_Serialize.Tentheloai = tour.TheLoai.TenLoai;
+                    tour_Serialize.Phanvung = tour.PhanVungId;
+                    tour_Serialize.Tenphanvung = tour.PhanVung.TenVung;
+                    tour_Serialize.Congty = tour.CongTyId;
+                    tour_Serialize.Tencongty = tour.CongTy.Tencongty;
+                    tour_Serialize.VeToiDa = tour.VeDoiDa;
+                    tour_Serialize.VeToiThieu = tour.VeToiThieu;
+                    tour_Serialize.SoNgay = tour.SoNgay;
+                    tour_Serialize.SoDem = tour.SoDem;
+                    tour_Serialize.DiemDi = tour.DiemDi;
+                    tour_Serialize.Tendiemdi = _context.DiaDiems.Where(d => d.Id == tour.DiemDi).FirstOrDefault().Ten;
+                    tour_Serialize.DiemDen = tour.DiemDen;
+                    tour_Serialize.Tendiemden = _context.DiaDiems.Where(d => d.Id == tour.DiemDen).FirstOrDefault().Ten;
+                    tour_Serialize.Mota = tour.MoTa;
+                    tour_Serialize.AmThuc = tour.AmThuc;
+                    tour_Serialize.LuuTru = tour.LuuTru;
+                    tour_Serialize.Phuongtien = tour.PhuongTien;
+                    tour_Serialize.Anhtour = tour.AnhTour;
 
-                    List<Hinhanh> hinhanhs = new List<Hinhanh>();
-                    List<AnhTour> anhtour = _context.AnhTours.Where(p => p.TourId == tour.Id && p.TrangThai == 1).ToList();
-                    foreach (var at in anhtour)
-                    {
-                        Hinhanh hinhanh = new Hinhanh();
-                        hinhanh.tenanh = at.Anh;
-                        hinhanhs.Add(hinhanh);
-                    }
-                    gt.Hinhanh = hinhanhs;
-
-
-
+                    // Get List Thoi Gian
                     List<NhungNgayKhoiHanh> nhungNgayKhoiHanhs = new List<NhungNgayKhoiHanh>();
                     List<ThoiGian> thoiGians = _context.ThoiGians.Where(p => p.TourId == tour.Id && p.TrangThai == 1).ToList();
                     foreach (var tg in thoiGians)
                     {
                         NhungNgayKhoiHanh nhungNgayKhoiHanh = new NhungNgayKhoiHanh();
-                        //nhungNgayKhoiHanh.NgayKh = tg.NgayDi.ToString();
-                        //nhungNgayKhoiHanh.NgayVe = tg.NgayVe.ToString();
-                        //nhungNgayKhoiHanh.Gia = tg.Gia;
-                        //nhungNgayKhoiHanh.SLMax = tg.SoLuongMax;
-                        //nhungNgayKhoiHanh.SLDat = tg.SoLuongDat;
+                        nhungNgayKhoiHanh.Id = tg.Id;
+                        nhungNgayKhoiHanh.NgayKh = tg.NgayDi.ToString();
+                        nhungNgayKhoiHanh.GiaNguoiLon = tg.GiaNguoiLon;
+                        nhungNgayKhoiHanh.GiaTreEn = tg.GiaTreEm;
+                        nhungNgayKhoiHanh.GiaTreNho = tg.GiaTreNho;
+                        nhungNgayKhoiHanh.Vedadat = tg.VeDaDat;
                         nhungNgayKhoiHanhs.Add(nhungNgayKhoiHanh);
                     }
-                    gt.NhungNgayKhoiHanh = nhungNgayKhoiHanhs;
+                    tour_Serialize.NhungNgayKhoiHanh = nhungNgayKhoiHanhs;
 
+                    // Get List dia diem
                     List<Nhungdiadiem> nhungdiadiems = new List<Nhungdiadiem>();
                     List<DiaDiem_Tour> diaDiem_Tours = _context.DiaDiem_Tours.Where(p => p.TourId == tour.Id && p.TrangThai == 1).ToList();
                     foreach (var dd in diaDiem_Tours)
                     {
                         Nhungdiadiem nhungdiadiem = new Nhungdiadiem();
+                        nhungdiadiem.Id = dd.Id;
                         nhungdiadiem.Thutu = dd.ThuTu;
                         nhungdiadiem.diadiem = dd.DiaDiemId;
+                        nhungdiadiem.Tendiadiem = _context.DiaDiems.Where(d => d.Id == dd.DiaDiemId).FirstOrDefault().Ten;
                         nhungdiadiems.Add(nhungdiadiem);
                     }
-                    gt.Nhungdiadiem = nhungdiadiems;
+                    tour_Serialize.Nhungdiadiem = nhungdiadiems;
 
+
+                    // Get List hinh anh
+                    List<Hinhanh> hinhanhs = new List<Hinhanh>();
+                    List<AnhTour> anhTours = _context.AnhTours.Where(p => p.TourId == tour.Id && p.TrangThai == 1).ToList();
+                    foreach (var at in anhTours)
+                    {
+                        Hinhanh hinhanh = new Hinhanh();
+                        hinhanh.Id = at.Id;
+                        hinhanh.tenanh = at.Anh;
+                        hinhanhs.Add(hinhanh);
+                    }
+                    tour_Serialize.Hinhanh = hinhanhs;
+
+                    // Get List lich trinh
                     List<Lichtrinh> lichtrinhs = new List<Lichtrinh>();
                     List<Models.LichTrinh> mlichTrinhs = _context.LichTrinhs.Where(p => p.TourId == tour.Id && p.TrangThai == 1).ToList();
                     foreach (var lt in mlichTrinhs)
                     {
                         Serialize.Lichtrinh lichTrinh = new Serialize.Lichtrinh();
+                        lichTrinh.Id = lt.Id;
                         lichTrinh.Ngay = lt.Ngay;
+                        lichTrinh.MoTa = lt.MoTa;
                         lichTrinh.Sang = lt.Sang;
                         lichTrinh.Trua = lt.Trua;
                         lichTrinh.Toi = lt.Toi;
 
                         lichtrinhs.Add(lichTrinh);
                     }
-                    gt.Lichtrinh = lichtrinhs;
-                    result.Add(gt);
+                    tour_Serialize.Lichtrinh = lichtrinhs;
+
+                    result.Add(tour_Serialize);
                 }
                 return Json(result);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return StatusCode(StatusCodes.Status500InternalServerError, new { message = "error occurred" });
+                return StatusCode(500, "Internal Server Error");
             }
 
         }
@@ -488,7 +513,7 @@ namespace Travel.Controllers
             }
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         [Route("dat_tour")]
         [ActionName("dattour")]
@@ -526,6 +551,77 @@ namespace Travel.Controllers
             catch (Exception ex)
             {
                 transaction.Rollback();
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+        [Authorize]
+        [Authorize(Roles = "Business")]
+        [HttpGet]
+        [Route("get_user_dattour/{id:int}")]
+        [ActionName("get_user_dattour")]
+        public async Task<IActionResult> get_user_dattour([FromRoute] int id)
+        {
+            try
+            {
+                List<GetUserDatTour_serialize> getUserDatTour_Serializes = new List<GetUserDatTour_serialize>();
+                List<HoaDon> hoaDons = _context.HoaDons.Include(h => h.NguoiDung).Include(t => t.Tour).Where(t => t.TrangThai > 0 && t.ThoiGianId == id).ToList();
+                if (hoaDons.Count == 0)
+                {
+                    return StatusCode(404, "Tour not found");
+                }
+                // Get information tour
+                foreach (var hoadon in hoaDons)
+                {
+                    GetUserDatTour_serialize getUserDatTour_Serialize = new GetUserDatTour_serialize();
+                    getUserDatTour_Serialize.id = hoadon.Id;
+                    getUserDatTour_Serialize.HoTen = hoadon.NguoiDung.HoTen;
+                    getUserDatTour_Serialize.NguoiDungId = hoadon.NguoiDungId;
+                    getUserDatTour_Serialize.Sdt = hoadon.NguoiDung.Sdt;
+                    getUserDatTour_Serialize.TongSoVeNl = hoadon.TongSoVeNl;
+                    getUserDatTour_Serialize.TongSoVeTe = hoadon.TongSoVeTe;
+                    getUserDatTour_Serialize.TongTien = hoadon.TongTien;
+                    getUserDatTour_Serialize.TrangThai = hoadon.TrangThai;
+
+                    getUserDatTour_Serializes.Add(getUserDatTour_Serialize);
+                }
+
+
+
+                return Json(getUserDatTour_Serializes);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+        [Authorize]
+        [Authorize(Roles = "Business")]
+        [HttpGet]
+        [Route("confirm_user_dattour/{id:int}")]
+        [ActionName("confirm_user_dattour")]
+        public async Task<IActionResult> confirm_user_dattour([FromRoute] int id)
+        {
+            try
+            {
+                HoaDon hoaDon = _context.HoaDons.Include(h => h.NguoiDung).Include(t => t.Tour).Where(t => t.TrangThai > 0 && t.Id == id).FirstOrDefault();
+                if (hoaDon == null)
+                {
+                    return StatusCode(404, "Tour not found");
+                }
+
+                hoaDon.TrangThai = 2;
+                _context.SaveChanges();
+                return Ok(new
+                {
+                    message = "Success",
+                });
+            }
+            catch (Exception ex)
+            {
                 Console.WriteLine(ex.Message);
                 return StatusCode(500, "Internal Server Error");
             }
