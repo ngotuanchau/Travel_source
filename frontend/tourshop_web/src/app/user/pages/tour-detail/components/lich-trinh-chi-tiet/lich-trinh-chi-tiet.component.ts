@@ -23,7 +23,6 @@ export class LichTrinhChiTietComponent implements OnInit {
       }
     }
   }
-  lstDD: any;
   ngOnInit(): void {
     this.sort();
   }

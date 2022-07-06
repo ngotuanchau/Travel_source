@@ -57,6 +57,34 @@ h1 {
     font-weight: bold;
 }
 
+//Form
+.form-in {
+    padding: 20px;
+    box-shadow: 2px 2px 2px 2px opacify($color: #5c5c5c, $amount: 0.2);
+}
+
+.form-in h2 {
+    text-align: center;
+    color: #000;
+    font-weight: bold;
+}
+
+.thong-tin input {
+    width: 25%;
+    text-align: center;
+    box-shadow: 2px 2px 2px 2px opacify($color: #5c5c5c, $amount: 0.2);
+}
+
+.thong-tin button {
+    box-shadow: 2px 2px 2px 2px opacify($color: #5c5c5c, $amount: 0.2);
+    border: #E76F51 2px solid;
+    color: #E76F51;
+    font-weight: bold;
+}
+
+// .form-in label {
+//     margin-right: 5px;
+// }
 @media (max-width:768px) {
     .ftco-about .col-6:nth-child(1),
     .ftco-about .col-6:nth-child(2) {

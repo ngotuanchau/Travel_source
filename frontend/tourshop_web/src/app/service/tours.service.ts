@@ -45,4 +45,9 @@ export class ToursService {
   getDetailTour(id: any): Observable<Tour> {
     return this.http.get<Tour>(this.baseUrl + "/get_a_tour/" + id);
   }
+
+  //Book tour
+  bookTour(tour: any): Observable<any> {
+    return this.http.post<any>(this.baseUrl + "/dat_tour", tour);
+  }
 }

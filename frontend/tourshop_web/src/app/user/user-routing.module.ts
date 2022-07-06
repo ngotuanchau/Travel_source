@@ -27,7 +27,7 @@ const routes: Routes = [
     data: { title: "Chi tiết tour" },
   },
   {
-    path: "booking",
+    path: "booking/:id/:id2",
     component: DatTourComponent,
     data: { title: "Đặt tour" },
   },
