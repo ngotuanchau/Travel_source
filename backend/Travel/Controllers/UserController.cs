@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Travel.Data;
 using Travel.Models;
+using Travel.Serialize;
 
 namespace Travel.Controllers
 {
@@ -52,7 +53,7 @@ namespace Travel.Controllers
             var user = _context.NguoiDungs.FirstOrDefault(nd => nd.Id == id);
             if (user == null)
             {
-                return NotFound(new { message = "User does not existed"});
+                return NotFound(new { message = "User does not existed" });
             }
             else
             {
@@ -102,5 +103,36 @@ namespace Travel.Controllers
             return true;
         }
 
+        [HttpGet]
+        [Route("{id:int}")]
+        public async Task<IActionResult> get_user([FromRoute] int id)
+        {
+            try
+            {
+                NguoiDung nguoiDung = _context.NguoiDungs.Where(u => u.TrangThai != 0 && u.Id == id).FirstOrDefault();
+                if (nguoiDung == null)
+                {
+                    return StatusCode(404, "Tour not found");
+                }
+                User_serialize user_Serialize = new User_serialize();
+                user_Serialize.Id = nguoiDung.Id;
+                user_Serialize.HoTen = nguoiDung.HoTen;
+                user_Serialize.Avt = nguoiDung.Avt;
+                user_Serialize.Cmnd = nguoiDung.Cmnd;
+                user_Serialize.Email = nguoiDung.Email;
+                user_Serialize.isAdmin = nguoiDung.isAdmin;
+                user_Serialize.NgaySinh = nguoiDung.NgaySinh;
+                user_Serialize.Sdt = nguoiDung.Sdt;
+                user_Serialize.TenNguoiDung = nguoiDung.TenNguoiDung;
+                user_Serialize.TrangThai = nguoiDung.TrangThai;
+
+                return Json(user_Serialize);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
     }
 }
