@@ -513,7 +513,7 @@ namespace Travel.Controllers
             }
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost]
         [Route("dat_tour")]
         [ActionName("dattour")]
@@ -528,13 +528,16 @@ namespace Travel.Controllers
                 hoaDon.TongSoVeNl = dattour_Serialize.sovenguoilon;
                 hoaDon.TongSoVeTe = dattour_Serialize.sovetreem;
                 hoaDon.ThoiGianId = dattour_Serialize.thoigianid;
+                hoaDon.TongSoVeTn = dattour_Serialize.sovetrenho;
                 hoaDon.TrangThai = 1;
                 _context.Add(hoaDon);
                 _context.SaveChanges();
 
-                ThoiGian thoiGian = _context.ThoiGians.Where(t => t.Id == dattour_Serialize.id && t.TrangThai == 1).FirstOrDefault();
-                thoiGian.VeDaDat = dattour_Serialize.sovenguoilon + dattour_Serialize.sovetreem;
-                _context.Add(thoiGian);
+                ThoiGian thoiGian = _context.ThoiGians.Where(t => t.Id == dattour_Serialize.thoigianid && t.TrangThai == 1).FirstOrDefault();
+                int vedadat = thoiGian.VeDaDat;
+                int vedat = dattour_Serialize.sovetrenho + dattour_Serialize.sovetreem + dattour_Serialize.sovenguoilon;
+                int updatevedat = vedadat + vedat;
+                thoiGian.VeDaDat = updatevedat;
                 _context.SaveChanges();
 
                 transaction.Commit();

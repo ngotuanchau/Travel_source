@@ -12,6 +12,7 @@ namespace Travel.Serialize
         public int tourid { get; set; }
         public int sovenguoilon { get; set; }
         public int sovetreem { get; set; }
+        public int sovetrenho { get; set; }
         public int thoigianid { get; set; }
         public decimal tongtien { get; set; }
     }
