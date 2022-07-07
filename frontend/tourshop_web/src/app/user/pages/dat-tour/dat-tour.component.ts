@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { ToursService } from "../../../service/tours.service";
+
 import { DatePipe } from "@angular/common";
+import { ToursService } from "../../../service/tours.service";
 @Component({
   selector: "app-dat-tour",
   templateUrl: "./dat-tour.component.html",
@@ -17,10 +18,12 @@ export class DatTourComponent implements OnInit {
   ngaykh: any;
   veDaDat: number;
   veTrong: number;
+  Date = new Date(Date.now());
+
   constructor(
     private routes: Router,
-    private tourService: ToursService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private tourService: ToursService
   ) {}
 
   ngOnInit(): void {

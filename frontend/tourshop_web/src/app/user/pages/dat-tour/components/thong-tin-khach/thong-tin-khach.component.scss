@@ -73,6 +73,7 @@ h1 {
     width: 25%;
     text-align: center;
     box-shadow: 2px 2px 2px 2px opacify($color: #5c5c5c, $amount: 0.2);
+    background: #fff;
 }
 
 .thong-tin button {
@@ -80,6 +81,11 @@ h1 {
     border: #E76F51 2px solid;
     color: #E76F51;
     font-weight: bold;
+    background: #fff;
+}
+
+.email input {
+    width: 100%;
 }
 
 // .form-in label {

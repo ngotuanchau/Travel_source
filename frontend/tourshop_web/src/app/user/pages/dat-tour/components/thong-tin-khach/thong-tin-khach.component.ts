@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { NguoiDungsService } from "../../../../../service/nguoidungs.service";
 
+import { ActivatedRoute } from "@angular/router";
 @Component({
   selector: "app-thong-tin-khach",
   templateUrl: "./thong-tin-khach.component.html",
@@ -15,9 +17,26 @@ export class ThongTinKhachComponent implements OnInit {
   trem: number = 0;
   trnho: number = 0;
   maxVe: number;
-  constructor() {}
+  idUser: any;
+  hoten: any;
+  email: any;
+  sdt: any;
 
-  ngOnInit(): void {}
+  constructor(
+    private userService: NguoiDungsService,
+
+    private activatedRoute: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    this.getUser();
+  }
+  getUser() {
+    (this.idUser = localStorage.getItem("id")),
+      (this.email = localStorage.getItem("email")),
+      (this.hoten = localStorage.getItem("hoTen")),
+      (this.sdt = localStorage.getItem("sdt"));
+  }
   congnl() {
     this.nglon = this.nglon + 1;
     this.updateTongKhach();

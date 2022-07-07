@@ -5,7 +5,7 @@
 
     <div class="card">
         <div class="p-3">
-            <h4 class="card-title mb-0">Lịch trình</h4>
+            <h4 class="card-title mb-0">Hành khách trong tour</h4>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -13,42 +13,43 @@
                     <table class="table table-bordered align-middle text-nowrap">
                         <thead>
                             <tr>
+                                <th class="text-dark font-medium fs-4">STT</th>
                                 <th class="text-dark font-medium fs-4">Ngày</th>
-                                <th class="text-dark font-medium fs-4">Mô tả</th>
-                                <th class="text-dark font-medium fs-4">Sáng</th>
-                                <th class="text-dark font-medium fs-4">Trưa</th>
-                                <th class="text-dark font-medium fs-4">Chiều</th>
-                                <th class="text-dark font-medium fs-4">Tối</th>
+                                <th class="text-dark font-medium fs-4">Giá Người lớn</th>
+                                <th class="text-dark font-medium fs-4">Giá Trẻ em</th>
+                                <th class="text-dark font-medium fs-4">Giá Trẻ nhỏ</th>
+                                <th class="text-dark font-medium fs-4">Số vé đã đặt</th>
                                 <th class="text-dark font-medium fs-4"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let tr of lichTrinh; index as i">
+                            <tr *ngFor="let tr of lichKH; index as i">
                                 <td>
                                     {{ i + 1 }}
                                 </td>
                                 <td>
-                                    <p>{{tr.moTa}}
+                                    <p>{{this.pipe.transform(tr.ngayKh, "dd/MM/yyyy")}}
                                     </p>
                                 </td>
                                 <td>
-                                    <p>{{tr.sang}}
+                                    <p>{{tr.giaNguoiLon}}
                                     </p>
                                 </td>
                                 <td>
-                                    <p>{{tr.trua}}</p>
+                                    <p>{{tr.giaTreEn}}</p>
                                 </td>
                                 <td>
-                                    <p>{{tr.chieu}}</p>
+                                    <p>{{tr.giaTreNho}}</p>
                                 </td>
                                 <td>
-                                    <p>{{tr.toi}}</p>
+                                    <p>{{tr.vedadat}}</p>
                                 </td>
                                 <td>
                                     <a [routerLink]="['detail']"><button type="button" class="btn btn-inverse-info btn-icon" onclick="">
                       <i class="bi bi-eye"></i></button></a>
-                                    <a [routerLink]="['update']"><button type="button" class="btn btn-inverse-info btn-icon" onclick="">
-                      <i class="bi bi-pen"></i></button></a>
+                                    <a [routerLink]="['../../khach-dat-tour/',tr.id]"><button type="button"
+                      class="btn btn-inverse-info btn-icon" onclick="">
+                      <i class="bi bi-person-fill"></i></button></a>
                                     <button type="button" class="btn btn-inverse-info btn-icon" onclick="">
                     <i class="bi bi-trash"></i></button>
                                 </td>

@@ -9,8 +9,8 @@ export class NguoiDungsService {
   baseUrl = "https://localhost:40998/api/Users";
   constructor(private http: HttpClient) {}
 
-  //Get detail
-  getDetailTour(id: any): Observable<any> {
-    return this.http.get<any>(this.baseUrl + "/get_a_user/" + id);
+  //get user
+  getUser(id: any): Observable<any> {
+    return this.http.get<any>(this.baseUrl + "/" + id);
   }
 }

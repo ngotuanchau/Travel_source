@@ -1,10 +1,21 @@
-.card-title {
-    font-size: 30px;
+.card {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #000;
+}
+
+.title {
     font-weight: bold;
-    text-transform: uppercase;
 }
 
 .card-description {
     font-size: 18px;
+    font-weight: bold;
+}
+
+.card-sub-description {
+    font-size: 16px;
+}
+
+span {
     font-weight: bold;
 }

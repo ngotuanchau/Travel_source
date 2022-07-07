@@ -181,53 +181,6 @@ export class ToursCreateComponent {
     );
   }
 
-  // saveImagesToLocalByNodeJS(idTour: any) {
-  //   const formdata = new FormData();
-
-  //   for (let img of this.ha) {
-  //     formdata.append("files", img);
-  //   }
-  //   console.log(formdata);
-
-  //   this.http
-  //     .post<any>("http://localhost:3000/node-js/create-images", formdata)
-  //     .subscribe((res) => {
-  //       // console.log("Res: " + res);
-  //       const data = res.path;
-  //       this.lstAnh = data;
-  //       // console.log("this.lstAnh: " + this.lstAnh);
-  //       var imageDetailSubmit: any = [];
-  //       var i = 0;
-  //       for (let dt of this.lstAnh) {
-  //         const anh = dt;
-  //         // console.log("anh: " + anh);
-  //         var extension = String(anh).split(".").pop();
-  //         idTour = 123;
-  //         var newName = idTour + "_" + i + "." + extension;
-  //         // console.log("newName: " + newName);
-  //         imageDetailSubmit.push({
-  //           idTour: idTour,
-  //           tenanh: newName,
-  //         });
-  //         // console.log("imageDetailSubmit: " + imageDetailSubmit);
-  //       }
-  //       this.lstAnh = imageDetailSubmit;
-  //       console.log("This.lstAnh: ");
-  //       console.log(this.lstAnh);
-  //       return this.anhService
-  //         .createImage(this.lstAnh)
-  //         .subscribe((response) => {
-  //           if (response != null) {
-  //             console.log("Res:");
-  //             console.log(response);
-  //           }
-  //         });
-  //     });
-  // }
-
-  //Update image
-
-  //Lay tat ca dia diem
   getAllDiaDiem() {
     this.diadiemService.getAllDiaDiem().subscribe((response) => {
       this.diadiems = response.listDiaDiem;
@@ -253,11 +206,6 @@ export class ToursCreateComponent {
   get idCty() {
     return localStorage.getItem("id");
   }
-  // set idCty(data) {
-  //   this.form.patchValue({
-  //     [FormField.congty]: data,
-  //   });
-  // }
 
   get songay() {
     return this.form?.controls?.[FormField.soNgay]?.value || 0;

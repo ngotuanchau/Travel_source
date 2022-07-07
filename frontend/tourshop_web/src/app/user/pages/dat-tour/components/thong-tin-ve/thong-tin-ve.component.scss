@@ -9,3 +9,13 @@
 span {
     font-weight: bold
 }
+
+.button .col-4:nth-child(2) button {
+    align-items: center;
+    width: 100%;
+    box-shadow: 2px 2px 2px 2px opacify($color: #5c5c5c, $amount: 0.2);
+    border: #E76F51 2px solid;
+    color: #E76F51;
+    font-weight: bold;
+    background: #fff;
+}
