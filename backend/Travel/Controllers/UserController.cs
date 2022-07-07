@@ -16,8 +16,7 @@ using Travel.Serialize;
 
 namespace Travel.Controllers
 {
-    [Authorize]
-    [Authorize(Roles = "Admin")]
+    
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : Controller
@@ -30,7 +29,8 @@ namespace Travel.Controllers
             _context = context;
             _configuration = configuration;
         }
-
+        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> create(NguoiDung nd)
         {
@@ -45,7 +45,8 @@ namespace Travel.Controllers
 
 
         }
-
+        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         [Route("{id:int}")]
         public async Task<IActionResult> Edit([FromRoute] int id, NguoiDung nd)
@@ -68,6 +69,8 @@ namespace Travel.Controllers
             }
         }
 
+        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         [Route("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
@@ -103,6 +106,7 @@ namespace Travel.Controllers
             return true;
         }
 
+        [Authorize]
         [HttpGet]
         [Route("{id:int}")]
         public async Task<IActionResult> get_user([FromRoute] int id)
