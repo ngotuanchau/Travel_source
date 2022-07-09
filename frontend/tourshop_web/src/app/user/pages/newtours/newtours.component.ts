@@ -3,7 +3,6 @@ import { Component, OnInit } from "@angular/core";
 import { DiadiemsService } from "../../../service/diadiems.service";
 import { TheloaisService } from "../../../service/theloais.service";
 import { ToursService } from "../../../service/tours.service";
-import { FormGroup, FormControl } from "@angular/forms";
 import {
   AmThuc,
   lstAmThucs,
@@ -169,5 +168,8 @@ export class NewtoursComponent implements OnInit {
   }
   viewDetail(id: number) {
     this.routes.navigate(["/tour/detail/" + id]);
+  }
+  onSearch() {
+    this.routes.navigate(["search"]);
   }
 }
