@@ -19,9 +19,10 @@ export class KhachDatTourComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getUserByIdTour();
+    this.getUserByIdNHK();
   }
-  getUserByIdTour() {
+  //Lấy danh sách Khách hàng Đặt Tour
+  getUserByIdNHK() {
     this.activatedRoute.paramMap.subscribe((params) => {
       this.id = params.get("id");
     });
@@ -32,7 +33,7 @@ export class KhachDatTourComponent implements OnInit {
   confirmBookTour(id: any) {
     this.tourservice.confirmBookTour(id).subscribe((res) => {
       if (res.message == "Success") {
-        this.getUserByIdTour();
+        this.getUserByIdNHK();
       }
     });
   }
