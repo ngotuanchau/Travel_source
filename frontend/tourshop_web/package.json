@@ -38,6 +38,7 @@
     "ckeditor4-angular": "^3.1.0",
     "i": "^0.3.7",
     "jquery": "^3.6.0",
+    "ng-angular-popup": "^0.1.2",
     "ng-apexcharts": "^1.5.6",
     "ng2-charts": "^2.4.2",
     "ngx-cookie-service": "^14.0.1",

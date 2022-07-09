@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { DiadiemsService } from "../../../../../service/diadiems.service";
+import { NgToastService } from "ng-angular-popup";
 @Component({
   selector: "app-dia-diem",
   templateUrl: "./dia-diem.component.html",
@@ -31,16 +32,21 @@ export class DiaDiemComponent implements OnInit {
     });
   }
 
-  constructor(private diadiemService: DiadiemsService) {
+  constructor(
+    private diadiemService: DiadiemsService,
+    private toast: NgToastService
+  ) {
     this.getAllDiaDiem();
   }
 
   ngOnInit(): void {}
   onAdd() {
-    if (this.thutu == null) {
-      alert("Chưa chọn số thứ tự");
-    } else if (this.dd == null) {
-      alert("Chưa chọn địa điểm");
+    if (this.dd == null) {
+      this.toast.error({
+        detail: "Cảnh báo",
+        summary: "Chưa chọn địa điểm",
+        duration: 3000,
+      });
     } else {
       const list = this.listDD;
       list.push({
@@ -74,6 +80,9 @@ export class DiaDiemComponent implements OnInit {
       })
     );
     if (missingItems(thutus, sttmax).length == 0) {
+      if (sttmax == null) {
+        this.thutu = 1;
+      }
       this.thutu = sttmax + 1;
     } else {
       this.thutu = minMiss;

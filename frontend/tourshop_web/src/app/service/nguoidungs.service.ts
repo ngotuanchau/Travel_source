@@ -6,7 +6,7 @@ import { Observable } from "rxjs";
   providedIn: "root",
 })
 export class NguoiDungsService {
-  baseUrl = "https://localhost:40998/api/Users";
+  baseUrl = "http://localhost:40998/api/User";
   constructor(private http: HttpClient) {}
 
   //get user

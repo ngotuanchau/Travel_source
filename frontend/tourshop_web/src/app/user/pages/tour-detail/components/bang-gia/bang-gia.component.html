@@ -25,8 +25,8 @@
                             <td>{{n.giaNguoiLon}}</td>
                             <td>{{n.giaTreEn}}</td>
                             <td>{{n.giaTreNho}}</td>
-                            <td>{{findBlankDisplay(tour.id,tour.veToiDa)}} chỗ</td>
-                            <td *ngIf="findBlankDisplay(tour.id,tour.veToiDa)>0"><button [disabled]="" (click)="booking(tour.id,n.id)">ĐẶT NGAY</button></td>
+                            <td>{{findBlankDisplay(n.id,tour.veToiDa)}} chỗ</td>
+                            <td *ngIf="findBlankDisplay(n.id,tour.veToiDa)>0"><button [disabled]="" (click)="booking(tour.id,n.id)">ĐẶT NGAY</button></td>
                             <td></td>
                     </tbody>
 

@@ -1,6 +1,7 @@
 import { DatePipe } from "@angular/common";
 import { Component, Input, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
+import { NgToastService } from "ng-angular-popup";
 
 @Component({
   selector: "app-ngay-khoi-hanh",
@@ -11,7 +12,7 @@ export class NgayKhoiHanhComponent implements OnInit {
   @Input() form: FormGroup;
   @Input() name: string;
 
-  constructor() {}
+  constructor(private toast: NgToastService) {}
   get lstNKH() {
     return this.form?.controls?.[this.name]?.value || [];
   }
@@ -34,7 +35,11 @@ export class NgayKhoiHanhComponent implements OnInit {
     const today = new Date().toLocaleDateString();
     const thisDay = new Date(this.ngayKh).toLocaleDateString();
     if (today > thisDay) {
-      return alert("Ngày không hợp lệ");
+      this.toast.error({
+        detail: "Cảnh báo",
+        summary: "Ngày " + thisDay + " không hợp lệ",
+        duration: 3000,
+      });
     } else {
       list.push({
         ngayKh: this.pipe.transform(this.ngayKh, "dd/MM/yyyy"),

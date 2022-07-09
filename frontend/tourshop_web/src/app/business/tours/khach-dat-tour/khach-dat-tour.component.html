@@ -1,58 +1,140 @@
-<div class="card">
+<div class="card-body border-top">
+    <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+        <li [ngbNavItem]="1">
+            <a ngbNavLink>Tất cả</a>
+            <ng-template ngbNavContent>
 
-    <div class="card-body">
-        <h4 class="card-title">Danh sách khách hàng đặt Tour</h4>
-        <div class="table-responsive">
-            <div class="table-lt">
-                <table class="table table-bordered align-middle text-nowrap">
-                    <thead>
-                        <tr>
-                            <th class="text-dark font-medium fs-4">STT</th>
-                            <th class="text-dark font-medium fs-4">Email</th>
-                            <th class="text-dark font-medium fs-4">Số điện thoại</th>
-                            <th class="text-dark font-medium fs-4">Họ tên</th>
-                            <th class="text-dark font-medium fs-4">Vé người lớn</th>
-                            <th class="text-dark font-medium fs-4">Vé trẻ em</th>
-                            <th class="text-dark font-medium fs-4">Vé trẻ nhỏ</th>
-                            <th class="text-dark font-medium fs-4">Tổng tiền</th>
-                            <th class="text-dark font-medium fs-4"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let u of users; index as i">
-                            <td>
-                                {{ i + 1 }}
-                            </td>
-                            <td>
-                                {{u.email}}
-                            </td>
-                            <td>
-                                {{u.sdt}}
-                            </td>
-                            <td>
-                                {{u.hoten}}
-                            </td>
-                            <td>
-                                {{u.sovenguoilon}}
-                            </td>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <div class="table-lt">
+                                <table class="table table-bordered align-middle text-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-dark font-medium fs-4">STT</th>
+                                            <th class="text-dark font-medium fs-4">Số điện thoại</th>
+                                            <th class="text-dark font-medium fs-4">Họ tên</th>
+                                            <th class="text-dark font-medium fs-4">Vé người lớn</th>
+                                            <th class="text-dark font-medium fs-4">Vé trẻ em</th>
+                                            <th class="text-dark font-medium fs-4">Vé trẻ nhỏ</th>
+                                            <th class="text-dark font-medium fs-4">Trạng thái</th>
+                                            <th class="text-dark font-medium fs-4">Tổng tiền</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let u of users; index as i">
+                                            <td>
+                                                {{ i + 1 }}
+                                            </td>
+                                            <td>
+                                                {{u.sdt}}
+                                            </td>
+                                            <td>
+                                                {{u.hoTen}}
+                                            </td>
+                                            <td>
+                                                {{u.tongSoVeNl}}
+                                            </td>
+                                            <td>
+                                                {{u.tongSoVeTe}}
+                                            </td>
 
-                            <td>
-                                {{u.sovetreem}}
-                            </td>
-                            <td>
-                                {{u.sovetreem}}
-                            </td>
-                            <td>
-                                {{u.tongtien}}
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-inverse-info btn-icon" (click)="confirmBookTour(u.id)">
-                  <i class="bi bi-eye"></i></button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+                                            <td>
+                                                {{u.tongSoVeTn}}
+                                            </td>
+                                            <td *ngIf="u.trangThai==1" class="confirm">
+                                                <button (click)="confirmBookTour(u.id)">Xác nhận</button>
+                                            </td>
+                                            <td *ngIf="u.trangThai==2" style="color: green;">
+                                                Đã xác nhận
+                                            </td>
+                                            <td>
+                                                {{u.tongTien}}
+                                            </td>
+                                            <!-- <td>
+                              <button type="button" class="btn btn-inverse-info btn-icon" (click)="confirmBookTour(u.id)">
+                <i class="bi bi-eye"></i></button>
+                          </td> -->
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </ng-template>
+        </li>
+        <li [ngbNavItem]=" 2 ">
+            <a ngbNavLink>Chưa xác nhận</a>
+            <ng-template ngbNavContent>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <div class="table-lt">
+                                <table class="table table-bordered align-middle text-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-dark font-medium fs-4">STT</th>
+                                            <th class="text-dark font-medium fs-4">Số điện thoại</th>
+                                            <th class="text-dark font-medium fs-4">Họ tên</th>
+                                            <th class="text-dark font-medium fs-4">Vé người lớn</th>
+                                            <th class="text-dark font-medium fs-4">Vé trẻ em</th>
+                                            <th class="text-dark font-medium fs-4">Vé trẻ nhỏ</th>
+                                            <th class="text-dark font-medium fs-4">Trạng thái</th>
+                                            <th class="text-dark font-medium fs-4">Tổng tiền</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let u of users1; index as i">
+                                            <td>
+                                                {{ i + 1 }}
+                                            </td>
+                                            <td>
+                                                {{u.sdt}}
+                                            </td>
+                                            <td>
+                                                {{u.hoTen}}
+                                            </td>
+                                            <td>
+                                                {{u.tongSoVeNl}}
+                                            </td>
+                                            <td>
+                                                {{u.tongSoVeTe}}
+                                            </td>
+
+                                            <td>
+                                                {{u.tongSoVeTn}}
+                                            </td>
+                                            <td *ngIf="u.trangThai==1" class="confirm">
+                                                <button (click)="confirmBookTour(u.id)">Xác nhận</button>
+                                            </td>
+                                            <td *ngIf="u.trangThai==2" style="color: green;">
+                                                Đã xác nhận
+                                            </td>
+                                            <td>
+                                                {{u.tongTien}}
+                                            </td>
+                                            <!-- <td>
+                          <button type="button" class="btn btn-inverse-info btn-icon" (click)="confirmBookTour(u.id)">
+            <i class="bi bi-eye"></i></button>
+                      </td> -->
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </li>
+        <li [ngbNavItem]="4 ">
+            <a ngbNavLink>Đã xác nhận</a>
+            <ng-template ngbNavContent>
+
+            </ng-template>
+        </li>
+    </ul>
+
+    <div [ngbNavOutlet]="nav " class="mt-2 "></div>
 </div>

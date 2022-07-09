@@ -32,3 +32,10 @@ p {
     outline: 1px solid #E76F51;
     border-radius: 10px;
 }
+
+.confirm button {
+    color: red;
+    border: red;
+    background-color: #fff;
+    box-shadow: 2px 2px 2px 2px opacify($color: #5c5c5c, $amount: 0.2);
+}

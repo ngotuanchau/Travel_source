@@ -23,12 +23,7 @@ export class BangGiaComponent implements OnInit {
     const today = new Date().toLocaleDateString();
     //const thisDay = new Date(this.ngayKh).toLocaleDateString();
     var blank = 0;
-    for (let n of this.ngayKhs) {
-      if (n.ngayKh > today) {
-        blank = n.vedadat;
-        break;
-      }
-    }
+    blank = this.ngayKhs.find((item: any) => item.id == id)?.vedadat;
     return this.minus(vetoida, blank);
   }
 

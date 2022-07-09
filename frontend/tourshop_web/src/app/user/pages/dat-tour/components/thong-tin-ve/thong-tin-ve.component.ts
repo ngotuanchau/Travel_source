@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ToursService } from "../../../../../service/tours.service";
 import { FormField } from "../../model";
 import { HttpClient } from "@angular/common/http";
+import { NgToastService } from "ng-angular-popup";
 @Component({
   selector: "app-thong-tin-ve",
   templateUrl: "./thong-tin-ve.component.html",
@@ -28,13 +29,15 @@ export class ThongTinVeComponent implements OnInit {
   constructor(
     private tourService: ToursService,
     private formBuilder: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private toast: NgToastService
   ) {
     this.form = this.formBuilder.group({
       [FormField.nguoidungid]: [null, [Validators.required]],
       [FormField.tourid]: [null, [Validators.required]],
       [FormField.sovenguoilon]: [1, [Validators.required]],
       [FormField.sovetreem]: [0],
+      [FormField.sovetrenho]: [0],
       [FormField.thoigianid]: [null, [Validators.required]],
       [FormField.tongtien]: [0, [Validators.required]],
     });
@@ -75,13 +78,22 @@ export class ThongTinVeComponent implements OnInit {
     this.form.patchValue({ [FormField.thoigianid]: parseInt(this.ngay) });
     this.form.patchValue({ [FormField.sovenguoilon]: this.nglon });
     this.form.patchValue({ [FormField.sovetreem]: this.trem });
+    this.form.patchValue({ [FormField.sovetrenho]: this.trnho });
     this.form.patchValue({ [FormField.tongtien]: this.tongtien });
     console.log(this.tongtien);
     this.tourService.bookTour(this.form.value).subscribe((response) => {
       if (response != null) {
-        alert("Đặt tour thành công");
+        this.toast.success({
+          detail: "Thông báo",
+          summary: "Đặt tour thành công",
+          duration: 3000,
+        });
       } else {
-        alert("Đặt tour thất bại");
+        this.toast.success({
+          detail: "Cảnh báo",
+          summary: "Đặt tour thất bại",
+          duration: 3000,
+        });
       }
     });
     // this.form.patchValue({ [FormField.tongtien]: this.trnho });

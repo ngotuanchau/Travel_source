@@ -6,21 +6,31 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from "@angular/router";
+import { NgToastService } from "ng-angular-popup";
 import { AuthService } from "../service/auth.service";
-import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root",
 })
 export class AuthGuard implements CanActivate {
-  constructor(private service: AuthService, private route: Router) {}
+  constructor(
+    private service: AuthService,
+    private route: Router,
+    private toast: NgToastService
+  ) {}
   canActivate() {
     if (this.service.IsLoggedIn()) {
       return true;
     } else {
+      this.toast.error({
+        detail: "Cảnh báo",
+        summary: "Bạn chưa đăng nhập",
+        duration: 3000,
+      });
       this.route.navigate(["login"]);
-      return false;
+
       //Neu chua dang nhap thi chuyen huong den trang login
     }
+    return false;
   }
 }
