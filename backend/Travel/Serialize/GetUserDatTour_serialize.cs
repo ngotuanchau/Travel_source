@@ -11,6 +11,7 @@ namespace Travel.Serialize
         public int NguoiDungId { get; set; }
         public int TongSoVeNl { get; set; }
         public int TongSoVeTe { get; set; }
+        public int TongSoVeTn { get; set; }
         public decimal TongTien { get; set; }
         public int TrangThai { get; set; }
         public string HoTen { get; set; }

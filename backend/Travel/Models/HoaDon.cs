@@ -16,7 +16,7 @@ namespace Travel.Models
         public int TongSoVeNl { get; set; }
         public int TongSoVeTe { get; set; }
         public int TongSoVeTn { get; set; }
-        public int TongTien { get; set; }
+        public decimal TongTien { get; set; }
         public DateTime NgayTao { get; set; } = DateTime.Now;
 
         public DateTime NgaySua { get; set; } = DateTime.Now;

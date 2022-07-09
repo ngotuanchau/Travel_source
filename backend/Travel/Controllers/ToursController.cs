@@ -513,7 +513,7 @@ namespace Travel.Controllers
             }
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         [Route("dat_tour")]
         [ActionName("dattour")]
@@ -529,6 +529,7 @@ namespace Travel.Controllers
                 hoaDon.TongSoVeTe = dattour_Serialize.sovetreem;
                 hoaDon.ThoiGianId = dattour_Serialize.thoigianid;
                 hoaDon.TongSoVeTn = dattour_Serialize.sovetrenho;
+                hoaDon.TongTien = dattour_Serialize.tongtien;
                 hoaDon.TrangThai = 1;
                 _context.Add(hoaDon);
                 _context.SaveChanges();
@@ -560,7 +561,7 @@ namespace Travel.Controllers
         }
 
         [Authorize]
-        [Authorize(Roles = "Business")]
+        [Authorize(Roles = "business")]
         [HttpGet]
         [Route("get_user_dattour/{id:int}")]
         [ActionName("get_user_dattour")]
@@ -584,6 +585,7 @@ namespace Travel.Controllers
                     getUserDatTour_Serialize.Sdt = hoadon.NguoiDung.Sdt;
                     getUserDatTour_Serialize.TongSoVeNl = hoadon.TongSoVeNl;
                     getUserDatTour_Serialize.TongSoVeTe = hoadon.TongSoVeTe;
+                    getUserDatTour_Serialize.TongSoVeTn = hoadon.TongSoVeTn;
                     getUserDatTour_Serialize.TongTien = hoadon.TongTien;
                     getUserDatTour_Serialize.TrangThai = hoadon.TrangThai;
 
