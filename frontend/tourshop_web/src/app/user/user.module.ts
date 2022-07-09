@@ -13,8 +13,10 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { NewtoursComponent } from "./pages/newtours/newtours.component";
 import { MatFormFieldModule } from "@angular/material/form-field";
+import { SearchResultComponent } from './pages/search-result/search-result.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 @NgModule({
-  declarations: [NewtoursComponent],
+  declarations: [NewtoursComponent, SearchResultComponent, ProfileComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
