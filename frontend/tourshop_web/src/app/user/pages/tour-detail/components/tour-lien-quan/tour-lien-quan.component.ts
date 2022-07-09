@@ -107,4 +107,22 @@ export class TourLienQuanComponent implements OnInit {
   viewAllNewTours() {
     this.routes.navigate(["/newtours"]);
   }
+  findDateId(id: number) {
+    var nkhs = this.newtours.find(
+      (item: any) => item.id == id
+    )?.nhungNgayKhoiHanh;
+    const today = new Date().toLocaleDateString();
+    //const thisDay = new Date(this.ngayKh).toLocaleDateString();
+    var ngay: any;
+    for (let n of nkhs) {
+      if (n.ngayKh > today) {
+        ngay = n.id;
+        break;
+      }
+    }
+    return ngay;
+  }
+  booking(id: any, ngay: any) {
+    this.routes.navigate(["../booking/" + id + "/" + ngay]);
+  }
 }

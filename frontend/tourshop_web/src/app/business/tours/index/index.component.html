@@ -63,11 +63,11 @@
                                                             {{tr.veToiDa}}
                                                         </td>
                                                         <td>
-                                                            <a [routerLink]="['detail']"><button type="button" class="btn btn-inverse-info btn-icon"
-                                  onclick="">
+                                                            <a [routerLink]="['detail/',tr.id]"><button type="button"
+                                  class="btn btn-inverse-info btn-icon" onclick="">
                                   <i class="bi bi-eye"></i></button></a>
-                                                            <a [routerLink]="['update']"><button type="button" class="btn btn-inverse-info btn-icon"
-                                  onclick="">
+                                                            <a [routerLink]="['update/',tr.id]"><button type="button"
+                                  class="btn btn-inverse-info btn-icon" onclick="">
                                   <i class="bi bi-pen"></i></button></a>
                                                             <button type="button" class="btn btn-inverse-info btn-icon" onclick="">
                                 <i class="bi bi-trash"></i></button>
@@ -76,7 +76,6 @@
                                                 </tbody>
                                             </table>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -84,13 +83,7 @@
                         </ng-template>
                     </li>
                     <li [ngbNavItem]=" 2 ">
-                        <a ngbNavLink>Chưa Khởi hành</a>
-                        <ng-template ngbNavContent>
-
-                        </ng-template>
-                    </li>
-                    <li [ngbNavItem]="3 ">
-                        <a ngbNavLink>Đang khởi hành</a>
+                        <a ngbNavLink>Chưa được duyệt</a>
                         <ng-template ngbNavContent>
 
                         </ng-template>

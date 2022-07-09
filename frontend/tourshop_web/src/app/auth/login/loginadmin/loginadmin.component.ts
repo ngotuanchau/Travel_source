@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthService } from "../../../service/auth.service";
+import { NgToastService } from "ng-angular-popup";
 @Component({
   selector: "app-loginadmin",
   templateUrl: "./loginadmin.component.html",
@@ -15,7 +16,11 @@ export class LoginadminComponent implements OnInit {
   editdata: any;
   resposedata: any;
 
-  constructor(private router: Router, private service: AuthService) {
+  constructor(
+    private router: Router,
+    private service: AuthService,
+    private toast: NgToastService
+  ) {
     localStorage.clear();
   }
   loginForm = new FormGroup({
@@ -28,9 +33,13 @@ export class LoginadminComponent implements OnInit {
   ngOnInit(): void {}
   ProceedLogin() {
     if (this.loginForm.valid) {
-      this.service
-        .proceedLoginAdmin(this.loginForm.value)
-        .subscribe((result) => {
+      this.service.proceedLoginAdmin(this.loginForm.value).subscribe(
+        (result) => {
+          this.toast.success({
+            detail: "Success Message",
+            summary: "Đăng nhập thành công",
+            duration: 3000,
+          });
           if (result != null) {
             this.resposedata = result;
             localStorage.setItem("token", this.resposedata.token);
@@ -40,7 +49,15 @@ export class LoginadminComponent implements OnInit {
             localStorage.setItem("avt", this.resposedata.avt);
             this.router.navigate(["/dashboard"]);
           }
-        });
+        },
+        (err) => {
+          this.toast.error({
+            detail: "Error Message",
+            summary: "Thông tin đăng nhập không hợp lệ",
+            duration: 3000,
+          });
+        }
+      );
     }
   }
 }

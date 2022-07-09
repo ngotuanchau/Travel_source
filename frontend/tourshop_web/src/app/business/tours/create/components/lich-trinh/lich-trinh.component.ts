@@ -67,7 +67,6 @@ export class LichTrinhComponent implements OnInit {
       })
     );
 
-    console.log("Ngày tiếp theo:" + this.ngay);
     this.sort();
   }
 
@@ -75,7 +74,7 @@ export class LichTrinhComponent implements OnInit {
     //Sắp xếp danh sách lịch trình
     var temp = 0;
     for (var i = 0; i < this.lstLT.length; i++) {
-      for (var j = i; j < this.lstLT.length - 1; j++) {
+      for (var j = i; j < this.lstLT.length; j++) {
         if (this.lstLT[j].ngay < this.lstLT[i].ngay) {
           temp = this.lstLT[j];
           this.lstLT[j] = this.lstLT[i];

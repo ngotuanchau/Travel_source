@@ -6,22 +6,39 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from "@angular/router";
+import { NgToastService } from "ng-angular-popup";
 import { AuthService } from "../service/auth.service";
-import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root",
 })
 export class RoleGuard implements CanActivate {
-  constructor(private service: AuthService, private route: Router) {}
+  constructor(
+    private service: AuthService,
+    private route: Router,
+    private toast: NgToastService
+  ) {}
   canActivate() {
     if (this.service.IsLoggedIn()) {
       if (this.service.HaveAccess()) {
         return true;
+      } else {
+        this.toast.error({
+          detail: "Cảnh báo",
+          summary: "Bạn không có quyền truy cập",
+          duration: 3000,
+        });
+        this.route.navigate(["home"]);
+        return false;
       }
-      this.route.navigate(["home"]);
-      return false;
-    } else this.route.navigate(["login"]);
+    } else {
+      this.toast.error({
+        detail: "Cảnh báo",
+        summary: "Bạn không có quyền truy cập",
+        duration: 3000,
+      });
+      this.route.navigate(["login"]);
+    }
     return false;
   }
 }

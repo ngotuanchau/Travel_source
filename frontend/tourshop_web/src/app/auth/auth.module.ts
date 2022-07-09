@@ -10,10 +10,16 @@ import { MatRadioModule } from "@angular/material/radio";
 import { MatSelectModule } from "@angular/material/select";
 import { SignupBusinessComponent } from "./signup/signup-business/signup-business.component";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
-import { LoginadminComponent } from './login/loginadmin/loginadmin.component';
+import { LoginadminComponent } from "./login/loginadmin/loginadmin.component";
+import { NgToastModule } from "ng-angular-popup";
 
 @NgModule({
-  declarations: [LoginComponent, SignupComponent, SignupBusinessComponent, LoginadminComponent],
+  declarations: [
+    LoginComponent,
+    SignupComponent,
+    SignupBusinessComponent,
+    LoginadminComponent,
+  ],
   imports: [
     CommonModule,
     AuthRoutingModule,
@@ -23,6 +29,7 @@ import { LoginadminComponent } from './login/loginadmin/loginadmin.component';
     MatRadioModule,
     MatSelectModule,
     MatSlideToggleModule,
+    NgToastModule,
   ],
 })
 export class AuthModule {}

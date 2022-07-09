@@ -2,11 +2,10 @@ import { NONE_TYPE } from "@angular/compiler";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, NgForm, Validators } from "@angular/forms";
 import { Router, RouterLink } from "@angular/router";
-import { NgbNavChangeEvent } from "@ng-bootstrap/ng-bootstrap";
-import { EMPTY } from "rxjs";
-import { CongTy } from "../../models/congty.model";
 import { NguoiDung } from "../../models/nguoidung.model";
 import { SignUpsService } from "../../service/signups.service";
+
+import { NgToastService } from "ng-angular-popup";
 @Component({
   selector: "app-signup",
   templateUrl: "./signup.component.html",
@@ -34,7 +33,8 @@ export class SignupComponent implements OnInit {
   constructor(
     private signupService: SignUpsService,
     private routes: Router,
-    private signUpForm: FormBuilder
+    private signUpForm: FormBuilder,
+    private toast: NgToastService
   ) {}
 
   infoUser = this.signUpForm.group({
@@ -51,23 +51,37 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
-    this.signupService.signUpUser(this.nguoiDung).subscribe((response) => {
-      this.nguoiDung = {
-        tenNguoiDung: "",
-        email: "",
-        matKhau: "",
-        cmnd: "",
-        sdt: "",
-        avt: "test.jpg",
-        hoTen: "",
-        ngayTao: this.Date,
-        ngaySua: this.Date,
-        trangThai: 0,
-        isAdmin: false,
-        id: 0,
-      };
-    });
-    this.routes.navigate(["/login"]);
+    this.signupService.signUpUser(this.nguoiDung).subscribe(
+      (response) => {
+        this.toast.success({
+          detail: "Thông báo",
+          summary: "Đăng ký Khách hàng thành công",
+          duration: 3000,
+        });
+        this.nguoiDung = {
+          tenNguoiDung: "",
+          email: "",
+          matKhau: "",
+          cmnd: "",
+          sdt: "",
+          avt: "test.jpg",
+          hoTen: "",
+          ngayTao: this.Date,
+          ngaySua: this.Date,
+          trangThai: 0,
+          isAdmin: false,
+          id: 0,
+        };
+        this.routes.navigate(["/login"]);
+      },
+      (err) => {
+        this.toast.error({
+          detail: "Cảnh báo",
+          summary: "Thông tin đăng ký không hợp lệ",
+          duration: 3000,
+        });
+      }
+    );
   }
   closeAlert() {
     this.alert = false;

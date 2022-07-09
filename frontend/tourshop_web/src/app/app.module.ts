@@ -27,6 +27,7 @@ import { BusinessComponent } from "./layouts/business/business.component";
 import { SidebarBusinessComponent } from "./shared/sidebar-business/sidebar.component";
 import { CookieService } from "ngx-cookie-service";
 import { TokenInterceptorService } from "./service/token-interceptor.service";
+import { NgToastModule } from "ng-angular-popup";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -56,6 +57,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
+    NgToastModule,
     RouterModule.forRoot(Approutes, {
       useHash: false,
       relativeLinkResolution: "legacy",

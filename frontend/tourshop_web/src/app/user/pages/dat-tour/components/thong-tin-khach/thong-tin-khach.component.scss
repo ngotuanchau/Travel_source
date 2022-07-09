@@ -1,0 +1,99 @@
+.ftco-about {
+    margin: 0px;
+    margin-top: 20px;
+}
+
+.ftco-about .col-6:nth-child(1) {
+    padding: 2% 2% 2% 0px;
+    width: 50%;
+}
+
+.ftco-about .col-6:nth-child(2) {
+    padding: 2% 0px 2% 2%;
+    width: 50%;
+}
+
+.img-box {
+    padding: 20px;
+    box-shadow: 2px 2px 2px 2px opacify($color: #5c5c5c, $amount: 0.2);
+    margin-bottom: 20px;
+}
+
+.img-child {
+    width: 22%;
+}
+
+.flex-gap {
+    margin-top: 20px;
+}
+
+.cut_string4 {
+    max-height: 200px;
+}
+
+.heading-section {
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #000;
+    font-size: 40px;
+    line-height: 1.1;
+}
+
+.body-section {
+    color: #000;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
+
+.body-section ul li {
+    margin-top: 20px;
+}
+
+.body-section ul li span {
+    font-weight: bold;
+}
+
+//Form
+.form-in {
+    padding: 20px;
+    box-shadow: 2px 2px 2px 2px opacify($color: #5c5c5c, $amount: 0.2);
+}
+
+.form-in h2 {
+    text-align: center;
+    color: #000;
+    font-weight: bold;
+}
+
+.thong-tin input {
+    width: 25%;
+    text-align: center;
+    box-shadow: 2px 2px 2px 2px opacify($color: #5c5c5c, $amount: 0.2);
+    background: #fff;
+}
+
+.thong-tin button {
+    box-shadow: 2px 2px 2px 2px opacify($color: #5c5c5c, $amount: 0.2);
+    border: #E76F51 2px solid;
+    color: #E76F51;
+    font-weight: bold;
+    background: #fff;
+}
+
+.email input {
+    width: 100%;
+}
+
+// .form-in label {
+//     margin-right: 5px;
+// }
+@media (max-width:768px) {
+    .ftco-about .col-6:nth-child(1),
+    .ftco-about .col-6:nth-child(2) {
+        width: 100%;
+    }
+}

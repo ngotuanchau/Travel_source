@@ -45,4 +45,21 @@ export class ToursService {
   getDetailTour(id: any): Observable<Tour> {
     return this.http.get<Tour>(this.baseUrl + "/get_a_tour/" + id);
   }
+
+  //Book tour
+  bookTour(tour: any): Observable<any> {
+    return this.http.post<any>(this.baseUrl + "/dat_tour", tour);
+  }
+  //get user
+  getUserByIdTour(id: any): Observable<any> {
+    return this.http.get<any>(this.baseUrl + "/get_user_dattour/" + id);
+  }
+  //get all tour of business by id business
+  getAllTourBusinessId(id: any): Observable<any> {
+    return this.http.get<any>(this.baseUrl + "/get_all_tour_bussiness/" + id);
+  }
+  //confirm user book tour
+  confirmBookTour(id: any): Observable<any> {
+    return this.http.get<any>(this.baseUrl + "/confirm_user_dattour/" + id);
+  }
 }

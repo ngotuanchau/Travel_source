@@ -1,15 +1,21 @@
 .ftco-about {
-    margin: 0 25px;
+    margin: 0px;
+    margin-top: 20px;
 }
 
-.ftco-about .one-half {
-    padding: 10px 2%;
+.ftco-about .col-6:nth-child(1) {
+    padding: 2% 2% 2% 0px;
+    width: 50%;
+}
+
+.ftco-about .col-6:nth-child(2) {
+    padding: 2% 0px 2% 2%;
     width: 50%;
 }
 
 .img-box {
     padding: 20px;
-    background: #FAF0EE;
+    box-shadow: 2px 2px 2px 2px opacify($color: #5c5c5c, $amount: 0.2);
     margin-bottom: 20px;
 }
 
@@ -30,7 +36,7 @@
 }
 
 h1 {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     color: #000;
     font-size: 40px;
@@ -39,7 +45,7 @@ h1 {
 
 .body-section {
     color: #000;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
 }
 
@@ -51,218 +57,9 @@ h1 {
     font-weight: bold;
 }
 
-.gia-tour,
-.dieu-kien {
-    padding: 20px;
-    background: #FAF0EE;
-    border-radius: 10px;
-}
-
-.dk-title {
-    text-align: center;
-    font-weight: bold;
-    color: #E76F51;
-}
-
-.dieu-kien ul li {
-    color: #E76F51;
-}
-
-.dieu-kien ul li p {
-    color: #000;
-}
-
-table,
-th,
-td {
-    border: none;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-td {
-    padding: 10px 0px;
-}
-
-.td-r {
-    text-align: right;
-}
-
-.gia-tour {
-    align-items: center;
-    color: #000;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 20px;
-}
-
-.gt-title {
-    text-align: center;
-    font-weight: bold;
-    color: #E76F51;
-}
-
-.box-button {
-    padding: 20px;
-}
-
-.box-button button {
-    width: 47%;
-    padding: 20px;
-    text-align: center;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 16px;
-    border: #E76F51 3px solid;
-}
-
-.box-button button:nth-child(1) {
-    border-radius: 25px;
-    background: #fff;
-    color: #E76F51;
-}
-
-.box-button button:nth-child(2) {
-    border-radius: 25px;
-    background: #E76F51;
-    color: #fff;
-}
-
-//Form
-.ftco-section {
-    padding: 1em 0;
-    position: relative;
-}
-
-.box-left {
-    width: 59%;
-    margin-right: 2%;
-}
-
-.box-right {
-    width: 39%;
-}
-
-.box-left,
-.box-right {
-    background: #FAF0EE;
-    border-radius: 15px;
-    padding: 20px 50px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.box-right {
-    padding: 20px;
-}
-
-.gt-title-f {
-    font-size: 26px;
-    text-align: center;
-    font-weight: bold;
-    color: #E76F51;
-}
-
-form {
-    margin-top: 20px;
-}
-
-.form-control {
-    padding: 0px;
-    height: 40px !important;
-    border: 1px solid #E76F51;
-    border-radius: 15px;
-}
-
-.form-group {
-    margin-bottom: 0px;
-}
-
-.sub-title {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 16px;
-    font-weight: bold;
-    color: #E76F51;
-}
-
-.tong {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 16px;
-}
-
-.tong span {
-    font-weight: bold;
-}
-
-.hk {
-    background: #C4C4C4;
-    color: #000;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 16px;
-    border-radius: 15px;
-}
-
-.box-left table {
-    border-collapse: separate;
-    border-spacing: 100px 0px;
-}
-
-.minus,
-.plus {
-    width: 30px;
-    height: 30px;
-    background: #fff;
-}
-
-td label {
-    margin: 0px 10px;
-}
-
-textarea {
-    border-radius: 15px;
-    border: #E76F51 1px solid;
-}
-
-.box-right .ftco-about {
-    margin: 0 0px;
-    margin-bottom: 10px;
-}
-
-.box-right .th-gian span {
-    font-weight: bold;
-}
-
-.box-right table {
-    background: #fff;
-    border-spacing: 20px 0px;
-    border-collapse: separate;
-    border-radius: 15px;
-}
-
-.txt-right {
-    text-align: right;
-}
-
-.txt-center {
-    text-align: center;
-}
-
-.box-right table .tong td span {
-    font-weight: bold;
-}
-
-.tong-hd {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 16px;
-    margin: 15px 0px;
-}
-
-.bold {
-    font-weight: bold;
-}
-
-.btn-dat button {
-    padding: 10px 30px;
-    border-radius: 25px;
-    background: #E76F51;
-    color: #fff;
-    border: #E76F51 1px solid;
+@media (max-width:768px) {
+    .ftco-about .col-6:nth-child(1),
+    .ftco-about .col-6:nth-child(2) {
+        width: 100%;
+    }
 }

@@ -8,12 +8,17 @@ import {
 } from "@angular/router";
 import { AuthService } from "../service/auth.service";
 import { Observable } from "rxjs";
+import { NgToastService } from "ng-angular-popup";
 
 @Injectable({
   providedIn: "root",
 })
 export class RoleadminGuard implements CanActivate {
-  constructor(private service: AuthService, private route: Router) {}
+  constructor(
+    private service: AuthService,
+    private route: Router,
+    private toast: NgToastService
+  ) {}
   canActivate() {
     if (this.service.IsLoggedIn()) {
       if (this.service.HaveAccessAdmin()) {
@@ -21,7 +26,15 @@ export class RoleadminGuard implements CanActivate {
       }
       this.route.navigate(["home"]);
       return false;
-    } else this.route.navigate(["login_admin"]);
+    } else {
+      this.toast.error({
+        detail: "Cảnh báo",
+        summary: "Bạn không có quyền truy cập",
+        duration: 3000,
+      });
+      this.route.navigate(["login"]);
+    }
+
     return false;
   }
 }

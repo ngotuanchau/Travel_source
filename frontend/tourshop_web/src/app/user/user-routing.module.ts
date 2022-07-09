@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { AuthGuard } from "../guard/auth.guard";
 import { DatTourComponent } from "./pages/dat-tour/dat-tour.component";
 import { NewtoursComponent } from "./pages/newtours/newtours.component";
 import { TourDetailComponent } from "./pages/tour-detail/tour-detail.component";
@@ -27,9 +28,10 @@ const routes: Routes = [
     data: { title: "Chi tiết tour" },
   },
   {
-    path: "booking",
+    path: "booking/:id/:id2",
     component: DatTourComponent,
     data: { title: "Đặt tour" },
+    canActivate: [AuthGuard],
   },
 ];
 

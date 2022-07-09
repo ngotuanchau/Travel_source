@@ -1,19 +1,19 @@
 import { Component } from "@angular/core";
 import { NgbNavChangeEvent } from "@ng-bootstrap/ng-bootstrap";
 import { TheloaisService } from "../../../service/theloais.service";
-import { Tour } from "../../../models/tour.model";
 import { ToursService } from "../../../service/tours.service";
 import { DiadiemsService } from "../../../service/diadiems.service";
 
 @Component({
   selector: "app-tours",
   templateUrl: "index.component.html",
-  styleUrls: ["index.component.css"],
+  styleUrls: ["index.component.scss"],
 })
 export class ToursIndexComponent {
   tours: any;
   getAllTours() {
-    this.tourservice.getAllTour().subscribe((response) => {
+    const id = localStorage.getItem("id");
+    this.tourservice.getAllTourBusinessId(id).subscribe((response) => {
       this.tours = response;
       console.log(this.tours);
     });

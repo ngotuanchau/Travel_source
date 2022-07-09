@@ -5,6 +5,7 @@ import { DiadiemsService } from "../../../../service/diadiems.service";
 @Component({
   selector: "app-diadiems",
   templateUrl: "index.component.html",
+  styleUrls: ["index.component.css"],
 })
 export class DiaDiemsIndexComponent implements OnInit {
   constructor(private diadiemService: DiadiemsService) {}

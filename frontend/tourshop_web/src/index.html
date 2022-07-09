@@ -26,16 +26,22 @@
 
     <link rel="stylesheet" href="assets/web/css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="assets/web/css/jquery.timepicker.css">
+
+    <!--Popup-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- List tour -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> -->
     <!-- end lIST TOUR -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,400i|Nunito:300,300i" rel="stylesheet">
     <link rel="stylesheet" href="assets/web/css/flaticon.css">
     <link rel="stylesheet" href="assets/web/css/icomoon.css">
     <link rel="stylesheet" href="assets/web/css/style.css">
+    <link rel="stylesheet" href="assets/web/css/css/slide.css">
+    <!-- Slide -->
+
     <style>
         #myBtn {
             display: none;
@@ -52,7 +58,7 @@
             padding: 5px;
             border-radius: 4px;
         }
-        
+
         #myBtn:hover {
             background-color: #555;
         }
@@ -79,6 +85,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
     <script src="assets/web/js/google-map.js"></script>
     <script src="assets/web/js/main.js"></script>
+    <script src="assets/web/js/slide.min.js"></script>
     <script>
         //Get the button
         var mybutton = document.getElementById("myBtn");
@@ -101,6 +108,38 @@
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
         }
+    </script>
+    <!-- <script type="text/javascript">
+        var slide_index = 1;
+        displaySlides(slide_index);
+
+        function nextSlide(n) {
+            console.log('Next Ok');
+            displaySlides(slide_index += n);
+        }
+
+        function currentSlide(n) {
+            displaySlides(slide_index = n);
+        }
+
+        function displaySlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("showSlide");
+            if (n > slides.length) {
+                slide_index = 1
+            }
+            if (n < 1) {
+                slide_index = slides.length
+            }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[slide_index - 1].style.display = "block";
+
+        }
+    </script> -->
+
+    <script>
     </script>
 </body>
 

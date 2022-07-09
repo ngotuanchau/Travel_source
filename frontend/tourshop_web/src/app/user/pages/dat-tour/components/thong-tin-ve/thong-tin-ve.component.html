@@ -1,0 +1,59 @@
+<form [formGroup]="form">
+    <div class="row mb-4">
+        <div class="col-6 img max-width">
+            <img src="http://localhost:3000/{{tour.anhtour}}">
+        </div>
+        <div class="col-6">
+            <div class="heading-section">
+                <div class="cut_string4">
+                    <h3 class="bill-title">{{tour.tentour}}
+                    </h3>
+                </div>
+            </div>
+            <div class="th-gian">
+                <p>Khởi hành: <span>{{findDateDisplay(this.ngay)}}</span></p>
+                <p>Tại: <span>{{tour.tendiemdi}}</span></p>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="row mb-4">
+            <div class="col-3">Tổng:<span> {{tongVe}} người</span></div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-3"></div>
+            <div class="col-3">Số lượng</div>
+            <div class="col-3">Đơn giá</div>
+            <div class="col-3">Thành tiền</div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-3">Người lớn</div>
+            <div class="col-3">X{{nglon}}</div>
+            <div class="col-3">{{gianl}}</div>
+            <div class="col-3">{{multi(nglon,gianl)}}</div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-3">Trẻ em</div>
+            <div class="col-3">X{{trem}}</div>
+            <div class="col-3">{{giatrem}}</div>
+            <div class="col-3">{{multi(trem,giatrem)}}</div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-3">Trẻ nhỏ</div>
+            <div class="col-3">X{{trnho}}</div>
+            <div class="col-3">{{giatrnho}}</div>
+            <div class="col-3">{{multi(trnho,giatrnho)}}</div>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="row mb-4">
+            <div class="col-9">Thành tiền</div>
+            <div class="col-3">{{plus(multi(nglon,gianl),multi(trem,giatrem),multi(trnho,giatrnho))}}</div>
+        </div>
+    </div>
+    <div class="row button">
+        <div class="col-4"></div>
+        <div class="col-4"><button type="submit" (click)="onSubmit()">Đặt vé</button></div>
+        <div class="col-4"></div>
+    </div>
+</form>

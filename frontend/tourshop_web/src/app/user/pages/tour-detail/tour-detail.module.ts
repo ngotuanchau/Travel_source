@@ -5,13 +5,16 @@ import { LichTrinhChiTietComponent } from "./components/lich-trinh-chi-tiet/lich
 import { BangGiaComponent } from "./components/bang-gia/bang-gia.component";
 import { TourLienQuanComponent } from "./components/tour-lien-quan/tour-lien-quan.component";
 import { MatButtonModule } from "@angular/material/button";
+import { AnhTourComponent } from "./components/anh-tour/anh-tour.component";
+import { SlickCarouselModule } from "ngx-slick-carousel";
 @NgModule({
   declarations: [
     TourDetailComponent,
     LichTrinhChiTietComponent,
     BangGiaComponent,
     TourLienQuanComponent,
+    AnhTourComponent,
   ],
-  imports: [CommonModule, MatButtonModule],
+  imports: [CommonModule, MatButtonModule, SlickCarouselModule],
 })
 export class TourDetailModule {}

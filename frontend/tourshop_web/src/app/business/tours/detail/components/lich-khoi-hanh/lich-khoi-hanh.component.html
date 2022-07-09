@@ -1,0 +1,63 @@
+<div class="row">
+    <!-- ==================================-->
+    <!-- ======= Basic Nav ===== -->
+    <!-- ==================================-->
+
+    <div class="card">
+        <div class="p-3">
+            <h4 class="card-title mb-0">Lịch khởi hành</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <div class="table-lt">
+                    <table class="table table-bordered align-middle text-nowrap">
+                        <thead>
+                            <tr>
+                                <th class="text-dark font-medium fs-4">STT</th>
+                                <th class="text-dark font-medium fs-4">Ngày</th>
+                                <th class="text-dark font-medium fs-4">Giá Người lớn</th>
+                                <th class="text-dark font-medium fs-4">Giá Trẻ em</th>
+                                <th class="text-dark font-medium fs-4">Giá Trẻ nhỏ</th>
+                                <th class="text-dark font-medium fs-4">Số vé đã đặt</th>
+                                <th class="text-dark font-medium fs-4"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let tr of lichKH; index as i">
+                                <td>
+                                    {{ i + 1 }}
+                                </td>
+                                <td>
+                                    <p>{{this.pipe.transform(tr.ngayKh, "dd/MM/yyyy")}}
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>{{tr.giaNguoiLon}}
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>{{tr.giaTreEn}}</p>
+                                </td>
+                                <td>
+                                    <p>{{tr.giaTreNho}}</p>
+                                </td>
+                                <td>
+                                    <p>{{tr.vedadat}}</p>
+                                </td>
+                                <td>
+                                    <a [routerLink]="['detail']"><button type="button" class="btn btn-inverse-info btn-icon" onclick="">
+                      <i class="bi bi-eye"></i></button></a>
+                                    <a [routerLink]="['../../khach-dat-tour/',tr.id]"><button type="button"
+                      class="btn btn-inverse-info btn-icon" onclick="">
+                      <i class="bi bi-person-fill"></i></button></a>
+                                    <button type="button" class="btn btn-inverse-info btn-icon" onclick="">
+                    <i class="bi bi-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

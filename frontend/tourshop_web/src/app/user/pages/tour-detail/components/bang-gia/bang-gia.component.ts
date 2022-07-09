@@ -12,30 +12,25 @@ export class BangGiaComponent implements OnInit {
   @Input() ngayKhs: any;
   constructor(private routes: Router) {}
   pipe = new DatePipe("en-US");
-  today = new Date().toLocaleDateString();
   formatDate(ngay: any) {
     var day;
     return (day = new Date(ngay).toLocaleDateString());
   }
-  ngOnInit(): void {}
-  disable: false;
+  ngOnInit(): void {
+    const today = new Date().toLocaleDateString();
+  }
   findBlankDisplay(id: number, vetoida: number): number {
     const today = new Date().toLocaleDateString();
     //const thisDay = new Date(this.ngayKh).toLocaleDateString();
     var blank = 0;
-    for (let n of this.ngayKhs) {
-      if (n.ngayKh > today) {
-        blank = n.vedadat;
-        break;
-      }
-    }
+    blank = this.ngayKhs.find((item: any) => item.id == id)?.vedadat;
     return this.minus(vetoida, blank);
   }
 
   minus(a: number, b: number) {
     return a - b;
   }
-  datNgay() {
-    this.routes.navigate(["../booking"]);
+  booking(id: any, ngay: any) {
+    this.routes.navigate(["../booking/" + id + "/" + ngay]);
   }
 }
