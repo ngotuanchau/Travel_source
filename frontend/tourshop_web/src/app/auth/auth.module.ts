@@ -12,6 +12,7 @@ import { SignupBusinessComponent } from "./signup/signup-business/signup-busines
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { LoginadminComponent } from "./login/loginadmin/loginadmin.component";
 import { NgToastModule } from "ng-angular-popup";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [

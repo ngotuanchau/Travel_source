@@ -1,5 +1,4 @@
-import { NONE_TYPE } from "@angular/compiler";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { FormBuilder, FormControl, NgForm, Validators } from "@angular/forms";
 import { Router, RouterLink } from "@angular/router";
 import { NguoiDung } from "../../models/nguoidung.model";

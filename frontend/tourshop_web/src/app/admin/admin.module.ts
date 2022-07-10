@@ -1,17 +1,15 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
-import { AdminRoutingModule } from './admin-routing.module';
-import { ToursModule } from './pages/tours/tours.module';
-import { DashboardModule } from './dashboard/dashboard.module';
-import { DiaDiemsModule } from './pages/diadiems/diadiems.module';
-import { NguoiDungsModule } from './pages/nguoidungs/nguoidungs.module';
-import { CongTysModule } from './pages/congtys/congtys.module';
-
+import { AdminRoutingModule } from "./admin-routing.module";
+import { ToursModule } from "./pages/tours/tours.module";
+import { DashboardModule } from "./dashboard/dashboard.module";
+import { DiaDiemsModule } from "./pages/diadiems/diadiems.module";
+import { NguoiDungsModule } from "./pages/nguoidungs/nguoidungs.module";
+import { CongTysModule } from "./pages/congtys/congtys.module";
 
 @NgModule({
-  declarations: [
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     AdminRoutingModule,
@@ -19,7 +17,7 @@ import { CongTysModule } from './pages/congtys/congtys.module';
     DashboardModule,
     DiaDiemsModule,
     NguoiDungsModule,
-    CongTysModule
-  ]
+    CongTysModule,
+  ],
 })
-export class AdminModule { }
+export class AdminModule {}

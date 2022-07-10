@@ -166,7 +166,7 @@ export class ToursCreateComponent {
               });
           });
         }
-        this.toast.error({
+        this.toast.success({
           detail: "Thông báo",
           summary: "Tạo Tour thành công",
           duration: 3000,

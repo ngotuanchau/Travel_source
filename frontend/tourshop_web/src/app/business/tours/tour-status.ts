@@ -13,7 +13,7 @@ export const lstStatus: Status[] = [
   },
   {
     id: 3,
-    name: "Đã khởi hành",
+    name: "Đang khởi hành",
   },
   {
     id: 4,
