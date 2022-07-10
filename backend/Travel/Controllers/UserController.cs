@@ -116,7 +116,7 @@ namespace Travel.Controllers
                 NguoiDung nguoiDung = _context.NguoiDungs.Where(u => u.TrangThai != 0 && u.Id == id).FirstOrDefault();
                 if (nguoiDung == null)
                 {
-                    return StatusCode(404, "Tour not found");
+                    return StatusCode(404, "User not found");
                 }
                 User_serialize user_Serialize = new User_serialize();
                 user_Serialize.Id = nguoiDung.Id;
