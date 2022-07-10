@@ -455,6 +455,7 @@ namespace Travel.Controllers
                     nhungNgayKhoiHanh.GiaTreEn = tg.GiaTreEm;
                     nhungNgayKhoiHanh.GiaTreNho = tg.GiaTreNho;
                     nhungNgayKhoiHanh.Vedadat = tg.VeDaDat;
+                    nhungNgayKhoiHanh.TrangThai = tg.TrangThai;
                     nhungNgayKhoiHanhs.Add(nhungNgayKhoiHanh);
                 }
                 tour_Serialize.NhungNgayKhoiHanh = nhungNgayKhoiHanhs;
