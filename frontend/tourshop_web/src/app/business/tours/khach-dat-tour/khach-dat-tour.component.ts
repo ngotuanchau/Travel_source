@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { ToursService } from "../../../service/tours.service";
 import { NgbNavChangeEvent } from "@ng-bootstrap/ng-bootstrap";
+import { Status, lstStatus } from "../hoadon-status";
 
 @Component({
   selector: "app-khach-dat-tour",
@@ -13,6 +14,7 @@ export class KhachDatTourComponent implements OnInit {
   users: any;
   users1: any;
   users2: any;
+  hoadonStatus: Status[];
   constructor(
     private tourservice: ToursService,
     private activatedRoute: ActivatedRoute
@@ -20,6 +22,7 @@ export class KhachDatTourComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserByIdNHK();
+    this.hoadonStatus = lstStatus;
   }
   //Lấy danh sách Khách hàng Đặt Tour
   getUserByIdNHK() {
@@ -30,12 +33,25 @@ export class KhachDatTourComponent implements OnInit {
       this.users = response;
     });
   }
+  //Xác nhận
   confirmBookTour(id: any) {
     this.tourservice.confirmBookTour(id).subscribe((res) => {
       if (res.message == "Success") {
         this.getUserByIdNHK();
       }
     });
+  }
+  //Thanh toán
+  confirmThanhToan(id: any) {
+    this.tourservice.confirmThanhToan(id).subscribe((res) => {
+      if (res.message == "Success") {
+        this.getUserByIdNHK();
+      }
+    });
+  }
+  //Get status name by id
+  getStatus(id: number) {
+    return this.hoadonStatus.find((item: any) => item.id == id)?.name;
   }
 
   //Nav

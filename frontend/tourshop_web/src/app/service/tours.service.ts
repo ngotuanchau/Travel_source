@@ -58,8 +58,28 @@ export class ToursService {
   getAllTourBusinessId(id: any): Observable<any> {
     return this.http.get<any>(this.baseUrl + "/get_all_tour_bussiness/" + id);
   }
+  //Tour prepare
+  prepare(id: any): Observable<any> {
+    return this.http.get<any>(this.baseUrl + "/confirm_tour_prepare/" + id);
+  }
+  //Tour start
+  start(id: any): Observable<any> {
+    return this.http.get<any>(this.baseUrl + "/confirm_tour_start/" + id);
+  }
+  //Tour end
+  end(id: any): Observable<any> {
+    return this.http.get<any>(this.baseUrl + "/confirm_tour_end/" + id);
+  }
+  //Tour cancel
+  cancel(id: any): Observable<any> {
+    return this.http.get<any>(this.baseUrl + "/tour_cancel/" + id);
+  }
   //confirm user book tour
   confirmBookTour(id: any): Observable<any> {
     return this.http.get<any>(this.baseUrl + "/confirm_user_dattour/" + id);
+  }
+  //confirm thanh toan
+  confirmThanhToan(id: any): Observable<any> {
+    return this.http.get<any>(this.baseUrl + "/confirm_user_thanhtoan/" + id);
   }
 }
