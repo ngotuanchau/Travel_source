@@ -561,7 +561,7 @@ namespace Travel.Controllers
         }
 
         [Authorize]
-        [Authorize(Roles = "business")]
+        [Authorize(Roles = "Business")]
         [HttpGet]
         [Route("get_user_dattour/{id:int}")]
         [ActionName("get_user_dattour")]
@@ -583,6 +583,7 @@ namespace Travel.Controllers
                     getUserDatTour_Serialize.HoTen = hoadon.NguoiDung.HoTen;
                     getUserDatTour_Serialize.NguoiDungId = hoadon.NguoiDungId;
                     getUserDatTour_Serialize.Sdt = hoadon.NguoiDung.Sdt;
+                    getUserDatTour_Serialize.email = hoadon.NguoiDung.Email;
                     getUserDatTour_Serialize.TongSoVeNl = hoadon.TongSoVeNl;
                     getUserDatTour_Serialize.TongSoVeTe = hoadon.TongSoVeTe;
                     getUserDatTour_Serialize.TongSoVeTn = hoadon.TongSoVeTn;
