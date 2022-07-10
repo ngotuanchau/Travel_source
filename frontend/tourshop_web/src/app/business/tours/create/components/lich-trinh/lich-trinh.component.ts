@@ -47,14 +47,14 @@ export class LichTrinhComponent implements OnInit {
     }
 
     //Lấy danh sách ngày
-    let ngays = [];
+    let ngays: any;
     for (let i = 0; i < this.lstLT.length; i++) {
       ngays.push(this.lstLT[i].ngay);
     }
     //console.log("Danh sách ngày:" + ngays);
     //Ngày còn thiếu
     function missingItems(arr: any, n: any) {
-      let missingItems = [];
+      let missingItems: any;
       for (let i = 1; i <= n; i++) if (!arr.includes(i)) missingItems.push(i);
       return missingItems;
     }
@@ -93,14 +93,14 @@ export class LichTrinhComponent implements OnInit {
       this.disable = false;
     }
     //Lấy danh sách ngày
-    let ngays = [];
+    let ngays: any;
     for (let i = 0; i < this.lstLT.length; i++) {
       ngays.push(this.lstLT[i].ngay);
     }
     //console.log("Danh sách ngày:" + ngays);
     //Ngày còn thiếu
     function missingItems(arr: any, n: any) {
-      let missingItems = [];
+      let missingItems: any;
       for (let i = 1; i <= n; i++) if (!arr.includes(i)) missingItems.push(i);
       return missingItems;
     }

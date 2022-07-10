@@ -6,13 +6,7 @@
             </div>
             <div class="col-md-6 col-lg-5 d-flex align-items-center">
                 <div class="card-body p-4 p-lg-5 text-black">
-                    <!--Đăng ký thành công-->
-                    <div *ngIf="isSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>Thông tin đăng nhập không đúng!</strong>
-                        <button (click)="closeAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-                    </div>
+
                     <form ngForm="loginForm" [formGroup]="loginForm" (ngSubmit)="ProceedLogin()" autocomplete="off">
                         <div class="d-flex align-items-center mb-3 pb-1">
                             <i class="bi bi-building"></i>

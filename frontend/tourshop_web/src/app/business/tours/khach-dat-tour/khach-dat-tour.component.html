@@ -18,6 +18,7 @@
                                             <th class="text-dark font-medium fs-4">Vé trẻ em</th>
                                             <th class="text-dark font-medium fs-4">Vé trẻ nhỏ</th>
                                             <th class="text-dark font-medium fs-4">Trạng thái</th>
+                                            <th class="text-dark font-medium fs-4">Cập nhật</th>
                                             <th class="text-dark font-medium fs-4">Tổng tiền</th>
                                         </tr>
                                     </thead>
@@ -42,11 +43,15 @@
                                             <td>
                                                 {{u.tongSoVeTn}}
                                             </td>
+                                            <td>
+                                                {{getStatus(u.trangThai)}}
+                                            </td>
+                                            <td *ngIf="u.trangThai!=1 && u.trangThai!=2"> </td>
                                             <td *ngIf="u.trangThai==1" class="confirm">
                                                 <button (click)="confirmBookTour(u.id)">Xác nhận</button>
                                             </td>
-                                            <td *ngIf="u.trangThai==2" style="color: green;">
-                                                Đã xác nhận
+                                            <td *ngIf="u.trangThai==2" class="confirm">
+                                                <button (click)="confirmThanhToan(u.id)">Thanh toán</button>
                                             </td>
                                             <td>
                                                 {{u.tongTien}}

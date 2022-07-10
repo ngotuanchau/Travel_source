@@ -6,13 +6,6 @@
             </div>
             <div class="col-md-6 col-lg-5 d-flex align-items-center">
                 <div class="card-body p-4 p-lg-5 text-black">
-                    <!--Đăng ký thành công-->
-                    <!-- <div *ngIf="alert" class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>Đăng ký thành công!</strong>
-                        <button (click)="closeAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-                    </div> -->
                     <mat-tab-group mat-align-tabs="start">
                         <mat-tab label="Khách hàng">
                             <form (ngSubmit)="onSubmit()" [formGroup]="infoUser" #form="ngForm">
@@ -25,6 +18,7 @@
 
                                     <div class="form-outline">
                                         <label class="form-label" for="form2Example1">Username</label>
+                                        <!-- [ngModelOptions]="{ standalone: true }" -->
                                         <input type="text" for="tenNguoiDung" formControlName="tenNguoiDung" [(ngModel)]="nguoiDung.tenNguoiDung" class="form-control" />
                                         <div *ngIf="f.tenNguoiDung.invalid && (f.tenNguoiDung.dirty||f.tenNguoiDung.touched)">
                                             <div *ngIf="f.tenNguoiDung.errors">
@@ -126,7 +120,6 @@
                             <app-signup-business></app-signup-business>
                         </mat-tab>
                     </mat-tab-group>
-
                 </div>
             </div>
         </div>

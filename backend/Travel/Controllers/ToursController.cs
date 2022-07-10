@@ -445,7 +445,7 @@ namespace Travel.Controllers
 
                 // Get List Thoi Gian
                 List<NhungNgayKhoiHanh> nhungNgayKhoiHanhs = new List<NhungNgayKhoiHanh>();
-                List<ThoiGian> thoiGians = _context.ThoiGians.Where(p => p.TourId == tour.Id && p.TrangThai == 1).ToList();
+                List<ThoiGian> thoiGians = _context.ThoiGians.Where(p => p.TourId == tour.Id).ToList();
                 foreach (var tg in thoiGians)
                 {
                     NhungNgayKhoiHanh nhungNgayKhoiHanh = new NhungNgayKhoiHanh();
