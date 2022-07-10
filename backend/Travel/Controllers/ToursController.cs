@@ -573,7 +573,7 @@ namespace Travel.Controllers
                 List<HoaDon> hoaDons = _context.HoaDons.Include(h => h.NguoiDung).Include(t => t.Tour).Where(t => t.TrangThai > 0 && t.ThoiGianId == id).ToList();
                 if (hoaDons.Count == 0)
                 {
-                    return StatusCode(404, "Tour not found");
+                    return StatusCode(404, "Hoa don not found");
                 }
                 // Get information tour
                 foreach (var hoadon in hoaDons)
@@ -613,10 +613,10 @@ namespace Travel.Controllers
         {
             try
             {
-                HoaDon hoaDon = _context.HoaDons.Include(h => h.NguoiDung).Include(t => t.Tour).Where(t => t.TrangThai > 0 && t.Id == id).FirstOrDefault();
+                HoaDon hoaDon = _context.HoaDons.Include(h => h.NguoiDung).Include(t => t.Tour).Where(t => t.TrangThai == 1 && t.Id == id).FirstOrDefault();
                 if (hoaDon == null)
                 {
-                    return StatusCode(404, "Tour not found");
+                    return StatusCode(404, "Hoa don not found");
                 }
 
                 hoaDon.TrangThai = 2;
@@ -628,6 +628,170 @@ namespace Travel.Controllers
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+        [Authorize]
+        [Authorize(Roles = "Business")]
+        [HttpGet]
+        [Route("confirm_user_thanhtoan/{id:int}")]
+        [ActionName("confirm_user_thanhtoan")]
+        public async Task<IActionResult> confirm_user_thanhtoan([FromRoute] int id)
+        {
+            try
+            {
+                HoaDon hoaDon = _context.HoaDons.Include(h => h.NguoiDung).Include(t => t.Tour).Where(t => t.TrangThai == 2 && t.Id == id).FirstOrDefault();
+                if (hoaDon == null)
+                {
+                    return StatusCode(404, "Hóa đơn chưa được xác nhận hoặc không tồn tại");
+                }
+
+                hoaDon.TrangThai = 3;
+                _context.SaveChanges();
+                return Ok(new
+                {
+                    message = "Success",
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+        [Authorize]
+        [Authorize(Roles = "Business")]
+        [HttpGet]
+        [Route("confirm_tour_prepare/{id:int}")] // id thoi gian
+        [ActionName("confirm_tour_prepare")]
+        public async Task<IActionResult> confirm_tour_prepare([FromRoute] int id)
+        {
+            try
+            {
+                ThoiGian thoiGian = _context.ThoiGians.Include(t => t.Tour).Where(t => t.TrangThai == 1 && t.Id == id).FirstOrDefault();
+                if (thoiGian == null)
+                {
+                    return StatusCode(404, "Tour không tồn tại");
+                }
+
+                thoiGian.TrangThai = 2;
+                _context.SaveChanges();
+                return Ok(new
+                {
+                    message = "Success",
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+        [Authorize]
+        [Authorize(Roles = "Business")]
+        [HttpGet]
+        [Route("confirm_tour_start/{id:int}")] // id thoi gian
+        [ActionName("confirm_tour_start")]
+        public async Task<IActionResult> confirm_tour_start([FromRoute] int id)
+        {
+            using var transaction = _context.Database.BeginTransaction();
+            try
+            {
+                ThoiGian thoiGian = _context.ThoiGians.Where(t => t.TrangThai == 2 && t.Id == id).FirstOrDefault();
+                if (thoiGian == null)
+                {
+                    return StatusCode(404, "Tour không tồn tại");
+                }
+
+                thoiGian.TrangThai = 3;
+                _context.SaveChanges();
+
+                List<HoaDon> hoaDons = _context.HoaDons.Where(t => t.ThoiGianId == id && t.TrangThai == 3).ToList();
+                foreach (var hoadon in hoaDons)
+                {
+                    hoadon.TrangThai = 4;
+                    _context.SaveChanges();
+                }
+                transaction.Commit();
+                return Ok(new
+                {
+                    message = "Success",
+                });
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+        [Authorize]
+        [Authorize(Roles = "Business")]
+        [HttpGet]
+        [Route("confirm_tour_end/{id:int}")] // id thoi gian
+        [ActionName("confirm_tour_end")]
+        public async Task<IActionResult> confirm_tour_end([FromRoute] int id)
+        {
+            try
+            {
+                ThoiGian thoiGian = _context.ThoiGians.Include(t => t.Tour).Where(t => t.TrangThai == 3 && t.Id == id).FirstOrDefault();
+                if (thoiGian == null)
+                {
+                    return StatusCode(404, "Tour không tồn tại hoặc chưa bắt đầu");
+                }
+
+                thoiGian.TrangThai = 4;
+                _context.SaveChanges();
+                return Ok(new
+                {
+                    message = "Success",
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+        [Authorize]
+        [Authorize(Roles = "Business")]
+        [HttpGet]
+        [Route("tour_cancel/{id:int}")] // id thoi gian
+        [ActionName("tour_cancel")]
+        public async Task<IActionResult> tour_cancel([FromRoute] int id)
+        {
+            using var transaction = _context.Database.BeginTransaction();
+            try
+            {
+                ThoiGian thoiGian = _context.ThoiGians.Include(t => t.Tour).Where(t => t.TrangThai == 1 || t.TrangThai == 2 && t.Id == id).FirstOrDefault();
+                if (thoiGian == null)
+                {
+                    return StatusCode(404, "Tour không tồn tại hoặc chưa bắt đầu");
+                }
+
+                thoiGian.TrangThai = 5;
+
+                _context.SaveChanges();
+                List<HoaDon> hoaDons = _context.HoaDons.Where(t => t.ThoiGianId == id && t.TrangThai == 3).ToList();
+                foreach (var hoadon in hoaDons)
+                {
+                    hoadon.TrangThai = 5;
+                    _context.SaveChanges();
+                }
+                transaction.Commit();
+                return Ok(new
+                {
+                    message = "Success",
+                });
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
                 Console.WriteLine(ex.Message);
                 return StatusCode(500, "Internal Server Error");
             }
