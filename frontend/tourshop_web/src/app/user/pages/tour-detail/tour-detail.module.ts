@@ -7,6 +7,7 @@ import { TourLienQuanComponent } from "./components/tour-lien-quan/tour-lien-qua
 import { MatButtonModule } from "@angular/material/button";
 import { AnhTourComponent } from "./components/anh-tour/anh-tour.component";
 import { SlickCarouselModule } from "ngx-slick-carousel";
+import { DichVuComponent } from './components/dich-vu/dich-vu.component';
 @NgModule({
   declarations: [
     TourDetailComponent,
@@ -14,6 +15,7 @@ import { SlickCarouselModule } from "ngx-slick-carousel";
     BangGiaComponent,
     TourLienQuanComponent,
     AnhTourComponent,
+    DichVuComponent,
   ],
   imports: [CommonModule, MatButtonModule, SlickCarouselModule],
 })
