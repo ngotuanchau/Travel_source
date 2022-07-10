@@ -67,8 +67,6 @@ namespace Travel.Controllers
                 result.Email = user.Email;
                 result.Avt = user.Avt;
                 result.token = tokenHandler.WriteToken(token);
-                HttpContext.Session.SetString("Token", result.token);
-                HttpContext.Request.Headers.Add("Authorization", $"Bearer {result.token}");
                 return Ok(result);
             }
             else
