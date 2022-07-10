@@ -10,6 +10,9 @@ import { DatePipe } from "@angular/common";
 export class BangGiaComponent implements OnInit {
   @Input() tour: any;
   @Input() ngayKhs: any;
+  @Input() amthuc: any;
+  @Input() luutru: any;
+  @Input() phuongtien: any;
   constructor(private routes: Router) {}
   pipe = new DatePipe("en-US");
   formatDate(ngay: any) {

@@ -19,11 +19,12 @@
                         <li>Thời gian: <span *ngIf="tour.soDem!=0">{{tour.soNgay}} ngày {{tour.soDem}} đêm</span>
                             <span *ngIf="tour.soDem==0">{{tour.soNgay}} ngày</span>
                         </li>
+                        <li>Còn: <span>{{findBlank(this.ngay)}}</span></li>
                         <li>Nơi tập trung: <span>Đang cập nhật</span></li>
                     </ul>
                 </div>
                 <div class="box-button flex justifylex">
-                    <button (click)="datNgay()">ĐẶT NGAY</button>
+                    <button (click)="datNgay()" [disabled]="findBlank(this.ngay)<=0">ĐẶT NGAY</button>
                     <button>LIÊN HỆ TƯ VẤN</button>
                 </div>
 
@@ -31,7 +32,7 @@
         </div>
     </section>
 </div>
-<app-bang-gia [ngayKhs]="this.ngayKHs" [tour]="this.tour"></app-bang-gia>
+<app-bang-gia [ngayKhs]="this.ngayKHs" [tour]="this.tour" [amthuc]="this.amthuc" [luutru]="this.luutru" [phuongtien]="this.phuongtien"></app-bang-gia>
 <app-lich-trinh-chi-tiet [lichtrinh]="this.lichtrinh" [tour]="this.tour" [diadiems]="this.diadiem">
 </app-lich-trinh-chi-tiet>
 <app-tour-lien-quan></app-tour-lien-quan>

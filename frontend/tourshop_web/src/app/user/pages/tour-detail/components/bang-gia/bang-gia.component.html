@@ -40,6 +40,11 @@
                 </div>
                 <div [innerHtml]="tour.mota"></div>
             </div>
+            <div class="mb-4"></div>
+            <div class="dieu-kien">
+                <app-dich-vu [tour]="this.tour" [amthuc]="this.amthuc" [luutru]="this.luutru" [phuongtien]="this.phuongtien">
+                </app-dich-vu>
+            </div>
         </div>
 
     </section>

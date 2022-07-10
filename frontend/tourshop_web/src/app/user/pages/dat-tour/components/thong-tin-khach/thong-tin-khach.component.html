@@ -4,25 +4,23 @@
         <div class="form-in">
             <h2>THÔNG TIN LIÊN LẠC</h2>
 
-            <div class="form-group row">
-                <div class="col-6">
-                    <div class="row">
-                        <div class="col-3"><label for="">Họ tên: </label></div>
-                        <div class="col-9"><input disabled [value]="user.hoTen"></div>
-                    </div>
+            <div class="form-group row email">
+                <div class="row">
+                    <div class="col-2"><label for="">Họ tên: </label></div>
+                    <div class="col-10"><input disabled [value]="user.hoTen"></div>
                 </div>
-                <div class="col-6">
-                    <div class="row">
-                        <div class="col-3"><label for="">Ngày sinh: </label></div>
-                        <div class="col-9"><input disabled [value]="user.ngaySinh"></div>
-                    </div>
+            </div>
+            <div class="form-group row email">
+                <div class="row">
+                    <div class="col-2"><label for="">Email: </label></div>
+                    <div class="col-10"><input disabled [value]="user.email"></div>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-6">
                     <div class="row">
-                        <div class="col-3"><label for="">CMND: </label></div>
-                        <div class="col-9"><input disabled [value]="user.cmnd"></div>
+                        <div class="col-4"><label for="">CMND: </label></div>
+                        <div class="col-8"><input disabled [value]="user.cmnd"></div>
                     </div>
                 </div>
                 <div class="col-6">
@@ -32,16 +30,6 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group row email">
-                <div class="col-7">
-                    <div class="row">
-                        <div class="col-2"><label for="">Email: </label></div>
-                        <div class="col-10"><input disabled [value]="user.email"></div>
-                    </div>
-                </div>
-
-            </div>
-
         </div>
         <div class="form-in thong-tin">
             <h2>THÔNG TIN ĐẶT TOUR</h2>
@@ -51,7 +39,7 @@
                         <div class="row">
                             <div class="col-2"><label for="">Người lớn: </label></div>
                             <div class="col-3">(Từ 6 tuổi trở lên)</div>
-                            <div class="col-4"><button [disabled]="this.maxVe==0" type="button" (click)="congnl()"><i
+                            <div class="col-4"><button [disabled]="this.maxVe<=0" type="button" (click)="congnl()"><i
                     class="bi bi-plus"></i></button><input disabled [value]="this.nglon"><button [disabled]="this.nglon==1" type="button" (click)="trunl()"><i class="bi bi-dash-lg"></i></button>
                             </div>
                         </div>
@@ -62,7 +50,7 @@
                         <div class="row">
                             <div class="col-2"><label for="">Trẻ em: </label></div>
                             <div class="col-3">(Từ 2 tuổi trở lên)</div>
-                            <div class="col-4"><button [disabled]="this.maxVe==0" type="button" (click)="congte()"><i
+                            <div class="col-4"><button [disabled]="this.maxVe<=0" type="button" (click)="congte()"><i
                     class="bi bi-plus"></i></button><input disabled [value]="this.trem"><button [disabled]="!this.trem" type="button" (click)="trute()"><i class="bi bi-dash-lg"></i></button></div>
                         </div>
                     </div>
@@ -73,7 +61,7 @@
                         <div class="row">
                             <div class="col-2"><label for="">Trẻ nhỏ: </label></div>
                             <div class="col-3">(Dưới 2 tuổi)</div>
-                            <div class="col-4"><button [disabled]="this.maxVe==0" type="button" (click)="congtn()"><i
+                            <div class="col-4"><button [disabled]="this.maxVe<=0" type="button" (click)="congtn()"><i
                     class="bi bi-plus"></i></button><input disabled [value]="this.trnho"><button [disabled]="!this.trnho" type="button" (click)="trutn()"><i class="bi bi-dash-lg"></i></button>
                             </div>
                         </div>

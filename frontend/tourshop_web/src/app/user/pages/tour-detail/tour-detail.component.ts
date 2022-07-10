@@ -32,6 +32,9 @@ export class TourDetailComponent implements OnInit {
   lichtrinh: any;
   diadiem: any;
   hinhanh: any;
+  amthuc: any;
+  phuongtien: any;
+  luutru: any;
   //Get detail
   getDetail(id: any) {
     this.tourService.getDetailTour(id).subscribe((res) => {
@@ -44,6 +47,10 @@ export class TourDetailComponent implements OnInit {
       this.diadiem = this.tour.nhungdiadiem;
       //get array image detail
       this.hinhanh = this.tour.hinhanh;
+      //get dich vu
+      this.amthuc = this.tour.amThuc;
+      this.luutru = this.tour.luuTru;
+      this.phuongtien = this.tour.phuongtien;
       const today = new Date().toLocaleDateString();
       for (let n of this.ngayKHs) {
         if (n.ngayKh > today) {
@@ -64,5 +71,13 @@ export class TourDetailComponent implements OnInit {
       }
     }
     return this.pipe.transform(ngay, "dd/MM/yyyy");
+  }
+  findBlank(id: number): number {
+    var blank = 0;
+    blank = this.ngayKHs.find((item: any) => item.id == id)?.vedadat;
+    return this.minus(this.tour.veToiDa, blank);
+  }
+  minus(a: number, b: number) {
+    return a - b;
   }
 }
