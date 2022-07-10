@@ -98,6 +98,7 @@ namespace Travel.Serialize
         [Required]
         public decimal GiaTreNho { get; set; }
         public int Vedadat { get; set; }
+        public int TrangThai { get; set; }
     }
 
 }
