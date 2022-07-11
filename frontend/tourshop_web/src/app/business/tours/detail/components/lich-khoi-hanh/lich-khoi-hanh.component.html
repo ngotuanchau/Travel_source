@@ -34,19 +34,19 @@
                                     </p>
                                 </td>
                                 <td>
-                                    <p>{{tr.giaNguoiLon}}
+                                    <p>{{formatCurrency(tr.giaNguoiLon)}}
                                     </p>
                                 </td>
                                 <td>
-                                    <p>{{tr.giaTreEn}}</p>
+                                    <p>{{formatCurrency(tr.giaTreEn)}}</p>
                                 </td>
                                 <td>
-                                    <p>{{tr.giaTreNho}}</p>
+                                    <p>{{formatCurrency(tr.giaTreNho)}}</p>
                                 </td>
                                 <td>
                                     <p>{{tr.vedadat}}</p>
                                 </td>
-                                <td>
+                                <td [style]="getColor(tr.trangThai)">
                                     {{getStatus(tr.trangThai)}}
                                 </td>
                                 <td *ngIf="tr.trangThai==1" class="confirm">

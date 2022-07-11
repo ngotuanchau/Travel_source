@@ -62,4 +62,10 @@ export class NgayKhoiHanhComponent implements OnInit {
     }
     return true;
   }
+  formatCurrency(money: number) {
+    return new Intl.NumberFormat("fr-FR", {
+      style: "currency",
+      currency: "VND",
+    }).format(money);
+  }
 }

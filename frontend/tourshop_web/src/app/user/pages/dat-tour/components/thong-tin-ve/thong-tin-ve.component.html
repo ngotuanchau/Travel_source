@@ -29,26 +29,26 @@
         <div class="row mb-4">
             <div class="col-3">Người lớn</div>
             <div class="col-3">X{{nglon}}</div>
-            <div class="col-3">{{gianl}}</div>
-            <div class="col-3">{{multi(nglon,gianl)}}</div>
+            <div class="col-3">{{formatCurrency(gianl)}}</div>
+            <div class="col-3">{{formatCurrency(multi(nglon,gianl))}}</div>
         </div>
         <div class="row mb-4">
             <div class="col-3">Trẻ em</div>
             <div class="col-3">X{{trem}}</div>
-            <div class="col-3">{{giatrem}}</div>
-            <div class="col-3">{{multi(trem,giatrem)}}</div>
+            <div class="col-3">{{formatCurrency(giatrem)}}</div>
+            <div class="col-3">{{formatCurrency(multi(trem,giatrem))}}</div>
         </div>
         <div class="row mb-4">
             <div class="col-3">Trẻ nhỏ</div>
             <div class="col-3">X{{trnho}}</div>
-            <div class="col-3">{{giatrnho}}</div>
-            <div class="col-3">{{multi(trnho,giatrnho)}}</div>
+            <div class="col-3">{{formatCurrency(giatrnho)}}</div>
+            <div class="col-3">{{formatCurrency(multi(trnho,giatrnho))}}</div>
         </div>
     </div>
     <div class="row mb-4">
         <div class="row mb-4">
             <div class="col-9">Thành tiền</div>
-            <div class="col-3">{{plus(multi(nglon,gianl),multi(trem,giatrem),multi(trnho,giatrnho))}}</div>
+            <div class="col-3">{{formatCurrency(plus(multi(nglon,gianl),multi(trem,giatrem),multi(trnho,giatrnho)))}}</div>
         </div>
     </div>
     <div class="row button">

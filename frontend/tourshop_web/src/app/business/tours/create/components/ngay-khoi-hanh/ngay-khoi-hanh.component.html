@@ -52,9 +52,9 @@
                         <tr *ngFor="let nkh of lstNKH; index as i">
                             <td>{{i+1}}</td>
                             <td>{{nkh.ngayKh}}</td>
-                            <td>{{nkh.giaNguoiLon | currency:"VND":true}}</td>
-                            <td>{{nkh.giaTreEn | currency:"VND":true}}</td>
-                            <td>{{nkh.giaTreNho | currency:"VND":true}}</td>
+                            <td>{{formatCurrency(nkh.giaNguoiLon)}}</td>
+                            <td>{{formatCurrency(nkh.giaTreEn)}}</td>
+                            <td>{{formatCurrency(nkh.giaTreNho)}}</td>
                             <td class="tt">
                                 <button mat-icon-button color="warn" aria-label="" (click)="onRemove(nkh.ngayKh)">
                   <mat-icon>delete</mat-icon>

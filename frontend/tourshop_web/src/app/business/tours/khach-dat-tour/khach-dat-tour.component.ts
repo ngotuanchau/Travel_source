@@ -92,4 +92,13 @@ export class KhachDatTourComponent implements OnInit {
     this.tabs.push(this.counter++);
     event.preventDefault();
   }
+  formatCurrency(money: number) {
+    return new Intl.NumberFormat("fr-FR", {
+      style: "currency",
+      currency: "VND",
+    }).format(money);
+  }
+  getColor(id: number) {
+    return this.hoadonStatus.find((item: any) => item.id == id)?.color;
+  }
 }

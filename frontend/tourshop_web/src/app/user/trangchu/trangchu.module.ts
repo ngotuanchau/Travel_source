@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { NgModule, LOCALE_ID } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { TimkiemComponent } from "./trangchu-component/timkiem/timkiem.component";
 import { TrangchuComponent } from "./trangchu.component";
@@ -41,5 +41,11 @@ import { HeaderComponent } from "../component/header/header.component";
     RouterModule,
   ],
   exports: [RouterModule],
+  providers: [
+    {
+      provide: LOCALE_ID,
+      useValue: "de-DE", // 'de-DE' for Germany, 'fr-FR' for France ...
+    },
+  ],
 })
 export class TrangchuModule {}

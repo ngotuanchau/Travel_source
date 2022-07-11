@@ -173,4 +173,10 @@ export class SearchResultComponent implements OnInit {
   onSearch() {
     this.routes.navigate(["search"]);
   }
+  formatCurrency(money: number) {
+    return new Intl.NumberFormat("fr-FR", {
+      style: "currency",
+      currency: "VND",
+    }).format(money);
+  }
 }

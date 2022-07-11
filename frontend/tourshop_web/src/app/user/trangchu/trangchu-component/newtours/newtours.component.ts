@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { DiadiemsService } from "../../../../service/diadiems.service";
 import { TheloaisService } from "../../../../service/theloais.service";
 import { ToursService } from "../../../../service/tours.service";
+
 @Component({
   selector: "app-newtours",
   templateUrl: "./newtours.component.html",
@@ -129,5 +130,12 @@ export class NewtoursComponent implements OnInit {
   }
   booking(id: any, ngay: any) {
     this.routes.navigate(["../booking/" + id + "/" + ngay]);
+  }
+  //format currency
+  formatCurrency(money: number) {
+    return new Intl.NumberFormat("fr-FR", {
+      style: "currency",
+      currency: "VND",
+    }).format(money);
   }
 }

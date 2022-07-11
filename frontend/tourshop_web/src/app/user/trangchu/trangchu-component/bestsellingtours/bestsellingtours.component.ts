@@ -130,4 +130,10 @@ export class BestsellingtoursComponent implements OnInit {
   booking(id: any, ngay: any) {
     this.routes.navigate(["../booking/" + id + "/" + ngay]);
   }
+  formatCurrency(money: number) {
+    return new Intl.NumberFormat("fr-FR", {
+      style: "currency",
+      currency: "VND",
+    }).format(money);
+  }
 }

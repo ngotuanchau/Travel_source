@@ -25,6 +25,9 @@ export class LichKhoiHanhComponent implements OnInit {
   getStatus(id: number) {
     return this.tourStatus.find((item: any) => item.id == id)?.name;
   }
+  getColor(id: number) {
+    return this.tourStatus.find((item: any) => item.id == id)?.color;
+  }
   //Prepare
   prepare(id: any) {
     this.tourservice.prepare(id).subscribe((res) => {
@@ -56,5 +59,11 @@ export class LichKhoiHanhComponent implements OnInit {
         this.getLichKHByIdTour();
       }
     });
+  }
+  formatCurrency(money: number) {
+    return new Intl.NumberFormat("fr-FR", {
+      style: "currency",
+      currency: "VND",
+    }).format(money);
   }
 }

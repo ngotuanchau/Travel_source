@@ -25,4 +25,10 @@ export class ProfileComponent implements OnInit {
     });
   }
   updateProfile() {}
+  formatCurrency(money: number) {
+    return new Intl.NumberFormat("fr-FR", {
+      style: "currency",
+      currency: "VND",
+    }).format(money);
+  }
 }

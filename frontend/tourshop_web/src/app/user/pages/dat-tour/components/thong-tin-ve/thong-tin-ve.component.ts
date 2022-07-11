@@ -98,4 +98,10 @@ export class ThongTinVeComponent implements OnInit {
     });
     // this.form.patchValue({ [FormField.tongtien]: this.trnho });
   }
+  formatCurrency(money: number) {
+    return new Intl.NumberFormat("fr-FR", {
+      style: "currency",
+      currency: "VND",
+    }).format(money);
+  }
 }
