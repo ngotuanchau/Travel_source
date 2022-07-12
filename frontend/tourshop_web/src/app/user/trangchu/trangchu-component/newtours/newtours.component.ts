@@ -40,7 +40,6 @@ export class NewtoursComponent implements OnInit {
         }
       }
       this.newtours = this.tours.slice(0, size);
-      console.log(this.newtours);
     });
   }
   // getTour() {

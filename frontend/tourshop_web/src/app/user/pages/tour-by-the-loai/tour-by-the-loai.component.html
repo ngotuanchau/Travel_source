@@ -1,0 +1,131 @@
+<section class="ftco-search">
+    <div class="width-box">
+        <div class="row">
+            <div class="col-6 col-lg-3">
+                <div class="mt-5 mb-5 search">
+                    <form action="">
+                        <div class="form-group">
+                            <label>Loại tour </label>
+                            <div class="form-field">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Chọn loại tour</mat-label>
+                                    <mat-select>
+                                        <mat-option *ngFor="let dd of theloais" [value]="dd.id">
+                                            {{dd.tenLoai}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Điểm khởi hành </label>
+                            <div class="form-field">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Chọn điểm khởi hành</mat-label>
+                                    <mat-select>
+                                        <mat-option *ngFor="let dd of diadiems" [value]="dd.id">
+                                            {{dd.ten}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Điểm đến </label>
+                            <div class="form-field">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Chọn điểm đến</mat-label>
+                                    <mat-select>
+                                        <mat-option *ngFor="let dd of diadiems" [value]="dd.id">
+                                            {{dd.ten}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Chọn ngày đi</label>
+                            <div class="form-field">
+                                <input type="date" class="form-control checkout_date" placeholder="Ngày khởi hành">
+                                <!-- <div class="icon"><span class="icon-calendar"></span></div> -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Chọn ngày kết thúc</label>
+                            <div class="form-field">
+                                <input type="date" class="form-control checkout_date" placeholder="Ngày khởi hành">
+                                <!-- <div class="icon"><span class="icon-calendar"></span></div> -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Ẩm thực</label>
+                            <div *ngFor="let at of lstAmThuc">
+                                <input type="checkbox" [value]="at.id" [checked]="at.completed" (change)="onChangeAT($event)"><label class="col-sm-1"></label><label>{{at.name}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Lưu trú</label>
+                            <div *ngFor="let at of lstLuuTru">
+                                <input type="checkbox" [value]="at.id" [checked]="at.completed" (change)="onChangeLT($event)"><label class="col-sm-1"></label><label>{{at.name}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Phương tiện</label>
+                            <div *ngFor="let at of lstPhuongTien">
+                                <input type="checkbox" [value]="at.id" [checked]="at.completed" (change)="onChangePT($event)"><label class="col-sm-1"></label><label>{{at.name}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button (click)="onSearch()">Tìm kiếm</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-9">
+                <div class="mt-5 mb-5">
+                    <div class="d-flex justify-content-center row">
+                        <div class="col-md-10 box bot" *ngFor="let tour of tours">
+                            <div class="row p-2 bg-white border rounded">
+
+                                <div class="col-md-4 mt-1">
+                                    <div class="box-item  scale-img"><img class="img-fluid img-responsive rounded product-image" src="http://localhost:3000/{{tour.anhtour}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mt-1">
+                                    <h5>Loại: <span>{{findTLById(tour.theloai)}}</span></h5>
+                                    <h1>{{tour.tentour}}</h1>
+                                    <div class="d-flex flex-row">
+                                        <div class="mt-1 mb-1 spec-1">Ngày khởi hành: <span> {{findDateDisplay(tour.id)}}</span></div>
+                                    </div>
+                                    <div class="d-flex flex-row">
+                                        <div class="mt-1 mb-1 spec-1">Thời gian: <span> {{tour.soNgay}} ngày <span
+                          *ngIf="tour.soDem!=0">{{tour.soDem}} đêm</span></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row">
+                                        <div class="mt-1 mb-1 spec-1">Còn lại: <span> {{findBlankDisplay(tour.id,tour.veToiDa)}} chỗ</span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-1 mb-1 spec-1"><span class="dot dot-r"></span><span class="r">Mới</span><span class="dot"></span><span>{{tour.tendiemdi}}</span><span class="dot"></span><span>{{tour.tendiemden}}<br></span></div>
+                                    <!-- <p class="text-justify text-truncate para mb-0">{{tour.mota}}<br><br></p> -->
+                                </div>
+                                <div class="align-items-center align-content-center col-md-2 border-left mt-1">
+                                    <div class="d-flex flex-row align-items-center">
+                                        <h1 class="price">{{findPriceDisplay(tour.id)}} đ</h1>
+                                        <!-- <h4 class="mr-1">$13.99</h4><span class="strike-text">$20.99</span> -->
+                                    </div>
+                                    <!-- <h6 class="text-success">Free shipping</h6> -->
+                                    <div class="d-flex flex-column mt-4"><button class="btn btn-primary btn-sm" type="button" (click)="viewDetail(tour.id)">Chi
+                      tiết</button><button class="btn btn-outline-primary btn-sm mt-2" type="button">Đặt ngay</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

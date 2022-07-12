@@ -15,8 +15,9 @@ import { NewtoursComponent } from "./pages/newtours/newtours.component";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { SearchResultComponent } from './pages/search-result/search-result.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { TourByTheLoaiComponent } from './pages/tour-by-the-loai/tour-by-the-loai.component';
 @NgModule({
-  declarations: [NewtoursComponent, SearchResultComponent, ProfileComponent],
+  declarations: [NewtoursComponent, SearchResultComponent, ProfileComponent, TourByTheLoaiComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
