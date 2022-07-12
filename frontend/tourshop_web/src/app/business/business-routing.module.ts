@@ -32,7 +32,7 @@ const routes: Routes = [
     component: ToursDetailComponent,
   },
   {
-    path: "ql-tours/khach-dat-tour/:id",
+    path: "ql-tours/khach-dat-tour/:id/:id2",
     component: KhachDatTourComponent,
   },
   //Đề xuất Tour

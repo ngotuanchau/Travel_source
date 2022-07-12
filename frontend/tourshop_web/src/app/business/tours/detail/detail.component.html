@@ -12,10 +12,11 @@
                 <div class="card-sub-description mb-4">Loại tour: <span>{{tour.tentheloai}}</span></div>
                 <div class="card-sub-description mb-4">Nơi khởi hành: <span>{{tour.tendiemdi}}</span></div>
                 <div class="card-sub-description mb-4">Điểm đến: <span>{{tour.tendiemden}}</span></div>
-                <div class="card-sub-description mb-4">Thời gian: <span>{{tour.soNgay}} ngày {{tour.soDem}} đêm</span></div>
+                <div class="card-sub-description mb-4">Thời gian: <span>{{tour.soNgay}} ngày {{tour.soDem}} đêm</span>
+                </div>
             </div>
         </div>
     </div>
-    <app-lich-khoi-hanh [tour]="this.tour"></app-lich-khoi-hanh>
+    <app-lich-khoi-hanh [idTour]="this.idTour"></app-lich-khoi-hanh>
     <app-lich-trinh-tours [tour]="this.tour"></app-lich-trinh-tours>
 </div>

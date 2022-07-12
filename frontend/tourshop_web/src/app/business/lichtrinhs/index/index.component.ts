@@ -11,7 +11,6 @@ export class LichTrinhsIndexComponent implements OnInit {
   constructor() {}
   getLichTrinhByIdTour() {
     this.lichTrinh = this.tour.lichtrinh;
-    console.log(this.lichTrinh);
   }
   ngOnInit(): void {
     this.getLichTrinhByIdTour();
