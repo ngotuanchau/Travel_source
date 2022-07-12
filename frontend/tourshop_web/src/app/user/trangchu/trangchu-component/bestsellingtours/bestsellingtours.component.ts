@@ -27,14 +27,20 @@ export class BestsellingtoursComponent implements OnInit {
   }
 
   newtours: any;
+  tours: any;
   getNewTours() {
+    this.newtours = [];
+    this.tours = [];
     const size = 10;
     this.tourservice.getNewTours().subscribe((response) => {
-      this.newtours = response.slice(0, size);
+      for (let tour of response) {
+        if (tour.nhungNgayKhoiHanh.length >= 1) {
+          this.tours.push(tour);
+        }
+      }
+      this.newtours = this.tours.slice(0, size);
+      console.log(this.newtours);
     });
-    // this.tourservice.getNewTours().subscribe((response) => {
-    //   this.newtours = response;
-    // });
   }
 
   findDateDisplay(id: number) {

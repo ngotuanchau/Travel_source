@@ -34,27 +34,58 @@ export class NgayKhoiHanhComponent implements OnInit {
     const list = this.lstNKH;
     const today = new Date();
     const thisDay = new Date(this.ngayKh);
-    if (
-      today.getDate() > thisDay.getDate() &&
-      today.getMonth() >= thisDay.getMonth() &&
-      today.getFullYear() >= thisDay.getFullYear()
-    ) {
+    if (thisDay.getFullYear() >= today.getFullYear()) {
+      if (thisDay.getMonth() >= today.getMonth()) {
+        if (
+          (thisDay.getDate() >= today.getDate() &&
+            thisDay.getMonth() == today.getMonth()) ||
+          thisDay.getMonth() > today.getMonth()
+        ) {
+          if (
+            this.giaNguoiLon != null &&
+            this.giaTreEn != null &&
+            this.giaTreNho != null
+          ) {
+            list.push({
+              ngayKh: this.pipe.transform(this.ngayKh, "dd/MM/yyyy"),
+              giaNguoiLon: this.giaNguoiLon,
+              giaTreEn: this.giaTreEn,
+              giaTreNho: this.giaTreNho,
+            });
+            this.lstNKH = list;
+            console.log(this.lstNKH);
+          } else {
+            this.toast.error({
+              detail: "Cảnh báo",
+              summary: "Chưa nhập đầy đủ thông tin",
+              duration: 3000,
+            });
+          }
+        } else {
+          this.toast.error({
+            detail: "Cảnh báo",
+            summary:
+              this.pipe.transform(this.ngayKh, "dd/MM/yyyy") + " không hợp lệ",
+            duration: 3000,
+          });
+        }
+      } else {
+        this.toast.error({
+          detail: "Cảnh báo",
+          summary:
+            this.pipe.transform(this.ngayKh, "dd/MM/yyyy") + " không hợp lệ",
+          duration: 3000,
+        });
+      }
+    } else {
       this.toast.error({
         detail: "Cảnh báo",
         summary:
           this.pipe.transform(this.ngayKh, "dd/MM/yyyy") + " không hợp lệ",
         duration: 3000,
       });
-    } else {
-      list.push({
-        ngayKh: this.pipe.transform(this.ngayKh, "dd/MM/yyyy"),
-        giaNguoiLon: this.giaNguoiLon,
-        giaTreEn: this.giaTreEn,
-        giaTreNho: this.giaTreNho,
-      });
-      this.lstNKH = list;
-      console.log(this.lstNKH);
     }
+
     this.sort();
   }
 
