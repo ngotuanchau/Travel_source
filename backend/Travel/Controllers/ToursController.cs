@@ -337,8 +337,9 @@ namespace Travel.Controllers
                     tour_Serialize.Anhtour = tour.AnhTour;
 
                     // Get List Thoi Gian
+                    DateTime now = DateTime.Now;
                     List<NhungNgayKhoiHanh> nhungNgayKhoiHanhs = new List<NhungNgayKhoiHanh>();
-                    List<ThoiGian> thoiGians = _context.ThoiGians.Where(p => p.TourId == tour.Id && p.TrangThai == 1).ToList();
+                    List<ThoiGian> thoiGians = _context.ThoiGians.Where(p => p.TourId == tour.Id && p.TrangThai == 1 && p.NgayDi > now).ToList();
                     foreach (var tg in thoiGians)
                     {
                         NhungNgayKhoiHanh nhungNgayKhoiHanh = new NhungNgayKhoiHanh();
@@ -415,7 +416,7 @@ namespace Travel.Controllers
             try
             {
                 Tour_serialize tour_Serialize = new Tour_serialize();
-                Tour tour = _context.Tours.Include(t => t.TheLoai).Include(t => t.CongTy).Include(t => t.PhanVung).Where(t => t.TrangThai == 1 && t.Id == id).FirstOrDefault();
+                Tour tour = _context.Tours.Include(t => t.TheLoai).Include(t => t.CongTy).Include(t => t.PhanVung).Where(t => t.TrangThai != 0 && t.Id == id).FirstOrDefault();
                 if (tour == null)
                 {
                     return StatusCode(404, "Tour not found");
@@ -778,7 +779,7 @@ namespace Travel.Controllers
                 thoiGian.TrangThai = 5;
 
                 _context.SaveChanges();
-                List<HoaDon> hoaDons = _context.HoaDons.Where(t => t.ThoiGianId == id && t.TrangThai == 3).ToList();
+                List<HoaDon> hoaDons = _context.HoaDons.Where(t => t.ThoiGianId == id && t.TrangThai == 3 || t.TrangThai == 2).ToList();
                 foreach (var hoadon in hoaDons)
                 {
                     hoadon.TrangThai = 5;
