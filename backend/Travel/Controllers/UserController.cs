@@ -138,5 +138,44 @@ namespace Travel.Controllers
                 return StatusCode(500, "Internal Server Error");
             }
         }
+
+        [Authorize]
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        [Route("user_get")]
+        [ActionName("get_all_user")]
+        public async Task<IActionResult> get_all_user()
+        {
+            try
+            {
+                List<NguoiDung> nguoiDungs = _context.NguoiDungs.Where(u => u.TrangThai != 0).ToList();
+                
+                List<User_serialize> user_Serializes = new List<User_serialize>();
+                foreach (var nd in nguoiDungs)
+                {
+                    User_serialize user_Serialize = new User_serialize();
+                    user_Serialize.Id = nd.Id;
+                    user_Serialize.HoTen = nd.HoTen;
+                    user_Serialize.Avt = nd.Avt;
+                    user_Serialize.Cmnd = nd.Cmnd;
+                    user_Serialize.Email = nd.Email;
+                    user_Serialize.isAdmin = nd.isAdmin;
+                    user_Serialize.NgaySinh = nd.NgaySinh;
+                    user_Serialize.Sdt = nd.Sdt;
+                    user_Serialize.TenNguoiDung = nd.TenNguoiDung;
+                    user_Serialize.TrangThai = nd.TrangThai;
+
+                    user_Serializes.Add(user_Serialize);
+                }
+                
+
+                return Ok(user_Serializes);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
     }
 }
