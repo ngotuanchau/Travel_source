@@ -43,7 +43,7 @@
                                     <h4 class="mb-0">CMND/CCCD</h4>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <input type="text" class="form-control" value="{{user.cmnd}}">
+                                    <input type="text" (keypress)="numberOnly($event)" class="form-control" value="{{user.cmnd}}">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -51,7 +51,7 @@
                                     <h4 class="mb-0">Số điện thoại</h4>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <input type="text" class="form-control" value="{{user.sdt}}">
+                                    <input (keypress)="numberOnly($event)" type="text" class="form-control" value="{{user.sdt}}">
                                 </div>
                             </div>
                             <div class="row mb-3">

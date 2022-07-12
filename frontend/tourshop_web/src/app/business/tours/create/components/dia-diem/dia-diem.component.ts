@@ -58,6 +58,7 @@ export class DiaDiemComponent implements OnInit {
     }
     //Lấy danh sách stt
     let thutus: any;
+    thutus = [];
     for (let i = 0; i < this.listDD.length; i++) {
       thutus.push(this.listDD[i].thutu);
     }
@@ -70,6 +71,7 @@ export class DiaDiemComponent implements OnInit {
     //STT còn thiếu
     function missingItems(arr: any, n: any) {
       let missingItems: any;
+      missingItems = [];
       for (let i = 1; i <= n; i++) if (!arr.includes(i)) missingItems.push(i);
       return missingItems;
     }
@@ -95,6 +97,7 @@ export class DiaDiemComponent implements OnInit {
     this.thutu = stt;
     //Lấy danh sách stt
     let thutus: any;
+    thutus = [];
     for (let i = 0; i < this.listDD.length; i++) {
       thutus.push(this.listDD[i].thutu);
     }
@@ -107,6 +110,7 @@ export class DiaDiemComponent implements OnInit {
     //STT còn thiếu
     function missingItems(arr: any, n: any) {
       let missingItems: any;
+      missingItems = [];
       for (let i = 1; i <= n; i++) if (!arr.includes(i)) missingItems.push(i);
       return missingItems;
     }

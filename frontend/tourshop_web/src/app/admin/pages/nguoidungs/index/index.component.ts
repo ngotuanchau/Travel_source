@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { NguoiDungs, Employee } from "../nguoidungs-data";
+
 import { NgbNavChangeEvent } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
@@ -8,11 +8,7 @@ import { NgbNavChangeEvent } from "@ng-bootstrap/ng-bootstrap";
   styleUrls: ["index.component.css"],
 })
 export class NguoiDungsIndexComponent {
-  trow: NguoiDungs[];
-
-  constructor() {
-    this.trow = Employee;
-  }
+  constructor() {}
   //Nav
   currentJustify = "start";
 
