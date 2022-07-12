@@ -15,7 +15,7 @@ namespace Travel.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class DoanhnghiepController : Controller
-    { 
+    {
 
         public IConfiguration _configuration;
         private readonly TravelContext _context;
@@ -60,4 +60,5 @@ namespace Travel.Controllers
                 return StatusCode(500, "Internal Server Error");
             }
         }
+    }
 }
