@@ -778,7 +778,7 @@ namespace Travel.Controllers
                 thoiGian.TrangThai = 5;
 
                 _context.SaveChanges();
-                List<HoaDon> hoaDons = _context.HoaDons.Where(t => t.ThoiGianId == id && t.TrangThai == 3).ToList();
+                List<HoaDon> hoaDons = _context.HoaDons.Where(t => t.ThoiGianId == id && t.TrangThai == 3 || t.TrangThai == 2).ToList();
                 foreach (var hoadon in hoaDons)
                 {
                     hoadon.TrangThai = 5;
