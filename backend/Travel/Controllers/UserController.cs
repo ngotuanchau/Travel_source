@@ -46,7 +46,6 @@ namespace Travel.Controllers
 
         }
         [Authorize]
-        [Authorize(Roles = "Admin")]
         [HttpPut]
         [Route("{id:int}")]
         public async Task<IActionResult> Edit([FromRoute] int id, NguoiDung nd)
