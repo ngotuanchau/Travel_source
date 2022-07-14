@@ -1,78 +1,78 @@
-<section class="ftco-search">
-    <div class="width-box">
-        <div class="main-body">
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex flex-column align-items-center text-center">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
-                                <div class="mt-3">
-                                    <h4>{{user.hoTen}}</h4>
-                                    <!-- <p class="text-secondary mb-1">Full Stack Developer</p>
-                                <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                                <button class="btn btn-primary">Follow</button>
-                                <button class="btn btn-outline-primary">Message</button> -->
-                                </div>
-                            </div>
-                            <hr class="my-4">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-8">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row mb-3">
-                                <div class="col-sm-3">
-                                    <h4 class="mb-0">Họ và tên</h4>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <input type="text" class="form-control" value="{{user.hoTen}}">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-sm-3">
-                                    <h4 class="mb-0">Email</h4>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <input type="text" class="form-control" value="{{user.email}}">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-sm-3">
-                                    <h4 class="mb-0">CMND/CCCD</h4>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <input type="text" (keypress)="numberOnly($event)" class="form-control" value="{{user.cmnd}}">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-sm-3">
-                                    <h4 class="mb-0">Số điện thoại</h4>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <input (keypress)="numberOnly($event)" type="text" class="form-control" value="{{user.sdt}}">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-sm-3">
-                                    <h4 class="mb-0">Ngày sinh</h4>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <input type="date" class="form-control" value="{{user.ngaySinh}}">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3"></div>
-                                <div class="col-sm-9 text-secondary">
-                                    <button type="button" class="btn btn-primary px-4">Lưu thay đổi</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<div class="width-box">
 
+    <div class="row">
+
+        <div class="col-3">
+            <section class="ftco-search">
+                <div class="box">
+                    <div class=" img-avt scale-img max-width">
+                        <img src="http://localhost:3000/default.png">
+                    </div>
                 </div>
+            </section>
+        </div>
+        <div class="col-9">
+            <div class="box">
+                <mat-tab-group mat-align-tabs="start">
+                    <mat-tab label="Thông tin cá nhân">
+                        <div class="profile">
+                            <div class="row">
+                                <div class="col-6">
+                                    <form action="">
+                                        <div class="form-group">
+                                            <div class="form-field">
+                                                <input type="text" [disabled]="disable" [value]="user.tenNguoiDung" [placeholder]="user.tenNguoiDung">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-field">
+                                                <input type="text" [disabled]="disable" [value]="user.hoTen" [placeholder]="user.hoTen">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-field">
+                                                <input type="text" [disabled]="disable" [value]="user.email" [placeholder]="user.email">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-field">
+                                                <input (keypress)="numberOnly($event)" [disabled]="disable" type="text" [value]="user.cmnd" [placeholder]="user.cmnd">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-field">
+                                                <input (keypress)="numberOnly($event)" [disabled]="disable" type="text" [value]="user.sdt" [placeholder]="user.sdt">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-field">
+                                                <input type="date" [disabled]="disable" [value]="user.ngaySinh" [placeholder]="user.ngaySinh">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-6">
+                                    <div class="button mb-4">
+                                        <button (click)="change()">{{text}}</button>
+                                    </div>
+                                    <div class="button">
+                                        <button (click)="cancel()">hủy</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Lịch sử đặt Tour">
+                        <mat-tab-group mat-align-tabs="start">
+                            <mat-tab label="Chưa xác nhận">Chưa xác nhận</mat-tab>
+                            <mat-tab label="Chưa thanh toán">Chưa thanh toán</mat-tab>
+                            <mat-tab label="Đã hoàn thành">Đã hoàn thành</mat-tab>
+                            <mat-tab label="Đã hủy">Đã hủy</mat-tab>
+                        </mat-tab-group>
+                    </mat-tab>
+                </mat-tab-group>
+
             </div>
         </div>
     </div>
-</section>
+</div>

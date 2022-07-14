@@ -17,7 +17,9 @@ import { SearchResultComponent } from "./pages/search-result/search-result.compo
 import { ProfileComponent } from "./pages/profile/profile.component";
 import { TourByTheLoaiComponent } from "./pages/tour-by-the-loai/tour-by-the-loai.component";
 import { TourByDiemDenComponent } from "./pages/tour-by-diem-den/tour-by-diem-den.component";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatTabsModule } from "@angular/material/tabs";
 @NgModule({
   declarations: [
     NewtoursComponent,
@@ -41,6 +43,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbModule,
+    MatTabsModule,
   ],
   providers: [Title],
 })
