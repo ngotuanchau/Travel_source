@@ -1061,6 +1061,14 @@ namespace Travel.Controllers
                 }
                 foreach (var tour in tours)
                 {
+                    // Get List Thoi Gian
+                    List<NhungNgayKhoiHanh> nhungNgayKhoiHanhs = new List<NhungNgayKhoiHanh>();
+                    List<ThoiGian> thoiGians = _context.ThoiGians.Where(p => p.TourId == tour.Id && p.TrangThai == 1 && p.NgayDi >= ngaykh).ToList();
+                    if (search_Serialize.thoigiandi != null && thoiGians.Count() < 1)
+                    {
+                        continue;
+                    }
+
                     // Get information tour
                     Tour_serialize tour_Serialize = new Tour_serialize();
                     tour_Serialize.Id = tour.Id;
@@ -1085,14 +1093,7 @@ namespace Travel.Controllers
                     tour_Serialize.Phuongtien = tour.PhuongTien;
                     tour_Serialize.Anhtour = tour.AnhTour;
 
-                    // Get List Thoi Gian
-                    DateTime now = DateTime.Now;
-                    List<NhungNgayKhoiHanh> nhungNgayKhoiHanhs = new List<NhungNgayKhoiHanh>();
-                    List<ThoiGian> thoiGians = _context.ThoiGians.Where(p => p.TourId == tour.Id && p.TrangThai == 1 && p.NgayDi == ngaykh).ToList();
-                    if (search_Serialize.thoigiandi != null && thoiGians.Count() < 1)
-                    {
-                        continue;
-                    }
+                    
                     foreach (var tg in thoiGians)
                     {
                         NhungNgayKhoiHanh nhungNgayKhoiHanh = new NhungNgayKhoiHanh();
