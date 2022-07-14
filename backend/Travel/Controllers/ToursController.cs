@@ -1063,7 +1063,7 @@ namespace Travel.Controllers
                 {
                     // Get List Thoi Gian
                     List<NhungNgayKhoiHanh> nhungNgayKhoiHanhs = new List<NhungNgayKhoiHanh>();
-                    List<ThoiGian> thoiGians = _context.ThoiGians.Where(p => p.TourId == tour.Id && p.TrangThai == 1 && p.NgayDi == ngaykh).ToList();
+                    List<ThoiGian> thoiGians = _context.ThoiGians.Where(p => p.TourId == tour.Id && p.TrangThai == 1 && p.NgayDi >= ngaykh).ToList();
                     if (search_Serialize.thoigiandi != null && thoiGians.Count() < 1)
                     {
                         continue;
