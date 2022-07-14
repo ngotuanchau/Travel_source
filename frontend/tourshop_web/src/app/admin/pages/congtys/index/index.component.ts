@@ -1,17 +1,25 @@
 import { Component } from "@angular/core";
-import { Congtys, Employee } from "../congty-data";
 import { NgbNavChangeEvent } from "@ng-bootstrap/ng-bootstrap";
-
+import { DatePipe } from "@angular/common";
+import { DoanhNghiepsService } from "../../../../service/doanhnghieps.service";
 @Component({
   selector: "app-congtys",
   templateUrl: "index.component.html",
   styleUrls: ["index.component.css"],
 })
 export class CongTysIndexComponent {
-  trow: Congtys[];
-
-  constructor() {
-    this.trow = Employee;
+  pipe = new DatePipe("en-US");
+  constructor(private doanhnghiepService: DoanhNghiepsService) {}
+  ngOnInit(): void {
+    this.getAllDoanhNghiep();
+  }
+  user: any;
+  getAllDoanhNghiep() {
+    this.user = [];
+    this.doanhnghiepService.getAllBusiness().subscribe((res) => {
+      this.user = res;
+      console.log(res);
+    });
   }
   //Nav
   currentJustify = "start";

@@ -42,6 +42,7 @@ namespace Travel.Controllers
                     Congty_serialize ct = new Congty_serialize();
                     ct.Id = congty.Id;
                     ct.KhuVuc = congty.KhuVuc;
+                    ct.Email = congty.Email;
                     ct.Mst = congty.Mst;
                     ct.Sdt = congty.Sdt;
                     ct.Tencongty = congty.Tencongty;

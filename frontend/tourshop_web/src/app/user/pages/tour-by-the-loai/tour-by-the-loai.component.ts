@@ -1,5 +1,5 @@
 import { DatePipe } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Output } from "@angular/core";
 import { DiadiemsService } from "../../../service/diadiems.service";
 import { TheloaisService } from "../../../service/theloais.service";
 import { ToursService } from "../../../service/tours.service";
@@ -25,6 +25,7 @@ export class TourByTheLoaiComponent implements OnInit {
   subTitle = "Cuộc sống là một cuộc phiêu lưu đầy táo bạo hoặc không là gì cả";
   pipe = new DatePipe("en-US");
   id: any;
+  count: number;
   constructor(
     private tourservice: ToursService,
     private theloaiService: TheloaisService,
@@ -105,7 +106,7 @@ export class TourByTheLoaiComponent implements OnInit {
           this.tours.push(tour);
         }
       }
-      console.log(this.tours);
+      this.count = this.tours.length;
     });
   }
   findDateDisplay(id: number) {
@@ -176,5 +177,12 @@ export class TourByTheLoaiComponent implements OnInit {
   }
   onSearch() {
     this.routes.navigate(["search"]);
+  }
+  //format currency
+  formatCurrency(money: number) {
+    return new Intl.NumberFormat("fr-FR", {
+      style: "currency",
+      currency: "VND",
+    }).format(money);
   }
 }

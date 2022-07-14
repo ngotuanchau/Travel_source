@@ -16,7 +16,6 @@ import { MatGridListModule } from "@angular/material/grid-list";
 import { MatButtonModule } from "@angular/material/button";
 import { MatSelectModule } from "@angular/material/select";
 import { MatDatepickerModule } from "@angular/material/datepicker";
-import { HeaderComponent } from "../component/header/header.component";
 
 @NgModule({
   declarations: [

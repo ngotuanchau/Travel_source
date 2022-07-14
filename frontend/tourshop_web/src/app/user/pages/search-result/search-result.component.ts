@@ -1,7 +1,15 @@
 import { DatePipe } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { PhanvungsService } from "../../../service/phanvungs.service";
+import { FormField } from "../search";
+import { HttpClient } from "@angular/common/http";
 import { DiadiemsService } from "../../../service/diadiems.service";
 import { TheloaisService } from "../../../service/theloais.service";
 import { ToursService } from "../../../service/tours.service";
@@ -25,16 +33,56 @@ export class SearchResultComponent implements OnInit {
   title = "Tour mới";
   subTitle = "Cuộc sống là một cuộc phiêu lưu đầy táo bạo hoặc không là gì cả";
   pipe = new DatePipe("en-US");
-
+  lstTour: any;
+  form: FormGroup;
+  readonly FormField = FormField;
   constructor(
     private tourservice: ToursService,
     private theloaiService: TheloaisService,
     private diadiemService: DiadiemsService,
-    private routes: Router
+    private routes: Router,
+    private phanvungService: PhanvungsService,
+    private formBuilder: FormBuilder
   ) {
     this.lstAmThuc = lstAmThucs;
     this.lstLuuTru = lstLuuTrus;
     this.lstPhuongTien = lstPhuongTiens;
+    this.form = this.formBuilder.group({
+      [FormField?.theloai]: [0],
+      [FormField?.khuvuc]: [0],
+      [FormField?.diemdi]: [0],
+      [FormField?.diemden]: [0],
+      [FormField?.amthuc]: [""],
+      [FormField?.luutru]: [""],
+      [FormField?.phuongtien]: [""],
+      [FormField?.thoigiandi]: [""],
+      [FormField?.dichvu]: [""],
+    });
+  }
+  listAT: any;
+  listLT: any;
+  listPT: any;
+  ngayKh: Date = new Date();
+  onSearch() {
+    let ngayKh = this.pipe.transform(this.ngayKh, "dd/MM/yyyy");
+    console.log("Ngày: ");
+    console.log(ngayKh);
+    this.form.patchValue({
+      [FormField.amthuc]: this.listAT,
+      [FormField.luutru]: this.listLT,
+      [FormField.phuongtien]: this.listPT,
+      [FormField.thoigiandi]: ngayKh,
+    });
+    this.tourservice.search(this.form.value).subscribe((res) => {
+      if (res == null) {
+        console.log("Không có Tour liên quan");
+      } else {
+        this.newtours = [];
+        this.newtours = res;
+        console.log("Tour:");
+        console.log(this.newtours);
+      }
+    });
   }
   onChangeAT($event: any) {
     const id = $event.target.value;
@@ -52,6 +100,7 @@ export class SearchResultComponent implements OnInit {
       .map((item) => item.id);
     // this.listAT = ids;
     var str1 = ids.toString(); // Gives you "42,55"
+    this.listAT = String(str1);
   }
   onChangeLT($event: any) {
     const id = $event.target.value;
@@ -69,6 +118,7 @@ export class SearchResultComponent implements OnInit {
       .filter((item) => item.completed)
       .map((item) => item.id);
     var str1 = ids.toString();
+    this.listLT = String(str1);
   }
   onChangePT($event: any) {
     const id = $event.target.value;
@@ -85,17 +135,35 @@ export class SearchResultComponent implements OnInit {
       .filter((item) => item.completed)
       .map((item) => item.id);
     var str1 = ids.toString();
+    this.listPT = String(str1);
   }
+
   ngOnInit(): void {
     this.getNewTours();
     this.getTheLoai();
     this.getAllDiaDiem();
+    this.getPhanVung();
   }
 
   newtours: any;
+  tours: any;
+  phanvungs: any;
+  getPhanVung() {
+    this.phanvungs = [];
+    this.phanvungService.getPhanVung().subscribe((res) => {
+      this.phanvungs = res.listPhanVung;
+    });
+  }
   getNewTours() {
+    this.newtours = [];
+    this.tours = [];
     this.tourservice.getNewTours().subscribe((response) => {
-      this.newtours = response;
+      for (let tour of response) {
+        if (tour.nhungNgayKhoiHanh.length >= 1) {
+          this.tours.push(tour);
+        }
+      }
+      this.newtours = this.tours;
     });
   }
   findDateDisplay(id: number) {
@@ -170,9 +238,7 @@ export class SearchResultComponent implements OnInit {
   viewDetail(id: number) {
     this.routes.navigate(["/tour/detail/" + id]);
   }
-  onSearch() {
-    this.routes.navigate(["search"]);
-  }
+
   formatCurrency(money: number) {
     return new Intl.NumberFormat("fr-FR", {
       style: "currency",

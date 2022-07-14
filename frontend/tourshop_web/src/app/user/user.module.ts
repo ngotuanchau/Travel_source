@@ -13,11 +13,19 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { NewtoursComponent } from "./pages/newtours/newtours.component";
 import { MatFormFieldModule } from "@angular/material/form-field";
-import { SearchResultComponent } from './pages/search-result/search-result.component';
-import { ProfileComponent } from './pages/profile/profile.component';
-import { TourByTheLoaiComponent } from './pages/tour-by-the-loai/tour-by-the-loai.component';
+import { SearchResultComponent } from "./pages/search-result/search-result.component";
+import { ProfileComponent } from "./pages/profile/profile.component";
+import { TourByTheLoaiComponent } from "./pages/tour-by-the-loai/tour-by-the-loai.component";
+import { TourByDiemDenComponent } from "./pages/tour-by-diem-den/tour-by-diem-den.component";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 @NgModule({
-  declarations: [NewtoursComponent, SearchResultComponent, ProfileComponent, TourByTheLoaiComponent],
+  declarations: [
+    NewtoursComponent,
+    SearchResultComponent,
+    ProfileComponent,
+    TourByTheLoaiComponent,
+    TourByDiemDenComponent,
+  ],
   imports: [
     CommonModule,
     UserRoutingModule,
@@ -31,6 +39,8 @@ import { TourByTheLoaiComponent } from './pages/tour-by-the-loai/tour-by-the-loa
     MatSelectModule,
     MatDatepickerModule,
     MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [Title],
 })

@@ -51,15 +51,17 @@
                                 </td>
                                 <td *ngIf="tr.trangThai==1" class="confirm">
                                     <button (click)="prepare(tr.id)">Chuẩn bị</button>
+                                    <button (click)="cancel(tr.id)" class="cancel">Hủy</button>
                                 </td>
                                 <td *ngIf="tr.trangThai==2" class="confirm">
                                     <button (click)="start(tr.id)">Khởi hành</button>
+                                    <button (click)="cancel(tr.id)" class="cancel">Hủy</button>
                                 </td>
                                 <td *ngIf="tr.trangThai==3" class="confirm">
                                     <button (click)="end(tr.id)">Kết thúc</button>
                                 </td>
                                 <td *ngIf="tr.trangThai==4" class="confirm">
-                                    <button (click)="cancel(tr.id)" class="cancel">Hủy</button>
+
                                 </td>
                                 <td>
                                     <a [routerLink]="['detail']"><button type="button" class="btn btn-inverse-info btn-icon" onclick="">

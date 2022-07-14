@@ -96,15 +96,13 @@ export class NewtoursComponent implements OnInit {
   getNewTours() {
     this.newtours = [];
     this.tours = [];
-    const size = 10;
     this.tourservice.getNewTours().subscribe((response) => {
       for (let tour of response) {
         if (tour.nhungNgayKhoiHanh.length >= 1) {
           this.tours.push(tour);
         }
       }
-      this.newtours = this.tours.slice(0, size);
-      console.log(this.newtours);
+      this.newtours = this.tours;
     });
   }
   findDateDisplay(id: number) {

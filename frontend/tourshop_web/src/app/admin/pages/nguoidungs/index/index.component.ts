@@ -1,14 +1,26 @@
-import { Component } from "@angular/core";
-
+import { Component, OnInit } from "@angular/core";
+import { DatePipe } from "@angular/common";
 import { NgbNavChangeEvent } from "@ng-bootstrap/ng-bootstrap";
+import { NguoiDungsService } from "../../../../service/nguoidungs.service";
 
 @Component({
   selector: "app-nguoidungs",
   templateUrl: "index.component.html",
   styleUrls: ["index.component.css"],
 })
-export class NguoiDungsIndexComponent {
-  constructor() {}
+export class NguoiDungsIndexComponent implements OnInit {
+  pipe = new DatePipe("en-US");
+  constructor(private nguoidungService: NguoiDungsService) {}
+  ngOnInit(): void {
+    this.getAllUser();
+  }
+  user: any;
+  getAllUser() {
+    this.user = [];
+    this.nguoidungService.getAllUsers().subscribe((res) => {
+      this.user = res;
+    });
+  }
   //Nav
   currentJustify = "start";
 
