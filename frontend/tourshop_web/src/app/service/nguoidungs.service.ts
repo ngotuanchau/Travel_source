@@ -20,4 +20,7 @@ export class NguoiDungsService {
   updateUser(id: any, data: any): Observable<any> {
     return this.http.put<any>(this.baseUrl + "/" + id, data);
   }
+  createUser(user: any): Observable<any> {
+    return this.http.post<any>(this.baseUrl, user);
+  }
 }
