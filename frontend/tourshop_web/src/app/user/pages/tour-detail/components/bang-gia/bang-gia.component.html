@@ -26,8 +26,12 @@
                             <td>{{formatCurrency(n.giaTreEn)}}</td>
                             <td>{{formatCurrency(n.giaTreNho)}}</td>
                             <td>{{findBlankDisplay(n.id,tour.veToiDa)}} chỗ</td>
-                            <td *ngIf="findBlankDisplay(n.id,tour.veToiDa)>0"><button [disabled]="" (click)="booking(tour.id,n.id)">ĐẶT NGAY</button></td>
-                            <td></td>
+                            <td *ngIf="!disableDatNgay(n.id,n.ngayKh)"><button (click)="booking(tour.id,n.id)">ĐẶT NGAY</button>
+                            </td>
+                            <td *ngIf="disableDatNgay(n.id,n.ngayKh)">
+                                <p *ngIf="findBlankDisplay(n.id,tour.veToiDa)==0">Đã bán hết</p>
+                                <p *ngIf="findBlankDisplay(n.id,tour.veToiDa)!=0">Hết hạn</p>
+                            </td>
                     </tbody>
 
                 </table>

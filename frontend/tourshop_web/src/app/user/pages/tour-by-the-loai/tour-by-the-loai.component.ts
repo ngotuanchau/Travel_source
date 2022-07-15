@@ -12,6 +12,9 @@ import {
   PhuongTien,
 } from "../dichvu-data";
 import { ActivatedRoute, Router } from "@angular/router";
+import { PhanvungsService } from "../../../service/phanvungs.service";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormField } from "../search";
 @Component({
   selector: "app-tour-by-the-loai",
   templateUrl: "./tour-by-the-loai.component.html",
@@ -26,16 +29,31 @@ export class TourByTheLoaiComponent implements OnInit {
   pipe = new DatePipe("en-US");
   id: any;
   count: number;
+  form: FormGroup;
+  readonly FormField = FormField;
   constructor(
     private tourservice: ToursService,
     private theloaiService: TheloaisService,
     private diadiemService: DiadiemsService,
     private routes: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private phanvungService: PhanvungsService,
+    private formBuilder: FormBuilder
   ) {
     this.lstAmThuc = lstAmThucs;
     this.lstLuuTru = lstLuuTrus;
     this.lstPhuongTien = lstPhuongTiens;
+    this.form = this.formBuilder.group({
+      [FormField?.theloai]: [0],
+      [FormField?.khuvuc]: [0],
+      [FormField?.diemdi]: [0],
+      [FormField?.diemden]: [0],
+      [FormField?.amthuc]: [""],
+      [FormField?.luutru]: [""],
+      [FormField?.phuongtien]: [""],
+      [FormField?.thoigiandi]: [""],
+      [FormField?.dichvu]: [""],
+    });
   }
   onChangeAT($event: any) {
     const id = $event.target.value;
@@ -94,8 +112,55 @@ export class TourByTheLoaiComponent implements OnInit {
     this.getNewTours(this.id);
     this.getTheLoai();
     this.getAllDiaDiem();
+    this.getPhanVung();
   }
-
+  phanvungs: any;
+  getPhanVung() {
+    this.phanvungs = [];
+    this.phanvungService.getPhanVung().subscribe((res) => {
+      this.phanvungs = res.listPhanVung;
+    });
+  }
+  listAT: any;
+  listLT: any;
+  listPT: any;
+  ngayKh: Date = new Date();
+  onSearch() {
+    let ngayKh = this.pipe.transform(this.ngayKh, "dd/MM/yyyy");
+    if (this.form.value.theloai == 0) {
+      this.form.patchValue({
+        [FormField.amthuc]: this.listAT,
+        [FormField.luutru]: this.listLT,
+        [FormField.phuongtien]: this.listPT,
+        [FormField.thoigiandi]: ngayKh,
+        [FormField.theloai]: parseInt(this.id),
+      });
+    } else {
+      this.form.patchValue({
+        [FormField.amthuc]: this.listAT,
+        [FormField.luutru]: this.listLT,
+        [FormField.phuongtien]: this.listPT,
+        [FormField.thoigiandi]: ngayKh,
+      });
+    }
+    this.form.patchValue({
+      [FormField.amthuc]: this.listAT,
+      [FormField.luutru]: this.listLT,
+      [FormField.phuongtien]: this.listPT,
+      [FormField.thoigiandi]: ngayKh,
+    });
+    this.tourservice.search(this.form.value).subscribe((res) => {
+      if (res == null) {
+        console.log("Không có Tour liên quan");
+      } else {
+        this.tours = [];
+        this.tours = res;
+        console.log("Tour:");
+        console.log(this.tours);
+      }
+    });
+    this.form.reset();
+  }
   newtours: any;
   tours: any;
   getNewTours(id: any) {
@@ -170,14 +235,12 @@ export class TourByTheLoaiComponent implements OnInit {
     });
   }
   findDDById(id: number) {
-    return this.diadiems.find((item: any) => item.id == id)?.ten;
+    return this.diadiems.find((item: any) => item.id == id)?.tendiadiem;
   }
   viewDetail(id: number) {
     this.routes.navigate(["/tour/detail/" + id]);
   }
-  onSearch() {
-    this.routes.navigate(["search"]);
-  }
+
   //format currency
   formatCurrency(money: number) {
     return new Intl.NumberFormat("fr-FR", {

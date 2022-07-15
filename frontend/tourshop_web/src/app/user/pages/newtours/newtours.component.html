@@ -3,13 +3,19 @@
         <div class="row">
             <div class="col-6 col-lg-3">
                 <div class="mt-5 mb-5 search">
-                    <form action="">
+                    <div class="form-group">
+                        <label>Chọn ngày đi</label>
+                        <div class="form-field">
+                            <input type="date" [(ngModel)]="ngayKh" class="form-control checkout_date" placeholder="Ngày khởi hành">
+                        </div>
+                    </div>
+                    <form action="" [formGroup]="form">
                         <div class="form-group">
                             <label>Loại tour </label>
                             <div class="form-field">
                                 <mat-form-field appearance="fill">
                                     <mat-label>Chọn loại tour</mat-label>
-                                    <mat-select>
+                                    <mat-select [formControlName]="FormField.theloai">
                                         <mat-option *ngFor="let dd of theloais" [value]="dd.id">
                                             {{dd.tenLoai}}
                                         </mat-option>
@@ -22,9 +28,9 @@
                             <div class="form-field">
                                 <mat-form-field appearance="fill">
                                     <mat-label>Chọn điểm khởi hành</mat-label>
-                                    <mat-select>
+                                    <mat-select [formControlName]="FormField.diemdi">
                                         <mat-option *ngFor="let dd of diadiems" [value]="dd.id">
-                                            {{dd.ten}}
+                                            {{dd.tendiadiem}}
                                         </mat-option>
                                     </mat-select>
                                 </mat-form-field>
@@ -35,28 +41,28 @@
                             <div class="form-field">
                                 <mat-form-field appearance="fill">
                                     <mat-label>Chọn điểm đến</mat-label>
-                                    <mat-select>
+                                    <mat-select [formControlName]="FormField.diemden">
                                         <mat-option *ngFor="let dd of diadiems" [value]="dd.id">
-                                            {{dd.ten}}
+                                            {{dd.tendiadiem}}
                                         </mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Chọn ngày đi</label>
+                            <label>Khu vực </label>
                             <div class="form-field">
-                                <input type="date" class="form-control checkout_date" placeholder="Ngày khởi hành">
-                                <!-- <div class="icon"><span class="icon-calendar"></span></div> -->
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Chọn khu vực</mat-label>
+                                    <mat-select [formControlName]="FormField.khuvuc">
+                                        <mat-option *ngFor="let dd of phanvungs" [value]="dd.id">
+                                            {{dd.tenVung}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label>Chọn ngày kết thúc</label>
-                            <div class="form-field">
-                                <input type="date" class="form-control checkout_date" placeholder="Ngày khởi hành">
-                                <!-- <div class="icon"><span class="icon-calendar"></span></div> -->
-                            </div>
-                        </div>
+
                         <div class="form-group">
                             <label>Ẩm thực</label>
                             <div *ngFor="let at of lstAmThuc">
@@ -79,6 +85,7 @@
                             <button (click)="onSearch()">Tìm kiếm</button>
                         </div>
                     </form>
+
                 </div>
             </div>
             <div class="col-12 col-sm-6 col-lg-9">
@@ -92,7 +99,8 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 mt-1">
-                                    <h5>Loại: <span>{{findTLById(tour.theloai)}}</span></h5>
+                                    <h5>Loại: <a [routerLink]="['../tour/theloai/',tour.theloai]"><span>{{findTLById(tour.theloai)}}</span></a>
+                                    </h5>
                                     <h1>{{tour.tentour}}</h1>
                                     <div class="d-flex flex-row">
                                         <div class="mt-1 mb-1 spec-1">Ngày khởi hành: <span> {{findDateDisplay(tour.id)}}</span></div>
@@ -106,7 +114,7 @@
                                         <div class="mt-1 mb-1 spec-1">Còn lại: <span> {{findBlankDisplay(tour.id,tour.veToiDa)}} chỗ</span>
                                         </div>
                                     </div>
-                                    <div class="mt-1 mb-1 spec-1"><span class="dot dot-r"></span><span class="r">Mới</span><span class="dot"></span><span>{{tour.tendiemdi}}</span><span class="dot"></span><span>{{tour.tendiemden}}<br></span></div>
+                                    <div class="mt-1 mb-1 spec-1"><span class="dot dot-r"></span><span class="r">Mới</span><span class="dot"></span><span>{{tour.tendiemdi}}</span><span class="dot"></span><a [routerLink]="['/../tour/diemden/',tour.diemDen]"><span>{{tour.tendiemden}}<br></span></a></div>
                                     <!-- <p class="text-justify text-truncate para mb-0">{{tour.mota}}<br><br></p> -->
                                 </div>
                                 <div class="align-items-center align-content-center col-md-2 border-left mt-1">

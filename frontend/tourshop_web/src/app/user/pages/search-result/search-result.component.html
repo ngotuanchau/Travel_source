@@ -30,7 +30,7 @@
                                     <mat-label>Chọn điểm khởi hành</mat-label>
                                     <mat-select [formControlName]="FormField.diemdi">
                                         <mat-option *ngFor="let dd of diadiems" [value]="dd.id">
-                                            {{dd.ten}}
+                                            {{dd.tendiadiem}}
                                         </mat-option>
                                     </mat-select>
                                 </mat-form-field>
@@ -43,7 +43,7 @@
                                     <mat-label>Chọn điểm đến</mat-label>
                                     <mat-select [formControlName]="FormField.diemden">
                                         <mat-option *ngFor="let dd of diadiems" [value]="dd.id">
-                                            {{dd.ten}}
+                                            {{dd.tendiadiem}}
                                         </mat-option>
                                     </mat-select>
                                 </mat-form-field>

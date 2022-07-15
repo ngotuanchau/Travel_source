@@ -35,6 +35,7 @@ export class TourDetailComponent implements OnInit {
   amthuc: any;
   phuongtien: any;
   luutru: any;
+  message: string;
   //Get detail
   getDetail(id: any) {
     this.tourService.getDetailTour(id).subscribe((res) => {
@@ -53,24 +54,35 @@ export class TourDetailComponent implements OnInit {
       this.phuongtien = this.tour.phuongtien;
       const today = new Date().toLocaleDateString();
       for (let n of this.ngayKHs) {
-        if (n.ngayKh > today) {
-          this.ngay = n.id;
-          break;
+        const today = new Date();
+        const thisDay = new Date(n.ngayKh);
+        if (this.findBlank(n.id) > 0) {
+          if (thisDay.getFullYear() >= today.getFullYear()) {
+            if (thisDay.getMonth() >= today.getMonth()) {
+              if (
+                (thisDay.getDate() >= today.getDate() &&
+                  thisDay.getMonth() == today.getMonth()) ||
+                thisDay.getMonth() > today.getMonth()
+              ) {
+                this.ngay = n.id;
+                break;
+              } else {
+                this.message = "Đã qua thời gian mở tour";
+              }
+            } else {
+              this.message = "Đã qua thời gian mở tour";
+            }
+          } else {
+            this.message = "Đã qua thời gian mở tour";
+          }
+        } else {
+          this.message = "Vé đã bán hết";
         }
       }
     });
   }
-  findDateDisplay(id: number) {
-    const today = new Date().toLocaleDateString();
-    //const thisDay = new Date(this.ngayKh).toLocaleDateString();
-    var ngay: any;
-    for (let n of this.ngayKHs) {
-      if (n.ngayKh > today) {
-        ngay = n.ngayKh;
-        break;
-      }
-    }
-    return this.pipe.transform(ngay, "dd/MM/yyyy");
+  findDateDisplay(id: any) {
+    return this.ngayKHs.find((item: any) => item.id == id)?.ngayKh;
   }
   findBlank(id: number): number {
     var blank = 0;

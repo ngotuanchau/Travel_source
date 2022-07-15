@@ -31,11 +31,8 @@ export class DichVuComponent implements OnInit {
 
   ngOnInit(): void {
     this.at = this.convertToArray(this.amthuc);
-    console.log(this.at);
     this.lt = this.convertToArray(this.luutru);
-    console.log(this.lt);
     this.pt = this.convertToArray(this.phuongtien);
-    console.log(this.pt);
   }
   convertToArray(string: string) {
     return string.split(",").map((item) => parseInt(item, 10));

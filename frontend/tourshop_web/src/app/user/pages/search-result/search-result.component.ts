@@ -83,6 +83,7 @@ export class SearchResultComponent implements OnInit {
         console.log(this.newtours);
       }
     });
+    this.form.reset();
   }
   onChangeAT($event: any) {
     const id = $event.target.value;
@@ -233,7 +234,7 @@ export class SearchResultComponent implements OnInit {
     });
   }
   findDDById(id: number) {
-    return this.diadiems.find((item: any) => item.id == id)?.ten;
+    return this.diadiems.find((item: any) => item.id == id)?.tendiadiem;
   }
   viewDetail(id: number) {
     this.routes.navigate(["/tour/detail/" + id]);
