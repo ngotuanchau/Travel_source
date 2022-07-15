@@ -1,15 +1,5 @@
 import { DatePipe } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { PhanvungsService } from "../../../service/phanvungs.service";
-import { FormField } from "../search";
-import { HttpClient } from "@angular/common/http";
+import { Component, OnInit, Output } from "@angular/core";
 import { DiadiemsService } from "../../../service/diadiems.service";
 import { TheloaisService } from "../../../service/theloais.service";
 import { ToursService } from "../../../service/tours.service";
@@ -21,19 +11,24 @@ import {
   LuuTru,
   PhuongTien,
 } from "../dichvu-data";
+import { ActivatedRoute, Router } from "@angular/router";
+import { PhanvungsService } from "../../../service/phanvungs.service";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormField } from "../search";
 @Component({
-  selector: "app-search-result",
-  templateUrl: "./search-result.component.html",
-  styleUrls: ["./search-result.component.scss"],
+  selector: "app-tour-by-the-loai",
+  templateUrl: "./tour-by-the-loai.component.html",
+  styleUrls: ["./tour-by-the-loai.component.scss"],
 })
-export class SearchResultComponent implements OnInit {
+export class TourByTheLoaiComponent implements OnInit {
   lstAmThuc: AmThuc[];
   lstLuuTru: LuuTru[];
   lstPhuongTien: PhuongTien[];
   title = "Tour mới";
   subTitle = "Cuộc sống là một cuộc phiêu lưu đầy táo bạo hoặc không là gì cả";
   pipe = new DatePipe("en-US");
-  lstTour: any;
+  id: any;
+  count: number;
   form: FormGroup;
   readonly FormField = FormField;
   constructor(
@@ -41,6 +36,7 @@ export class SearchResultComponent implements OnInit {
     private theloaiService: TheloaisService,
     private diadiemService: DiadiemsService,
     private routes: Router,
+    private activatedRoute: ActivatedRoute,
     private phanvungService: PhanvungsService,
     private formBuilder: FormBuilder
   ) {
@@ -59,32 +55,6 @@ export class SearchResultComponent implements OnInit {
       [FormField?.dichvu]: [""],
     });
   }
-  listAT: any;
-  listLT: any;
-  listPT: any;
-  ngayKh: Date = new Date();
-  onSearch() {
-    let ngayKh = this.pipe.transform(this.ngayKh, "dd/MM/yyyy");
-    console.log("Ngày: ");
-    console.log(ngayKh);
-    this.form.patchValue({
-      [FormField.amthuc]: this.listAT,
-      [FormField.luutru]: this.listLT,
-      [FormField.phuongtien]: this.listPT,
-      [FormField.thoigiandi]: ngayKh,
-    });
-    this.tourservice.search(this.form.value).subscribe((res) => {
-      if (res == null) {
-        console.log("Không có Tour liên quan");
-      } else {
-        this.newtours = [];
-        this.newtours = res;
-        console.log("Tour:");
-        console.log(this.newtours);
-      }
-    });
-    this.form.reset();
-  }
   onChangeAT($event: any) {
     const id = $event.target.value;
     const isChecked = $event.target.checked;
@@ -101,7 +71,6 @@ export class SearchResultComponent implements OnInit {
       .map((item) => item.id);
     // this.listAT = ids;
     var str1 = ids.toString(); // Gives you "42,55"
-    this.listAT = String(str1);
   }
   onChangeLT($event: any) {
     const id = $event.target.value;
@@ -119,7 +88,6 @@ export class SearchResultComponent implements OnInit {
       .filter((item) => item.completed)
       .map((item) => item.id);
     var str1 = ids.toString();
-    this.listLT = String(str1);
   }
   onChangePT($event: any) {
     const id = $event.target.value;
@@ -136,18 +104,16 @@ export class SearchResultComponent implements OnInit {
       .filter((item) => item.completed)
       .map((item) => item.id);
     var str1 = ids.toString();
-    this.listPT = String(str1);
   }
-
   ngOnInit(): void {
-    this.getNewTours();
+    this.activatedRoute.paramMap.subscribe((params) => {
+      this.id = params.get("id");
+    });
+    this.getNewTours(this.id);
     this.getTheLoai();
     this.getAllDiaDiem();
     this.getPhanVung();
   }
-
-  newtours: any;
-  tours: any;
   phanvungs: any;
   getPhanVung() {
     this.phanvungs = [];
@@ -155,22 +121,61 @@ export class SearchResultComponent implements OnInit {
       this.phanvungs = res.listPhanVung;
     });
   }
-  getNewTours() {
-    this.newtours = [];
+  listAT: any;
+  listLT: any;
+  listPT: any;
+  ngayKh: Date = new Date();
+  onSearch() {
+    let ngayKh = this.pipe.transform(this.ngayKh, "dd/MM/yyyy");
+    if (this.form.value.theloai == 0) {
+      this.form.patchValue({
+        [FormField.amthuc]: this.listAT,
+        [FormField.luutru]: this.listLT,
+        [FormField.phuongtien]: this.listPT,
+        [FormField.thoigiandi]: ngayKh,
+        [FormField.theloai]: parseInt(this.id),
+      });
+    } else {
+      this.form.patchValue({
+        [FormField.amthuc]: this.listAT,
+        [FormField.luutru]: this.listLT,
+        [FormField.phuongtien]: this.listPT,
+        [FormField.thoigiandi]: ngayKh,
+      });
+    }
+    this.form.patchValue({
+      [FormField.amthuc]: this.listAT,
+      [FormField.luutru]: this.listLT,
+      [FormField.phuongtien]: this.listPT,
+      [FormField.thoigiandi]: ngayKh,
+    });
+    this.tourservice.search(this.form.value).subscribe((res) => {
+      if (res == null) {
+        console.log("Không có Tour liên quan");
+      } else {
+        this.tours = [];
+        this.tours = res;
+        console.log("Tour:");
+        console.log(this.tours);
+      }
+    });
+    this.form.reset();
+  }
+  newtours: any;
+  tours: any;
+  getNewTours(id: any) {
     this.tours = [];
-    this.tourservice.getNewTours().subscribe((response) => {
+    this.tourservice.getToursByIdTL(id).subscribe((response) => {
       for (let tour of response) {
         if (tour.nhungNgayKhoiHanh.length >= 1) {
           this.tours.push(tour);
         }
       }
-      this.newtours = this.tours;
+      this.count = this.tours.length;
     });
   }
   findDateDisplay(id: number) {
-    var nkhs = this.newtours.find(
-      (item: any) => item.id == id
-    )?.nhungNgayKhoiHanh;
+    var nkhs = this.tours.find((item: any) => item.id == id)?.nhungNgayKhoiHanh;
     const today = new Date().toLocaleDateString();
     //const thisDay = new Date(this.ngayKh).toLocaleDateString();
     var ngay: any;
@@ -183,9 +188,7 @@ export class SearchResultComponent implements OnInit {
     return this.pipe.transform(ngay, "dd/MM/yyyy");
   }
   findPriceDisplay(id: number) {
-    var nkhs = this.newtours.find(
-      (item: any) => item.id == id
-    )?.nhungNgayKhoiHanh;
+    var nkhs = this.tours.find((item: any) => item.id == id)?.nhungNgayKhoiHanh;
     const today = new Date().toLocaleDateString();
     //const thisDay = new Date(this.ngayKh).toLocaleDateString();
     var price: any;
@@ -198,9 +201,7 @@ export class SearchResultComponent implements OnInit {
     return price;
   }
   findBlankDisplay(id: number, vetoida: number): number {
-    var nkhs = this.newtours.find(
-      (item: any) => item.id == id
-    )?.nhungNgayKhoiHanh;
+    var nkhs = this.tours.find((item: any) => item.id == id)?.nhungNgayKhoiHanh;
     const today = new Date().toLocaleDateString();
     //const thisDay = new Date(this.ngayKh).toLocaleDateString();
     var blank = 0;
@@ -240,6 +241,7 @@ export class SearchResultComponent implements OnInit {
     this.routes.navigate(["/tour/detail/" + id]);
   }
 
+  //format currency
   formatCurrency(money: number) {
     return new Intl.NumberFormat("fr-FR", {
       style: "currency",

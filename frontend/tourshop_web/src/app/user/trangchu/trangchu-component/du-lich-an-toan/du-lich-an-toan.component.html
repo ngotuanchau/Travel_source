@@ -8,13 +8,13 @@
         </div>
 
         <div class="row max-width">
-            <div class="col-md-3" *ngFor="let dl of dlats">
-                <a href="{{dl.route}}">
+            <div class="col-md-3" *ngFor="let tl of theLoai; index as i">
+                <a [routerLink]="['../tour/theloai/',tl.id]">
                     <div class="box-item relative scale-img">
-                        <img class="relative" src="../../../assets/web/images/DLAT/{{dl.img}}">
+                        <img class="relative" src="../../../../../assets/web/images/DLAT/{{dlats[i].img}}">
                         <div class=" name-item absolute">
-                            <p class="title">{{dl.title}}</p>
-                            <p class="subTitle">{{dl.subTitle}} - <span>{{dl.soTour}} tours</span></p>
+                            <p class="title">{{tl.tenLoai}}</p>
+                            <p class="subTitle">{{dlats[i].subTitle}} - <span></span></p>
                         </div>
                     </div>
                 </a>

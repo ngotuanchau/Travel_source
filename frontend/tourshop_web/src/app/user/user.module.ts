@@ -13,10 +13,21 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { NewtoursComponent } from "./pages/newtours/newtours.component";
 import { MatFormFieldModule } from "@angular/material/form-field";
-import { SearchResultComponent } from './pages/search-result/search-result.component';
-import { ProfileComponent } from './pages/profile/profile.component';
+import { SearchResultComponent } from "./pages/search-result/search-result.component";
+import { ProfileComponent } from "./pages/profile/profile.component";
+import { TourByTheLoaiComponent } from "./pages/tour-by-the-loai/tour-by-the-loai.component";
+import { TourByDiemDenComponent } from "./pages/tour-by-diem-den/tour-by-diem-den.component";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatTabsModule } from "@angular/material/tabs";
 @NgModule({
-  declarations: [NewtoursComponent, SearchResultComponent, ProfileComponent],
+  declarations: [
+    NewtoursComponent,
+    SearchResultComponent,
+    ProfileComponent,
+    TourByTheLoaiComponent,
+    TourByDiemDenComponent,
+  ],
   imports: [
     CommonModule,
     UserRoutingModule,
@@ -30,6 +41,10 @@ import { ProfileComponent } from './pages/profile/profile.component';
     MatSelectModule,
     MatDatepickerModule,
     MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModule,
+    MatTabsModule,
   ],
   providers: [Title],
 })

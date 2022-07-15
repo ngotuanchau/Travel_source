@@ -1,16 +1,17 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class PhanvungsService {
-
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   //Get all Phan Vung
-  getPhanVung():Observable<any>{
-    return this.http.get<any>('http://localhost:40998/api/PhanVung/get_phanvung');
+  getPhanVung(): Observable<any> {
+    return this.http.get<any>(
+      "http://localhost:40998/api/PhanVung/get_phanvung"
+    );
   }
 }

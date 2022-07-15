@@ -10,6 +10,7 @@ import { Status, lstStatus } from "../hoadon-status";
   styleUrls: ["./khach-dat-tour.component.scss"],
 })
 export class KhachDatTourComponent implements OnInit {
+  idTG: any;
   id: any;
   users: any;
   users1: any;
@@ -27,7 +28,8 @@ export class KhachDatTourComponent implements OnInit {
   //Lấy danh sách Khách hàng Đặt Tour
   getUserByIdNHK() {
     this.activatedRoute.paramMap.subscribe((params) => {
-      this.id = params.get("id");
+      this.idTG = params.get("id");
+      this.id = params.get("id2");
     });
     this.tourservice.getUserByIdTour(this.id).subscribe((response) => {
       this.users = response;
@@ -91,5 +93,14 @@ export class KhachDatTourComponent implements OnInit {
   add(event: MouseEvent) {
     this.tabs.push(this.counter++);
     event.preventDefault();
+  }
+  formatCurrency(money: number) {
+    return new Intl.NumberFormat("fr-FR", {
+      style: "currency",
+      currency: "VND",
+    }).format(money);
+  }
+  getColor(id: number) {
+    return this.hoadonStatus.find((item: any) => item.id == id)?.color;
   }
 }

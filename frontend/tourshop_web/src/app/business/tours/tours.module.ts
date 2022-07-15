@@ -23,9 +23,8 @@ import { DiaDiemComponent } from "./create/components/dia-diem/dia-diem.componen
 import { AnhTourComponent } from "./create/components/anh-tour/anh-tour.component";
 import { MatCardModule } from "@angular/material/card";
 import { ThongTinComponent } from "./create/components/thong-tin/thong-tin.component";
-import { CheDoTreEmComponent } from "./create/components/bang-gia/bang-gia";
-import { KhachDatTourComponent } from './khach-dat-tour/khach-dat-tour.component';
-import { LichKhoiHanhComponent } from './detail/components/lich-khoi-hanh/lich-khoi-hanh.component';
+import { KhachDatTourComponent } from "./khach-dat-tour/khach-dat-tour.component";
+import { LichKhoiHanhComponent } from "./detail/components/lich-khoi-hanh/lich-khoi-hanh.component";
 @NgModule({
   declarations: [
     ToursIndexComponent,
@@ -37,7 +36,6 @@ import { LichKhoiHanhComponent } from './detail/components/lich-khoi-hanh/lich-k
     NgayKhoiHanhComponent,
     DichVuComponent,
     LichTrinhComponent,
-    CheDoTreEmComponent,
     DiaDiemComponent,
     AnhTourComponent,
     ThongTinComponent,

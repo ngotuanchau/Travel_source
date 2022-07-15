@@ -40,21 +40,21 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr *ngFor="let tr of trow; index as i">
+                                                    <tr *ngFor="let tr of user; index as i">
                                                         <td>
                                                             {{ i + 1 }}
                                                         </td>
                                                         <td>
-                                                            {{tr.ten}}
+                                                            {{tr.tencongty}}
                                                         </td>
                                                         <td>
                                                             {{tr.email}}
                                                         </td>
                                                         <td>
-                                                            {{tr.khuvuc}}
+                                                            {{tr.khuVuc}}
                                                         </td>
                                                         <td>
-                                                            {{tr.vanphong}}
+                                                            {{tr.vanPhong}}
                                                         </td>
                                                         <td>
                                                             {{tr.mst}}
@@ -63,10 +63,13 @@
                                                             {{tr.sdt}}
                                                         </td>
                                                         <td>
-                                                            {{tr.thenganhang}}
+                                                            {{tr.theNganHang}}
                                                         </td>
-                                                        <td>
-                                                            {{tr.trangthai}}
+                                                        <td *ngIf="tr.trangthai" style="color:green">
+                                                            Hoạt động
+                                                        </td>
+                                                        <td *ngIf="tr.trangthai" style="color:red">
+                                                            Ngừng hoạt động
                                                         </td>
                                                         <td>
                                                             <a [routerLink]="['detail']"><button type="button" class="btn btn-inverse-info btn-icon"

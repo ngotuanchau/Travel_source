@@ -32,28 +32,66 @@ export class NgayKhoiHanhComponent implements OnInit {
 
   onAdd() {
     const list = this.lstNKH;
-    const today = new Date().toLocaleDateString();
-    const thisDay = new Date(this.ngayKh).toLocaleDateString();
-    if (today > thisDay) {
+    const today = new Date();
+    const thisDay = new Date(this.ngayKh);
+    if (thisDay.getFullYear() >= today.getFullYear()) {
+      if (thisDay.getMonth() >= today.getMonth()) {
+        if (
+          (thisDay.getDate() >= today.getDate() &&
+            thisDay.getMonth() == today.getMonth()) ||
+          thisDay.getMonth() > today.getMonth()
+        ) {
+          if (
+            this.giaNguoiLon != null &&
+            this.giaTreEn != null &&
+            this.giaTreNho != null
+          ) {
+            list.push({
+              ngayKh: this.pipe.transform(this.ngayKh, "dd/MM/yyyy"),
+              giaNguoiLon: this.giaNguoiLon,
+              giaTreEn: this.giaTreEn,
+              giaTreNho: this.giaTreNho,
+            });
+            this.lstNKH = list;
+            console.log(this.lstNKH);
+          } else {
+            this.toast.error({
+              detail: "Cảnh báo",
+              summary: "Chưa nhập đầy đủ thông tin",
+              duration: 3000,
+            });
+          }
+        } else {
+          this.toast.error({
+            detail: "Cảnh báo",
+            summary:
+              this.pipe.transform(this.ngayKh, "dd/MM/yyyy") + " không hợp lệ",
+            duration: 3000,
+          });
+        }
+      } else {
+        this.toast.error({
+          detail: "Cảnh báo",
+          summary:
+            this.pipe.transform(this.ngayKh, "dd/MM/yyyy") + " không hợp lệ",
+          duration: 3000,
+        });
+      }
+    } else {
       this.toast.error({
         detail: "Cảnh báo",
-        summary: "Ngày " + thisDay + " không hợp lệ",
+        summary:
+          this.pipe.transform(this.ngayKh, "dd/MM/yyyy") + " không hợp lệ",
         duration: 3000,
       });
-    } else {
-      list.push({
-        ngayKh: this.pipe.transform(this.ngayKh, "dd/MM/yyyy"),
-        giaNguoiLon: this.giaNguoiLon,
-        giaTreEn: this.giaTreEn,
-        giaTreNho: this.giaTreNho,
-      });
-      this.lstNKH = list;
-      console.log(this.lstNKH);
     }
+
+    this.sort();
   }
 
   onRemove(ngayKh: Date) {
     this.lstNKH = this.lstNKH.filter((item: any) => item.ngayKh != ngayKh);
+    this.sort();
   }
   numberOnly(event: any): boolean {
     const charCode = event.which ? event.which : event.keyCode;
@@ -61,5 +99,27 @@ export class NgayKhoiHanhComponent implements OnInit {
       return false;
     }
     return true;
+  }
+  minus(a: number, b: number) {
+    return a + b;
+  }
+  formatCurrency(money: number) {
+    return new Intl.NumberFormat("fr-FR", {
+      style: "currency",
+      currency: "VND",
+    }).format(money);
+  }
+  sort() {
+    //Sắp xếp danh sách lịch trình
+    var temp = 0;
+    for (var i = 0; i < this.lstNKH.length; i++) {
+      for (var j = i; j < this.lstNKH.length; j++) {
+        if (this.lstNKH[j].ngayKh < this.lstNKH[i].ngayKh) {
+          temp = this.lstNKH[j];
+          this.lstNKH[j] = this.lstNKH[i];
+          this.lstNKH[i] = temp;
+        }
+      }
+    }
   }
 }

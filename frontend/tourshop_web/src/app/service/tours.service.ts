@@ -13,8 +13,8 @@ export class ToursService {
   constructor(private http: HttpClient) {}
 
   //Get all Tour
-  getAllTour(): Observable<Tour[]> {
-    return this.http.get<Tour[]>(this.baseUrl + "/get_all_tour");
+  getAllTour(): Observable<any[]> {
+    return this.http.get<any[]>(this.baseUrl + "/get_all_tour");
   }
 
   //Create Tour
@@ -38,12 +38,20 @@ export class ToursService {
   }
   //Get all new tours
   //Get all Tour
-  getNewTours(): Observable<Tour[]> {
-    return this.http.get<Tour[]>(this.baseUrl + "/get_tour_new");
+  getNewTours(): Observable<any[]> {
+    return this.http.get<any[]>(this.baseUrl + "/get_tour_new");
+  }
+  //Get Tour by The loai Id
+  getToursByIdTL(id: any): Observable<any[]> {
+    return this.http.get<any[]>(this.baseUrl + "/get_tour_by_theloaiid/" + id);
+  }
+  //Get Tour by Diem Den Id
+  getToursByIdDD(id: any): Observable<any[]> {
+    return this.http.get<any[]>(this.baseUrl + "/get_tour_by_diemdenid/" + id);
   }
   //Get detail
-  getDetailTour(id: any): Observable<Tour> {
-    return this.http.get<Tour>(this.baseUrl + "/get_a_tour/" + id);
+  getDetailTour(id: any): Observable<any> {
+    return this.http.get<any>(this.baseUrl + "/get_a_tour/" + id);
   }
 
   //Book tour
@@ -81,5 +89,9 @@ export class ToursService {
   //confirm thanh toan
   confirmThanhToan(id: any): Observable<any> {
     return this.http.get<any>(this.baseUrl + "/confirm_user_thanhtoan/" + id);
+  }
+  //Search
+  search(tour: any): Observable<any> {
+    return this.http.post<any>(this.baseUrl + "/search_tour", tour);
   }
 }

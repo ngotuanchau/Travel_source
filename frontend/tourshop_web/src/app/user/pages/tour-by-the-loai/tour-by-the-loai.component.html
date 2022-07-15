@@ -90,8 +90,8 @@
             </div>
             <div class="col-12 col-sm-6 col-lg-9">
                 <div class="mt-5 mb-5">
-                    <div class="d-flex justify-content-center row" *ngIf="newtours!=null">
-                        <div class="col-md-10 box bot" *ngFor="let tour of newtours">
+                    <div class="d-flex justify-content-center row">
+                        <div class="col-md-10 box bot" *ngFor="let tour of tours">
                             <div class="row p-2 bg-white border rounded">
 
                                 <div class="col-md-4 mt-1">
@@ -113,7 +113,8 @@
                                         <div class="mt-1 mb-1 spec-1">Còn lại: <span> {{findBlankDisplay(tour.id,tour.veToiDa)}} chỗ</span>
                                         </div>
                                     </div>
-                                    <div class="mt-1 mb-1 spec-1"><span class="dot dot-r"></span><span class="r">Mới</span><span class="dot"></span><span>{{tour.tendiemdi}}</span><span class="dot"></span><span>{{tour.tendiemden}}<br></span></div>
+                                    <div class="mt-1 mb-1 spec-1"><span class="dot dot-r"></span><span class="r">Mới</span><span class="dot"></span><span>{{tour.tendiemdi}}</span><span class="dot"></span><a [routerLink]="['../../../tour/diemden/',tour.diemDen]"><span>{{tour.tendiemden}}<br></span></a>
+                                    </div>
                                     <!-- <p class="text-justify text-truncate para mb-0">{{tour.mota}}<br><br></p> -->
                                 </div>
                                 <div class="align-items-center align-content-center col-md-2 border-left mt-1">
@@ -129,9 +130,6 @@
                             </div>
 
                         </div>
-                    </div>
-                    <div class="d-flex justify-content-center row" *ngIf="newtours==null">
-                        <h2>Không có tour liên quan</h2>
                     </div>
                 </div>
             </div>

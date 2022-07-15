@@ -13,6 +13,7 @@ import { NguoiDungsCreateComponent } from "./pages/nguoidungs/create/create.comp
 import { NguoiDungsDetailComponent } from "./pages/nguoidungs/detail/detail.component";
 import { NguoiDungsEditComponent } from "./pages/nguoidungs/edit/edit.component";
 import { NguoiDungsIndexComponent } from "./pages/nguoidungs/index/index.component";
+import { TheLoaiIndexComponent } from "./pages/theloais/index/index.component";
 import { ToursCreateComponent } from "./pages/tours/create/create.component";
 import { ToursDetailComponent } from "./pages/tours/detail/detail.component";
 import { ToursEditComponent } from "./pages/tours/edit/edit.component";
@@ -44,6 +45,11 @@ const routes: Routes = [
   {
     path: "tour/detail",
     component: ToursDetailComponent,
+  },
+  //The loai
+  {
+    path: "theloai",
+    component: TheLoaiIndexComponent,
   },
   //Dia Diem
   {

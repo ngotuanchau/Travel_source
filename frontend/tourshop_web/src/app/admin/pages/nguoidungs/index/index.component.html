@@ -24,43 +24,43 @@
                                         <th class="text-dark font-medium fs-4">STT</th>
                                         <th class="text-dark font-medium fs-4">Username</th>
                                         <th class="text-dark font-medium fs-4">Email</th>
-                                        <th class="text-dark font-medium fs-4">Avatar</th>
+                                        <th class="text-dark font-medium fs-4">SĐT</th>
                                         <th class="text-dark font-medium fs-4">Họ tên</th>
                                         <th class="text-dark font-medium fs-4">CMND</th>
-                                        <th class="text-dark font-medium fs-4">SĐT</th>
                                         <th class="text-dark font-medium fs-4">Ngày sinh</th>
                                         <th class="text-dark font-medium fs-4">Trạng thái</th>
                                         <th class="text-dark font-medium fs-4"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let tr of trow; index as i">
+                                    <tr *ngFor="let tr of user; index as i">
                                         <td>
                                             {{ i + 1 }}
                                         </td>
                                         <td>
-                                            {{tr.username}}
+                                            {{tr.tenNguoiDung}}
                                         </td>
                                         <td>
                                             {{tr.email}}
                                         </td>
                                         <td>
-                                            {{tr.avater}}
+                                            {{tr.sdt}}
                                         </td>
                                         <td>
-                                            {{tr.hoten}}
+                                            {{tr.hoTen}}
                                         </td>
                                         <td>
                                             {{tr.cmnd}}
                                         </td>
+
                                         <td>
-                                            {{tr.sdt}}
+                                            {{this.pipe.transform(tr.ngaySinh, "dd/MM/yyyy")}}
                                         </td>
-                                        <td>
-                                            {{tr.ngaysinh}}
+                                        <td *ngIf="tr.trangThai==1" style="color:green">
+                                            Hoạt động
                                         </td>
-                                        <td>
-                                            {{tr.trangthai}}
+                                        <td *ngIf="tr.trangThai!=1" style="color:red">
+                                            Bị khóa
                                         </td>
                                         <td>
                                             <a [routerLink]="['detail']"><button type="button" class="btn btn-inverse-info btn-icon"

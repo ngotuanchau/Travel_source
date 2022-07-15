@@ -2,10 +2,6 @@ table {
     width: 100%;
 }
 
-.text-nowrap {
-    white-space: unset !important;
-}
-
 .table> :not(caption)>*>* {
     padding: 10px;
     font-size: 16px;

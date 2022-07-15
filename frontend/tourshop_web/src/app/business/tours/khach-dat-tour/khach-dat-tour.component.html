@@ -5,6 +5,11 @@
             <ng-template ngbNavContent>
 
                 <div class="card">
+                    <div class="p-3">
+                        <a class="btn-back" [routerLink]="['../../../detail',this.idTG]"><button type="button"
+                class="btn btn-success btn-rounded btn-fw">Danh sách Ngày khởi hành
+              </button></a>
+                    </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <div class="table-lt">
@@ -43,7 +48,7 @@
                                             <td>
                                                 {{u.tongSoVeTn}}
                                             </td>
-                                            <td>
+                                            <td [style]="getColor(u.trangThai)">
                                                 {{getStatus(u.trangThai)}}
                                             </td>
                                             <td *ngIf="u.trangThai!=1 && u.trangThai!=2"> </td>
@@ -54,7 +59,7 @@
                                                 <button (click)="confirmThanhToan(u.id)">Thanh toán</button>
                                             </td>
                                             <td>
-                                                {{u.tongTien}}
+                                                {{formatCurrency(u.tongTien)}}
                                             </td>
                                             <!-- <td>
                               <button type="button" class="btn btn-inverse-info btn-icon" (click)="confirmBookTour(u.id)">

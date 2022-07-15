@@ -15,16 +15,16 @@
                         <li>Thể loại: <span>{{tour.tentheloai}}</span></li>
                         <li>Xuất phát tại: <span>{{tour.tendiemdi}}</span></li>
                         <li>Điểm đến: <span>{{tour.tendiemden}}</span></li>
-                        <li>Ngày khởi hành: <span>{{findDateDisplay(tour.id)}}</span></li>
+                        <li>Ngày khởi hành: <span *ngIf="findDateDisplay(this.ngay)!=null">{{this.pipe.transform(findDateDisplay(this.ngay),"dd/MM/yyyy")}}</span><span *ngIf="findDateDisplay(this.ngay)==null">{{message}}</span></li>
                         <li>Thời gian: <span *ngIf="tour.soDem!=0">{{tour.soNgay}} ngày {{tour.soDem}} đêm</span>
                             <span *ngIf="tour.soDem==0">{{tour.soNgay}} ngày</span>
                         </li>
-                        <li>Còn: <span>{{findBlank(this.ngay)}}</span></li>
+                        <li>Còn: <span *ngIf="findDateDisplay(this.ngay)!=null">{{findBlank(this.ngay)}}</span><span *ngIf="findDateDisplay(this.ngay)==null">{{message}}</span></li>
                         <li>Nơi tập trung: <span>Đang cập nhật</span></li>
                     </ul>
                 </div>
                 <div class="box-button flex justifylex">
-                    <button (click)="datNgay()" [disabled]="findBlank(this.ngay)<=0">ĐẶT NGAY</button>
+                    <button (click)="datNgay()" [disabled]="findDateDisplay(this.ngay)==null">ĐẶT NGAY</button>
                     <button>LIÊN HỆ TƯ VẤN</button>
                 </div>
 

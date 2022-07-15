@@ -15,6 +15,7 @@ export class BangGiaComponent implements OnInit {
   @Input() phuongtien: any;
   constructor(private routes: Router) {}
   pipe = new DatePipe("en-US");
+  disable: boolean = false;
   formatDate(ngay: any) {
     var day;
     return (day = new Date(ngay).toLocaleDateString());
@@ -35,5 +36,35 @@ export class BangGiaComponent implements OnInit {
   }
   booking(id: any, ngay: any) {
     this.routes.navigate(["../booking/" + id + "/" + ngay]);
+  }
+  formatCurrency(money: number) {
+    return new Intl.NumberFormat("fr-FR", {
+      style: "currency",
+      currency: "VND",
+    }).format(money);
+  }
+  disableDatNgay(idngay: any, ngay: Date): boolean {
+    if (this.findBlankDisplay(idngay, this.tour.veToiDa) > 0) {
+      const today = new Date();
+      const thisDay = new Date(ngay);
+      if (thisDay.getFullYear() >= today.getFullYear()) {
+        if (thisDay.getMonth() >= today.getMonth()) {
+          if (
+            (thisDay.getDate() >= today.getDate() &&
+              thisDay.getMonth() == today.getMonth()) ||
+            thisDay.getMonth() > today.getMonth()
+          ) {
+            this.disable = false;
+          } else {
+            this.disable = true;
+          }
+        } else {
+          this.disable = true;
+        }
+      } else {
+        this.disable = true;
+      }
+    }
+    return this.disable;
   }
 }
