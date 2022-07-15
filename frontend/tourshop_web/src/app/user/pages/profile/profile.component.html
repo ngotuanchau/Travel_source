@@ -5,8 +5,11 @@
         <div class="col-3">
             <section class="ftco-search">
                 <div class="box">
-                    <div class=" img-avt scale-img max-width">
+                    <div class=" img-avt scale-img max-width" *ngIf="user.avt==''">
                         <img src="http://localhost:3000/default.png">
+                    </div>
+                    <div class=" img-avt scale-img max-width" *ngIf="user.avt!=''">
+                        <img src="http://localhost:3000/{{user.avt}}">
                     </div>
                 </div>
             </section>
@@ -18,46 +21,61 @@
                         <div class="profile">
                             <div class="row">
                                 <div class="col-6">
-                                    <form action="">
+                                    <form action="" [formGroup]="form" (ngSubmit)="change()">
                                         <div class="form-group">
                                             <div class="form-field">
-                                                <input type="text" [disabled]="disable" [value]="user.tenNguoiDung" [placeholder]="user.tenNguoiDung">
+                                                <div class="row">
+                                                    <div class="col-3">Username</div>
+                                                    <div class="col-9"><input type="text" formControlName="tenNguoiDung" [value]="user.tenNguoiDung" [placeholder]="user.tenNguoiDung">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="form-field">
-                                                <input type="text" [disabled]="disable" [value]="user.hoTen" [placeholder]="user.hoTen">
+                                                <div class="row">
+                                                    <div class="col-3">Họ tên</div>
+                                                    <div class="col-9"><input [disabled]="disable" type="text" formControlName="hoTen" [value]="user.hoTen" [placeholder]="user.hoTen">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="form-field">
-                                                <input type="text" [disabled]="disable" [value]="user.email" [placeholder]="user.email">
+                                                <div class="row">
+                                                    <div class="col-3">CMND/CCCD</div>
+                                                    <div class="col-9"><input (keypress)="numberOnly($event)" type="text" formControlName="cmnd" [value]="user.cmnd" [placeholder]="user.cmnd">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="form-field">
-                                                <input (keypress)="numberOnly($event)" [disabled]="disable" type="text" [value]="user.cmnd" [placeholder]="user.cmnd">
+                                                <div class="row">
+                                                    <div class="col-3">SĐT</div>
+                                                    <div class="col-9"><input (keypress)="numberOnly($event)" type="text" formControlName="sdt" [value]="user.sdt" [placeholder]="user.sdt">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="form-field">
-                                                <input (keypress)="numberOnly($event)" [disabled]="disable" type="text" [value]="user.sdt" [placeholder]="user.sdt">
+                                                <div class="row">
+                                                    <div class="col-3">Ngày sinh</div>
+                                                    <div class="col-3">{{this.pipe.transform(user.ngaySinh,"dd/MM/yyyy")}}</div>
+                                                    <div class="col-6"><input type="date" formControlName="ngaySinh" [value]="user.ngaySinh" [placeholder]="user.ngaySinh">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="form-field">
-                                                <input type="date" [disabled]="disable" [value]="user.ngaySinh" [placeholder]="user.ngaySinh">
-                                            </div>
-                                        </div>
+
                                     </form>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-3">
                                     <div class="button mb-4">
                                         <button (click)="change()">{{text}}</button>
                                     </div>
-                                    <div class="button">
-                                        <button (click)="cancel()">hủy</button>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>

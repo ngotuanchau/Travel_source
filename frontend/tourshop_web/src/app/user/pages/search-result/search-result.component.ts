@@ -1,15 +1,9 @@
 import { DatePipe } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { Router } from "@angular/router";
 import { PhanvungsService } from "../../../service/phanvungs.service";
 import { FormField } from "../search";
-import { HttpClient } from "@angular/common/http";
 import { DiadiemsService } from "../../../service/diadiems.service";
 import { TheloaisService } from "../../../service/theloais.service";
 import { ToursService } from "../../../service/tours.service";
