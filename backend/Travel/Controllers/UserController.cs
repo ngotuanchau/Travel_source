@@ -60,6 +60,9 @@ namespace Travel.Controllers
                 user.HoTen = nd.HoTen;
                 user.NgaySinh = nd.NgaySinh;
                 user.TenNguoiDung = nd.TenNguoiDung;
+                user.Cmnd = nd.Cmnd;
+                user.Sdt = nd.Sdt;
+                user.Avt = nd.Avt;
                 user.NgaySua = DateTime.Now;
                 _context.Update(user);
                 await _context.SaveChangesAsync();
