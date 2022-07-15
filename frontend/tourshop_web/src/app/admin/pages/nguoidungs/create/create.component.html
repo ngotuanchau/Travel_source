@@ -1,11 +1,11 @@
 <a class="btn-back" [routerLink]="['../']"><button type="button" class="btn btn-success btn-rounded btn-fw">Xem danh
-  sách người dùng
-</button></a>
+    sách người dùng
+  </button></a>
 <div class="col-12 grid-margin">
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Thêm người dùng</h4>
-            <form class="form-sample">
+            <form class="form-sample" [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="col-12 grid-margin grid-child">
                     <p class="card-description">Thông tin người dùng</p>
                     <div class="row">
@@ -13,15 +13,26 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Username</label>
                                 <div class="col-sm-9">
-                                    <input disabled type="text" class="form-control" placeholder="Username" value="Username" />
+                                    <input type="text" class="form-control" placeholder="Username" [formControlName]="FormField.tenNguoiDung" />
+                                    <div class="text-danger" *ngIf="isControlError(FormField.tenNguoiDung, 'required')">
+                                        Username không được để trống
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Password</label>
                                 <div class="col-sm-9">
-                                    <input type="password" class="form-control" rows="5" placeholder="*******" value="************" />
+                                    <input type="password" class="form-control" rows="5" [formControlName]="FormField.matKhau" />
+                                    <div class="text-danger" *ngIf="isControlError(FormField.matKhau, 'required')">
+                                        Mật khẩu không được để trống
+                                    </div>
+                                    <div class="text-danger" *ngIf="this.form.controls[FormField.matKhau].errors?.['minlength']">
+                                        Mật khẩu phải có ít nhất 6 ký tự
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -31,7 +42,14 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Email</label>
                                 <div class="col-sm-9">
-                                    <input type="email" class="form-control" rows="5" placeholder="abc@gmail.com" value="abc@gmail.com" />
+                                    <input type="email" class="form-control" rows="5" placeholder="abc@gmail.com" [formControlName]="FormField.email" />
+                                    <div class="text-danger" *ngIf="isControlError(FormField.email, 'required')">
+                                        Email không được để trống
+                                    </div>
+                                    <div class="text-danger" *ngIf="this.form.controls[FormField.email].errors?.email">
+                                        Email chưa đúng định dạng
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -39,7 +57,10 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Họ tên</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" rows="5" placeholder="Nguyễn Văn An" value="Nguyễn Văn An" />
+                                    <input type="text" class="form-control" rows="5" placeholder="Họ và tên" [formControlName]="FormField.hoTen" />
+                                    <div class="text-danger" *ngIf="isControlError(FormField.hoTen, 'required')">
+                                        Họ tên không được để trống
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -49,7 +70,10 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">CMND</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" rows="5" placeholder="336699552288" value="336699552288" />
+                                    <input type="text" class="form-control" rows="5" placeholder="336699552288" [formControlName]="FormField.cmnd" />
+                                    <div class="text-danger" *ngIf="isControlError(FormField.cmnd, 'required')">
+                                        CMND/CCCD không được để trống
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -57,7 +81,14 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Số điện thoại</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" rows="5" placeholder="0123456789" value="0123456789" />
+                                    <input type="text" class="form-control" rows="5" placeholder="0123456789" [formControlName]="FormField.sdt" />
+                                    <div class="text-danger" *ngIf="isControlError(FormField.sdt, 'required')">
+                                        Số điện thoại không được để trống
+                                    </div>
+                                    <div class="text-danger" *ngIf="this.form.controls[FormField.sdt].errors?.['minlength']">
+                                        Mật khẩu phải có ít nhất 10 ký tự
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -67,19 +98,24 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Ngày sinh</label>
                                 <div class="col-sm-9">
-                                    <input type="date" class="form-control" rows="5" placeholder="dd/mm/yyyy" value="dd/mm/yyyy" />
+                                    <input type="date" class="form-control" rows="5" placeholder="dd/mm/yyyy" [formControlName]="FormField.ngaySinh" />
+                                    <div class="text-danger" *ngIf="isControlError(FormField.ngaySinh, 'required')">
+                                        Ngày sinh không được để trống
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Trạng thái</label>
-                                <div class="col-sm-9">
-                                    <select class="form-control">
-                  <option>Hoạt động</option>
-                  <option>Vô hiệu hóa</option>
-                  <option>Bị khóa</option>
-                </select>
+                            <div class="row">
+                                <div class="col-6">
+                                    <mat-slide-toggle class="example-margin" ngModel="isChecked" (change)="checkToggel()">
+                                        Kích hoạt tài khoản
+                                    </mat-slide-toggle>
+                                </div>
+                                <div class="col-6">
+                                    <mat-slide-toggle class="example-margin" ngModel="isChecked" (change)="checkToggelAdmin()">
+                                        Quyền Quản trị viên
+                                    </mat-slide-toggle>
                                 </div>
                             </div>
                         </div>
@@ -87,7 +123,7 @@
                 </div>
 
 
-                <button type="button" class="btn btn-primary mr-2" onclick=""> Xác nhận </button>
+                <button type="button" class="btn btn-primary mr-2" (click)="onSubmit()"> Xác nhận </button>
                 <button class="btn btn-light">Hủy</button>
             </form>
         </div>

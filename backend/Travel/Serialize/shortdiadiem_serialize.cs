@@ -9,6 +9,7 @@ namespace Travel.Serialize
     {
         public int id { get; set; }
         public string tendiadiem { get; set; }
+        public int? trangthai { get; set; }
         public int sotour { get; set; }
     }
 }

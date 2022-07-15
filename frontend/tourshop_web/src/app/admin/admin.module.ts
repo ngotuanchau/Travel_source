@@ -9,6 +9,7 @@ import { NguoiDungsModule } from "./pages/nguoidungs/nguoidungs.module";
 import { CongTysModule } from "./pages/congtys/congtys.module";
 import { TheloaisModule } from "./pages/theloais/theloais.module";
 
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 @NgModule({
   declarations: [],
   imports: [
@@ -20,6 +21,8 @@ import { TheloaisModule } from "./pages/theloais/theloais.module";
     NguoiDungsModule,
     CongTysModule,
     TheloaisModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
 })
 export class AdminModule {}

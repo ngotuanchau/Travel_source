@@ -41,7 +41,7 @@ namespace Travel.Controllers
                     sd.id = diadiem.Id;
                     sd.tendiadiem = diadiem.Ten;
                     sd.sotour = diaDiem_Tours.Count;
-
+                    sd.trangthai = diadiem.TrangThai;
                     shortdiadiem_Serializes.Add(sd);
                 }
                 var result = shortdiadiem_Serializes.OrderByDescending(d => d.sotour);

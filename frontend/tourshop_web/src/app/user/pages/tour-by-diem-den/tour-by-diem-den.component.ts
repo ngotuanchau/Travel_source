@@ -1,9 +1,5 @@
 import { DatePipe } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
-import { Router } from "@angular/router";
-import { PhanvungsService } from "../../../service/phanvungs.service";
-import { FormField } from "../search";
 import { DiadiemsService } from "../../../service/diadiems.service";
 import { TheloaisService } from "../../../service/theloais.service";
 import { ToursService } from "../../../service/tours.service";
@@ -15,19 +11,23 @@ import {
   LuuTru,
   PhuongTien,
 } from "../dichvu-data";
+import { ActivatedRoute, Router } from "@angular/router";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormField } from "../search";
+import { PhanvungsService } from "../../../service/phanvungs.service";
 @Component({
-  selector: "app-search-result",
-  templateUrl: "./search-result.component.html",
-  styleUrls: ["./search-result.component.scss"],
+  selector: "app-tour-by-diem-den",
+  templateUrl: "./tour-by-diem-den.component.html",
+  styleUrls: ["./tour-by-diem-den.component.scss"],
 })
-export class SearchResultComponent implements OnInit {
+export class TourByDiemDenComponent implements OnInit {
   lstAmThuc: AmThuc[];
   lstLuuTru: LuuTru[];
   lstPhuongTien: PhuongTien[];
   title = "Tour mới";
   subTitle = "Cuộc sống là một cuộc phiêu lưu đầy táo bạo hoặc không là gì cả";
   pipe = new DatePipe("en-US");
-  lstTour: any;
+  id: any;
   form: FormGroup;
   readonly FormField = FormField;
   constructor(
@@ -35,6 +35,7 @@ export class SearchResultComponent implements OnInit {
     private theloaiService: TheloaisService,
     private diadiemService: DiadiemsService,
     private routes: Router,
+    private activatedRoute: ActivatedRoute,
     private phanvungService: PhanvungsService,
     private formBuilder: FormBuilder
   ) {
@@ -59,8 +60,22 @@ export class SearchResultComponent implements OnInit {
   ngayKh: Date = new Date();
   onSearch() {
     let ngayKh = this.pipe.transform(this.ngayKh, "dd/MM/yyyy");
-    console.log("Ngày: ");
-    console.log(ngayKh);
+    if (this.form.value.diemden == 0) {
+      this.form.patchValue({
+        [FormField.amthuc]: this.listAT,
+        [FormField.luutru]: this.listLT,
+        [FormField.phuongtien]: this.listPT,
+        [FormField.thoigiandi]: ngayKh,
+        [FormField.diemden]: parseInt(this.id),
+      });
+    } else {
+      this.form.patchValue({
+        [FormField.amthuc]: this.listAT,
+        [FormField.luutru]: this.listLT,
+        [FormField.phuongtien]: this.listPT,
+        [FormField.thoigiandi]: ngayKh,
+      });
+    }
     this.form.patchValue({
       [FormField.amthuc]: this.listAT,
       [FormField.luutru]: this.listLT,
@@ -71,10 +86,10 @@ export class SearchResultComponent implements OnInit {
       if (res == null) {
         console.log("Không có Tour liên quan");
       } else {
-        this.newtours = [];
-        this.newtours = res;
+        this.tours = [];
+        this.tours = res;
         console.log("Tour:");
-        console.log(this.newtours);
+        console.log(this.tours);
       }
     });
     this.form.reset();
@@ -132,16 +147,15 @@ export class SearchResultComponent implements OnInit {
     var str1 = ids.toString();
     this.listPT = String(str1);
   }
-
   ngOnInit(): void {
-    this.getNewTours();
+    this.activatedRoute.paramMap.subscribe((params) => {
+      this.id = params.get("id");
+    });
+    this.getNewTours(this.id);
     this.getTheLoai();
     this.getAllDiaDiem();
     this.getPhanVung();
   }
-
-  newtours: any;
-  tours: any;
   phanvungs: any;
   getPhanVung() {
     this.phanvungs = [];
@@ -149,37 +163,35 @@ export class SearchResultComponent implements OnInit {
       this.phanvungs = res.listPhanVung;
     });
   }
-  getNewTours() {
-    this.newtours = [];
+  newtours: any;
+  tours: any;
+  ngay: any;
+  getNewTours(id: any) {
     this.tours = [];
-    this.tourservice.getNewTours().subscribe((response) => {
+    this.tourservice.getToursByIdDD(id).subscribe((response) => {
       for (let tour of response) {
         if (tour.nhungNgayKhoiHanh.length >= 1) {
           this.tours.push(tour);
         }
       }
-      this.newtours = this.tours;
+      console.log(this.tours);
     });
   }
   findDateDisplay(id: number) {
-    var nkhs = this.newtours.find(
-      (item: any) => item.id == id
-    )?.nhungNgayKhoiHanh;
+    var nkhs = this.tours.find((item: any) => item.id == id)?.nhungNgayKhoiHanh;
     const today = new Date().toLocaleDateString();
     //const thisDay = new Date(this.ngayKh).toLocaleDateString();
-    var ngay: any;
+
     for (let n of nkhs) {
       if (n.ngayKh > today) {
-        ngay = n.ngayKh;
+        this.ngay = n.ngayKh;
         break;
       }
     }
-    return this.pipe.transform(ngay, "dd/MM/yyyy");
+    return this.pipe.transform(this.ngay, "dd/MM/yyyy");
   }
   findPriceDisplay(id: number) {
-    var nkhs = this.newtours.find(
-      (item: any) => item.id == id
-    )?.nhungNgayKhoiHanh;
+    var nkhs = this.tours.find((item: any) => item.id == id)?.nhungNgayKhoiHanh;
     const today = new Date().toLocaleDateString();
     //const thisDay = new Date(this.ngayKh).toLocaleDateString();
     var price: any;
@@ -192,9 +204,7 @@ export class SearchResultComponent implements OnInit {
     return price;
   }
   findBlankDisplay(id: number, vetoida: number): number {
-    var nkhs = this.newtours.find(
-      (item: any) => item.id == id
-    )?.nhungNgayKhoiHanh;
+    var nkhs = this.tours.find((item: any) => item.id == id)?.nhungNgayKhoiHanh;
     const today = new Date().toLocaleDateString();
     //const thisDay = new Date(this.ngayKh).toLocaleDateString();
     var blank = 0;
@@ -233,11 +243,14 @@ export class SearchResultComponent implements OnInit {
   viewDetail(id: number) {
     this.routes.navigate(["/tour/detail/" + id]);
   }
-
+  //format currency
   formatCurrency(money: number) {
     return new Intl.NumberFormat("fr-FR", {
       style: "currency",
       currency: "VND",
     }).format(money);
+  }
+  datNgay(id: any) {
+    this.routes.navigate(["../booking/" + this.id + "/" + id]);
   }
 }

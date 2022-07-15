@@ -71,39 +71,6 @@ export class AnhTourComponent implements OnInit {
     }
     console.log("Ảnh chi tiết: " + this.multipleImages);
   }
-  //Upoad nhiều ảnh
-
-  // onMultipleSubmit() {
-  //   const formdata = new FormData();
-  //   for (let img of this.multipleImages) {
-  //     formdata.append("files", img);
-  //   }
-  //   this.http
-  //     .post<any>("http://localhost:3000/node-js/create-images", formdata)
-  //     .subscribe((res) => {
-  //       console.log("res" + res);
-  //       this.multipleInput.nativeElement.value = "";
-  //       //Màn hình nhiều ảnh
-  //       this.displayMultipleImages = true;
-  //       this.displayMultipleImageArray = res.path;
-  //       // this.image = res.path;
-  //       const data = res.path;
-  //       // this.image = data;
-  //       //this.form.patchValue({ [this.name]: data });
-  //       console.log(data);
-  //       const list = this.lstAnh;
-  //       for (let dt of data) {
-  //         const anh = dt;
-
-  //         list.push({
-  //           tenanh: anh,
-  //         });
-
-  //         console.log(dt);
-  //       }
-  //       this.lstAnh = list;
-  //     });
-  // }
 
   ngOnInit(): void {}
 }

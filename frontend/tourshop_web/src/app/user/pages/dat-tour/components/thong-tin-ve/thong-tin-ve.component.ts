@@ -89,7 +89,7 @@ export class ThongTinVeComponent implements OnInit {
           duration: 3000,
         });
       } else {
-        this.toast.success({
+        this.toast.error({
           detail: "Cảnh báo",
           summary: "Đặt tour thất bại",
           duration: 3000,

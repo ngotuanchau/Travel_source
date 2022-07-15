@@ -17,4 +17,10 @@ export class NguoiDungsService {
   getAllUsers(): Observable<any> {
     return this.http.get<any>(this.baseUrl + "/user_get");
   }
+  updateUser(id: any, data: any): Observable<any> {
+    return this.http.put<any>(this.baseUrl + "/" + id, data);
+  }
+  createUser(user: any): Observable<any> {
+    return this.http.post<any>(this.baseUrl, user);
+  }
 }
