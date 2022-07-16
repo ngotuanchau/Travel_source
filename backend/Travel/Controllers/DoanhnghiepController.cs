@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using Travel.Data;
 using Travel.Models;
@@ -94,6 +96,59 @@ namespace Travel.Controllers
                 Console.WriteLine(ex.Message);
                 return StatusCode(500, "Internal Server Error");
             }
+        }
+
+        [Authorize]
+        [HttpPut]
+        [Route("doanhnghiep/change_password/{id:int}")]
+        [Authorize(Roles = "Business")]
+        [ActionName("change_password")]
+        public async Task<IActionResult> change_password([FromRoute] int id, changepassword_serialize changepassword_Serialize)
+        {
+            try
+            {
+
+                CongTy congTies = _context.CongTies.Where(t => t.TrangThai != 0 && t.Id == id).FirstOrDefault();
+                if (congTies == null)
+                {
+                    return NotFound("Doanh nghiệp không tồn tại");
+                }
+                var password_old = GetMD5(changepassword_Serialize.passwordold);
+                var password_new = GetMD5(changepassword_Serialize.passwordnew);
+                if (password_old != congTies.MatKhau)
+                {
+                    return BadRequest(new
+                    {
+                        message = "Mật khẩu không đúng"
+                    });
+                }
+                congTies.MatKhau = password_new;
+                _context.SaveChanges();
+
+                return Ok(new
+                {
+                    message = "change password success"
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+        public static string GetMD5(string str)
+        {
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] fromData = Encoding.UTF8.GetBytes(str);
+            byte[] targetData = md5.ComputeHash(fromData);
+            string byte2String = null;
+
+            for (int i = 0; i < targetData.Length; i++)
+            {
+                byte2String += targetData[i].ToString("x2");
+
+            }
+            return byte2String;
         }
     }
 }
