@@ -70,7 +70,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">CMND</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" rows="5" placeholder="336699552288" [formControlName]="FormField.cmnd" />
+                                    <input type="text" class="form-control" rows="5" (keypress)="numberOnly($event)" placeholder="336699552288" [formControlName]="FormField.cmnd" />
                                     <div class="text-danger" *ngIf="isControlError(FormField.cmnd, 'required')">
                                         CMND/CCCD không được để trống
                                     </div>
@@ -81,12 +81,15 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Số điện thoại</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" rows="5" placeholder="0123456789" [formControlName]="FormField.sdt" />
+                                    <input type="text" (keypress)="numberOnly($event)" class="form-control" rows="5" placeholder="0123456789" [formControlName]="FormField.sdt" />
                                     <div class="text-danger" *ngIf="isControlError(FormField.sdt, 'required')">
                                         Số điện thoại không được để trống
                                     </div>
                                     <div class="text-danger" *ngIf="this.form.controls[FormField.sdt].errors?.['minlength']">
-                                        Mật khẩu phải có ít nhất 10 ký tự
+                                        Số điện thoại không hợp lệ
+                                    </div>
+                                    <div class="text-danger" *ngIf="this.form.controls[FormField.sdt].errors?.['maxlength']">
+                                        Số điện thoại không hợp lệ
 
                                     </div>
                                 </div>
@@ -123,8 +126,9 @@
                 </div>
 
 
-                <button type="button" class="btn btn-primary mr-2" (click)="onSubmit()"> Xác nhận </button>
-                <button class="btn btn-light">Hủy</button>
+                <button type="button" class="btn btn-primary mr-2" [disabled]="!form.valid" (click)="onSubmit()"> Xác nhận
+        </button>
+                <button class="btn btn-light" (click)="Huy()">Hủy</button>
             </form>
         </div>
     </div>

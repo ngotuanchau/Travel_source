@@ -79,11 +79,11 @@ const routes: Routes = [
     component: NguoiDungsCreateComponent,
   },
   {
-    path: "nguoidung/update",
+    path: "nguoidung/update/:id",
     component: NguoiDungsEditComponent,
   },
   {
-    path: "nguoidung/detail",
+    path: "nguoidung/detail/:id",
     component: NguoiDungsDetailComponent,
   },
 

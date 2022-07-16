@@ -26,7 +26,7 @@
                                                     <mat-label>Chọn điểm khởi hành</mat-label>
                                                     <mat-select>
                                                         <mat-option *ngFor="let dd of diadiems" [value]="dd.id">
-                                                            {{dd.ten}}
+                                                            {{dd.tendiadiem}}
                                                         </mat-option>
                                                     </mat-select>
                                                 </mat-form-field>
@@ -41,7 +41,7 @@
                                                     <mat-label>Chọn điểm đến</mat-label>
                                                     <mat-select>
                                                         <mat-option *ngFor="let dd of diadiems" [value]="dd.id">
-                                                            {{dd.ten}}
+                                                            {{dd.tendiadiem}}
                                                         </mat-option>
                                                     </mat-select>
                                                 </mat-form-field>
@@ -50,6 +50,22 @@
                                     </div>
                                     <div class="col-md align-items-end">
                                         <div class="form-group">
+                                            <label for="#">Loại tour</label>
+                                            <div class="form-field">
+                                                <mat-form-field appearance="fill">
+                                                    <mat-label>Chọn điểm đến</mat-label>
+                                                    <mat-select>
+                                                        <mat-option *ngFor="let dd of diadiems" [value]="dd.id">
+                                                            {{dd.tendiadiem}}
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md align-items-end">
+                                        <div class="form-group">
+
                                             <label for="#">Ngày khởi hành</label>
                                             <div class="form-field">
                                                 <input type="date" class="form-control checkout_date" placeholder="Ngày khởi hành">
@@ -57,24 +73,16 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="col-md align-items-end">
                                         <div class="form-group">
-                                            <label for="#">Ngày về</label>
-                                            <div class="form-field">
-                                                <div class="icon"><span class="icon-calendar"></span></div>
-                                                <input type="date" class="form-control checkout_date" placeholder="Ngày về">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md align-items-end">
-                                        <div class="form-group">
-                                            <label for="#">Loại tour</label>
+                                            <label for="#">Khu vực</label>
                                             <div class="form-field">
                                                 <mat-form-field appearance="fill">
-                                                    <mat-label>Chọn loại tour</mat-label>
+                                                    <mat-label>Chọn khu vực</mat-label>
                                                     <mat-select>
-                                                        <mat-option *ngFor="let dd of theloais" [value]="dd.id">
-                                                            {{dd.tenLoai}}
+                                                        <mat-option *ngFor="let dd of phanvungs" [value]="dd.id">
+                                                            Miền {{dd.tenVung}}
                                                         </mat-option>
                                                     </mat-select>
                                                 </mat-form-field>

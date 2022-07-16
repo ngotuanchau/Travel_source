@@ -6,6 +6,7 @@ import { FormField } from "../../../../user/pages/search";
 import { DiadiemsService } from "../../../../service/diadiems.service";
 import { TheloaisService } from "../../../../service/theloais.service";
 import { ToursService } from "../../../../service/tours.service";
+import { PhanvungsService } from "../../../../service/phanvungs.service";
 
 @Component({
   selector: "app-timkiem",
@@ -22,7 +23,8 @@ export class TimkiemComponent implements OnInit {
     private theloaiService: TheloaisService,
     private diadiemService: DiadiemsService,
     private routes: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private phanvungService: PhanvungsService
   ) {
     this.form = this.formBuilder.group({
       [FormField?.theloai]: [0],
@@ -40,8 +42,15 @@ export class TimkiemComponent implements OnInit {
   ngOnInit(): void {
     this.getTheLoai();
     this.getAllDiaDiem();
+    this.getPhanVung();
   }
-
+  phanvungs: any;
+  getPhanVung() {
+    this.phanvungs = [];
+    this.phanvungService.getPhanVung().subscribe((res) => {
+      this.phanvungs = res.listPhanVung;
+    });
+  }
   theloais: any;
   //Lay the loai
   getTheLoai() {
@@ -66,19 +75,5 @@ export class TimkiemComponent implements OnInit {
   newtours: any;
   onSearch() {
     this.routes.navigate(["search"]);
-    // let ngayKh = this.pipe.transform(this.ngayKh, "dd/MM/yyyy");
-    // console.log("Ngày: ");
-    // console.log(ngayKh);
-    // this.tourservice.search(this.form.value).subscribe((res) => {
-    //   if (res == null) {
-    //     console.log("Không có Tour liên quan");
-    //   } else {
-    //     this.newtours = [];
-    //     this.newtours = res;
-    //     console.log("Tour:");
-    //     console.log(this.newtours);
-
-    //   }
-    // });
   }
 }

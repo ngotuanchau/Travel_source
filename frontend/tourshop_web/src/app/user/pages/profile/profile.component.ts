@@ -2,8 +2,7 @@ import { Component, OnInit } from "@angular/core";
 
 import { NguoiDungsService } from "../../../service/nguoidungs.service";
 import { DatePipe } from "@angular/common";
-import { NgbNavChangeEvent } from "@ng-bootstrap/ng-bootstrap";
-import { FormControl, FormGroup } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { NgToastService } from "ng-angular-popup";
 import { HttpClient } from "@angular/common/http";
 @Component({
@@ -14,21 +13,32 @@ import { HttpClient } from "@angular/common/http";
 export class ProfileComponent implements OnInit {
   idUser: any;
   user: any;
-  disable: boolean;
+  disable: boolean = true;
   text: string;
   form: FormGroup;
+  form_pass: FormGroup;
   pipe = new DatePipe("en-US");
   constructor(
     private userService: NguoiDungsService,
     private toast: NgToastService,
     private http: HttpClient
-  ) {}
+  ) {
+    this.form_pass = new FormGroup({
+      passwordold: new FormControl("", [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
+      passwordnew: new FormControl("", [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
+    });
+  }
 
   ngOnInit(): void {
     this.disable = true;
     this.idUser = localStorage.getItem("id");
     this.getUser();
-
     this.text = "cập nhật";
   }
   getUser() {
@@ -46,7 +56,6 @@ export class ProfileComponent implements OnInit {
       this.disable = true;
     });
   }
-  updateProfile() {}
   formatCurrency(money: number) {
     return new Intl.NumberFormat("fr-FR", {
       style: "currency",
@@ -61,38 +70,82 @@ export class ProfileComponent implements OnInit {
     return true;
   }
   change() {
-    // if (this.disable) {
-    //   this.disable = false;
-    //   this.text = "Xác nhận";
-    // } else {
-    //Get image from field
-    if (this.form.value.avt != null) {
-      //Save image to local
-    }
-    if (this.form.value.tenNguoiDung == "") {
-      this.form.value.tenNguoiDung = this.user.tenNguoiDung;
-    }
-    if (this.form.value.hoTen == "") {
-      this.form.value.hoTen = this.user.hoTen;
-    }
-    this.userService
-      .updateUser(this.idUser, this.form.value)
-      .subscribe((res) => {
-        this.getUser();
-        this.toast.success({
-          detail: "Thông báo",
-          summary: "Cập nhật thông tin thành công",
+    if (this.disable) {
+      this.disable = false;
+      this.text = "Xác nhận";
+    } else {
+      //Get image from field
+      if (this.form.value.avt != null) {
+        //Save image to local
+      }
+      if (this.form.value.tenNguoiDung == "") {
+        this.form.value.tenNguoiDung = this.user.tenNguoiDung;
+      }
+      if (this.form.value.hoTen == "") {
+        this.form.value.hoTen = this.user.hoTen;
+      }
+      if (this.ngay(this.form.value.ngaySinh)) {
+        this.userService
+          .updateUser(this.idUser, this.form.value)
+          .subscribe((res) => {
+            this.getUser();
+            this.toast.success({
+              detail: "Thông báo",
+              summary: "Cập nhật thông tin thành công",
+              duration: 3000,
+            });
+          });
+        this.text = "Cập nhật";
+      } else {
+        this.toast.error({
+          detail: "Cảnh báo",
+          summary:
+            this.pipe.transform(this.form.value.ngaySinh, "dd/MM/yyyy") +
+            " không hợp lệ",
           duration: 3000,
         });
-      });
-  }
-
-  // Chọn 1 file
-  selectMainImage(event: any) {
-    if (event.target.files.length > 0) {
-      this.form.value.avt = event.target.files;
-      console.log("ảnh đại diện: ");
-      console.log(this.form.value.avt);
+      }
     }
+  }
+  change_pass() {
+    this.userService.change_pass(this.idUser, this.form_pass.value).subscribe(
+      (res) => {
+        this.toast.success({
+          detail: "Thông báo",
+          summary: "Đổi mật khẩu thành công",
+          duration: 3000,
+        });
+        this.form_pass.reset();
+      },
+      (err) => {
+        this.toast.error({
+          detail: "Thông báo",
+          summary: "Mật khẩu không không chính xác",
+          duration: 3000,
+        });
+      }
+    );
+  }
+  ngay(ngay: Date): boolean {
+    const today = new Date();
+    const thisDay = new Date(ngay);
+    var giaTri: boolean = false;
+    if (thisDay.getFullYear() <= today.getFullYear()) {
+      if (
+        (thisDay.getMonth() < today.getMonth() &&
+          thisDay.getFullYear() == today.getFullYear()) || //tháng<tháng hiện tại và năm =năm ht
+        thisDay.getFullYear() < today.getFullYear() || //năm nhỏ hơn năm hiện tại
+        (thisDay.getDate() <= today.getDate() &&
+          thisDay.getMonth() == today.getMonth() &&
+          thisDay.getFullYear() == today.getFullYear()) //năm=năm hiện tại và tháng = tháng hiện tại và ngày <ngày hiện tại
+      ) {
+        giaTri = true;
+      } else {
+        giaTri = false;
+      }
+    } else {
+      giaTri = false;
+    }
+    return giaTri;
   }
 }

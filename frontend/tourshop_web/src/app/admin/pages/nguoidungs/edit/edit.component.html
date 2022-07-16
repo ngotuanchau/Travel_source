@@ -1,27 +1,27 @@
-<a class="btn-back" [routerLink]="['../']"><button type="button" class="btn btn-success btn-rounded btn-fw">Xem danh
-  sách tour
-</button></a>
+<a class="btn-back" [routerLink]="['../../']"><button type="button" class="btn btn-success btn-rounded btn-fw">Xem danh
+    sách tour
+  </button></a>
 <div class="col-12 grid-margin">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Cập nhật thông tin tour</h4>
-            <form class="form-sample">
+            <h4 class="card-title">Cập nhật thông tin người dùng</h4>
+            <form class="form-sample" [formGroup]="form" (ngSubmit)="change()">
                 <div class="col-12 grid-margin grid-child">
-                    <p class="card-description">Thông tin tour</p>
+                    <p class="card-description">Thông tin người dùng</p>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Tên tour</label>
+                                <label class="col-sm-3 col-form-label">Username</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" value="tên tour" placeholder="Tên tour" />
+                                    <input type="text" class="form-control" formControlName="tenNguoiDung" [value]="user.tenNguoiDung" [placeholder]="user.tenNguoiDung" />
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Điểm nổi bật</label>
+                                <label class="col-sm-3 col-form-label">Họ và tên</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" value="Điểm nổi bật của tour" placeholder="Điểm nổi bật của tour" />
+                                    <input type="text" class="form-control" formControlName="hoTen" [value]="user.hoTen" [placeholder]="user.hoTen" />
                                 </div>
                             </div>
                         </div>
@@ -29,140 +29,33 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Loại tour</label>
+                                <label class="col-sm-3 col-form-label">CMND</label>
                                 <div class="col-sm-9">
-                                    <select class="form-control">
-                  <option>Tour gia đình</option>
-                  <option>Team building</option>
-                  <option>Tour ...</option>
-                </select>
+                                    <input class="form-control" (keypress)="numberOnly($event)" type="text" formControlName="cmnd" [value]="user.cmnd" [placeholder]="user.cmnd">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Công ty lữ hành</label>
+                                <label class="col-sm-3 col-form-label">Số điện thoại</label>
                                 <div class="col-sm-9">
-                                    <select class="form-control">
-                  <option>Công ty 1</option>
-                  <option>Công ty 2</option>
-                  <option>Công ty 3</option>
-                </select>
+                                    <input class="form-control" (keypress)="numberOnly($event)" type="text" formControlName="sdt" [value]="user.sdt" [placeholder]="user.sdt">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-3">Ngày sinh</div>
+                                    <div class="col-3">{{this.pipe.transform(user.ngaySinh,"dd/MM/yyyy")}}</div>
+                                    <div class="col-6"><input class="form-control" type="date" formControlName="ngaySinh" [value]="user.ngaySinh" [placeholder]="user.ngaySinh">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 grid-margin grid-child">
-                    <p class="card-description">Thời gian</p>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Ngày khởi hành</label>
-                                <div class="col-sm-9">
-                                    <input type="date" class="form-control" placeholder="dd/mm/yyyy" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Ngày về</label>
-                                <div class="col-sm-9">
-                                    <input type="date" class="form-control" placeholder="dd/mm/yyyy" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-12 grid-margin grid-child">
-                    <p class="card-description">Địa điểm</p>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Điểm khởi hành</label>
-                                <div class="col-sm-9">
-                                    <select class="form-control">
-                  <option>TP Hồ Chí Minh</option>
-                  <option>Hà Nội</option>
-                  <option>Đà Nẵng</option>
-                </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Điểm đến</label>
-                                <div class="col-sm-9">
-                                    <select class="form-control">
-                  <option>TP Hồ Chí Minh</option>
-                  <option>Hà Nội</option>
-                  <option>Đà Nẵng</option>
-                </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 grid-margin grid-child">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Mô tả</label>
-                                <div class="col-sm-9">
-                                    <textarea class="form-control" id="exampleTextarea1" rows="5" value="Mô tả tour" placeholder="Mô tả tour"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Cần chuẩn bị</label>
-                                <div class="col-sm-9">
-                                    <textarea class="form-control" id="exampleTextarea1" rows="5" value="Cần chuẩn bị" placeholder="Cần chuẩn bị"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 grid-margin grid-child">
-                    <p class="card-description">Chế độ trẻ em</p>
-                    <div class="card">
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">0-2 tuổi</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="1.000.000 đ" value="" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">3-5 tuổi</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="2.000.000 đ" value="" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">5-12 tuổi</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="3.000.000 đ" value="" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 grid-margin grid-child">
-                    <p class="card-description">Ảnh</p>
-                    <div class="card">
-                        <label class="btn btn-default"><i class="bi bi-upload"></i>
-                      Chọn <input type="file" hidden>
-                  </label>
-
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary mr-2"> Xác nhận </button>
+                <button type="submit" class="btn btn-primary mr-2" (click)="change()"> Xác nhận </button>
                 <button class="btn btn-light">Hủy</button>
             </form>
         </div>

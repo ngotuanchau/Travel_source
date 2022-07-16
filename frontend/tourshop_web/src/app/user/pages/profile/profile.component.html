@@ -1,96 +1,214 @@
-<div class="width-box">
-
-    <div class="row">
-
-        <div class="col-3">
-            <section class="ftco-search">
+<section class="ftco-search">
+    <div class="width-box mb-4">
+        <div class="row">
+            <div class="col-4">
                 <div class="box">
-                    <div class=" img-avt scale-img max-width" *ngIf="user.avt==''">
-                        <img src="http://localhost:3000/default.png">
-                    </div>
-                    <div class=" img-avt scale-img max-width" *ngIf="user.avt!=''">
-                        <img src="http://localhost:3000/{{user.avt}}">
-                    </div>
-                </div>
-            </section>
-        </div>
-        <div class="col-9">
-            <div class="box">
-                <mat-tab-group mat-align-tabs="start">
-                    <mat-tab label="Thông tin cá nhân">
-                        <div class="profile">
-                            <div class="row">
-                                <div class="col-6">
-                                    <form action="" [formGroup]="form" (ngSubmit)="change()">
+                    <mat-tab-group mat-align-tabs="center">
+                        <mat-tab label="THÔNG TIN CÁ NHÂN">
+                            <div class="profile">
+                                <div class="row">
+                                    <div class="update" *ngIf="disable==false">
                                         <div class="form-group">
                                             <div class="form-field">
                                                 <div class="row">
-                                                    <div class="col-3">Username</div>
-                                                    <div class="col-9"><input type="text" formControlName="tenNguoiDung" [value]="user.tenNguoiDung" [placeholder]="user.tenNguoiDung">
+                                                    <div class="col-3">Email</div>
+                                                    <div class="col-9"><input disabled class="form-control" type="text" [value]="user.email" [placeholder]="user.email">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="form-field">
-                                                <div class="row">
-                                                    <div class="col-3">Họ tên</div>
-                                                    <div class="col-9"><input [disabled]="disable" type="text" formControlName="hoTen" [value]="user.hoTen" [placeholder]="user.hoTen">
+                                        <form action="" [formGroup]="form" (ngSubmit)="change()">
+                                            <div class="form-group">
+                                                <div class="form-field">
+                                                    <div class="row">
+                                                        <div class="col-3">Username</div>
+                                                        <div class="col-9"><input class="form-control" type="text" formControlName="tenNguoiDung" [value]="user.tenNguoiDung" [placeholder]="user.tenNguoiDung">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="form-field">
-                                                <div class="row">
-                                                    <div class="col-3">CMND/CCCD</div>
-                                                    <div class="col-9"><input (keypress)="numberOnly($event)" type="text" formControlName="cmnd" [value]="user.cmnd" [placeholder]="user.cmnd">
+                                            <div class="form-group">
+                                                <div class="form-field">
+                                                    <div class="row">
+                                                        <div class="col-3">Họ tên</div>
+                                                        <div class="col-9"><input class="form-control" type="text" formControlName="hoTen" [value]="user.hoTen" [placeholder]="user.hoTen">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="form-field">
-                                                <div class="row">
-                                                    <div class="col-3">SĐT</div>
-                                                    <div class="col-9"><input (keypress)="numberOnly($event)" type="text" formControlName="sdt" [value]="user.sdt" [placeholder]="user.sdt">
+                                            <div class="form-group">
+                                                <div class="form-field">
+                                                    <div class="row">
+                                                        <div class="col-3">CMND/CCCD</div>
+                                                        <div class="col-9"><input class="form-control" (keypress)="numberOnly($event)" type="text" formControlName="cmnd" [value]="user.cmnd" [placeholder]="user.cmnd">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="form-field">
-                                                <div class="row">
-                                                    <div class="col-3">Ngày sinh</div>
-                                                    <div class="col-3">{{this.pipe.transform(user.ngaySinh,"dd/MM/yyyy")}}</div>
-                                                    <div class="col-6"><input type="date" formControlName="ngaySinh" [value]="user.ngaySinh" [placeholder]="user.ngaySinh">
+                                            <div class="form-group">
+                                                <div class="form-field">
+                                                    <div class="row">
+                                                        <div class="col-3">SĐT</div>
+                                                        <div class="col-9"><input class="form-control" (keypress)="numberOnly($event)" type="text" formControlName="sdt" [value]="user.sdt" [placeholder]="user.sdt">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                            <div class="form-group">
+                                                <div class="form-field">
+                                                    <div class="row">
+                                                        <div class="col-3">Ngày sinh</div>
+                                                        <div class="col-3">{{this.pipe.transform(user.ngaySinh,"dd/MM/yyyy")}}</div>
+                                                        <div class="col-6"><input class="form-control" type="date" formControlName="ngaySinh" [value]="user.ngaySinh" [placeholder]="user.ngaySinh">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                    </form>
-                                </div>
-                                <div class="col-3">
-                                    <div class="button mb-4">
-                                        <button (click)="change()">{{text}}</button>
+                                        </form>
                                     </div>
+                                    <div class="update" *ngIf="disable">
+                                        <form action="">
+                                            <div class="form-group">
+                                                <div class="form-field">
+                                                    <div class="row">
+                                                        <div class="col-3">Email</div>
+                                                        <div class="col-9"><input disabled class="form-control" type="text" [value]="user.email" [placeholder]="user.email">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-field">
+                                                    <div class="row">
+                                                        <div class="col-3">Username</div>
+                                                        <div class="col-9"><input class="form-control" type="text" [value]="user.tenNguoiDung" [placeholder]="user.tenNguoiDung" [disabled]="disable">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-field">
+                                                    <div class="row">
+                                                        <div class="col-3">Họ tên</div>
+                                                        <div class="col-9"><input class="form-control" type="text" [value]="user.hoTen" [disabled]="disable" [placeholder]="user.hoTen">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-field">
+                                                    <div class="row">
+                                                        <div class="col-3">CMND/CCCD</div>
+                                                        <div class="col-9"><input class="form-control" [value]="user.cmnd" [disabled]="disable" [placeholder]="user.cmnd">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-field">
+                                                    <div class="row">
+                                                        <div class="col-3">SĐT</div>
+                                                        <div class="col-9"><input class="form-control" [value]="user.sdt" [disabled]="disable" [placeholder]="user.sdt">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-field">
+                                                    <div class="row">
+                                                        <div class="col-3">Ngày sinh</div>
+                                                        <div class="col-3">{{this.pipe.transform(user.ngaySinh,"dd/MM/yyyy")}}</div>
 
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                    <div class="button mb-4">
+                                        <div class="row">
+                                            <div class="col-3"></div>
+                                            <div class="col-6"><button (click)="change()">{{text}}</button></div>
+                                            <div class="col-3"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </mat-tab>
-                    <mat-tab label="Lịch sử đặt Tour">
-                        <mat-tab-group mat-align-tabs="start">
-                            <mat-tab label="Chưa xác nhận">Chưa xác nhận</mat-tab>
-                            <mat-tab label="Chưa thanh toán">Chưa thanh toán</mat-tab>
-                            <mat-tab label="Đã hoàn thành">Đã hoàn thành</mat-tab>
-                            <mat-tab label="Đã hủy">Đã hủy</mat-tab>
-                        </mat-tab-group>
-                    </mat-tab>
-                </mat-tab-group>
+                        </mat-tab>
+                        <mat-tab label="ĐỔI MẬT KHẨU">
+                            <div class="profile">
+                                <div class="row">
+                                    <form [formGroup]="form_pass" (ngSubmit)="change_pass()">
+                                        <div class="form-group">
+                                            <div class="form-field">
+                                                <div class="row">
+                                                    <div class="col-5">Mật khẩu cũ</div>
+                                                    <div class="col-7"><input class="form-control" formControlName="passwordold" type="password">
+                                                        <div class="text-danger" *ngIf="form_pass.controls.passwordold.invalid && (form_pass.controls.passwordold.dirty||form_pass.controls.passwordold.touched)">
+                                                            <div *ngIf="form_pass.controls.passwordold.errors">
+                                                                <div *ngIf="form_pass.controls.passwordold.errors?.['minlength']">
+                                                                    <small>Mật khẩu phải có ít nhất 6 ký tự</small>
+                                                                </div>
+                                                                <div *ngIf="form_pass.controls.passwordold.errors.required">
+                                                                    <small>Bạn chưa nhập mật khẩu</small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-field">
+                                                <div class="row">
+                                                    <div class="col-5">Mật khẩu mới</div>
+                                                    <div class="col-7"><input class="form-control" type="password" formControlName="passwordnew">
+                                                        <div class="text-danger" *ngIf="form_pass.controls.passwordnew.invalid && (form_pass.controls.passwordnew.dirty||form_pass.controls.passwordnew.touched)">
+                                                            <div *ngIf="form_pass.controls.passwordnew.errors">
+                                                                <div *ngIf="form_pass.controls.passwordnew.errors?.['minlength']">
+                                                                    <small>Mật khẩu phải có ít nhất 6 ký tự</small>
+                                                                </div>
+                                                                <div *ngIf="form_pass.controls.passwordnew.errors.required">
+                                                                    <small>Bạn chưa nhập mật khẩu</small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="button mb-4">
+                                            <div class="row">
+                                                <div class="col-3"></div>
+                                                <div class="col-6"><button [disabled]="!form_pass.valid" (click)="change_pass()">ĐỔI MẬT
+                            KHẨU</button></div>
+                                                <div class="col-3"></div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
 
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="box">
+                    <mat-tab-group mat-align-tabs="center">
+                        <mat-tab label="LỊCH SỬ ĐẶT TOUR">
+                            <mat-tab-group mat-align-tabs="start">
+                                <mat-tab label="Chưa xác nhận">Chưa xác nhận</mat-tab>
+                                <mat-tab label="Đã cọc">Đã cọc</mat-tab>
+                                <mat-tab label="Đã thanh toán">Đã thanh toán</mat-tab>
+                                <mat-tab label="Đã hoàn thành">Đã hoàn thành</mat-tab>
+                                <mat-tab label="Đã hủy">Đã hủy</mat-tab>
+                            </mat-tab-group>
+                        </mat-tab>
+                    </mat-tab-group>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>

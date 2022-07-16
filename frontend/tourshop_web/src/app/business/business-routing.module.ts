@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { ProfileComponent } from "./profile/profile.component";
 import { TourDeXuatComponent } from "./tour-de-xuat/tour-de-xuat.component";
 import { ToursCreateComponent } from "./tours/create/create.component";
 import { ToursDetailComponent } from "./tours/detail/detail.component";
@@ -39,6 +40,11 @@ const routes: Routes = [
   {
     path: "dx-tours",
     component: TourDeXuatComponent,
+  },
+  //Thông tin công ty
+  {
+    path: "doanhnghiep/profile",
+    component: ProfileComponent,
   },
 ];
 

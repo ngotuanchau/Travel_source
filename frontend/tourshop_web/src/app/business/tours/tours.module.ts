@@ -25,6 +25,7 @@ import { MatCardModule } from "@angular/material/card";
 import { ThongTinComponent } from "./create/components/thong-tin/thong-tin.component";
 import { KhachDatTourComponent } from "./khach-dat-tour/khach-dat-tour.component";
 import { LichKhoiHanhComponent } from "./detail/components/lich-khoi-hanh/lich-khoi-hanh.component";
+import { MatTabsModule } from "@angular/material/tabs";
 @NgModule({
   declarations: [
     ToursIndexComponent,
@@ -56,6 +57,7 @@ import { LichKhoiHanhComponent } from "./detail/components/lich-khoi-hanh/lich-k
     FormsModule,
     MatCardModule,
     ReactiveFormsModule,
+    MatTabsModule,
   ],
 })
 export class ToursModule {}
