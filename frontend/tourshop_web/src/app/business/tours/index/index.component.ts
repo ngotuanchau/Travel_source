@@ -1,5 +1,4 @@
 import { Component } from "@angular/core";
-import { NgbNavChangeEvent } from "@ng-bootstrap/ng-bootstrap";
 import { TheloaisService } from "../../../service/theloais.service";
 import { ToursService } from "../../../service/tours.service";
 import { DiadiemsService } from "../../../service/diadiems.service";
@@ -36,7 +35,7 @@ export class ToursIndexComponent {
     });
   }
   findDDById(id: number) {
-    return this.diadiems.find((item: any) => item.id == id)?.ten;
+    return this.diadiems.find((item: any) => item.id == id)?.tendiadiem;
   }
   constructor(
     private tourservice: ToursService,
@@ -47,43 +46,16 @@ export class ToursIndexComponent {
     this.getAllTours();
     this.getTheLoai();
     this.getAllDiaDiem();
+    console.log(this.getTourByIdTheLoai(2));
   }
-  //Nav
-  currentJustify = "start";
-
-  active = 1;
-  activev = "top";
-
-  activeKeep = 1;
-
-  activeSelected = 1;
-  disabled = true;
-
-  tabs = [1, 2, 3, 4, 5];
-  counter = this.tabs.length + 1;
-  activeDynamic = 1;
-
-  onNavChange(changeEvent: NgbNavChangeEvent) {
-    if (changeEvent.nextId === 3) {
-      changeEvent.preventDefault();
+  getTourByIdTheLoai(id: any) {
+    let list: any;
+    list = [];
+    for (let u of this.tours) {
+      if (u.theloai == id) {
+        list.push(u);
+      }
     }
-  }
-
-  toggleDisabled() {
-    this.disabled = !this.disabled;
-    if (this.disabled) {
-      this.activeSelected = 1;
-    }
-  }
-
-  close(event: MouseEvent, toRemove: number) {
-    this.tabs = this.tabs.filter((id) => id !== toRemove);
-    event.preventDefault();
-    event.stopImmediatePropagation();
-  }
-
-  add(event: MouseEvent) {
-    this.tabs.push(this.counter++);
-    event.preventDefault();
+    return list;
   }
 }

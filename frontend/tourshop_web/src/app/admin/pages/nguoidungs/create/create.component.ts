@@ -125,16 +125,15 @@ export class NguoiDungsCreateComponent implements OnInit {
     const thisDay = new Date(ngay);
     var giaTri: boolean = false;
     if (thisDay.getFullYear() <= today.getFullYear()) {
-      if (thisDay.getMonth() <= today.getMonth()) {
-        if (
-          (thisDay.getDate() <= today.getDate() &&
-            thisDay.getMonth() == today.getMonth()) ||
-          thisDay.getMonth() < today.getMonth()
-        ) {
-          giaTri = true;
-        } else {
-          giaTri = false;
-        }
+      if (
+        (thisDay.getMonth() < today.getMonth() &&
+          thisDay.getFullYear() == today.getFullYear()) || //tháng<tháng hiện tại và năm =năm ht
+        thisDay.getFullYear() < today.getFullYear() || //năm nhỏ hơn năm hiện tại
+        (thisDay.getDate() <= today.getDate() &&
+          thisDay.getMonth() == today.getMonth() &&
+          thisDay.getFullYear() == today.getFullYear()) //năm=năm hiện tại và tháng = tháng hiện tại và ngày <ngày hiện tại
+      ) {
+        giaTri = true;
       } else {
         giaTri = false;
       }

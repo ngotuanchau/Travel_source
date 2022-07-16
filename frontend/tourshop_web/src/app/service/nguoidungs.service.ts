@@ -1,4 +1,5 @@
 import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { identifierModuleUrl } from "@angular/compiler";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
@@ -22,5 +23,11 @@ export class NguoiDungsService {
   }
   createUser(user: any): Observable<any> {
     return this.http.post<any>(this.baseUrl, user);
+  }
+  change_pass(id: any, pass: any): Observable<any> {
+    return this.http.put<any>(
+      this.baseUrl + "/user/change_password/" + id,
+      pass
+    );
   }
 }

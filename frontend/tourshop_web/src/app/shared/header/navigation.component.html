@@ -25,15 +25,14 @@
             </a>
         </div>
         <div *ngIf="checkRole()==false">
-            <a ngbDropdownToggle class="nav-link waves-effect waves-dark pro-pic" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a ngbDropdownToggle class="nav-link waves-effect waves-dark pro-pic" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="ms-2">{{name}}</span>
             </a>
         </div>
         <div class="dropdown-menu-right" ngbDropdownMenu>
-            <a class="dropdown-item" href="javascript:void(0)"> Hồ sơ cá nhân</a>
+            <a class="dropdown-item" [routerLink]="['./doanhnghiep/profile']"> Hồ sơ cá nhân</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="javascript:void(0)"> Cài đặt</a>
-            <div class="dropdown-divider"></div>
+
             <a class="dropdown-item" [routerLink]="['./logout']"> Đăng xuất</a>
         </div>
     </li>
