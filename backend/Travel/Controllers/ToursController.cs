@@ -667,6 +667,64 @@ namespace Travel.Controllers
         [Authorize]
         [Authorize(Roles = "Business")]
         [HttpGet]
+        [Route("confirm_user_hoanthanhthanhtoan/{id:int}")]
+        [ActionName("confirm_user_hoanthanhthanhtoan")]
+        public async Task<IActionResult> confirm_user_hoanthanhthanhtoan([FromRoute] int id)
+        {
+            try
+            {
+                HoaDon hoaDon = _context.HoaDons.Include(h => h.NguoiDung).Include(t => t.Tour).Where(t => t.TrangThai == 3 && t.Id == id).FirstOrDefault();
+                if (hoaDon == null)
+                {
+                    return StatusCode(404, "Hóa đơn không hợp lệ");
+                }
+
+                hoaDon.TrangThai = 4;
+                _context.SaveChanges();
+                return Ok(new
+                {
+                    message = "Success",
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+        [Authorize]
+        [Authorize(Roles = "Business")]
+        [HttpGet]
+        [Route("confirm_dahoantien/{id:int}")]
+        [ActionName("confirm_dahoantien")]
+        public async Task<IActionResult> confirm_dahoantien([FromRoute] int id)
+        {
+            try
+            {
+                HoaDon hoaDon = _context.HoaDons.Include(h => h.NguoiDung).Include(t => t.Tour).Where(t => t.TrangThai == 5 || t.TrangThai == 8 && t.Id == id).FirstOrDefault();
+                if (hoaDon == null)
+                {
+                    return StatusCode(404, "Hóa đơn không hợp lệ");
+                }
+
+                hoaDon.TrangThai = 9;
+                _context.SaveChanges();
+                return Ok(new
+                {
+                    message = "Success",
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+        [Authorize]
+        [Authorize(Roles = "Business")]
+        [HttpGet]
         [Route("confirm_tour_prepare/{id:int}")] // id thoi gian
         [ActionName("confirm_tour_prepare")]
         public async Task<IActionResult> confirm_tour_prepare([FromRoute] int id)
@@ -782,7 +840,14 @@ namespace Travel.Controllers
                 List<HoaDon> hoaDons = _context.HoaDons.Where(t => t.ThoiGianId == id && t.TrangThai == 3 || t.TrangThai == 2).ToList();
                 foreach (var hoadon in hoaDons)
                 {
-                    hoadon.TrangThai = 5;
+                    if (hoadon.TrangThai == 3)
+                    {
+                        hoadon.TrangThai = 5;
+                    }
+                    else if(hoadon.TrangThai == 2)
+                    {
+                        hoadon.TrangThai = 6;
+                    }    
                     _context.SaveChanges();
                 }
                 transaction.Commit();
