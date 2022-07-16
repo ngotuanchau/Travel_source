@@ -28,7 +28,6 @@ namespace Travel.Controllers
         [Authorize]
         [HttpGet]
         [Route("doanhnghiep_get")]
-        [Authorize(Roles = "Admin")]
         [ActionName("doanhnghiep_get")]
         public async Task<IActionResult> doanhnghiep_get()
         {
@@ -53,6 +52,42 @@ namespace Travel.Controllers
                 }
 
                 return Ok(congty_Serializes);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+        [Authorize]
+        [HttpPut]
+        [Route("doanhnghiep_update")]
+        [Authorize(Roles = "Business")]
+        [ActionName("doanhnghiep_update")]
+        public async Task<IActionResult> doanhnghiep_update([FromBody] Congty_serialize congty_Serialize)
+        {
+            try
+            {
+
+                CongTy congTies = _context.CongTies.Where(t => t.TrangThai != 0 && t.Id == congty_Serialize.Id).FirstOrDefault();
+                if (congTies == null)
+                {
+                    return NotFound("Doanh nghiệp không tồn tại");
+                }
+                congTies.KhuVuc = congty_Serialize.KhuVuc;
+                congTies.Mst = congty_Serialize.Mst;
+                congTies.Sdt = congty_Serialize.Sdt;
+                congTies.Tencongty = congty_Serialize.Tencongty;
+                congTies.TheNganHang = congty_Serialize.TheNganHang;
+                congTies.VanPhong = congty_Serialize.VanPhong;
+                congTies.NgaySua = DateTime.Now;
+
+                _context.SaveChanges();
+
+                return Ok(new { 
+                    message = "update success"
+                });
             }
             catch (Exception ex)
             {
