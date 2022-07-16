@@ -262,5 +262,52 @@ namespace Travel.Controllers
                 return StatusCode(500, "Internal Server Error");
             }
         }
+
+        [Authorize]
+        [HttpDelete]
+        [Route("user/huy_tourdat/{id:int}")] //id hoadon
+        //[Authorize(Roles = "User")]
+        [ActionName("huy_tourdat")]
+        public async Task<IActionResult> huy_tourdat([FromRoute] int id)
+        {
+            try
+            {
+
+                HoaDon hoaDons = _context.HoaDons.Include(h => h.Tour).Include(h => h.NguoiDung).Where(h => h.Id == id).FirstOrDefault();
+                if (hoaDons == null)
+                {
+                    return NotFound(new
+                    {
+                        message = "Hóa đơn không tồn tại"
+                    });
+                }
+
+                ThoiGian thoiGian = _context.ThoiGians.Where(t => t.TrangThai == 2 && t.Id == hoaDons.ThoiGianId).FirstOrDefault();
+                if (thoiGian != null)
+                {
+                    return BadRequest(new
+                    {
+                        message = "Tour đã được chuẩn bị, không thể hủy"
+                    });
+                }
+                if (hoaDons.TrangThai == 2)
+                {
+                    hoaDons.TrangThai =7;
+                }
+                else if(hoaDons.TrangThai == 3)
+                {
+                    hoaDons.TrangThai = 8;
+                }    
+                _context.SaveChanges();
+                return Ok(new { 
+                    message = "Hủy tour thành công"
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
     }
 }
