@@ -218,5 +218,49 @@ namespace Travel.Controllers
                 return StatusCode(500, "Internal Server Error");
             }
         }
+
+        [Authorize]
+        [HttpGet]
+        [Route("user/get_tour_dadat/{id:int}")] //id nguoidung
+        //[Authorize(Roles = "User")]
+        [ActionName("get_tour_dadat")]
+        public async Task<IActionResult> get_tour_dadat([FromRoute] int id)
+        {
+            try
+            {
+
+                List<HoaDon> hoaDons = _context.HoaDons.Include(h => h.Tour).Include(h => h.NguoiDung).Where(h => h.NguoiDungId == id).ToList();
+                List<getTourDaDat_serialize> getTourDaDat_Serializes = new List<getTourDaDat_serialize>();
+                
+                foreach( var hoadon in hoaDons)
+                {
+                    getTourDaDat_serialize getTourDaDat_Serialize = new getTourDaDat_serialize();
+                    getTourDaDat_Serialize.id = hoadon.Id;
+                    getTourDaDat_Serialize.nguoidungid = hoadon.NguoiDungId;
+                    getTourDaDat_Serialize.ngaykh = _context.ThoiGians.Where(t => t.Id == hoadon.ThoiGianId).FirstOrDefault().NgayDi;
+                    getTourDaDat_Serialize.sovenguoilon = hoadon.TongSoVeNl;
+                    getTourDaDat_Serialize.sovetreem = hoadon.TongSoVeTe;
+                    getTourDaDat_Serialize.sovetrenho = hoadon.TongSoVeTn;
+                    getTourDaDat_Serialize.tencongty = _context.Tours.Include(t => t.CongTy).Where(t => t.Id == hoadon.TourId).FirstOrDefault().CongTy.Tencongty;
+                    int id_diemdi = _context.Tours.Include(t => t.CongTy).Where(t => t.Id == hoadon.TourId).FirstOrDefault().DiemDi;
+                    getTourDaDat_Serialize.diemdi = _context.DiaDiems.Where(t => t.Id == id_diemdi).FirstOrDefault().Ten;
+                    getTourDaDat_Serialize.tentour = _context.Tours.Where(t => t.Id == hoadon.TourId).FirstOrDefault().TenTour;
+                    getTourDaDat_Serialize.thoigianid = hoadon.ThoiGianId;
+                    getTourDaDat_Serialize.tongtien = hoadon.TongTien;
+                    getTourDaDat_Serialize.trangthaihoadon = hoadon.TrangThai;
+                    getTourDaDat_Serialize.trangthaitour = _context.ThoiGians.Where(t => t.Id == hoadon.ThoiGianId).FirstOrDefault().TrangThai;
+                    getTourDaDat_Serialize.ngaydat = hoadon.NgayTao.ToString("dd/MM/yyyy");
+
+                    getTourDaDat_Serializes.Add(getTourDaDat_Serialize);
+                }
+
+                return Ok(getTourDaDat_Serializes);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
     }
 }
