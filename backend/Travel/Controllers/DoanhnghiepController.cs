@@ -176,6 +176,84 @@ namespace Travel.Controllers
                 return StatusCode(500, "Internal Server Error");
             }
         }
+
+        //[Authorize]
+        [HttpGet]
+        [Route("doanhnghiep/thongke/{id:int}")] //id doanh nghiep
+        //[Authorize(Roles = "Business")]
+        [ActionName("thongke")]
+        public async Task<IActionResult> thongke([FromRoute] int id, thongkedoanhnghiep_serialize thongkedoanhnghiep_Serialize)
+        {
+            try
+            {
+                int tongsotour = 0;
+                int sotour_dahuy = 0;
+                int sotour_chuanbi = 0;
+                int sotour_batdau = 0;
+                int sotour_hoanthanh = 0;
+                decimal tongdoanhthu = 0;
+
+                CongTy congTies = _context.CongTies.Where(t => t.TrangThai != 0 && t.Id == id).FirstOrDefault();
+                if (congTies == null)
+                {
+                    return NotFound("Doanh nghiệp không tồn tại");
+                }
+                
+                DateTime start = DateTime.ParseExact(thongkedoanhnghiep_Serialize.thang, "MM/yyyy",
+                                           System.Globalization.CultureInfo.InvariantCulture);
+                DateTime end = start.AddMonths(1);
+                List<Tour> tours = _context.Tours.Where(t => t.CongTyId == id && t.TrangThai != 0).ToList();
+                foreach (var tour in tours)
+                {
+                    List<ThoiGian> thoiGians = _context.ThoiGians.Where(t => t.TourId == tour.Id && t.NgayDi >= start && t.NgayDi < end).ToList();
+                    if (thoiGians.Count() < 1)
+                    {
+                        continue;
+                    }
+                    tongsotour += thoiGians.Count();
+                    foreach (var thoigian in thoiGians)
+                    {
+
+                        if (thoigian.TrangThai == 2)
+                        {
+                            sotour_chuanbi++;
+                        }
+                        if (thoigian.TrangThai == 3)
+                        {
+                            sotour_batdau++;
+                        }
+                        if (thoigian.TrangThai == 4)
+                        {
+                            sotour_hoanthanh++;
+                        }
+                        if (thoigian.TrangThai == 5)
+                        {
+                            sotour_dahuy++;
+                        }
+                        List<HoaDon> hoaDons = _context.HoaDons.Where(h => h.ThoiGianId == thoigian.Id && h.TrangThai == 4).ToList();
+                        foreach (var hoadon in hoaDons)
+                        {
+                            tongdoanhthu += hoadon.TongTien;
+                        }
+                    }
+                }
+                thongkedoanhnghiep_serialize tk = new thongkedoanhnghiep_serialize();
+                tk.thang = thongkedoanhnghiep_Serialize.thang;
+                tk.iddoanhnghiep = id;
+                tk.sotour_batdau = sotour_batdau;
+                tk.sotour_chuanbi = sotour_chuanbi;
+                tk.sotour_dahuy = sotour_dahuy;
+                tk.sotour_hoanthanh = sotour_hoanthanh;
+                tk.tongdoanhthu = tongdoanhthu;
+                tk.tongsotour = tongsotour;
+                return Ok(tk);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
         public static string GetMD5(string str)
         {
             MD5 md5 = new MD5CryptoServiceProvider();
