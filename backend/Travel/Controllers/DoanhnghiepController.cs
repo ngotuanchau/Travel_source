@@ -64,6 +64,44 @@ namespace Travel.Controllers
         }
 
         [Authorize]
+        [HttpGet]
+        [Route("doanhnghiep_get/{id:int}")]
+        [ActionName("doanhnghiep_a_get")]
+        public async Task<IActionResult> doanhnghiep_a_get([FromRoute] int id)
+        {
+            try
+            {
+
+                CongTy congTies = _context.CongTies.Where(t => t.TrangThai != 0 && t.Id ==id).FirstOrDefault();
+                if (congTies == null)
+                {
+                    return NotFound(new
+                    {
+                        message = "Doanh nghiệp không tồn tại"
+                    });
+                }    
+                Congty_serialize ct = new Congty_serialize();
+                ct.Id = congTies.Id;
+                ct.KhuVuc = congTies.KhuVuc;
+                ct.Mst = congTies.Mst;
+                ct.Sdt = congTies.Sdt;
+                ct.Tencongty = congTies.Tencongty;
+                ct.TheNganHang = congTies.TheNganHang;
+                ct.VanPhong = congTies.VanPhong;
+                ct.TrangThai = congTies.TrangThai;
+
+ 
+
+                return Ok(ct);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+        [Authorize]
         [HttpPut]
         [Route("doanhnghiep_update/{id:int}")]
         [Authorize(Roles = "Business")]
