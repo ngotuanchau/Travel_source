@@ -36,7 +36,14 @@ export class NguoiDungsCreateComponent implements OnInit {
       [FormField.hoTen]: ["", Validators.required], //2
       [FormField.cmnd]: [null, Validators.required], //3
       [FormField.email]: [null, [Validators.required, Validators.email]], //4
-      [FormField.sdt]: [null, [Validators.required, Validators.minLength(10)]], //5
+      [FormField.sdt]: [
+        null,
+        [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(10),
+        ],
+      ], //5
       [FormField.ngaySinh]: [null, [Validators.required]], //6
       [FormField.isAdmin]: [false], //7
       [FormField.matKhau]: [
@@ -73,24 +80,67 @@ export class NguoiDungsCreateComponent implements OnInit {
         [FormField.isAdmin]: true,
       });
     }
-    if (this.form.value.ngaySinh != null) {
-      this.form.patchValue({
-        [FormField.ngaySinh]: this.pipe.transform(
-          this.form.value.ngaySinh,
-          "dd/MM/yyyy"
-        ),
+
+    if (this.ngay(this.form.value.ngaySinh)) {
+      this.userService.createUser(this.form.value).subscribe(
+        (res) => {
+          this.toast.success({
+            detail: "Thông báo",
+            summary: "Thêm người dùng thành công",
+            duration: 3000,
+          });
+          this.form.reset();
+        },
+        (err) => {
+          this.toast.error({
+            detail: "Cảnh báo",
+            summary: "Email đã được đăng ký",
+            duration: 3000,
+          });
+        }
+      );
+    } else {
+      this.toast.error({
+        detail: "Cảnh báo",
+        summary:
+          this.pipe.transform(this.form.value.ngaySinh, "dd/MM/yyyy") +
+          " không hợp lệ",
+        duration: 3000,
       });
     }
-    this.userService.createUser(this.form.value).subscribe(
-      (res) => {},
-      (err) => {
-        this.toast.error({
-          detail: "Cảnh báo",
-          summary: "Email đã được đăng ký",
-          duration: 3000,
-        });
-      }
-    );
+  }
+  numberOnly(event: any): boolean {
+    const charCode = event.which ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+  }
+  Huy() {
+    this.form.reset();
   }
   ngOnInit(): void {}
+  ngay(ngay: Date): boolean {
+    const today = new Date();
+    const thisDay = new Date(ngay);
+    var giaTri: boolean = false;
+    if (thisDay.getFullYear() <= today.getFullYear()) {
+      if (thisDay.getMonth() <= today.getMonth()) {
+        if (
+          (thisDay.getDate() <= today.getDate() &&
+            thisDay.getMonth() == today.getMonth()) ||
+          thisDay.getMonth() < today.getMonth()
+        ) {
+          giaTri = true;
+        } else {
+          giaTri = false;
+        }
+      } else {
+        giaTri = false;
+      }
+    } else {
+      giaTri = false;
+    }
+    return giaTri;
+  }
 }

@@ -10,17 +10,11 @@
             chủ</a>
                 </li>
                 <li class="nav-item"><a href="about.html" class="nav-link font-weight-normal text-light">Tours</a></li>
-                <li class="nav-item"><a href="blog.html" class="nav-link font-weight-normal text-light">Tin tức</a></li>
-                <li class="nav-item"><a href="contact.html" class="nav-link font-weight-normal text-light">Liên hệ</a></li>
-                <!-- <li class="nav-item login" *ngIf="loginStatus()==false"><a [routerLink]="['./login']" class="nav-link font-weight-normal text-light ">Đăng
-            nhập</a>
-                </li>
-                <li class="nav-item login" *ngIf="loginStatus()"><a [routerLink]="" class="nav-link font-weight-normal text-light ">{{name}}</a>
-                </li> -->
+
                 <li class="nav-item" ngbDropdown placement="bottom-end">
                     <div *ngIf="loginStatus()">
-                        <a ngbDropdownToggle class="nav-link waves-effect waves-dark pro-pic" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="assets/images/users/{{avt}}" alt="user" class="rounded-circle" width="31" />
+                        <a ngbDropdownToggle class="nav-link waves-effect waves-dark pro-pic" [routerLink]="['./profile']" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <!-- <img src="assets/images/users/{{avt}}" alt="user" class="rounded-circle" width="31" /> -->
 
                             <span class="ms-2">{{name}}</span>
                         </a>

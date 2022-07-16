@@ -46,7 +46,6 @@ export class ProfileComponent implements OnInit {
       this.disable = true;
     });
   }
-  updateProfile() {}
   formatCurrency(money: number) {
     return new Intl.NumberFormat("fr-FR", {
       style: "currency",
@@ -85,14 +84,5 @@ export class ProfileComponent implements OnInit {
           duration: 3000,
         });
       });
-  }
-
-  // Chọn 1 file
-  selectMainImage(event: any) {
-    if (event.target.files.length > 0) {
-      this.form.value.avt = event.target.files;
-      console.log("ảnh đại diện: ");
-      console.log(this.form.value.avt);
-    }
   }
 }

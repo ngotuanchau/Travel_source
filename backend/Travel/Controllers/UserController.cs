@@ -150,7 +150,7 @@ namespace Travel.Controllers
         {
             try
             {
-                List<NguoiDung> nguoiDungs = _context.NguoiDungs.Where(u => u.TrangThai != 0).ToList();
+                List<NguoiDung> nguoiDungs = _context.NguoiDungs.ToList();
                 
                 List<User_serialize> user_Serializes = new List<User_serialize>();
                 foreach (var nd in nguoiDungs)

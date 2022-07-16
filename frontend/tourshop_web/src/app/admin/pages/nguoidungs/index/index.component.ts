@@ -21,6 +21,16 @@ export class NguoiDungsIndexComponent implements OnInit {
       this.user = res;
     });
   }
+  filterUserByStatus(status: any) {
+    let list: any;
+    list = [];
+    for (let u of this.user) {
+      if (u.trangThai == status) {
+        list.push(u);
+      }
+    }
+    return list;
+  }
   //Nav
   currentJustify = "start";
 

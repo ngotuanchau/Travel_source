@@ -8,6 +8,9 @@ import { NguoiDungsDetailComponent } from "./detail/detail.component";
 import { RouterModule } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
+import { MatTabsModule } from "@angular/material/tabs";
+import { MatRadioModule } from "@angular/material/radio";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 @NgModule({
   declarations: [
     NguoiDungsIndexComponent,
@@ -22,6 +25,9 @@ import { MatSlideToggleModule } from "@angular/material/slide-toggle";
     FormsModule,
     ReactiveFormsModule,
     MatSlideToggleModule,
+    MatTabsModule,
+    MatRadioModule,
+    MatCheckboxModule,
   ],
 })
 export class NguoiDungsModule {}
