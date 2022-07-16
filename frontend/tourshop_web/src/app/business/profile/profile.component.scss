@@ -1,0 +1,13 @@
+.profile {
+    padding: 20px;
+}
+
+button {
+    padding: 10px 30px;
+    box-shadow: 2px 2px 2px 2px opacify($color: #E76F51, $amount: 0.2);
+    background: #fff;
+    border: #E76F51 2px solid;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #E76F51;
+}

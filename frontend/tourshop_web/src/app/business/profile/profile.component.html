@@ -1,26 +1,210 @@
 <div class="card">
     <div class="width-box">
-        <form action="">
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="form-field">
-                            <div class="row">
-                                <div class="col-3">Tên công ty</div>
-                                <div class="col-9"><input disabled class="form-control"></div>
+        <div class="profile" *ngIf="disable">
+            <form action="" [formGroup]="form">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-field">
+                                <div class="row">
+                                    <div class="col-3">Tên công ty</div>
+                                    <div class="col-9"><input type="text" [disabled]="disable" class="form-control" [placeholder]="user.tencongty"></div>
+                                </div>
                             </div>
                         </div>
+                        <div class="col-6">
+                            <div class="form-field">
+                                <div class="row">
+                                    <div class="col-3">Số điện thoại</div>
+                                    <div class="col-9"><input type="text" class="form-control" [placeholder]="user.sdt" [disabled]="disable"></div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="col-6">
-                        <div class="form-field">
-                            <div class="row">
-                                <div class="col-3">Tên công ty</div>
-                                <div class="col-9"><input disabled class="form-control"></div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-field">
+                                <div class="row">
+                                    <div class="col-3">Thẻ ngân hàng</div>
+                                    <div class="col-9"><input type="text" class="form-control" [placeholder]="user.theNganHang" [disabled]="disable"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-field">
+                                <div class="row">
+                                    <div class="col-3">Mã số thuế</div>
+                                    <div class="col-9"><input type="text" class="form-control" [placeholder]="user.mst" [disabled]="disable"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-field">
+                                <div class="row">
+                                    <div class="col-3">Khu vực</div>
+                                    <div class="col-9">
+                                        <select class="form-control" formControlName="khuVuc" for="" required>
+                      <option *ngFor="let dd of phanvungs" [value]="dd.id" disabled>Miền {{dd.tenVung}}</option>
+                    </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-field">
+                                <div class="row">
+                                    <div class="col-3">Văn phòng</div>
+                                    <div class="col-9"><input type="text" class="form-control" [disabled]="disable" [placeholder]="user.vanPhong"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="button mb-4">
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3"></div>
+                        <div class="col-6"><button (click)="change()">{{text}}</button></div>
+                    </div>
+                </div>
             </div>
-        </form>
+        </div>
+        <div class="profile" *ngIf="disable==false">
+            <form action="" [formGroup]="form">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-field">
+                                <div class="row">
+                                    <div class="col-3">Tên công ty</div>
+                                    <div class="col-9"><input type="text" class="form-control" formControlName="tencongty" [placeholder]="user.tencongty"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-field">
+                                <div class="row">
+                                    <div class="col-3">Số điện thoại</div>
+                                    <div class="col-9"><input type="text" class="form-control" formControlName="sdt"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-field">
+                                <div class="row">
+                                    <div class="col-3">Thẻ ngân hàng</div>
+                                    <div class="col-9"><input type="text" class="form-control" formControlName="theNganHang"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-field">
+                                <div class="row">
+                                    <div class="col-3">Mã số thuế</div>
+                                    <div class="col-9"><input type="text" class="form-control" formControlName="mst"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-field">
+                                <div class="row">
+                                    <div class="col-3">Khu vực</div>
+                                    <div class="col-9">
+                                        <select class="form-control" formControlName="khuVuc" for="" required>
+                      <option *ngFor="let dd of phanvungs" [value]="dd.id">Miền {{dd.tenVung}}</option>
+                    </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-field">
+                                <div class="row">
+                                    <div class="col-3">Văn phòng</div>
+                                    <div class="col-9"><input type="text" class="form-control" formControlName="vanPhong"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="button mb-4">
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3"></div>
+                        <div class="col-6"><button (click)="change()">{{text}}</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="card">
+    <div class="width-box">
+        <div class="profile">
+            <form action="" [formGroup]="form_pass" (ngSubmit)="change_pass()">
+                <div class="row mb-4">
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-3">Mật khẩu cũ</div>
+                            <div class="col-9"><input class="form-control" formControlName="passwordold" type="password">
+                                <div class="text-danger" *ngIf="form_pass.controls.passwordold.invalid && (form_pass.controls.passwordold.dirty||form_pass.controls.passwordold.touched)">
+                                    <div *ngIf="form_pass.controls.passwordold.errors">
+                                        <div *ngIf="form_pass.controls.passwordold.errors?.['minlength']">
+                                            <small>Mật khẩu phải có ít nhất 6 ký tự</small>
+                                        </div>
+                                        <div *ngIf="form_pass.controls.passwordold.errors.required">
+                                            <small>Bạn chưa nhập mật khẩu</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-3">Mật khẩu mới</div>
+                            <div class="col-9"><input class="form-control" type="password" formControlName="passwordnew">
+                                <div class="text-danger" *ngIf="form_pass.controls.passwordnew.invalid && (form_pass.controls.passwordnew.dirty||form_pass.controls.passwordnew.touched)">
+                                    <div *ngIf="form_pass.controls.passwordnew.errors">
+                                        <div *ngIf="form_pass.controls.passwordnew.errors?.['minlength']">
+                                            <small>Mật khẩu phải có ít nhất 6 ký tự</small>
+                                        </div>
+                                        <div *ngIf="form_pass.controls.passwordnew.errors.required">
+                                            <small>Bạn chưa nhập mật khẩu</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="button mb-4">
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3"></div>
+                        <div class="col-6"><button (click)="change_pass()">{{text}}</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

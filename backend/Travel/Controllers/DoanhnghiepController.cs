@@ -85,6 +85,7 @@ namespace Travel.Controllers
                 ct.KhuVuc = congTies.KhuVuc;
                 ct.Mst = congTies.Mst;
                 ct.Sdt = congTies.Sdt;
+                ct.Email = congTies.Email;
                 ct.Tencongty = congTies.Tencongty;
                 ct.TheNganHang = congTies.TheNganHang;
                 ct.VanPhong = congTies.VanPhong;

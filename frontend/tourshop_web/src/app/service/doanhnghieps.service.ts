@@ -13,8 +13,11 @@ export class DoanhNghiepsService {
   getAllBusiness(): Observable<any> {
     return this.http.get<any>(this.baseUrl + "/doanhnghiep_get");
   }
+  getDoanhNghiep(id: any): Observable<any> {
+    return this.http.get<any>(this.baseUrl + "/doanhnghiep_get/" + id);
+  }
 
-  update_doanhNghiep(doanhNghiep: any, id: any): Observable<any> {
+  update_doanhNghiep(id: any, doanhNghiep: any): Observable<any> {
     return this.http.put<any>(
       this.baseUrl + "/doanhnghiep_update/" + id,
       doanhNghiep
