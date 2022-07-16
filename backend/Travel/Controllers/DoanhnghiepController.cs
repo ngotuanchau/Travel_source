@@ -63,15 +63,15 @@ namespace Travel.Controllers
 
         [Authorize]
         [HttpPut]
-        [Route("doanhnghiep_update")]
+        [Route("doanhnghiep_update/{id:int}")]
         [Authorize(Roles = "Business")]
         [ActionName("doanhnghiep_update")]
-        public async Task<IActionResult> doanhnghiep_update([FromBody] Congty_serialize congty_Serialize)
+        public async Task<IActionResult> doanhnghiep_update([FromRoute] int id, Congty_serialize congty_Serialize)
         {
             try
             {
 
-                CongTy congTies = _context.CongTies.Where(t => t.TrangThai != 0 && t.Id == congty_Serialize.Id).FirstOrDefault();
+                CongTy congTies = _context.CongTies.Where(t => t.TrangThai != 0 && t.Id == id).FirstOrDefault();
                 if (congTies == null)
                 {
                     return NotFound("Doanh nghiệp không tồn tại");
