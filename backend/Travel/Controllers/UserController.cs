@@ -46,6 +46,7 @@ namespace Travel.Controllers
 
         }
         [Authorize]
+        [Authorize(Roles = "User")]
         [HttpPut]
         [Route("{id:int}")]
         public async Task<IActionResult> Edit([FromRoute] int id, NguoiDung nd)
@@ -172,6 +173,44 @@ namespace Travel.Controllers
                 
 
                 return Ok(user_Serializes);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+        [Authorize]
+        [HttpPut]
+        [Route("user/change_password/{id:int}")]
+        [Authorize(Roles = "User")]
+        [ActionName("change_password")]
+        public async Task<IActionResult> change_password([FromRoute] int id, changepassword_serialize changepassword_Serialize)
+        {
+            try
+            {
+
+                NguoiDung nguoiDung = _context.NguoiDungs.Where(t => t.TrangThai != 0 && t.Id == id).FirstOrDefault();
+                if (nguoiDung == null)
+                {
+                    return NotFound("Người dùng không tồn tại");
+                }
+                var password_old = GetMD5(changepassword_Serialize.passwordold);
+                var password_new = GetMD5(changepassword_Serialize.passwordnew);
+                if (password_old != nguoiDung.MatKhau)
+                {
+                    return BadRequest(new
+                    {
+                        message = "Mật khẩu không đúng"
+                    });
+                }
+                nguoiDung.MatKhau = password_new;
+                _context.SaveChanges();
+
+                return Ok(new
+                {
+                    message = "change password success"
+                });
             }
             catch (Exception ex)
             {
