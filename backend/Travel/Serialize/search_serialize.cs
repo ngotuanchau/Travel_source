@@ -7,14 +7,27 @@ namespace Travel.Serialize
 {
     public class search_serialize
     {
-        public int diemdi { get; set; }
-        public int diemden { get; set; }
+        public string diemdi { get; set; }
+        public string diemden { get; set; }
         public string thoigiandi { get; set; }
-        public int khuvuc { get; set; }
-        public int theloai { get; set; }
+        public string khuvuc { get; set; }
+        public string theloai { get; set; }
         public string dichvu { get; set; }
         public string amthuc { get; set; }
         public string phuongtien { get; set; }
         public string luutru { get; set; }
+
+        public search_serialize()
+        {
+            diemdi = null;
+            diemden = null;
+            thoigiandi = null;
+            khuvuc = null;
+            theloai = null;
+            dichvu = null;
+            amthuc = null;
+            phuongtien = null;
+            luutru = null;
+        }
     }
 }
