@@ -290,7 +290,7 @@ namespace Travel.Controllers
                         message = "Tour đã được chuẩn bị, không thể hủy"
                     });
                 }
-                if (hoaDons.TrangThai == 2)
+                if (hoaDons.TrangThai == 2 || hoaDons.TrangThai == 1)
                 {
                     hoaDons.TrangThai =7;
                 }
