@@ -51,6 +51,22 @@ export class KhachDatTourComponent implements OnInit {
       }
     });
   }
+  //Hoàn thành thanh toán
+  cofirmHTThanhToan(id: any) {
+    this.tourservice.confirmKTThanhToan(id).subscribe((res) => {
+      if (res.message == "Success") {
+        this.getUserByIdNHK();
+      }
+    });
+  }
+  //Xác nhận đã hoàn tiền
+  cofirmHoanTien(id: any) {
+    this.tourservice.confirmRefund(id).subscribe((res) => {
+      if (res.message == "Success") {
+        this.getUserByIdNHK();
+      }
+    });
+  }
   //Get status name by id
   getStatus(id: number) {
     return this.hoadonStatus.find((item: any) => item.id == id)?.name;
@@ -70,6 +86,21 @@ export class KhachDatTourComponent implements OnInit {
     list = [];
     for (let hd of this.users) {
       if (hd.trangThai == id) {
+        list.push(hd);
+      }
+    }
+    return list;
+  }
+  filterTourCancelByStt() {
+    let list: any;
+    list = [];
+    for (let hd of this.users) {
+      if (
+        hd.trangthaihoadon == 5 ||
+        hd.trangthaihoadon == 6 ||
+        hd.trangthaihoadon == 7 ||
+        hd.trangthaihoadon == 8
+      ) {
         list.push(hd);
       }
     }

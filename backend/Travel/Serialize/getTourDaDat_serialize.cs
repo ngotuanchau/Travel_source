@@ -9,7 +9,9 @@ namespace Travel.Serialize
     {
         public int id { get; set; }
         public int nguoidungid { get; set; }
+        public int idtour { get; set; }
         public string tentour { get; set; }
+        public string anhtour { get; set; }
         public string tencongty { get; set; }
         public int thoigianid { get; set; }
         public DateTime ngaykh { get; set; }

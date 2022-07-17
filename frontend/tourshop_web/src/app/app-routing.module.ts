@@ -48,7 +48,7 @@ export const Approutes: Routes = [
     children: [
       {
         path: "",
-        redirectTo: "/ql-tours",
+        redirectTo: "/dashboardDN",
         pathMatch: "full",
       },
       {

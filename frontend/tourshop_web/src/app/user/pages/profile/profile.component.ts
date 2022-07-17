@@ -4,7 +4,6 @@ import { NguoiDungsService } from "../../../service/nguoidungs.service";
 import { DatePipe } from "@angular/common";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { NgToastService } from "ng-angular-popup";
-import { HttpClient } from "@angular/common/http";
 @Component({
   selector: "app-profile",
   templateUrl: "./profile.component.html",
@@ -18,10 +17,10 @@ export class ProfileComponent implements OnInit {
   form: FormGroup;
   form_pass: FormGroup;
   pipe = new DatePipe("en-US");
+
   constructor(
     private userService: NguoiDungsService,
-    private toast: NgToastService,
-    private http: HttpClient
+    private toast: NgToastService
   ) {
     this.form_pass = new FormGroup({
       passwordold: new FormControl("", [

@@ -30,4 +30,10 @@ export class NguoiDungsService {
       pass
     );
   }
+  getBillByUser(id: any): Observable<any> {
+    return this.http.get<any>(this.baseUrl + "/user/get_tour_dadat/" + id);
+  }
+  huyTour(id: any) {
+    return this.http.delete<any>(this.baseUrl + "/user/huy_tourdat/" + id);
+  }
 }

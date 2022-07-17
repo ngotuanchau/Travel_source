@@ -35,15 +35,6 @@ export class NguoiDungsEditComponent implements OnInit {
     });
     this.getUser();
   }
-  // isStatus() {
-  //   if (this.status == 1) {
-  //     this.status = 0;
-  //   } else {
-  //     this.status = 1;
-  //   }
-  //   console.log("status");
-  //   console.log(this.status);
-  // }
   isAdmin() {
     if (this.admin == true) {
       this.admin = false;

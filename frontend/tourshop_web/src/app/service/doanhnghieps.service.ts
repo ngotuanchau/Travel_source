@@ -29,4 +29,10 @@ export class DoanhNghiepsService {
       pass
     );
   }
+  thongKe(id: any, thang: any): Observable<any> {
+    return this.http.get<any>(
+      this.baseUrl + "/doanhnghiep/thongke/" + id,
+      thang
+    );
+  }
 }

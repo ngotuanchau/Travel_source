@@ -36,4 +36,5 @@ button {
 .box {
     box-shadow: 2px 2px 2px 2px opacify($color: #5c5c5c, $amount: 0.2);
     background-color: #fff;
+    min-height: 29vh;
 }

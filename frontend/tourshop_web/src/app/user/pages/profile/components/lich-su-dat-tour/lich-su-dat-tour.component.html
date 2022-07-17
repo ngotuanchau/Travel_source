@@ -1,0 +1,347 @@
+<mat-tab-group mat-align-tabs="center">
+    <mat-tab label="LỊCH SỬ ĐẶT TOUR" class="child-tab">
+        <mat-tab-group mat-align-tabs="start">
+            <mat-tab label="Tất cả">
+                <div class="item" *ngFor="let hd of lst_HD">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="box-img max-width">
+                                <img src="http://localhost:3000/{{hd.anhtour}}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="status col-sm-6" [style]="findSttById(hd.trangthaihoadon).color">
+                                    {{findSttById(hd.trangthaihoadon).name}}</div>
+                                <div class="col-sm-6">Ngày đặt: <span>{{hd.ngaydat}}</span></div>
+
+                            </div>
+                            <a [routerLink]="['../tour/detail/',hd.idtour]">
+                                <div class="ten-tour">{{hd.tentour}}
+                                </div>
+                            </a>
+                            <div class="thong-tin">
+                                <ul>
+                                    <li>{{hd.tencongty}}</li>
+                                    <li>Xuất phát tại:<span>{{hd.diemdi}}</span></li>
+                                    <li>Ngày khởi hành:<span>{{this.pipe.transform(hd.ngaykh,"dd/MM/yyyy")}}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="thong-tin-ve">
+                                <div class="row">
+                                    <div class="col-6">Người lớn: </div>
+                                    <span class="col-6">{{hd.sovenguoilon}} vé</span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">Trẻ em: </div>
+                                    <span class="col-6">{{hd.sovetreem}} vé</span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">Trẻ nhỏ: </div>
+                                    <span class="col-6">{{hd.sovetrenho}} vé</span>
+                                </div>
+                                <div class="dropdown-divider"></div>
+                                <div class="row">
+                                    <div class="col-6">Tổng tiền: </div>
+                                    <span class="col-6">{{formatCurrency(hd.tongtien)}}</span>
+                                </div>
+                                <div class="row" *ngIf="hd.trangthaihoadon==1">
+                                    <div class="col-4"></div>
+                                    <span class="col-4"><button (click)="huyTour(hd.id)">HỦY</button></span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                </div>
+            </mat-tab>
+            <mat-tab label="Chưa xác nhận">
+                <div class="item" *ngFor="let hd of filterTourByStt(1)">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="box-img max-width">
+                                <img src="http://localhost:3000/{{hd.anhtour}}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="status col-sm-6" [style]="findSttById(hd.trangthaihoadon).color">
+                                    {{findSttById(hd.trangthaihoadon).name}}</div>
+                                <div class="col-sm-6">Ngày đặt: <span>{{hd.ngaydat}}</span></div>
+
+                            </div>
+                            <a [routerLink]="['../tour/detail/',hd.idtour]">
+                                <div class="ten-tour">{{hd.tentour}}
+                                </div>
+                            </a>
+                            <div class="thong-tin">
+                                <ul>
+                                    <li>{{hd.tencongty}}</li>
+                                    <li>Xuất phát tại:<span>{{hd.diemdi}}</span></li>
+                                    <li>Ngày khởi hành:<span>{{this.pipe.transform(hd.ngaykh,"dd/MM/yyyy")}}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="thong-tin-ve">
+                                <div class="row">
+                                    <div class="col-6">Người lớn: </div>
+                                    <span class="col-6">{{hd.sovenguoilon}} vé</span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">Trẻ em: </div>
+                                    <span class="col-6">{{hd.sovetreem}} vé</span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">Trẻ nhỏ: </div>
+                                    <span class="col-6">{{hd.sovetrenho}} vé</span>
+                                </div>
+                                <div class="dropdown-divider"></div>
+                                <div class="row">
+                                    <div class="col-6">Tổng tiền: </div>
+                                    <span class="col-6">{{formatCurrency(hd.tongtien)}}</span>
+                                </div>
+                                <div class="row" *ngIf="hd.trangthaihoadon==1">
+                                    <div class="col-4"></div>
+                                    <span class="col-4"><button (click)="huyTour(hd.id)">HỦY</button></span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                </div>
+            </mat-tab>
+            <mat-tab label="Đã xác nhận">
+                <div class="item" *ngFor="let hd of filterTourByStt(2)">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="box-img max-width">
+                                <img src="http://localhost:3000/{{hd.anhtour}}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="status col-sm-6" [style]="findSttById(hd.trangthaihoadon).color">
+                                    {{findSttById(hd.trangthaihoadon).name}}</div>
+                                <div class="col-sm-6">Ngày đặt: <span>{{hd.ngaydat}}</span></div>
+
+                            </div>
+                            <a [routerLink]="['../tour/detail/',hd.idtour]">
+                                <div class="ten-tour">{{hd.tentour}}
+                                </div>
+                            </a>
+                            <div class="thong-tin">
+                                <ul>
+                                    <li>{{hd.tencongty}}</li>
+                                    <li>Xuất phát tại:<span>{{hd.diemdi}}</span></li>
+                                    <li>Ngày khởi hành:<span>{{this.pipe.transform(hd.ngaykh,"dd/MM/yyyy")}}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="thong-tin-ve">
+                                <div class="row">
+                                    <div class="col-6">Người lớn: </div>
+                                    <span class="col-6">{{hd.sovenguoilon}} vé</span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">Trẻ em: </div>
+                                    <span class="col-6">{{hd.sovetreem}} vé</span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">Trẻ nhỏ: </div>
+                                    <span class="col-6">{{hd.sovetrenho}} vé</span>
+                                </div>
+                                <div class="dropdown-divider"></div>
+                                <div class="row">
+                                    <div class="col-6">Tổng tiền: </div>
+                                    <span class="col-6">{{formatCurrency(hd.tongtien)}}</span>
+                                </div>
+                                <div class="row" *ngIf="hd.trangthaihoadon==1">
+                                    <div class="col-4"></div>
+                                    <span class="col-4"><button (click)="huyTour(hd.id)">HỦY</button></span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                </div>
+            </mat-tab>
+            <mat-tab label="Đã thanh toán">
+                <div class="item" *ngFor="let hd of filterTourByStt(3)">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="box-img max-width">
+                                <img src="http://localhost:3000/{{hd.anhtour}}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="status col-sm-6">{{findSttById(hd.trangthaihoadon).name}}</div>
+                                <div class="col-sm-6">Ngày đặt: <span>{{hd.ngaydat}}</span></div>
+
+                            </div>
+                            <a [routerLink]="['../tour/detail/',hd.idtour]">
+                                <div class="ten-tour">{{hd.tentour}}
+                                </div>
+                            </a>
+                            <div class="thong-tin">
+                                <ul>
+                                    <li>{{hd.tencongty}}</li>
+                                    <li>Xuất phát tại:<span>{{hd.diemdi}}</span></li>
+                                    <li>Ngày khởi hành:<span>{{this.pipe.transform(hd.ngaykh,"dd/MM/yyyy")}}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="thong-tin-ve">
+                                <div class="row">
+                                    <div class="col-6">Người lớn: </div>
+                                    <span class="col-6">{{hd.sovenguoilon}} vé</span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">Trẻ em: </div>
+                                    <span class="col-6">{{hd.sovetreem}} vé</span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">Trẻ nhỏ: </div>
+                                    <span class="col-6">{{hd.sovetrenho}} vé</span>
+                                </div>
+                                <div class="dropdown-divider"></div>
+                                <div class="row">
+                                    <div class="col-6">Tổng tiền: </div>
+                                    <span class="col-6">{{formatCurrency(hd.tongtien)}}</span>
+                                </div>
+                                <div class="row" *ngIf="hd.trangthaihoadon==1">
+                                    <div class="col-4"></div>
+                                    <span class="col-4"><button (click)="huyTour(hd.id)">HỦY</button></span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                </div>
+            </mat-tab>
+            <mat-tab label="Đã hoàn thành">
+                <div class="item" *ngFor="let hd of filterTourByStt(4)">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="box-img max-width">
+                                <img src="http://localhost:3000/{{hd.anhtour}}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="status col-sm-6" [style]="findSttById(hd.trangthaihoadon).color">
+                                    {{findSttById(hd.trangthaihoadon).name}}</div>
+                                <div class="col-sm-6">Ngày đặt: <span>{{hd.ngaydat}}</span></div>
+
+                            </div>
+                            <a [routerLink]="['../tour/detail/',hd.idtour]">
+                                <div class="ten-tour">{{hd.tentour}}
+                                </div>
+                            </a>
+                            <div class="thong-tin">
+                                <ul>
+                                    <li>{{hd.tencongty}}</li>
+                                    <li>Xuất phát tại:<span>{{hd.diemdi}}</span></li>
+                                    <li>Ngày khởi hành:<span>{{this.pipe.transform(hd.ngaykh,"dd/MM/yyyy")}}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="thong-tin-ve">
+                                <div class="row">
+                                    <div class="col-6">Người lớn: </div>
+                                    <span class="col-6">{{hd.sovenguoilon}} vé</span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">Trẻ em: </div>
+                                    <span class="col-6">{{hd.sovetreem}} vé</span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">Trẻ nhỏ: </div>
+                                    <span class="col-6">{{hd.sovetrenho}} vé</span>
+                                </div>
+                                <div class="dropdown-divider"></div>
+                                <div class="row">
+                                    <div class="col-6">Tổng tiền: </div>
+                                    <span class="col-6">{{formatCurrency(hd.tongtien)}}</span>
+                                </div>
+                                <div class="row" *ngIf="hd.trangthaihoadon==1">
+                                    <div class="col-4"></div>
+                                    <span class="col-4"><button (click)="huyTour(hd.id)">HỦY</button></span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                </div>
+            </mat-tab>
+            <mat-tab label="Đã hủy">
+                <div class="item" *ngFor="let hd of filterTourCancelByStt()">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="box-img max-width">
+                                <img src="http://localhost:3000/{{hd.anhtour}}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="status col-sm-6" [style]="findSttById(hd.trangthaihoadon).color">
+                                    {{findSttById(hd.trangthaihoadon).name}}</div>
+                                <div class="col-sm-6">Ngày đặt: <span>{{hd.ngaydat}}</span></div>
+
+                            </div>
+                            <a [routerLink]="['../tour/detail/',hd.idtour]">
+                                <div class="ten-tour">{{hd.tentour}}
+                                </div>
+                            </a>
+                            <div class="thong-tin">
+                                <ul>
+                                    <li>{{hd.tencongty}}</li>
+                                    <li>Xuất phát tại:<span>{{hd.diemdi}}</span></li>
+                                    <li>Ngày khởi hành:<span>{{this.pipe.transform(hd.ngaykh,"dd/MM/yyyy")}}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="thong-tin-ve">
+                                <div class="row">
+                                    <div class="col-6">Người lớn: </div>
+                                    <span class="col-6">{{hd.sovenguoilon}} vé</span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">Trẻ em: </div>
+                                    <span class="col-6">{{hd.sovetreem}} vé</span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">Trẻ nhỏ: </div>
+                                    <span class="col-6">{{hd.sovetrenho}} vé</span>
+                                </div>
+                                <div class="dropdown-divider"></div>
+                                <div class="row">
+                                    <div class="col-6">Tổng tiền: </div>
+                                    <span class="col-6">{{formatCurrency(hd.tongtien)}}</span>
+                                </div>
+                                <div class="row" *ngIf="hd.trangthaihoadon==1">
+                                    <div class="col-4"></div>
+                                    <span class="col-4"><button (click)="huyTour(hd.id)">HỦY</button></span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-tab>
+</mat-tab-group>

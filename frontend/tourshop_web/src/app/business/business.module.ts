@@ -8,6 +8,7 @@ import { CKEditorModule } from "ckeditor4-angular";
 import { ProfileComponent } from "./profile/profile.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatSelectModule } from "@angular/material/select";
+import { DashboardModule } from "./dashboard/dashboard.module";
 @NgModule({
   declarations: [TourDeXuatComponent, ProfileComponent],
   imports: [
@@ -18,6 +19,7 @@ import { MatSelectModule } from "@angular/material/select";
     FormsModule,
     ReactiveFormsModule,
     MatSelectModule,
+    DashboardModule,
   ],
 })
 export class BusinessModule {}

@@ -1,0 +1,23 @@
+<div class="row">
+    <form action="" [formGroup]="form">
+        <div class="col-sm-3">Tháng</div>
+        <div class="col-sm-3">
+            <select formControlName="thang" (change)="thongKe()">
+        <option *ngFor="let thang of lstThang()" [value]="ghep(thang)">{{thang}}</option>
+      </select>
+        </div>
+    </form>
+</div>
+<app-top-thong-ke [thongKe]="this.thongke"></app-top-thong-ke>
+<div class="row">
+    <!-- column -->
+    <div class="col-12">
+        <app-blog-cards></app-blog-cards>
+    </div>
+</div>
+<div class="row">
+    <!-- column -->
+    <div class="col-12">
+        <app-top-congty></app-top-congty>
+    </div>
+</div>
