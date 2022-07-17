@@ -177,10 +177,10 @@ namespace Travel.Controllers
             }
         }
 
-        //[Authorize]
-        [HttpGet]
+        [Authorize]
+        [HttpPost]
         [Route("doanhnghiep/thongke/{id:int}")] //id doanh nghiep
-        //[Authorize(Roles = "Business")]
+        [Authorize(Roles = "Business")]
         [ActionName("thongke")]
         public async Task<IActionResult> thongke([FromRoute] int id, thongkedoanhnghiep_serialize thongkedoanhnghiep_Serialize)
         {
