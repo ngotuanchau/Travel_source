@@ -1088,38 +1088,38 @@ namespace Travel.Controllers
 
                 List<Tour_serialize> result = new List<Tour_serialize>();
                 List<Tour> tours = _context.Tours.Include(t => t.TheLoai).Include(t => t.CongTy).Include(t => t.PhanVung).Where(t => t.TrangThai == 1).OrderByDescending(t => t.NgayTao).ToList();
-                if (search_Serialize.diemdi != null)
+                if (search_Serialize.diemdi != null && search_Serialize.diemdi != "")
                 {
                      tours = tours.Where(t => t.DiemDi == Convert.ToInt32(search_Serialize.diemdi)).ToList();
                 }
-                if (search_Serialize.diemden != null)
+                if (search_Serialize.diemden != null && search_Serialize.diemden != "")
                 {
                     tours = tours.Where(t => t.DiemDen == Convert.ToInt32(search_Serialize.diemden)).ToList();
                 }
 
-                if (search_Serialize.khuvuc != null)
+                if (search_Serialize.khuvuc != null && search_Serialize.khuvuc != "")
                 {
                     tours = tours.Where(t => t.PhanVungId == Convert.ToInt32(search_Serialize.khuvuc)).ToList();
                 }
 
-                if (search_Serialize.theloai != null)
+                if (search_Serialize.theloai != null && search_Serialize.theloai != "")
                 {
                     tours = tours.Where(t => t.TheLoaiId == Convert.ToInt32(search_Serialize.theloai)).ToList();
                 }
-                if (search_Serialize.amthuc != null)
+                if (search_Serialize.amthuc != null && search_Serialize.amthuc != "")
                 {
                     tours = tours.Where(t => t.AmThuc.Contains(search_Serialize.amthuc)).ToList();
                 }
-                if (search_Serialize.phuongtien != null)
+                if (search_Serialize.phuongtien != null && search_Serialize.phuongtien != "")
                 {
                     tours = tours.Where(t => t.PhuongTien.Contains(search_Serialize.phuongtien)).ToList();
                 }
-                if (search_Serialize.luutru != null)
+                if (search_Serialize.luutru != null && search_Serialize.luutru != "")
                 {
                     tours = tours.Where(t => t.LuuTru.Contains(search_Serialize.luutru)).ToList();
                 }
                 DateTime ngaykh = DateTime.Now;
-                if (search_Serialize.thoigiandi != null)
+                if (search_Serialize.thoigiandi != null && search_Serialize.thoigiandi != "")
                 {
                     ngaykh = DateTime.ParseExact(search_Serialize.thoigiandi, "dd/MM/yyyy",
                                            System.Globalization.CultureInfo.InvariantCulture);
