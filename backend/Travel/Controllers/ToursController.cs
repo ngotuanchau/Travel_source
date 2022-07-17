@@ -837,14 +837,14 @@ namespace Travel.Controllers
                 thoiGian.TrangThai = 5;
 
                 _context.SaveChanges();
-                List<HoaDon> hoaDons = _context.HoaDons.Where(t => t.ThoiGianId == id && t.TrangThai == 3 || t.TrangThai == 2).ToList();
+                List<HoaDon> hoaDons = _context.HoaDons.Where(t => t.ThoiGianId == id && (t.TrangThai == 3 || t.TrangThai == 2 || t.TrangThai == 1)).ToList();
                 foreach (var hoadon in hoaDons)
                 {
                     if (hoadon.TrangThai == 3)
                     {
                         hoadon.TrangThai = 5;
                     }
-                    else if(hoadon.TrangThai == 2)
+                    else if(hoadon.TrangThai == 2 || hoadon.TrangThai == 1)
                     {
                         hoadon.TrangThai = 6;
                     }    
