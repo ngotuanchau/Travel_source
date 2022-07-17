@@ -44,10 +44,10 @@ export class TourByTheLoaiComponent implements OnInit {
     this.lstLuuTru = lstLuuTrus;
     this.lstPhuongTien = lstPhuongTiens;
     this.form = this.formBuilder.group({
-      [FormField?.theloai]: [0],
-      [FormField?.khuvuc]: [0],
-      [FormField?.diemdi]: [0],
-      [FormField?.diemden]: [0],
+      [FormField?.theloai]: [null],
+      [FormField?.khuvuc]: [null],
+      [FormField?.diemdi]: [null],
+      [FormField?.diemden]: [null],
       [FormField?.amthuc]: [""],
       [FormField?.luutru]: [""],
       [FormField?.phuongtien]: [""],
