@@ -8,75 +8,140 @@
             <h4 class="card-title mb-0">Lịch khởi hành</h4>
         </div>
         <div class="card-body">
-            <div class="table-responsive">
-                <div class="table-lt">
-                    <table class="table table-bordered align-middle text-nowrap">
-                        <thead>
-                            <tr>
-                                <th class="text-dark font-medium fs-4">STT</th>
-                                <th class="text-dark font-medium fs-4">Ngày</th>
-                                <th class="text-dark font-medium fs-4">Giá Người lớn</th>
-                                <th class="text-dark font-medium fs-4">Giá Trẻ em</th>
-                                <th class="text-dark font-medium fs-4">Giá Trẻ nhỏ</th>
-                                <th class="text-dark font-medium fs-4">Số vé đã đặt</th>
-                                <th class="text-dark font-medium fs-4">Trạng thái</th>
-                                <th class="text-dark font-medium fs-4">Cập nhật</th>
-                                <th class="text-dark font-medium fs-4"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let tr of lichKH; index as i">
-                                <td>
-                                    {{ i + 1 }}
-                                </td>
-                                <td>
-                                    <p>{{this.pipe.transform(tr.ngayKh, "dd/MM/yyyy")}}
-                                    </p>
-                                </td>
-                                <td>
-                                    <p>{{formatCurrency(tr.giaNguoiLon)}}
-                                    </p>
-                                </td>
-                                <td>
-                                    <p>{{formatCurrency(tr.giaTreEn)}}</p>
-                                </td>
-                                <td>
-                                    <p>{{formatCurrency(tr.giaTreNho)}}</p>
-                                </td>
-                                <td>
-                                    <p>{{tr.vedadat}}</p>
-                                </td>
-                                <td [style]="getColor(tr.trangThai)">
-                                    {{getStatus(tr.trangThai)}}
-                                </td>
-                                <td *ngIf="tr.trangThai==1" class="confirm">
-                                    <button (click)="prepare(tr.id)">Chuẩn bị</button>
-                                    <button (click)="cancel(tr.id)" class="cancel">Hủy</button>
-                                </td>
-                                <td *ngIf="tr.trangThai==2" class="confirm">
-                                    <button (click)="start(tr.id)">Khởi hành</button>
-                                    <button (click)="cancel(tr.id)" class="cancel">Hủy</button>
-                                </td>
-                                <td *ngIf="tr.trangThai==3" class="confirm">
-                                    <button (click)="end(tr.id)">Kết thúc</button>
-                                </td>
-                                <td *ngIf="tr.trangThai==4" class="confirm">
+            <mat-tab-group mat-align-tabs="start">
+                <mat-tab label="Tất cả">
+                    <div class="table-responsive">
+                        <div class="table-lt">
+                            <table class="table table-bordered align-middle text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th class="text-dark font-medium fs-4">STT</th>
+                                        <th class="text-dark font-medium fs-4">Ngày</th>
+                                        <th class="text-dark font-medium fs-4">Giá Người lớn</th>
+                                        <th class="text-dark font-medium fs-4">Giá Trẻ em</th>
+                                        <th class="text-dark font-medium fs-4">Giá Trẻ nhỏ</th>
+                                        <th class="text-dark font-medium fs-4">Số vé đã đặt</th>
+                                        <th class="text-dark font-medium fs-4">Trạng thái</th>
+                                        <th class="text-dark font-medium fs-4">Cập nhật</th>
+                                        <th class="text-dark font-medium fs-4"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let tr of lichKH; index as i">
+                                        <td>
+                                            {{ i + 1 }}
+                                        </td>
+                                        <td>
+                                            <p>{{this.pipe.transform(tr.ngayKh, "dd/MM/yyyy")}}
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p>{{formatCurrency(tr.giaNguoiLon)}}
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p>{{formatCurrency(tr.giaTreEn)}}</p>
+                                        </td>
+                                        <td>
+                                            <p>{{formatCurrency(tr.giaTreNho)}}</p>
+                                        </td>
+                                        <td>
+                                            <p>{{tr.vedadat}}</p>
+                                        </td>
+                                        <td [style]="getColor(tr.trangThai)">
+                                            {{getStatus(tr.trangThai)}}
+                                        </td>
+                                        <td *ngIf="tr.trangThai==1" class="confirm">
+                                            <div class="row"><button (click)="prepare(tr.id)">Chuẩn bị</button></div>
+                                            <div class="row"><button (click)="cancel(tr.id)" class="cancel">Hủy</button></div>
+                                        </td>
+                                        <td *ngIf="tr.trangThai==2" class="confirm">
+                                            <div class="row"><button (click)="start(tr.id)">Khởi hành</button></div>
+                                            <div class="row"><button (click)="cancel(tr.id)" class="cancel">Hủy</button></div>
+                                        </td>
+                                        <td *ngIf="tr.trangThai==3" class="confirm">
+                                            <div class="row"><button (click)="end(tr.id)">Kết thúc</button></div>
+                                        </td>
+                                        <td *ngIf="tr.trangThai==4" class="confirm">
 
-                                </td>
-                                <td>
-                                    <a [routerLink]="['detail']"><button type="button" class="btn btn-inverse-info btn-icon" onclick="">
-                      <i class="bi bi-eye"></i></button></a>
-                                    <a [routerLink]="['../../khach-dat-tour/',this.id,tr.id]"><button type="button"
-                      class="btn btn-inverse-info btn-icon" onclick="">
-                      <i class="bi bi-person-fill"></i></button></a>
-                                    <button type="button" class="btn btn-inverse-info btn-icon" onclick="">
-                    <i class="bi bi-trash"></i></button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                                        </td>
+                                        <td>
+                                            <a [routerLink]="['../../khach-dat-tour/',this.id,tr.id]"><button type="button"
+                          class="btn btn-inverse-info btn-icon" onclick="">
+                          <i class="bi bi-person-fill"></i></button></a>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab *ngFor="let stt of tourStatus" label="{{stt.name}}">
+                    <div class="table-responsive">
+                        <div class="table-lt">
+                            <table class="table table-bordered align-middle text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th class="text-dark font-medium fs-4">STT</th>
+                                        <th class="text-dark font-medium fs-4">Ngày</th>
+                                        <th class="text-dark font-medium fs-4">Giá Người lớn</th>
+                                        <th class="text-dark font-medium fs-4">Giá Trẻ em</th>
+                                        <th class="text-dark font-medium fs-4">Giá Trẻ nhỏ</th>
+                                        <th class="text-dark font-medium fs-4">Số vé đã đặt</th>
+                                        <th class="text-dark font-medium fs-4">Cập nhật</th>
+                                        <th class="text-dark font-medium fs-4"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let tr of getLichKHByStt(stt.id); index as i">
+                                        <td>
+                                            {{ i + 1 }}
+                                        </td>
+                                        <td>
+                                            <p>{{this.pipe.transform(tr.ngayKh, "dd/MM/yyyy")}}
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p>{{formatCurrency(tr.giaNguoiLon)}}
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p>{{formatCurrency(tr.giaTreEn)}}</p>
+                                        </td>
+                                        <td>
+                                            <p>{{formatCurrency(tr.giaTreNho)}}</p>
+                                        </td>
+                                        <td>
+                                            <p>{{tr.vedadat}}</p>
+                                        </td>
+                                        <td *ngIf="tr.trangThai==1" class="confirm">
+                                            <button (click)="prepare(tr.id)">Chuẩn bị</button>
+                                            <button (click)="cancel(tr.id)" class="cancel">Hủy</button>
+                                        </td>
+                                        <td *ngIf="tr.trangThai==2" class="confirm">
+                                            <button (click)="start(tr.id)">Khởi hành</button>
+                                            <button (click)="cancel(tr.id)" class="cancel">Hủy</button>
+                                        </td>
+                                        <td *ngIf="tr.trangThai==3" class="confirm">
+                                            <button (click)="end(tr.id)">Kết thúc</button>
+                                        </td>
+                                        <td *ngIf="tr.trangThai==4" class="confirm">
+
+                                        </td>
+                                        <td>
+                                            <a [routerLink]="['../../khach-dat-tour/',this.id,tr.id]"><button type="button"
+                          class="btn btn-inverse-info btn-icon" onclick="">
+                          <i class="bi bi-person-fill"></i></button></a>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
         </div>
     </div>
 </div>

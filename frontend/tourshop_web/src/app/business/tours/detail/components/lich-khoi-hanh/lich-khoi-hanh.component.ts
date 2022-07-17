@@ -28,7 +28,17 @@ export class LichKhoiHanhComponent implements OnInit {
       console.log(this.lichKH);
     });
   }
-
+  //Get nhk by Id Stt
+  getLichKHByStt(id: any) {
+    let list: any;
+    list = [];
+    for (let nkh of this.lichKH) {
+      if (nkh.trangThai == id) {
+        list.push(nkh);
+      }
+    }
+    return list;
+  }
   //Get status name by id
   getStatus(id: number) {
     return this.tourStatus.find((item: any) => item.id == id)?.name;

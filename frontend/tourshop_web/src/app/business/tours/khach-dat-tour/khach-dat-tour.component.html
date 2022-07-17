@@ -45,23 +45,26 @@
                                         <td>
                                             {{u.tongSoVeTn}}
                                         </td>
-                                        <td [style]="getColor(u.trangThai)">
+                                        <td class="trangthai" [style]="getColor(u.trangThai)">
                                             {{getStatus(u.trangThai)}}
                                         </td>
-                                        <td *ngIf="u.trangThai!=1 && u.trangThai!=2"> </td>
                                         <td *ngIf="u.trangThai==1" class="confirm">
                                             <button (click)="confirmBookTour(u.id)">Xác nhận</button>
                                         </td>
                                         <td *ngIf="u.trangThai==2" class="confirm">
-                                            <button (click)="confirmThanhToan(u.id)">Thanh toán</button>
+                                            <button (click)="confirmThanhToan(u.id)">Xác nhận Thanh toán</button>
+                                        </td>
+                                        <td *ngIf="u.trangThai==3" class="confirm">
+                                            <button (click)="cofirmHTThanhToan(u.id)">Hoàn thành Thanh toán</button>
+                                        </td>
+                                        <td *ngIf="u.trangThai==5||u.trangThai==8" class="confirm">
+                                            <button (click)="cofirmHoanTien(u.id)">Đã hoàn tiền</button>
+                                        </td>
+                                        <td *ngIf="u.trangThai==4||u.trangThai==9||u.trangThai==6||u.trangThai==7" class="confirm">
                                         </td>
                                         <td>
                                             {{formatCurrency(u.tongTien)}}
                                         </td>
-                                        <!-- <td>
-                    <button type="button" class="btn btn-inverse-info btn-icon" (click)="confirmBookTour(u.id)">
-      <i class="bi bi-eye"></i></button>
-                </td> -->
                                     </tr>
                                 </tbody>
                             </table>
@@ -70,7 +73,7 @@
                 </div>
             </div>
         </mat-tab>
-        <mat-tab *ngFor="let status of hoadonStatus" label="{{status.name}}">
+        <mat-tab label="Chưa xác nhận">
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
@@ -89,7 +92,167 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let u of filterHDByStatus(status.id); index as i">
+                                    <tr *ngFor="let u of filterHDByStatus(1);index as i">
+                                        <td>
+                                            {{ i + 1 }}
+                                        </td>
+                                        <td>
+                                            {{u.sdt}}
+                                        </td>
+                                        <td>
+                                            {{u.hoTen}}
+                                        </td>
+                                        <td>
+                                            {{u.tongSoVeNl}}
+                                        </td>
+                                        <td>
+                                            {{u.tongSoVeTe}}
+                                        </td>
+
+                                        <td>
+                                            {{u.tongSoVeTn}}
+                                        </td>
+                                        <td *ngIf="u.trangThai==1" class="confirm">
+                                            <button (click)="confirmBookTour(u.id)">Xác nhận</button>
+                                        </td>
+                                        <td>
+                                            {{formatCurrency(u.tongTien)}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Đã xác nhận">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div class="table-lt">
+                            <table class="table table-bordered align-middle text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th class="text-dark font-medium fs-4">STT</th>
+                                        <th class="text-dark font-medium fs-4">Số điện thoại</th>
+                                        <th class="text-dark font-medium fs-4">Họ tên</th>
+                                        <th class="text-dark font-medium fs-4">Vé người lớn</th>
+                                        <th class="text-dark font-medium fs-4">Vé trẻ em</th>
+                                        <th class="text-dark font-medium fs-4">Vé trẻ nhỏ</th>
+                                        <th class="text-dark font-medium fs-4">Cập nhật</th>
+                                        <th class="text-dark font-medium fs-4">Tổng tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let u of filterHDByStatus(2);index as i">
+                                        <td>
+                                            {{ i + 1 }}
+                                        </td>
+                                        <td>
+                                            {{u.sdt}}
+                                        </td>
+                                        <td>
+                                            {{u.hoTen}}
+                                        </td>
+                                        <td>
+                                            {{u.tongSoVeNl}}
+                                        </td>
+                                        <td>
+                                            {{u.tongSoVeTe}}
+                                        </td>
+
+                                        <td>
+                                            {{u.tongSoVeTn}}
+                                        </td>
+                                        <td *ngIf="u.trangThai==2" class="confirm">
+                                            <button (click)="confirmThanhToan(u.id)">Xác nhận Thanh toán</button>
+                                        </td>
+
+                                        <td>
+                                            {{formatCurrency(u.tongTien)}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Đã thanh toán">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div class="table-lt">
+                            <table class="table table-bordered align-middle text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th class="text-dark font-medium fs-4">STT</th>
+                                        <th class="text-dark font-medium fs-4">Số điện thoại</th>
+                                        <th class="text-dark font-medium fs-4">Họ tên</th>
+                                        <th class="text-dark font-medium fs-4">Vé người lớn</th>
+                                        <th class="text-dark font-medium fs-4">Vé trẻ em</th>
+                                        <th class="text-dark font-medium fs-4">Vé trẻ nhỏ</th>
+                                        <th class="text-dark font-medium fs-4">Cập nhật</th>
+                                        <th class="text-dark font-medium fs-4">Tổng tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let u of filterHDByStatus(3);index as i">
+                                        <td>
+                                            {{ i + 1 }}
+                                        </td>
+                                        <td>
+                                            {{u.sdt}}
+                                        </td>
+                                        <td>
+                                            {{u.hoTen}}
+                                        </td>
+                                        <td>
+                                            {{u.tongSoVeNl}}
+                                        </td>
+                                        <td>
+                                            {{u.tongSoVeTe}}
+                                        </td>
+
+                                        <td>
+                                            {{u.tongSoVeTn}}
+                                        </td>
+                                        <td *ngIf="u.trangThai==3" class="confirm">
+                                            <button (click)="cofirmHTThanhToan(u.id)">Hoàn thành Thanh toán</button>
+                                        </td>
+
+                                        <td>
+                                            {{formatCurrency(u.tongTien)}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Đã kết thúc">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div class="table-lt">
+                            <table class="table table-bordered align-middle text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th class="text-dark font-medium fs-4">STT</th>
+                                        <th class="text-dark font-medium fs-4">Số điện thoại</th>
+                                        <th class="text-dark font-medium fs-4">Họ tên</th>
+                                        <th class="text-dark font-medium fs-4">Vé người lớn</th>
+                                        <th class="text-dark font-medium fs-4">Vé trẻ em</th>
+                                        <th class="text-dark font-medium fs-4">Vé trẻ nhỏ</th>
+                                        <th class="text-dark font-medium fs-4">Tổng tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let u of filterHDByStatus(4);index as i">
                                         <td>
                                             {{ i + 1 }}
                                         </td>
@@ -110,20 +273,118 @@
                                             {{u.tongSoVeTn}}
                                         </td>
 
-                                        <td *ngIf="u.trangThai!=1 && u.trangThai!=2"> </td>
-                                        <td *ngIf="u.trangThai==1" class="confirm">
-                                            <button (click)="confirmBookTour(u.id)">Xác nhận</button>
+                                        <td>
+                                            {{formatCurrency(u.tongTien)}}
                                         </td>
-                                        <td *ngIf="u.trangThai==2" class="confirm">
-                                            <button (click)="confirmThanhToan(u.id)">Thanh toán</button>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Đã hủy">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div class="table-lt">
+                            <table class="table table-bordered align-middle text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th class="text-dark font-medium fs-4">STT</th>
+                                        <th class="text-dark font-medium fs-4">Số điện thoại</th>
+                                        <th class="text-dark font-medium fs-4">Họ tên</th>
+                                        <th class="text-dark font-medium fs-4">Vé người lớn</th>
+                                        <th class="text-dark font-medium fs-4">Vé trẻ em</th>
+                                        <th class="text-dark font-medium fs-4">Vé trẻ nhỏ</th>
+                                        <th class="text-dark font-medium fs-4">Cập nhật</th>
+                                        <th class="text-dark font-medium fs-4">Tổng tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let u of filterTourCancelByStt();index as i">
+                                        <td>
+                                            {{ i + 1 }}
+                                        </td>
+                                        <td>
+                                            {{u.sdt}}
+                                        </td>
+                                        <td>
+                                            {{u.hoTen}}
+                                        </td>
+                                        <td>
+                                            {{u.tongSoVeNl}}
+                                        </td>
+                                        <td>
+                                            {{u.tongSoVeTe}}
+                                        </td>
+
+                                        <td>
+                                            {{u.tongSoVeTn}}
+                                        </td>
+
+                                        <td *ngIf="u.trangThai==5||u.trangThai==8" class="confirm">
+                                            <button (click)="cofirmHoanTien(u.id)">Đã hoàn tiền</button>
+                                        </td>
+                                        <td *ngIf="u.trangThai==6||u.trangThai==7" class="confirm">
+                                        </td>
+                                        <td>
+                                            {{formatCurrency(u.tongTien)}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Đã hoàn tiền">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div class="table-lt">
+                            <table class="table table-bordered align-middle text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th class="text-dark font-medium fs-4">STT</th>
+                                        <th class="text-dark font-medium fs-4">Số điện thoại</th>
+                                        <th class="text-dark font-medium fs-4">Họ tên</th>
+                                        <th class="text-dark font-medium fs-4">Vé người lớn</th>
+                                        <th class="text-dark font-medium fs-4">Vé trẻ em</th>
+                                        <th class="text-dark font-medium fs-4">Vé trẻ nhỏ</th>
+                                        <th class="text-dark font-medium fs-4">Tổng tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let u of filterHDByStatus(9);index as i">
+                                        <td>
+                                            {{ i + 1 }}
+                                        </td>
+                                        <td>
+                                            {{u.sdt}}
+                                        </td>
+                                        <td>
+                                            {{u.hoTen}}
+                                        </td>
+                                        <td>
+                                            {{u.tongSoVeNl}}
+                                        </td>
+                                        <td>
+                                            {{u.tongSoVeTe}}
+                                        </td>
+
+                                        <td>
+                                            {{u.tongSoVeTn}}
                                         </td>
                                         <td>
                                             {{formatCurrency(u.tongTien)}}
                                         </td>
                                         <!-- <td>
-                      <button type="button" class="btn btn-inverse-info btn-icon" (click)="confirmBookTour(u.id)">
-        <i class="bi bi-eye"></i></button>
-                  </td> -->
+            <button type="button" class="btn btn-inverse-info btn-icon" (click)="confirmBookTour(u.id)">
+<i class="bi bi-eye"></i></button>
+        </td> -->
                                     </tr>
                                 </tbody>
                             </table>

@@ -7,14 +7,19 @@ import { ToursDetailComponent } from "./tours/detail/detail.component";
 import { ToursEditComponent } from "./tours/edit/edit.component";
 import { ToursIndexComponent } from "./tours/index/index.component";
 import { KhachDatTourComponent } from "./tours/khach-dat-tour/khach-dat-tour.component";
+import { DashboardComponent } from "./dashboard/dashboard.component";
 
 const routes: Routes = [
   {
     path: "",
-    redirectTo: "ql-tours",
+    redirectTo: "dashboardDN",
     pathMatch: "full",
   },
-
+  //Dashboard
+  {
+    path: "dashboardDN",
+    component: DashboardComponent,
+  },
   //Tour
   {
     path: "ql-tours",

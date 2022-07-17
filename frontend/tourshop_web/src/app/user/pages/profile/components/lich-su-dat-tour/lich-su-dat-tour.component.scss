@@ -1,0 +1,26 @@
+.item {
+    padding: 0px 20px;
+}
+
+.item:nth-child(1) {
+    padding: 10px 20px;
+}
+
+button {
+    padding: 5px 15px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #E76F51;
+    border: none;
+    background: #fff;
+}
+
+mat-tab-group {
+    color: #000;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+a,
+span {
+    font-weight: bold;
+}

@@ -20,6 +20,7 @@ import { TourByDiemDenComponent } from "./pages/tour-by-diem-den/tour-by-diem-de
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatTabsModule } from "@angular/material/tabs";
+import { LichSuDatTourComponent } from './pages/profile/components/lich-su-dat-tour/lich-su-dat-tour.component';
 @NgModule({
   declarations: [
     NewtoursComponent,
@@ -27,6 +28,7 @@ import { MatTabsModule } from "@angular/material/tabs";
     ProfileComponent,
     TourByTheLoaiComponent,
     TourByDiemDenComponent,
+    LichSuDatTourComponent,
   ],
   imports: [
     CommonModule,

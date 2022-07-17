@@ -90,6 +90,16 @@ export class ToursService {
   confirmThanhToan(id: any): Observable<any> {
     return this.http.get<any>(this.baseUrl + "/confirm_user_thanhtoan/" + id);
   }
+  //cofirm Refund
+  confirmRefund(id: any): Observable<any> {
+    return this.http.get<any>(this.baseUrl + "/confirm_dahoantien/" + id);
+  }
+  //cofirm Refund
+  confirmKTThanhToan(id: any): Observable<any> {
+    return this.http.get<any>(
+      this.baseUrl + "/confirm_user_hoanthanhthanhtoan/" + id
+    );
+  }
   //Search
   search(tour: any): Observable<any> {
     return this.http.post<any>(this.baseUrl + "/search_tour", tour);

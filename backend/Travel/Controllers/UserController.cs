@@ -245,6 +245,8 @@ namespace Travel.Controllers
                     int id_diemdi = _context.Tours.Include(t => t.CongTy).Where(t => t.Id == hoadon.TourId).FirstOrDefault().DiemDi;
                     getTourDaDat_Serialize.diemdi = _context.DiaDiems.Where(t => t.Id == id_diemdi).FirstOrDefault().Ten;
                     getTourDaDat_Serialize.tentour = _context.Tours.Where(t => t.Id == hoadon.TourId).FirstOrDefault().TenTour;
+                    getTourDaDat_Serialize.anhtour = _context.Tours.Where(t => t.Id == hoadon.TourId).FirstOrDefault().AnhTour;
+                    getTourDaDat_Serialize.idtour = _context.Tours.Where(t => t.Id == hoadon.TourId).FirstOrDefault().Id;
                     getTourDaDat_Serialize.thoigianid = hoadon.ThoiGianId;
                     getTourDaDat_Serialize.tongtien = hoadon.TongTien;
                     getTourDaDat_Serialize.trangthaihoadon = hoadon.TrangThai;
