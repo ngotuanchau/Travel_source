@@ -45,11 +45,11 @@ export class NewtoursComponent implements OnInit {
       [FormField?.khuvuc]: [null],
       [FormField?.diemdi]: [null],
       [FormField?.diemden]: [null],
-      [FormField?.amthuc]: [""],
-      [FormField?.luutru]: [""],
-      [FormField?.phuongtien]: [""],
+      [FormField?.amthuc]: [null],
+      [FormField?.luutru]: [null],
+      [FormField?.phuongtien]: [null],
       [FormField?.thoigiandi]: [""],
-      [FormField?.dichvu]: [""],
+      [FormField?.dichvu]: [null],
     });
   }
   listAT: any;
