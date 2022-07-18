@@ -90,6 +90,7 @@ namespace Travel.Controllers
             {
 
                 ct.MatKhau = GetMD5(ct.MatKhau);
+                ct.TrangThai = 2;
                 _context.Add(ct);
                 await _context.SaveChangesAsync();
                 var register_Serialize = new register_serialize()
