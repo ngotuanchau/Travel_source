@@ -265,7 +265,7 @@ namespace Travel.Controllers
             }
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpDelete]
         [Route("user/huy_tourdat/{id:int}")] //id hoadon
         //[Authorize(Roles = "User")]
@@ -274,7 +274,7 @@ namespace Travel.Controllers
         {
             try
             {
-
+                
                 HoaDon hoaDons = _context.HoaDons.Include(h => h.Tour).Include(h => h.NguoiDung).Where(h => h.Id == id).FirstOrDefault();
                 if (hoaDons == null)
                 {
@@ -283,15 +283,19 @@ namespace Travel.Controllers
                         message = "Hóa đơn không tồn tại"
                     });
                 }
+                int sovehuy = hoaDons.TongSoVeTn + hoaDons.TongSoVeTe + hoaDons.TongSoVeNl;
+                ThoiGian thoiGian = _context.ThoiGians.Where(t => t.Id == hoaDons.ThoiGianId).FirstOrDefault();
 
-                ThoiGian thoiGian = _context.ThoiGians.Where(t => t.TrangThai == 2 && t.Id == hoaDons.ThoiGianId).FirstOrDefault();
-                if (thoiGian != null)
+                DateTime ngaykh = thoiGian.NgayDi;
+                DateTime now = DateTime.Now;
+                now = now.AddDays(5);
+                if (now > ngaykh)
                 {
                     return BadRequest(new
                     {
-                        message = "Tour đã được chuẩn bị, không thể hủy"
+                        message = "Không thể hủy"
                     });
-                }
+                }    
                 if (hoaDons.TrangThai == 2 || hoaDons.TrangThai == 1)
                 {
                     hoaDons.TrangThai =7;
@@ -299,7 +303,8 @@ namespace Travel.Controllers
                 else if(hoaDons.TrangThai == 3)
                 {
                     hoaDons.TrangThai = 8;
-                }    
+                }
+                thoiGian.VeDaDat -= sovehuy;
                 _context.SaveChanges();
                 return Ok(new { 
                     message = "Hủy tour thành công"
