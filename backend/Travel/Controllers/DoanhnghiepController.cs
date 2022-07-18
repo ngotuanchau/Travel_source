@@ -65,6 +65,109 @@ namespace Travel.Controllers
 
         [Authorize]
         [HttpGet]
+        [Route("doanhnghiep_choduyet")]
+        [Authorize(Roles = "Admin")]
+        [ActionName("doanhnghiep_choduyet")]
+        public async Task<IActionResult> doanhnghiep_choduyet()
+        {
+            try
+            {
+
+                List<CongTy> congTies = _context.CongTies.Where(t => t.TrangThai == 2).ToList();
+                List<Congty_serialize> congty_Serializes = new List<Congty_serialize>();
+                foreach (var congty in congTies)
+                {
+                    Congty_serialize ct = new Congty_serialize();
+                    ct.Id = congty.Id;
+                    ct.KhuVuc = congty.KhuVuc;
+                    ct.Email = congty.Email;
+                    ct.Mst = congty.Mst;
+                    ct.Sdt = congty.Sdt;
+                    ct.Tencongty = congty.Tencongty;
+                    ct.TheNganHang = congty.TheNganHang;
+                    ct.VanPhong = congty.VanPhong;
+                    ct.TrangThai = congty.TrangThai;
+
+                    congty_Serializes.Add(ct);
+                }
+
+                return Ok(congty_Serializes);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("doanhnghiep_duyet/{id:int}")]
+        [Authorize(Roles = "Admin")]
+        [ActionName("doanhnghiep_duyet")]
+        public async Task<IActionResult> doanhnghiep_duyet([FromRoute] int id)
+        {
+            try
+            {
+
+                CongTy congTy = _context.CongTies.Where(t => t.Id == id && t.TrangThai == 2).FirstOrDefault();
+                if (congTy == null)
+                {
+                    return NotFound(new
+                    {
+                        message = "Công ty không tồn tại"
+                    });
+                }
+                congTy.TrangThai = 1;
+                _context.SaveChanges();
+                return Ok(new
+                {
+                    message = "Doanh nghiệp đã được duyệt"
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+        [Authorize]
+        [HttpPut]
+        [Route("doanhnghiep_huyduyet/{id:int}")] // id diadiem
+        [Authorize(Roles = "Admin")]
+        [ActionName("doanhnghiep_huyduyet")]
+        public async Task<IActionResult> doanhnghiep_huyduyet([FromRoute] int id)
+        {
+
+            try
+            {
+                CongTy congTy = _context.CongTies.Where(t => t.Id == id && t.TrangThai == 2).FirstOrDefault();
+                if (congTy == null)
+                {
+                    return NotFound(new
+                    {
+                        message = "Công ty không tồn tại"
+                    });
+                }
+                congTy.TrangThai = 0;
+                _context.SaveChanges();
+                return Ok(new
+                {
+                    message = "Doanh nghiệp đã được hủy"
+                });
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Internal Server Error " });
+
+            }
+
+        }
+
+        [Authorize]
+        [HttpGet]
         [Route("doanhnghiep_get/{id:int}")]
         [ActionName("doanhnghiep_a_get")]
         public async Task<IActionResult> doanhnghiep_a_get([FromRoute] int id)

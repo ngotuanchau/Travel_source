@@ -288,8 +288,8 @@ namespace Travel.Controllers
 
                 DateTime ngaykh = thoiGian.NgayDi;
                 DateTime now = DateTime.Now;
-                now = now.AddDays(5);
-                if (now > ngaykh)
+
+                if (now.AddDays(5) > ngaykh)
                 {
                     return BadRequest(new
                     {
@@ -300,10 +300,14 @@ namespace Travel.Controllers
                 {
                     hoaDons.TrangThai =7;
                 }
-                else if(hoaDons.TrangThai == 3)
+                else if(hoaDons.TrangThai == 3 && (now.AddDays(5) == ngaykh || now.AddDays(6) == ngaykh))
                 {
                     hoaDons.TrangThai = 8;
                 }
+                else if(hoaDons.TrangThai == 3)
+                {
+                    hoaDons.TrangThai = 10;
+                }    
                 thoiGian.VeDaDat -= sovehuy;
                 _context.SaveChanges();
                 return Ok(new { 
