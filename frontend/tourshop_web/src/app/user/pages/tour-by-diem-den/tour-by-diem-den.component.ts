@@ -51,7 +51,7 @@ export class TourByDiemDenComponent implements OnInit {
       [FormField?.luutru]: [""],
       [FormField?.phuongtien]: [""],
       [FormField?.thoigiandi]: [""],
-      [FormField?.dichvu]: [""],
+      [FormField?.dichvu]: [null],
     });
   }
   listAT: any;
@@ -60,13 +60,33 @@ export class TourByDiemDenComponent implements OnInit {
   ngayKh: Date = new Date();
   onSearch() {
     let ngayKh = this.pipe.transform(this.ngayKh, "dd/MM/yyyy");
-    if (this.form.value.diemden == 0) {
+    if (this.form.value.diemdi != null) {
+      this.form.patchValue({
+        [FormField.diemdi]: Number(this.form.value.diemdi).toString(),
+      });
+    }
+    if (this.form.value.diemden != null) {
+      this.form.patchValue({
+        [FormField.diemden]: Number(this.form.value.diemden).toString(),
+      });
+    }
+    if (this.form.value.khuvuc != null) {
+      this.form.patchValue({
+        [FormField.khuvuc]: Number(this.form.value.khuvuc).toString(),
+      });
+    }
+    if (this.form.value.theloai != null) {
+      this.form.patchValue({
+        [FormField.theloai]: Number(this.form.value.theloai).toString(),
+      });
+    }
+    if (this.form.value.diemden == null) {
       this.form.patchValue({
         [FormField.amthuc]: this.listAT,
         [FormField.luutru]: this.listLT,
         [FormField.phuongtien]: this.listPT,
         [FormField.thoigiandi]: ngayKh,
-        [FormField.diemden]: parseInt(this.id),
+        [FormField.diemden]: this.id,
       });
     } else {
       this.form.patchValue({
@@ -76,12 +96,7 @@ export class TourByDiemDenComponent implements OnInit {
         [FormField.thoigiandi]: ngayKh,
       });
     }
-    this.form.patchValue({
-      [FormField.amthuc]: this.listAT,
-      [FormField.luutru]: this.listLT,
-      [FormField.phuongtien]: this.listPT,
-      [FormField.thoigiandi]: ngayKh,
-    });
+
     this.tourservice.search(this.form.value).subscribe((res) => {
       if (res == null) {
         console.log("Không có Tour liên quan");

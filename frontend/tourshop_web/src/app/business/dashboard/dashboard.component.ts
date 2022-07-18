@@ -30,11 +30,13 @@ export class DashboardComponent implements OnInit {
         console.log(this.form.value);
       });
   }
+  //Ghép tháng năm
   ghep(thang: any) {
     const today = new Date();
     if (thang < 10) return "0" + thang + "/" + today.getFullYear();
     else return thang + "/" + today.getFullYear();
   }
+
   lstThang() {
     let list: any;
     list = [];

@@ -3,6 +3,7 @@ import { ToursService } from "../../../../../service/tours.service";
 import { NguoiDungsService } from "../../../../../service/nguoidungs.service";
 import { DatePipe } from "@angular/common";
 import { Status, lstStatus } from "../../../hoadon-status";
+import { tourStatus, lstTourStatus } from "../../../tour-status";
 import { NgToastService } from "ng-angular-popup";
 
 @Component({
@@ -15,12 +16,14 @@ export class LichSuDatTourComponent implements OnInit {
   lst_HD: any;
   pipe = new DatePipe("en-US");
   status: Status[];
+  tourStatus: tourStatus[];
   constructor(
     private userService: NguoiDungsService,
     private tourService: ToursService,
     private toast: NgToastService
   ) {
     this.status = lstStatus;
+    this.tourStatus = lstTourStatus;
   }
 
   ngOnInit(): void {
@@ -35,6 +38,15 @@ export class LichSuDatTourComponent implements OnInit {
   findSttById(id: any) {
     let status: any;
     for (let stt of this.status) {
+      if (stt.id == id) {
+        status = stt;
+      }
+    }
+    return status;
+  }
+  findTourSttById(id: any) {
+    let status: any;
+    for (let stt of this.tourStatus) {
       if (stt.id == id) {
         status = stt;
       }
@@ -71,6 +83,16 @@ export class LichSuDatTourComponent implements OnInit {
     list = [];
     for (let hd of this.lst_HD) {
       if (hd.trangthaihoadon == id) {
+        list.push(hd);
+      }
+    }
+    return list;
+  }
+  filtertourByStt(id: any) {
+    let list: any;
+    list = [];
+    for (let hd of this.lst_HD) {
+      if (hd.trangthaitour == id) {
         list.push(hd);
       }
     }

@@ -6,7 +6,7 @@
                 <label class="col-sm-3 col-form-label">Điểm đi</label>
                 <div class="col-sm-9">
                     <select class="form-control" [(ngModel)]="diemDi" for="" required>
-            <option *ngFor="let dd of diadiems" [value]="dd.id">{{dd.ten}}</option>
+            <option *ngFor="let dd of diadiems" [value]="dd.id">{{dd.tendiadiem}}</option>
           </select>
                 </div>
 
@@ -17,7 +17,7 @@
                 <label class="col-sm-3 col-form-label">Điểm đến</label>
                 <div class="col-sm-9">
                     <select class="form-control" [(ngModel)]="diemDen" for="" required>
-            <option *ngFor="let dd of diadiems" [value]="dd.id">{{dd.ten}}</option>
+            <option *ngFor="let dd of diadiems" [value]="dd.id">{{dd.tendiadiem}}</option>
           </select>
                 </div>
 

@@ -21,7 +21,7 @@ export const lstStatus: Status[] = [
   },
   {
     id: 4,
-    name: "Đã kết thúc",
+    name: "Đã hoàn thành",
     color: "color:gray",
   },
   {

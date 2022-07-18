@@ -27,10 +27,10 @@ export class TimkiemComponent implements OnInit {
     private phanvungService: PhanvungsService
   ) {
     this.form = this.formBuilder.group({
-      [FormField?.theloai]: [0],
-      [FormField?.khuvuc]: [0],
-      [FormField?.diemdi]: [0],
-      [FormField?.diemden]: [0],
+      [FormField?.theloai]: [null],
+      [FormField?.khuvuc]: [null],
+      [FormField?.diemdi]: [null],
+      [FormField?.diemden]: [null],
       [FormField?.amthuc]: [""],
       [FormField?.luutru]: [""],
       [FormField?.phuongtien]: [""],
@@ -74,6 +74,12 @@ export class TimkiemComponent implements OnInit {
   ngayKh: Date = new Date();
   newtours: any;
   onSearch() {
-    this.routes.navigate(["search"]);
+    let value = this.form.value;
+    Object.keys(value).forEach((key) => {
+      if (!value[key]) {
+        delete value[key];
+      }
+    });
+    this.routes.navigate(["/search"], { queryParams: value });
   }
 }

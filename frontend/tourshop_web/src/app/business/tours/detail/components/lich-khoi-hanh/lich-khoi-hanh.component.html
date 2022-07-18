@@ -62,7 +62,7 @@
                                         <td *ngIf="tr.trangThai==3" class="confirm">
                                             <div class="row"><button (click)="end(tr.id)">Kết thúc</button></div>
                                         </td>
-                                        <td *ngIf="tr.trangThai==4" class="confirm">
+                                        <td *ngIf="tr.trangThai==4||tr.trangThai==5" class="confirm">
 
                                         </td>
                                         <td>
@@ -126,7 +126,7 @@
                                         <td *ngIf="tr.trangThai==3" class="confirm">
                                             <button (click)="end(tr.id)">Kết thúc</button>
                                         </td>
-                                        <td *ngIf="tr.trangThai==4" class="confirm">
+                                        <td *ngIf="tr.trangThai==4||tr.trangThai==5" class="confirm">
 
                                         </td>
                                         <td>

@@ -96,3 +96,13 @@ mat-form-field {
     padding: 10px;
     border-radius: 5px;
 }
+
+.button {
+    padding: 5px 15px;
+    box-shadow: 2px 2px 2px 2px opacify($color: #E76F51, $amount: 0.2);
+    background: #fff;
+    border: #E76F51 2px solid;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #E76F51;
+}

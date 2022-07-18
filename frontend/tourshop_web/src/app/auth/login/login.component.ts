@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
               localStorage.setItem("email", this.resposedata.email);
               localStorage.setItem("hoTen", this.resposedata.hoTen);
               localStorage.setItem("avt", this.resposedata.avt);
-              this.router.navigate(["/ql-tours"]);
+              this.router.navigate(["/dashboardDN"]);
             }
           },
           (err) => {

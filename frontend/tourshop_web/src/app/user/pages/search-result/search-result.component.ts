@@ -1,7 +1,7 @@
 import { DatePipe } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { PhanvungsService } from "../../../service/phanvungs.service";
 import { FormField } from "../search";
 import { DiadiemsService } from "../../../service/diadiems.service";
@@ -15,12 +15,14 @@ import {
   LuuTru,
   PhuongTien,
 } from "../dichvu-data";
+import { forkJoin, Subscription, SubscriptionLike } from "rxjs";
+import { map, mergeMap } from "rxjs/operators";
 @Component({
   selector: "app-search-result",
   templateUrl: "./search-result.component.html",
   styleUrls: ["./search-result.component.scss"],
 })
-export class SearchResultComponent implements OnInit {
+export class SearchResultComponent implements OnInit, OnDestroy {
   lstAmThuc: AmThuc[];
   lstLuuTru: LuuTru[];
   lstPhuongTien: PhuongTien[];
@@ -36,7 +38,8 @@ export class SearchResultComponent implements OnInit {
     private diadiemService: DiadiemsService,
     private routes: Router,
     private phanvungService: PhanvungsService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute
   ) {
     this.lstAmThuc = lstAmThucs;
     this.lstLuuTru = lstLuuTrus;
@@ -50,35 +53,53 @@ export class SearchResultComponent implements OnInit {
       [FormField?.luutru]: [""],
       [FormField?.phuongtien]: [""],
       [FormField?.thoigiandi]: [""],
-      [FormField?.dichvu]: [""],
+      [FormField?.dichvu]: [null],
     });
   }
   listAT: any;
   listLT: any;
   listPT: any;
   ngayKh: Date = new Date();
+  queryParamsSubscription: Subscription;
 
   onSearch() {
     let ngayKh = this.pipe.transform(this.ngayKh, "dd/MM/yyyy");
+
     this.form.patchValue({
       [FormField.amthuc]: this.listAT,
       [FormField.luutru]: this.listLT,
       [FormField.phuongtien]: this.listPT,
       [FormField.thoigiandi]: ngayKh,
     });
-    console.log(this.form.value);
-    this.tourservice.search(this.form.value).subscribe((res) => {
+
+    let value = this.form.value;
+    if (this.form.value.diemdi != null) {
+      value[FormField.diemdi] = Number(this.form.value.diemdi).toString();
+    }
+    if (this.form.value.diemden != null) {
+      value[FormField.diemden] = Number(this.form.value.diemden).toString();
+    }
+    if (this.form.value.khuvuc != null) {
+      value[FormField.khuvuc] = Number(this.form.value.khuvuc).toString();
+    }
+    if (this.form.value.theloai != null) {
+      value[FormField.theloai] = Number(this.form.value.theloai).toString();
+    }
+    console.log(value);
+    this.tourservice.search(value).subscribe((res) => {
       if (res == null) {
         console.log("Không có Tour liên quan");
       } else {
         this.newtours = [];
         this.newtours = res;
-        console.log("Tour:");
-        console.log(this.newtours);
       }
     });
+  }
+
+  onReset() {
     this.form.reset();
   }
+
   onChangeAT($event: any) {
     const id = $event.target.value;
     const isChecked = $event.target.checked;
@@ -134,10 +155,45 @@ export class SearchResultComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getNewTours();
-    this.getTheLoai();
-    this.getAllDiaDiem();
-    this.getPhanVung();
+    forkJoin([
+      this.getNewTours(),
+      this.getTheLoai(),
+      this.getAllDiaDiem(),
+      this.getPhanVung(),
+    ]).subscribe((data) => {
+      this.subTest();
+    });
+  }
+
+  subTest() {
+    this.queryParamsSubscription = this.route.queryParams.subscribe((query) => {
+      const { theloai, diemdi, diemden, khuvuc } = query;
+      let search = false;
+
+      if (theloai) {
+        this.form.controls[FormField.theloai].setValue(Number(theloai));
+        search = true;
+      }
+      if (diemdi) {
+        this.form.controls[FormField.diemdi].setValue(Number(diemdi));
+        search = true;
+      }
+      if (diemden) {
+        this.form.controls[FormField.diemden].setValue(Number(diemden));
+        search = true;
+      }
+      if (khuvuc) {
+        this.form.controls[FormField.khuvuc].setValue(Number(khuvuc));
+        search = true;
+      }
+      if (search) {
+        this.onSearch();
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.queryParamsSubscription.unsubscribe();
   }
 
   newtours: any;
@@ -145,21 +201,25 @@ export class SearchResultComponent implements OnInit {
   phanvungs: any;
   getPhanVung() {
     this.phanvungs = [];
-    this.phanvungService.getPhanVung().subscribe((res) => {
-      this.phanvungs = res.listPhanVung;
-    });
+    return this.phanvungService.getPhanVung().pipe(
+      map((res) => {
+        this.phanvungs = res.listPhanVung;
+      })
+    );
   }
   getNewTours() {
     this.newtours = [];
     this.tours = [];
-    this.tourservice.getNewTours().subscribe((response) => {
-      for (let tour of response) {
-        if (tour.nhungNgayKhoiHanh.length >= 1) {
-          this.tours.push(tour);
+    return this.tourservice.getNewTours().pipe(
+      map((response) => {
+        for (let tour of response) {
+          if (tour.nhungNgayKhoiHanh.length >= 1) {
+            this.tours.push(tour);
+          }
         }
-      }
-      this.newtours = this.tours;
-    });
+        this.newtours = this.tours;
+      })
+    );
   }
   findDateDisplay(id: number) {
     var nkhs = this.newtours.find(
@@ -213,9 +273,11 @@ export class SearchResultComponent implements OnInit {
   theloais: any;
   //Lay the loai
   getTheLoai() {
-    this.theloaiService.getTheLoai().subscribe((response) => {
-      this.theloais = response.listTheLoai;
-    });
+    return this.theloaiService.getTheLoai().pipe(
+      map((response) => {
+        this.theloais = response.listTheLoai;
+      })
+    );
   }
   findTLById(id: number) {
     return this.theloais.find((item: any) => item.id == id)?.tenLoai;
@@ -223,9 +285,11 @@ export class SearchResultComponent implements OnInit {
   diadiems: any;
   //Lay tat ca dia diem
   getAllDiaDiem() {
-    this.diadiemService.getAllDiaDiem().subscribe((response) => {
-      this.diadiems = response.listDiaDiem;
-    });
+    return this.diadiemService.getAllDiaDiem().pipe(
+      map((response) => {
+        this.diadiems = response.listDiaDiem;
+      })
+    );
   }
   findDDById(id: number) {
     return this.diadiems.find((item: any) => item.id == id)?.tendiadiem;
