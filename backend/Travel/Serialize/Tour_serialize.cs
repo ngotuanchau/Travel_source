@@ -74,6 +74,7 @@ namespace Travel.Serialize
         public string Chieu { get; set; }
         [Required]
         public string Toi { get; set; }
+        public int mode { get; set; }
     }
 
     public class Nhungdiadiem
@@ -84,6 +85,7 @@ namespace Travel.Serialize
         public string Tendiadiem { get; set; }
         [Required]
         public int Thutu { get; set; }
+        public int mode { get; set; }
     }
 
     public class NhungNgayKhoiHanh
@@ -99,6 +101,7 @@ namespace Travel.Serialize
         public decimal GiaTreNho { get; set; }
         public int Vedadat { get; set; }
         public int TrangThai { get; set; }
+        public int mode { get; set; }
     }
 
 }

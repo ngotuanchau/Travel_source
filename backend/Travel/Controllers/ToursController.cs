@@ -157,6 +157,211 @@ namespace Travel.Controllers
             }
 
         }
+
+        [Authorize]
+        [HttpPut]
+        [Route("update/{id:int}")]
+        [Authorize(Roles = "Business")]
+        [ActionName("updateTour")]
+        public async Task<IActionResult> updateTour([FromRoute] int id, Tour_serialize tour_Serialize)
+        {
+            using var transaction = _context.Database.BeginTransaction();
+            try
+            {
+                // Update table Tour
+                
+                Tour tour = _context.Tours.Where( t=> t.Id == id && t.TrangThai == 1).FirstOrDefault();
+                if (tour == null)
+                {
+                    return NotFound(new
+                    {
+                        message = "Tour không tồn tại"
+                    });
+                }    
+                string tenanh = "default.png";
+                try
+                {
+
+                    tour.CongTyId = tour_Serialize.Congty;
+                    tour.TheLoaiId = tour_Serialize.Theloai;
+                    tour.PhanVungId = tour_Serialize.Phanvung;
+                    tour.TenTour = tour_Serialize.Tentour;
+                    tour.SoNgay = tour_Serialize.SoNgay;
+                    tour.SoDem = tour_Serialize.SoDem;
+                    tour.VeDoiDa = tour_Serialize.VeToiDa;
+                    tour.VeToiThieu = tour_Serialize.VeToiThieu;
+                    tour.DiemDi = tour_Serialize.DiemDi;
+                    tour.DiemDen = tour_Serialize.DiemDen;
+                    tour.AmThuc = tour_Serialize.AmThuc;
+                    tour.LuuTru = tour_Serialize.LuuTru;
+                    tour.PhuongTien = tour_Serialize.Phuongtien;
+                    tour.MoTa = tour_Serialize.Mota;
+                    tour.AnhTour = tenanh;
+                    tour.TrangThai = 1;
+                }
+                catch
+                {
+                    throw new BadHttpRequestException("Bad request");
+                }
+
+                _context.SaveChanges();
+
+
+                //Update table DiaDiem_Tour
+                foreach (var dd in tour_Serialize.Nhungdiadiem)
+                {
+                    if (dd.Id == 0)
+                    {
+                        var diadiem_tour = new DiaDiem_Tour();
+                        try
+                        {
+                            diadiem_tour.TourId = id;
+                            diadiem_tour.ThuTu = dd.Thutu;
+                            diadiem_tour.DiaDiemId = dd.diadiem;
+                        }
+                        catch
+                        {
+                            throw new BadHttpRequestException("Bad request");
+                        }
+                        _context.Add(diadiem_tour);
+                        _context.SaveChanges();
+                    }
+                    else if(dd.mode == 1)
+                    {
+                        DiaDiem_Tour diaDiem_Tour = _context.DiaDiem_Tours.Where(d => d.Id == dd.Id).FirstOrDefault();
+                        diaDiem_Tour.TourId = id;
+                        diaDiem_Tour.ThuTu = dd.Thutu;
+                        diaDiem_Tour.DiaDiemId = dd.diadiem;
+
+                        _context.SaveChanges();
+                    }
+                    else
+                    {
+                        DiaDiem_Tour diaDiem_Tour = _context.DiaDiem_Tours.Where(d => d.Id == dd.Id).FirstOrDefault();
+                        diaDiem_Tour.TrangThai = 0;
+                        _context.SaveChanges();
+                    }    
+                }
+
+                //Update table ThoiGian
+                foreach (var tt in tour_Serialize.NhungNgayKhoiHanh)
+                {
+                    if (tt.Id == 0)
+                    {
+                        var thoigian = new ThoiGian();
+
+                        try
+                        {
+                            DateTime ngaykh = DateTime.ParseExact(tt.NgayKh, "dd/MM/yyyy",
+                                               System.Globalization.CultureInfo.InvariantCulture);
+                            thoigian.TourId = id;
+                            thoigian.NgayDi = ngaykh;
+                            thoigian.GiaNguoiLon = tt.GiaNguoiLon;
+                            thoigian.GiaTreEm = tt.GiaTreEn;
+                            thoigian.GiaTreNho = tt.GiaTreNho;
+                            thoigian.VeDaDat = 0;
+                            thoigian.TrangThai = 1;
+                        }
+                        catch
+                        {
+                            throw new BadHttpRequestException("Bad request");
+                        }
+                        _context.Add(thoigian);
+                        _context.SaveChanges();
+                    }
+                    else if(tt.mode == 1)
+                    {
+                        ThoiGian thoiGian = _context.ThoiGians.Where(t => t.Id == tt.Id).FirstOrDefault();
+                        DateTime ngaykh = DateTime.ParseExact(tt.NgayKh, "dd/MM/yyyy",
+                                               System.Globalization.CultureInfo.InvariantCulture);
+                        thoiGian.TourId = id;
+                        thoiGian.NgayDi = ngaykh;
+                        thoiGian.GiaNguoiLon = tt.GiaNguoiLon;
+                        thoiGian.GiaTreEm = tt.GiaTreEn;
+                        thoiGian.GiaTreNho = tt.GiaTreNho;
+                        thoiGian.TrangThai = 1;
+
+                        _context.SaveChanges();
+                    }
+                    else
+                    {
+                        ThoiGian thoiGian = _context.ThoiGians.Where(t => t.Id == tt.Id).FirstOrDefault();
+                        thoiGian.TrangThai = 0;
+                        _context.SaveChanges();
+                    }
+                }
+
+                //insert table LichTrinh
+                foreach (var lt in tour_Serialize.Lichtrinh)
+                {
+                    if (lt.Id == 0)
+                    {
+                        var lichtrinh = new LichTrinh();
+                        try
+                        {
+                            lichtrinh.TourId = id;
+                            lichtrinh.Ngay = lt.Ngay;
+                            lichtrinh.MoTa = lt.MoTa;
+                            lichtrinh.Sang = lt.Sang;
+                            lichtrinh.Trua = lt.Trua;
+                            lichtrinh.Chieu = lt.Chieu;
+                            lichtrinh.Toi = lt.Toi;
+                            lichtrinh.TrangThai = 1;
+                        }
+                        catch
+                        {
+                            throw new BadHttpRequestException("Bad request");
+                        }
+                        _context.Add(lichtrinh);
+                        _context.SaveChanges();
+                    }
+                    else if(lt.mode == 1)
+                    {
+                        LichTrinh lichTrinh = _context.LichTrinhs.Where(l => l.Id == lt.Id).FirstOrDefault();
+                        lichTrinh.TourId = id;
+                        lichTrinh.Ngay = lt.Ngay;
+                        lichTrinh.MoTa = lt.MoTa;
+                        lichTrinh.Sang = lt.Sang;
+                        lichTrinh.Trua = lt.Trua;
+                        lichTrinh.Chieu = lt.Chieu;
+                        lichTrinh.Toi = lt.Toi;
+                        lichTrinh.TrangThai = 1;
+                        _context.SaveChanges();
+
+                    }    
+                    else
+                    {
+                        LichTrinh lichTrinh = _context.LichTrinhs.Where(l => l.Id == lt.Id).FirstOrDefault();
+                        lichTrinh.TrangThai = 0;
+                        _context.SaveChanges();
+                    }    
+                }
+
+
+
+                // Commit transaction if all commands succeed, transaction will auto-rollback
+                // when disposed if either commands fails
+                transaction.Commit();
+                return Ok(new
+                {
+                    message = "Update tour thành công",
+                });
+            }
+            catch (BadHttpRequestException)
+            {
+                transaction.Rollback();
+                return BadRequest("Bad request");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                transaction.Rollback();
+                return StatusCode(500, "Internal Server Error");
+
+            }
+
+        }
+
         [Authorize]
         [Authorize(Roles = "Business")]
         [HttpGet]
