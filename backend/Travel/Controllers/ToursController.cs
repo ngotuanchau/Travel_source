@@ -833,7 +833,16 @@ namespace Travel.Controllers
                 {
                     return StatusCode(404, "Tour không tồn tại hoặc chưa bắt đầu");
                 }
-
+                DateTime ngaykh = thoiGian.NgayDi;
+                DateTime now = DateTime.Now;
+                now = now.AddDays(5);
+                if (now > ngaykh)
+                {
+                    return BadRequest(new
+                    {
+                        message = "Không thể hủy"
+                    });
+                }
                 thoiGian.TrangThai = 5;
 
                 _context.SaveChanges();
