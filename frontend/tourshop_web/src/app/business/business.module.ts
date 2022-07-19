@@ -9,6 +9,7 @@ import { ProfileComponent } from "./profile/profile.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatSelectModule } from "@angular/material/select";
 import { DashboardModule } from "./dashboard/dashboard.module";
+import { DiaDiemsModule } from "./diadiems/diadiems.module";
 @NgModule({
   declarations: [TourDeXuatComponent, ProfileComponent],
   imports: [
@@ -17,6 +18,7 @@ import { DashboardModule } from "./dashboard/dashboard.module";
     CKEditorModule,
     ToursModule,
     FormsModule,
+    DiaDiemsModule,
     ReactiveFormsModule,
     MatSelectModule,
     DashboardModule,

@@ -19,7 +19,6 @@
                                 <th class="text-dark font-medium fs-4">Trưa</th>
                                 <th class="text-dark font-medium fs-4">Chiều</th>
                                 <th class="text-dark font-medium fs-4">Tối</th>
-                                <th class="text-dark font-medium fs-4"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -44,14 +43,7 @@
                                 <td>
                                     <p>{{tr.toi}}</p>
                                 </td>
-                                <td>
-                                    <a [routerLink]="['detail']"><button type="button" class="btn btn-inverse-info btn-icon" onclick="">
-                      <i class="bi bi-eye"></i></button></a>
-                                    <a [routerLink]="['update']"><button type="button" class="btn btn-inverse-info btn-icon" onclick="">
-                      <i class="bi bi-pen"></i></button></a>
-                                    <button type="button" class="btn btn-inverse-info btn-icon" onclick="">
-                    <i class="bi bi-trash"></i></button>
-                                </td>
+
                             </tr>
                         </tbody>
                     </table>

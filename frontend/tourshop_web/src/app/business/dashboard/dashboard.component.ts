@@ -1,6 +1,7 @@
 import { Component, AfterViewInit, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { DoanhNghiepsService } from "../../service/doanhnghieps.service";
+import { DatePipe } from "@angular/common";
 //declare var require: any;
 
 @Component({
@@ -11,36 +12,44 @@ export class DashboardComponent implements OnInit {
   idDN: any;
   ngay: string;
   form: FormGroup;
-
+  pipe = new DatePipe("en-US");
   constructor(private doanhNghiepService: DoanhNghiepsService) {
     const today = new Date();
     this.form = new FormGroup({
       thang: new FormControl(""),
     });
   }
+  today = new Date();
   ngOnInit(): void {
     this.idDN = localStorage.getItem("id");
+
+    if (this.today.getMonth() + 1 < 10) {
+      this.form.value.thang =
+        "0" + (this.today.getMonth() + 1) + "/" + this.today.getFullYear();
+    } else {
+      this.form.value.thang =
+        this.today.getMonth() + 1 + "/" + this.today.getFullYear();
+    }
+    this.thongKe();
   }
   thongKe() {
-    console.log(this.form.value);
     this.doanhNghiepService
       .thongKe(this.idDN, this.form.value)
       .subscribe((res) => {
         this.thongke = res;
-        console.log(this.form.value);
       });
   }
-  ghep(thang: any) {
-    const today = new Date();
-    if (thang < 10) return "0" + thang + "/" + today.getFullYear();
-    else return thang + "/" + today.getFullYear();
+  choose() {
+    this.form.value.thang = this.pipe.transform(
+      this.form.value.thang,
+      "MM/yyyy"
+    );
+    this.thongKe();
   }
-  lstThang() {
-    let list: any;
-    list = [];
-    for (var i = 1; i <= 12; i++) {
-      list.push(i);
-    }
-    return list;
+  formatCurrency(money: number) {
+    return new Intl.NumberFormat("fr-FR", {
+      style: "currency",
+      currency: "VND",
+    }).format(money);
   }
 }

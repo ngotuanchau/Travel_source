@@ -58,18 +58,33 @@ export class NewtoursComponent implements OnInit {
   ngayKh: Date = new Date();
   onSearch() {
     let ngayKh = this.pipe.transform(this.ngayKh, "dd/MM/yyyy");
+    if (this.form.value.diemdi != null) {
+      this.form.patchValue({
+        [FormField.diemdi]: Number(this.form.value.diemdi).toString(),
+      });
+    }
+    if (this.form.value.diemden != null) {
+      this.form.patchValue({
+        [FormField.diemden]: Number(this.form.value.diemden).toString(),
+      });
+    }
+    if (this.form.value.khuvuc != null) {
+      this.form.patchValue({
+        [FormField.khuvuc]: Number(this.form.value.khuvuc).toString(),
+      });
+    }
+    if (this.form.value.theloai != null) {
+      this.form.patchValue({
+        [FormField.theloai]: Number(this.form.value.theloai).toString(),
+      });
+    }
     this.form.patchValue({
       [FormField.amthuc]: this.listAT,
       [FormField.luutru]: this.listLT,
       [FormField.phuongtien]: this.listPT,
       [FormField.thoigiandi]: ngayKh,
     });
-    this.form.patchValue({
-      [FormField.amthuc]: this.listAT,
-      [FormField.luutru]: this.listLT,
-      [FormField.phuongtien]: this.listPT,
-      [FormField.thoigiandi]: ngayKh,
-    });
+
     this.tourservice.search(this.form.value).subscribe((res) => {
       if (res == null) {
         console.log("Không có Tour liên quan");
@@ -80,6 +95,7 @@ export class NewtoursComponent implements OnInit {
         console.log(this.newtours);
       }
     });
+    this.form.reset();
   }
   onChangeAT($event: any) {
     const id = $event.target.value;
@@ -220,7 +236,7 @@ export class NewtoursComponent implements OnInit {
   diadiems: any;
   //Lay tat ca dia diem
   getAllDiaDiem() {
-    this.diadiemService.getAllDiaDiem().subscribe((response) => {
+    this.diadiemService.getDiaDiem().subscribe((response) => {
       this.diadiems = response.listDiaDiem;
     });
   }

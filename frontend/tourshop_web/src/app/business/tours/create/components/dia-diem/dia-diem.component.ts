@@ -142,7 +142,7 @@ export class DiaDiemComponent implements OnInit {
     }
   }
   findDDById(id: number) {
-    return this.diadiems.find((item: any) => item.id == id)?.ten;
+    return this.diadiems.find((item: any) => item.id == id)?.tendiadiem;
   }
   getSTT(value: any) {
     this.thutu = value;

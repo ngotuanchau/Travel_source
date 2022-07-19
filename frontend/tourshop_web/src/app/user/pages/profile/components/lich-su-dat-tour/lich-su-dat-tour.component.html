@@ -11,10 +11,9 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="row">
-                                <div class="status col-sm-6" [style]="findSttById(hd.trangthaihoadon).color">
-                                    {{findSttById(hd.trangthaihoadon).name}}</div>
+                                <div class="col-sm-6" [style]="findTourSttById(hd.trangthaitour).color">
+                                    Tour: <span>{{findTourSttById(hd.trangthaitour).name}}</span></div>
                                 <div class="col-sm-6">Ngày đặt: <span>{{hd.ngaydat}}</span></div>
-
                             </div>
                             <a [routerLink]="['../tour/detail/',hd.idtour]">
                                 <div class="ten-tour">{{hd.tentour}}
@@ -30,6 +29,10 @@
                         </div>
                         <div class="col-sm-3">
                             <div class="thong-tin-ve">
+                                <div class="row">
+                                    <div [style]="findSttById(hd.trangthaihoadon).color">
+                                        {{findSttById(hd.trangthaihoadon).name}}</div>
+                                </div>
                                 <div class="row">
                                     <div class="col-6">Người lớn: </div>
                                     <span class="col-6">{{hd.sovenguoilon}} vé</span>
@@ -47,7 +50,7 @@
                                     <div class="col-6">Tổng tiền: </div>
                                     <span class="col-6">{{formatCurrency(hd.tongtien)}}</span>
                                 </div>
-                                <div class="row" *ngIf="hd.trangthaihoadon==1">
+                                <div class="row" *ngIf="hd.trangthaihoadon==1&& sosanhNgay(hd.ngaykh)">
                                     <div class="col-4"></div>
                                     <span class="col-4"><button (click)="huyTour(hd.id)">HỦY</button></span>
                                 </div>
@@ -68,8 +71,8 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="row">
-                                <div class="status col-sm-6" [style]="findSttById(hd.trangthaihoadon).color">
-                                    {{findSttById(hd.trangthaihoadon).name}}</div>
+                                <div class="col-sm-6" [style]="findTourSttById(hd.trangthaitour).color">
+                                    Tour: <span>{{findTourSttById(hd.trangthaitour).name}}</span></div>
                                 <div class="col-sm-6">Ngày đặt: <span>{{hd.ngaydat}}</span></div>
 
                             </div>
@@ -88,6 +91,10 @@
                         <div class="col-sm-3">
                             <div class="thong-tin-ve">
                                 <div class="row">
+                                    <div [style]="findSttById(hd.trangthaihoadon).color">
+                                        {{findSttById(hd.trangthaihoadon).name}}</div>
+                                </div>
+                                <div class="row">
                                     <div class="col-6">Người lớn: </div>
                                     <span class="col-6">{{hd.sovenguoilon}} vé</span>
                                 </div>
@@ -104,7 +111,7 @@
                                     <div class="col-6">Tổng tiền: </div>
                                     <span class="col-6">{{formatCurrency(hd.tongtien)}}</span>
                                 </div>
-                                <div class="row" *ngIf="hd.trangthaihoadon==1">
+                                <div class="row" *ngIf="hd.trangthaihoadon==1 && sosanhNgay(hd.ngaykh)">
                                     <div class="col-4"></div>
                                     <span class="col-4"><button (click)="huyTour(hd.id)">HỦY</button></span>
                                 </div>
@@ -125,8 +132,8 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="row">
-                                <div class="status col-sm-6" [style]="findSttById(hd.trangthaihoadon).color">
-                                    {{findSttById(hd.trangthaihoadon).name}}</div>
+                                <div class="col-sm-6" [style]="findTourSttById(hd.trangthaitour).color">
+                                    Tour: <span>{{findTourSttById(hd.trangthaitour).name}}</span></div>
                                 <div class="col-sm-6">Ngày đặt: <span>{{hd.ngaydat}}</span></div>
 
                             </div>
@@ -144,6 +151,10 @@
                         </div>
                         <div class="col-sm-3">
                             <div class="thong-tin-ve">
+                                <div class="row">
+                                    <div [style]="findSttById(hd.trangthaihoadon).color">
+                                        {{findSttById(hd.trangthaihoadon).name}}</div>
+                                </div>
                                 <div class="row">
                                     <div class="col-6">Người lớn: </div>
                                     <span class="col-6">{{hd.sovenguoilon}} vé</span>
@@ -182,9 +193,9 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="row">
-                                <div class="status col-sm-6">{{findSttById(hd.trangthaihoadon).name}}</div>
+                                <div class="col-sm-6" [style]="findTourSttById(hd.trangthaitour).color">
+                                    Tour: <span>{{findTourSttById(hd.trangthaitour).name}}</span></div>
                                 <div class="col-sm-6">Ngày đặt: <span>{{hd.ngaydat}}</span></div>
-
                             </div>
                             <a [routerLink]="['../tour/detail/',hd.idtour]">
                                 <div class="ten-tour">{{hd.tentour}}
@@ -200,6 +211,10 @@
                         </div>
                         <div class="col-sm-3">
                             <div class="thong-tin-ve">
+                                <div class="row">
+                                    <div [style]="findSttById(hd.trangthaihoadon).color">
+                                        {{findSttById(hd.trangthaihoadon).name}}</div>
+                                </div>
                                 <div class="row">
                                     <div class="col-6">Người lớn: </div>
                                     <span class="col-6">{{hd.sovenguoilon}} vé</span>
@@ -258,6 +273,10 @@
                         <div class="col-sm-3">
                             <div class="thong-tin-ve">
                                 <div class="row">
+                                    <div [style]="findSttById(hd.trangthaihoadon).color">
+                                        {{findSttById(hd.trangthaihoadon).name}}</div>
+                                </div>
+                                <div class="row">
                                     <div class="col-6">Người lớn: </div>
                                     <span class="col-6">{{hd.sovenguoilon}} vé</span>
                                 </div>
@@ -295,10 +314,9 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="row">
-                                <div class="status col-sm-6" [style]="findSttById(hd.trangthaihoadon).color">
-                                    {{findSttById(hd.trangthaihoadon).name}}</div>
+                                <div class="col-sm-6" [style]="findTourSttById(hd.trangthaitour).color">
+                                    Tour: <span>{{findTourSttById(hd.trangthaitour).name}}</span></div>
                                 <div class="col-sm-6">Ngày đặt: <span>{{hd.ngaydat}}</span></div>
-
                             </div>
                             <a [routerLink]="['../tour/detail/',hd.idtour]">
                                 <div class="ten-tour">{{hd.tentour}}
@@ -314,6 +332,10 @@
                         </div>
                         <div class="col-sm-3">
                             <div class="thong-tin-ve">
+                                <div class="row">
+                                    <div [style]="findSttById(hd.trangthaihoadon).color">
+                                        {{findSttById(hd.trangthaihoadon).name}}</div>
+                                </div>
                                 <div class="row">
                                     <div class="col-6">Người lớn: </div>
                                     <span class="col-6">{{hd.sovenguoilon}} vé</span>
@@ -331,7 +353,7 @@
                                     <div class="col-6">Tổng tiền: </div>
                                     <span class="col-6">{{formatCurrency(hd.tongtien)}}</span>
                                 </div>
-                                <div class="row" *ngIf="hd.trangthaihoadon==1">
+                                <div class="row" *ngIf="hd.trangthaihoadon==1 ">
                                     <div class="col-4"></div>
                                     <span class="col-4"><button (click)="huyTour(hd.id)">HỦY</button></span>
                                 </div>

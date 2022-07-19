@@ -6,7 +6,6 @@ import { TienichComponent } from "./trangchu-component/tienich/tienich.component
 import { RouterModule, Routes } from "@angular/router";
 import { GioithieuComponent } from "./trangchu-component/gioithieu/gioithieu.component";
 import { UudiemComponent } from "./trangchu-component/uudiem/uudiem.component";
-import { BestsellingtoursComponent } from "./trangchu-component/bestsellingtours/bestsellingtours.component";
 import { NewtoursComponent } from "./trangchu-component/newtours/newtours.component";
 import { TintucComponent } from "./trangchu-component/tintuc/tintuc.component";
 import { DuLichAnToanComponent } from "./trangchu-component/du-lich-an-toan/du-lich-an-toan.component";
@@ -16,6 +15,7 @@ import { MatGridListModule } from "@angular/material/grid-list";
 import { MatButtonModule } from "@angular/material/button";
 import { MatSelectModule } from "@angular/material/select";
 import { MatDatepickerModule } from "@angular/material/datepicker";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -25,7 +25,6 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
     DuLichAnToanComponent,
     GioithieuComponent,
     UudiemComponent,
-    BestsellingtoursComponent,
     NewtoursComponent,
     TintucComponent,
     UuDaiTotNhatComponent,
@@ -38,6 +37,8 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
     MatSelectModule,
     MatDatepickerModule,
     RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [RouterModule],
   providers: [

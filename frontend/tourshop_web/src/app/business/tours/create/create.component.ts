@@ -9,6 +9,7 @@ import { HttpClient } from "@angular/common/http";
 import { AnhsService } from "../../../service/anhs.service";
 
 import { NgToastService } from "ng-angular-popup";
+import { Router } from "@angular/router";
 @Component({
   selector: "app-tours-create",
   templateUrl: "./create.component.html",
@@ -33,7 +34,8 @@ export class ToursCreateComponent {
     private formBuilder: FormBuilder,
     private anhService: AnhsService,
     private http: HttpClient,
-    private toast: NgToastService
+    private toast: NgToastService,
+    private route: Router
   ) {
     this.form = this.formBuilder.group({
       [FormField.tentour]: [null, Validators.required], //1
@@ -171,6 +173,7 @@ export class ToursCreateComponent {
           summary: "Tạo Tour thành công",
           duration: 3000,
         });
+        this.route.navigate(["../ql-tours"]);
       } else {
         this.toast.error({
           detail: "Cảnh báo",

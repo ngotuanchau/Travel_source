@@ -21,7 +21,7 @@ export const lstStatus: Status[] = [
   },
   {
     id: 4,
-    name: "Đã kết thúc",
+    name: "Đã hoàn thành",
     color: "color:gray",
   },
   {
@@ -47,6 +47,11 @@ export const lstStatus: Status[] = [
   {
     id: 9,
     name: "Đã được hoàn tiền",
+    color: "color:red",
+  },
+  {
+    id: 10,
+    name: "Được hủy bởi người dùng (Hoàn tiền 100%)",
     color: "color:red",
   },
 ];
