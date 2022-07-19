@@ -1,23 +1,102 @@
-<div class="row">
-    <form action="" [formGroup]="form">
-        <div class="col-sm-3">Tháng</div>
-        <div class="col-sm-3">
-            <select formControlName="thang" (change)="thongKe()">
-        <option *ngFor="let thang of lstThang()" [value]="ghep(thang)">{{thang}}</option>
-      </select>
-        </div>
-    </form>
-</div>
-<app-top-thong-ke [thongKe]="this.thongke"></app-top-thong-ke>
-<div class="row">
-    <!-- column -->
-    <div class="col-12">
-        <app-blog-cards></app-blog-cards>
+<div class="row mb-4">
+    <div class="col-sm-3"><input class="form-control" disabled [placeholder]="thongke.thang"></div>
+    <div class="col-sm-1">
+        <form action="" [formGroup]="form">
+            <input class="form-control" type="month" formControlName="thang" (change)="choose()">
+        </form>
     </div>
 </div>
 <div class="row">
-    <!-- column -->
-    <div class="col-12">
-        <app-top-congty></app-top-congty>
+    <div class="col-md-6 col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="btn btn-lg rounded-circle round round-lg fs-6 d-flex align-items-center justify-content-center bg-light-success text-success">
+                        <i class='bi bi-wallet'></i>
+                    </div>
+                    <div class="ms-3">
+                        <small class="text-muted fs-3">Số Tour trong tháng</small>
+                        <h3 class="mb-0 font-weight-bold">{{thongke.tongsotour}} Tour</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="btn btn-lg rounded-circle round round-lg fs-6 d-flex align-items-center justify-content-center bg-light-danger text-danger">
+                        <i class='bi bi-coin'></i>
+                    </div>
+                    <div class="ms-3">
+                        <small class="text-muted fs-3">Tổng doanh thu</small>
+                        <h3 class="mb-0 font-weight-bold">{{formatCurrency(thongke.tongdoanhthu)}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="btn btn-lg rounded-circle round round-lg fs-6 d-flex align-items-center justify-content-center bg-secondary text-white">
+                        <i class="bi bi-handbag"></i>
+                    </div>
+                    <div class="ms-3">
+                        <small class="text-muted fs-3">Tour đang chuẩn bị</small>
+                        <h3 class="mb-0 font-weight-bold">{{thongke.sotour_chuanbi}} Tour</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="btn btn-lg rounded-circle round round-lg fs-6 d-flex align-items-center justify-content-center bg-light-primary text-primary">
+                        <i class="bi bi-arrow-up-square"></i>
+                    </div>
+                    <div class="ms-3">
+                        <small class="text-muted fs-3">Tour đang bắt đầu</small>
+                        <h3 class="mb-0 font-weight-bold">{{thongke.sotour_batdau}} Tour</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="btn btn-lg rounded-circle round round-lg fs-6 d-flex align-items-center justify-content-center bg-light-success text-success">
+                        <i class="bi bi-bag-check"></i>
+                    </div>
+                    <div class="ms-3">
+                        <small class="text-muted fs-3">Tour đã hoàn thành</small>
+                        <h3 class="mb-0 font-weight-bold">{{thongke.sotour_hoanthanh}} Tour</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="btn btn-lg rounded-circle round round-lg fs-6 d-flex align-items-center justify-content-center bg-light-danger text-danger">
+                        <i class="bi bi-shield-x"></i>
+                    </div>
+                    <div class="ms-3">
+                        <small class="text-muted fs-3">Tour đã hủy</small>
+                        <h3 class="mb-0 font-weight-bold">{{thongke.sotour_dahuy}} Tour</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

@@ -47,7 +47,7 @@ export class LoginadminComponent implements OnInit {
             localStorage.setItem("email", this.resposedata.email);
             localStorage.setItem("hoTen", this.resposedata.hoTen);
             localStorage.setItem("avt", this.resposedata.avt);
-            this.router.navigate(["/diadiem"]);
+            this.router.navigate(["/dashboard"]);
           }
         },
         (err) => {

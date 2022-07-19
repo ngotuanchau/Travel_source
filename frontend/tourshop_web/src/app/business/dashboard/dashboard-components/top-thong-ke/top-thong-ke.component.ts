@@ -9,5 +9,7 @@ export class TopThongKeComponent implements OnInit {
   @Input() thongKe: any;
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.thongKe);
+  }
 }

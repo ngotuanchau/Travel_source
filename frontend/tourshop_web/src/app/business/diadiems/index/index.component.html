@@ -1,0 +1,62 @@
+<div class="row">
+    <!-- ==================================-->
+    <!-- ======= Basic Nav ===== -->
+    <!-- ==================================-->
+    <div class="col-12">
+        <div class="card">
+            <div class="p-3">
+                <h4 class="card-title mb-0">ĐỊA ĐIỂM</h4>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="table-responsive">
+                            <div class="table-lt">
+                                <table class="table table-bordered align-middle text-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-dark font-medium fs-4">STT</th>
+                                            <th class="text-dark font-medium fs-4">Tên địa điểm</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let tr of diadiems; index as i">
+                                            <td>
+                                                {{ i + 1 }}
+                                            </td>
+                                            <td>
+                                                {{tr.tendiadiem}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="p-3">
+                            <h4 class="card-title mb-0">ĐỀ XUẤT ĐỊA ĐIỂM</h4>
+                        </div>
+                        <form action="" [formGroup]="form">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-field">
+                                            <input formControlName="tendiadiem" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-field">
+                                            <button (click)="dexuatDD()">Đề xuất</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

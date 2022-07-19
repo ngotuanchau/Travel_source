@@ -7,6 +7,7 @@ import { CongTysEditComponent } from "./edit/edit.component";
 import { CongTysDetailComponent } from "./detail/detail.component";
 import { RouterModule } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatTabsModule } from "@angular/material/tabs";
 @NgModule({
   declarations: [
     CongTysIndexComponent,
@@ -20,6 +21,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    MatTabsModule,
   ],
 })
 export class CongTysModule {}

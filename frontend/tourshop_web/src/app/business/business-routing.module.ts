@@ -8,6 +8,7 @@ import { ToursEditComponent } from "./tours/edit/edit.component";
 import { ToursIndexComponent } from "./tours/index/index.component";
 import { KhachDatTourComponent } from "./tours/khach-dat-tour/khach-dat-tour.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
+import { DiaDiemsIndexComponent } from "./diadiems/index/index.component";
 
 const routes: Routes = [
   {
@@ -45,6 +46,11 @@ const routes: Routes = [
   {
     path: "dx-tours",
     component: TourDeXuatComponent,
+  },
+  //Đề xuất Địa điểm
+  {
+    path: "dx-diadiem",
+    component: DiaDiemsIndexComponent,
   },
   //Thông tin công ty
   {

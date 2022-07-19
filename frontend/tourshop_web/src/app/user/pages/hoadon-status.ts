@@ -49,4 +49,9 @@ export const lstStatus: Status[] = [
     name: "Đã được hoàn tiền",
     color: "color:red",
   },
+  {
+    id: 10,
+    name: "Được hủy bởi người dùng (Hoàn tiền 100%)",
+    color: "color:red",
+  },
 ];

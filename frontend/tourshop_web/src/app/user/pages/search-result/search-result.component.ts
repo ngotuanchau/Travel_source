@@ -285,7 +285,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   diadiems: any;
   //Lay tat ca dia diem
   getAllDiaDiem() {
-    return this.diadiemService.getAllDiaDiem().pipe(
+    return this.diadiemService.getDiaDiem().pipe(
       map((response) => {
         this.diadiems = response.listDiaDiem;
       })

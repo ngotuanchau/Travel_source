@@ -6,7 +6,6 @@ import { TienichComponent } from "./trangchu-component/tienich/tienich.component
 import { RouterModule, Routes } from "@angular/router";
 import { GioithieuComponent } from "./trangchu-component/gioithieu/gioithieu.component";
 import { UudiemComponent } from "./trangchu-component/uudiem/uudiem.component";
-import { BestsellingtoursComponent } from "./trangchu-component/bestsellingtours/bestsellingtours.component";
 import { NewtoursComponent } from "./trangchu-component/newtours/newtours.component";
 import { TintucComponent } from "./trangchu-component/tintuc/tintuc.component";
 import { DuLichAnToanComponent } from "./trangchu-component/du-lich-an-toan/du-lich-an-toan.component";
@@ -26,7 +25,6 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     DuLichAnToanComponent,
     GioithieuComponent,
     UudiemComponent,
-    BestsellingtoursComponent,
     NewtoursComponent,
     TintucComponent,
     UuDaiTotNhatComponent,

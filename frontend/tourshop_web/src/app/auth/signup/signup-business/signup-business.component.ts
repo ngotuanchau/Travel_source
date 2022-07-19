@@ -58,7 +58,8 @@ export class SignupBusinessComponent implements OnInit {
       (response) => {
         this.toast.success({
           detail: "Thông báo",
-          summary: "Đăng ký Doanh nghiệp thành công",
+          summary:
+            "Đăng ký Doanh nghiệp thành công. Tài khoản sẽ sớm được kích hoạt",
           duration: 3000,
         });
         this.congTy = {

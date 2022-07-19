@@ -10,6 +10,14 @@ export const ROUTES: RouteInfo[] = [
     submenu: [],
   },
   {
+    path: "/dx-diadiem",
+    title: "Địa điểm",
+    icon: "bi bi-layout-split",
+    class: "",
+    extralink: false,
+    submenu: [],
+  },
+  {
     path: "/ql-tours",
     title: "Quản lý Tour",
     icon: "bi bi-layout-split",

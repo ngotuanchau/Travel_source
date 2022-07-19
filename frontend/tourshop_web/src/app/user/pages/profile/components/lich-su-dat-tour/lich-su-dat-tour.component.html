@@ -50,7 +50,7 @@
                                     <div class="col-6">Tổng tiền: </div>
                                     <span class="col-6">{{formatCurrency(hd.tongtien)}}</span>
                                 </div>
-                                <div class="row" *ngIf="hd.trangthaihoadon==1">
+                                <div class="row" *ngIf="hd.trangthaihoadon==1&& sosanhNgay(hd.ngaykh)">
                                     <div class="col-4"></div>
                                     <span class="col-4"><button (click)="huyTour(hd.id)">HỦY</button></span>
                                 </div>
@@ -111,7 +111,7 @@
                                     <div class="col-6">Tổng tiền: </div>
                                     <span class="col-6">{{formatCurrency(hd.tongtien)}}</span>
                                 </div>
-                                <div class="row" *ngIf="hd.trangthaihoadon==1">
+                                <div class="row" *ngIf="hd.trangthaihoadon==1 && sosanhNgay(hd.ngaykh)">
                                     <div class="col-4"></div>
                                     <span class="col-4"><button (click)="huyTour(hd.id)">HỦY</button></span>
                                 </div>
@@ -353,7 +353,7 @@
                                     <div class="col-6">Tổng tiền: </div>
                                     <span class="col-6">{{formatCurrency(hd.tongtien)}}</span>
                                 </div>
-                                <div class="row" *ngIf="hd.trangthaihoadon==1">
+                                <div class="row" *ngIf="hd.trangthaihoadon==1 ">
                                     <div class="col-4"></div>
                                     <span class="col-4"><button (click)="huyTour(hd.id)">HỦY</button></span>
                                 </div>

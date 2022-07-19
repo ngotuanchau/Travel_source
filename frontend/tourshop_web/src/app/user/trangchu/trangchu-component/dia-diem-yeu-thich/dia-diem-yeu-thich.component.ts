@@ -20,7 +20,7 @@ export class DiaDiemYeuThichComponent implements OnInit {
   }
   getDiaDiem() {
     this.diadiem = [];
-    this.diadiemService.getAllDiaDiem().subscribe((res) => {
+    this.diadiemService.getDiaDiem().subscribe((res) => {
       this.diadiem = res.listDiaDiem;
     });
   }

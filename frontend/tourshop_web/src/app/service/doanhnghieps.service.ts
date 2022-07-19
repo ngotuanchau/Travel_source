@@ -30,11 +30,9 @@ export class DoanhNghiepsService {
     );
   }
   thongKe(id: any, thang: any): Observable<any> {
-    return this.http.get<any>(this.baseUrl + "/doanhnghiep/thongke/" + id, {
-      params: thang,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    return this.http.post<any>(
+      this.baseUrl + "/doanhnghiep/thongke/" + id,
+      thang
+    );
   }
 }

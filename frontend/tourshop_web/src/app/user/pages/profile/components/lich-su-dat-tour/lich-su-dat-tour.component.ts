@@ -5,6 +5,7 @@ import { DatePipe } from "@angular/common";
 import { Status, lstStatus } from "../../../hoadon-status";
 import { tourStatus, lstTourStatus } from "../../../tour-status";
 import { NgToastService } from "ng-angular-popup";
+import * as moment from "moment";
 
 @Component({
   selector: "app-lich-su-dat-tour",
@@ -112,5 +113,13 @@ export class LichSuDatTourComponent implements OnInit {
       }
     }
     return list;
+  }
+  sosanhNgay(ngay: Date) {
+    const today = moment().add(5, "days").toDate().getTime();
+    var ng = new Date(ngay).getTime();
+    if (ng > today) return true;
+    else return false;
+    // console.log(today);
+    // console.log(ng);
   }
 }

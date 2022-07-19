@@ -236,7 +236,7 @@ export class NewtoursComponent implements OnInit {
   diadiems: any;
   //Lay tat ca dia diem
   getAllDiaDiem() {
-    this.diadiemService.getAllDiaDiem().subscribe((response) => {
+    this.diadiemService.getDiaDiem().subscribe((response) => {
       this.diadiems = response.listDiaDiem;
     });
   }
