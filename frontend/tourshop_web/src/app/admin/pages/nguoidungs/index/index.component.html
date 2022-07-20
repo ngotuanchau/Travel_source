@@ -63,15 +63,13 @@
                                                 <td *ngIf="tr.trangThai!=1" style="color:red">
                                                     Bị khóa
                                                 </td>
-                                                <td>
-                                                    <a [routerLink]="['detail/',tr.id]"><button type="button"
-                              class="btn btn-inverse-info btn-icon" onclick="">
-                              <i class="bi bi-eye"></i></button></a>
-                                                    <a [routerLink]="['update/',tr.id]"><button type="button"
-                              class="btn btn-inverse-info btn-icon" onclick="">
-                              <i class="bi bi-pen"></i></button></a>
-                                                    <button type="button" class="btn btn-inverse-info btn-icon" onclick="">
-                            <i class="bi bi-trash"></i></button>
+                                                <td *ngIf="tr.trangThai==1">
+                                                    <button type="button" class="btn btn-inverse-info btn-icon" (click)="lock(tr.id)">
+                            <i class="bi bi-lock"></i></button>
+                                                </td>
+                                                <td *ngIf="tr.trangThai!=1">
+                                                    <button type="button" class="btn btn-inverse-info btn-icon" (click)="unlock(tr.id)">
+                            <i class="bi bi-unlock"></i></button>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -122,14 +120,8 @@
                                                 </td>
 
                                                 <td>
-                                                    <a [routerLink]="['detail/',tr.id]"><button type="button"
-                              class="btn btn-inverse-info btn-icon" onclick="">
-                              <i class="bi bi-eye"></i></button></a>
-                                                    <a [routerLink]="['update/',tr.id]"><button type="button"
-                              class="btn btn-inverse-info btn-icon" onclick="">
-                              <i class="bi bi-pen"></i></button></a>
-                                                    <button type="button" class="btn btn-inverse-info btn-icon" onclick="">
-                            <i class="bi bi-trash"></i></button>
+                                                    <button type="button" class="btn btn-inverse-info btn-icon" (click)="lock(tr.id)">
+                            <i class="bi bi-lock"></i></button>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -180,14 +172,8 @@
                                                 </td>
 
                                                 <td>
-                                                    <a [routerLink]="['detail/',tr.id]"><button type="button"
-                              class="btn btn-inverse-info btn-icon" onclick="">
-                              <i class="bi bi-eye"></i></button></a>
-                                                    <a [routerLink]="['update/',tr.id]"><button type="button"
-                              class="btn btn-inverse-info btn-icon" onclick="">
-                              <i class="bi bi-pen"></i></button></a>
-                                                    <button type="button" class="btn btn-inverse-info btn-icon">
-                            <i class="bi bi-trash"></i></button>
+                                                    <button type="button" class="btn btn-inverse-info btn-icon" (click)="unlock(tr.id)">
+                            <i class="bi bi-unlock"></i></button>
                                                 </td>
                                             </tr>
                                         </tbody>

@@ -1,0 +1,21 @@
+export enum FormField {
+  tentour = "tentour",
+  theloai = "theloai",
+  phanvung = "phanvung",
+  congty = "congty",
+  veToiDa = "veToiDa",
+  veToiThieu = "veToiThieu",
+  soNgay = "soNgay",
+  soDem = "soDem",
+  diemDi = "diemDi",
+  diemDen = "diemDen",
+  mota = "mota",
+  amThuc = "amThuc",
+  luuTru = "luuTru",
+  phuongtien = "phuongtien",
+  hinhanh = "hinhanh",
+  nhungNgayKhoiHanh = "nhungNgayKhoiHanh",
+  nhungdiadiem = "nhungdiadiem",
+  lichtrinh = "lichtrinh",
+}
+

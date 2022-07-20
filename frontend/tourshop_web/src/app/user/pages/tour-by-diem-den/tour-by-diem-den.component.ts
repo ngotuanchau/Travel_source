@@ -265,7 +265,7 @@ export class TourByDiemDenComponent implements OnInit {
       currency: "VND",
     }).format(money);
   }
-  datNgay(id: any) {
-    this.routes.navigate(["../booking/" + this.id + "/" + id]);
+  booking(id: any, ngay: any) {
+    this.routes.navigate(["../booking/" + id + "/" + ngay]);
   }
 }

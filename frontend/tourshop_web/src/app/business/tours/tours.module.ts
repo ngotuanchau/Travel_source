@@ -26,6 +26,10 @@ import { ThongTinComponent } from "./create/components/thong-tin/thong-tin.compo
 import { KhachDatTourComponent } from "./khach-dat-tour/khach-dat-tour.component";
 import { LichKhoiHanhComponent } from "./detail/components/lich-khoi-hanh/lich-khoi-hanh.component";
 import { MatTabsModule } from "@angular/material/tabs";
+import { MatSelectModule } from "@angular/material/select";
+import { NgayKhoiHanhEditComponent } from './edit/components/ngay-khoi-hanh-edit/ngay-khoi-hanh-edit.component';
+import { LichTrinhEditComponent } from './edit/components/lich-trinh-edit/lich-trinh-edit.component';
+import { DiaDiemEditComponent } from './edit/components/dia-diem-edit/dia-diem-edit.component';
 @NgModule({
   declarations: [
     ToursIndexComponent,
@@ -42,6 +46,9 @@ import { MatTabsModule } from "@angular/material/tabs";
     ThongTinComponent,
     KhachDatTourComponent,
     LichKhoiHanhComponent,
+    NgayKhoiHanhEditComponent,
+    LichTrinhEditComponent,
+    DiaDiemEditComponent,
   ],
   imports: [
     CommonModule,
@@ -58,6 +65,7 @@ import { MatTabsModule } from "@angular/material/tabs";
     MatCardModule,
     ReactiveFormsModule,
     MatTabsModule,
+    MatSelectModule,
   ],
 })
 export class ToursModule {}

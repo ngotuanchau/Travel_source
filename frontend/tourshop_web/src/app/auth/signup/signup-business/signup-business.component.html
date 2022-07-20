@@ -52,6 +52,12 @@
         <input type="text" for="sdt" formControlName="sdt" (keypress)="numberOnly($event)" [(ngModel)]="congTy.sdt" class="form-control" />
         <div *ngIf="b.sdt.invalid && (b.sdt.dirty||b.sdt.touched)">
             <div *ngIf="b.sdt.errors">
+                <div *ngIf="b.sdt.errors?.['minlength']">
+                    <small>Số điện thoại không hợp lệ</small>
+                </div>
+                <div *ngIf="b.sdt.errors?.['maxlength']">
+                    <small>Số điện thoại không hợp lệ</small>
+                </div>
                 <div *ngIf="b.sdt.errors.required">
                     <small>Bạn chưa nhập Số điện thoại</small>
                 </div>
@@ -75,6 +81,17 @@
         </div>
     </div>
     <div class="form-outline mb-4 form-group">
+        <label class="form-label" for="form2Example1">Mã số thuế</label>
+        <input type="text" for="mst" formControlName="mst" [(ngModel)]="congTy.mst" class="form-control" />
+        <div *ngIf="b.mst.invalid && (b.mst.dirty||b.mst.touched)">
+            <div *ngIf="b.mst.errors">
+                <div *ngIf="b.mst.errors.required">
+                    <small>Bạn chưa nhập Mã số thuế</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-outline mb-4 form-group">
         <label class="form-label" for="form2Example1">Văn phòng</label>
         <input type="text" for="vanPhong" formControlName="vanPhong" [(ngModel)]="congTy.vanPhong" class="form-control" />
         <div *ngIf="b.vanPhong.invalid && (b.vanPhong.dirty||b.vanPhong.touched)">
@@ -82,7 +99,6 @@
                 <div *ngIf="b.vanPhong.errors.required">
                     <small>Bạn chưa nhập Địa chỉ văn phòng</small>
                 </div>
-
             </div>
         </div>
     </div>

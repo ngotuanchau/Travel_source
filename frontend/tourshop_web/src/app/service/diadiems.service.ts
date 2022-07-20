@@ -51,4 +51,11 @@ export class DiadiemsService {
   taoDiaDiem(diadiem: any): Observable<any> {
     return this.http.post<any>(this.baseUrl + "/admin/create_diadiem", diadiem);
   }
+  //Khôi phục địa điểm
+  khoiPhuc(id: any): Observable<any> {
+    return this.http.put<any>(
+      this.baseUrl + "/admin/khoiphuc_diadiem/" + id,
+      id
+    );
+  }
 }

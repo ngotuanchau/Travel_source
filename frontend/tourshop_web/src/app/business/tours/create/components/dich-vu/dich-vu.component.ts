@@ -7,7 +7,7 @@ import {
   lstPhuongTiens,
   LuuTru,
   PhuongTien,
-} from "./dichvu-data";
+} from "../../../dichvu-data";
 @Component({
   selector: "app-dich-vu",
   templateUrl: "./dich-vu.component.html",

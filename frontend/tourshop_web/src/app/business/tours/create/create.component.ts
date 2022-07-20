@@ -7,7 +7,6 @@ import { ToursService } from "../../../service/tours.service";
 import { FormField } from "./components/model";
 import { HttpClient } from "@angular/common/http";
 import { AnhsService } from "../../../service/anhs.service";
-
 import { NgToastService } from "ng-angular-popup";
 import { Router } from "@angular/router";
 @Component({
@@ -210,7 +209,7 @@ export class ToursCreateComponent {
   }
 
   getAllDiaDiem() {
-    this.diadiemService.getAllDiaDiem().subscribe((response) => {
+    this.diadiemService.getDiaDiem().subscribe((response) => {
       this.diadiems = response.listDiaDiem;
     });
   }
@@ -261,9 +260,6 @@ export class ToursCreateComponent {
     }
     return true;
   }
-
-  N: number = 1;
-  D: number = 0;
 
   // //keyup
   getSoNgay(value: any) {

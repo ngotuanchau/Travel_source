@@ -3,16 +3,18 @@ import { NgbNavChangeEvent } from "@ng-bootstrap/ng-bootstrap";
 import { DatePipe } from "@angular/common";
 import { DoanhNghiepsService } from "../../../../service/doanhnghieps.service";
 import { PhanvungsService } from "../../../../service/phanvungs.service";
+import { NgToastService } from "ng-angular-popup";
 @Component({
   selector: "app-congtys",
   templateUrl: "index.component.html",
-  styleUrls: ["index.component.css"],
+  styleUrls: ["index.component.scss"],
 })
 export class CongTysIndexComponent {
   pipe = new DatePipe("en-US");
   constructor(
     private doanhnghiepService: DoanhNghiepsService,
-    private phanvungServices: PhanvungsService
+    private phanvungServices: PhanvungsService,
+    private toast: NgToastService
   ) {}
   ngOnInit(): void {
     this.getAllDoanhNghiep();
@@ -47,5 +49,25 @@ export class CongTysIndexComponent {
       }
     }
     return list;
+  }
+  duyet(id: any) {
+    this.doanhnghiepService.duyetDN(id).subscribe((res) => {
+      this.getAllDoanhNghiep();
+    });
+  }
+  khongDuyet(id: any) {
+    this.doanhnghiepService.khongDuyetDN(id).subscribe((res) => {
+      this.getAllDoanhNghiep();
+    });
+  }
+  lock(id: any) {
+    this.doanhnghiepService.lock(id).subscribe((res) => {
+      this.getAllDoanhNghiep();
+    });
+  }
+  unlock(id: any) {
+    this.doanhnghiepService.unlock(id).subscribe((res) => {
+      this.getAllDoanhNghiep();
+    });
   }
 }

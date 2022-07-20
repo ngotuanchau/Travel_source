@@ -6,7 +6,7 @@ import { NguoiDungsService } from "../../../../service/nguoidungs.service";
 @Component({
   selector: "app-nguoidungs",
   templateUrl: "index.component.html",
-  styleUrls: ["index.component.css"],
+  styleUrls: ["index.component.scss"],
 })
 export class NguoiDungsIndexComponent implements OnInit {
   pipe = new DatePipe("en-US");
@@ -68,5 +68,16 @@ export class NguoiDungsIndexComponent implements OnInit {
   add(event: MouseEvent) {
     this.tabs.push(this.counter++);
     event.preventDefault();
+  }
+
+  lock(id: any) {
+    this.nguoidungService.lock(id).subscribe((res) => {
+      this.getAllUser();
+    });
+  }
+  unlock(id: any) {
+    this.nguoidungService.unlock(id).subscribe((res) => {
+      this.getAllUser();
+    });
   }
 }

@@ -59,11 +59,19 @@
                                                     <td *ngIf="tr.trangThai==2" style="color:red">
                                                         Chưa duyệt
                                                     </td>
+                                                    <td *ngIf="tr.trangThai==0">
+                                                        <button type="button" class="btn btn-inverse-info btn-icon" (click)="unlock(tr.id)">
+                              <i class="bi bi-unlock"></i></button>
+                                                    </td>
+                                                    <td *ngIf="tr.trangThai==1">
+                                                        <button type="button" class="btn btn-inverse-info btn-icon" (click)="lock(tr.id)">
+                              <i class="bi bi-lock"></i></button>
+                                                    </td>
                                                     <td *ngIf="tr.trangThai==2">
-
-                                                        <button type="button" class="btn btn-inverse-info btn-icon" onclick="">
+                                                        <button type="button" class="btn btn-inverse-info btn-icon" (click)="duyet(tr.id)">
                               <i class="bi bi-check-circle-fill"></i></button>
-
+                                                        <button type="button" class="btn btn-inverse-info btn-icon" (click)="khongDuyet(tr.id)">
+                              <i class="bi bi-trash"></i></button>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -89,6 +97,7 @@
                                                     <th class="text-dark font-medium fs-4">MST</th>
                                                     <th class="text-dark font-medium fs-4">SĐT</th>
                                                     <th class="text-dark font-medium fs-4">Thẻ ngân hàng</th>
+                                                    <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -117,7 +126,10 @@
                                                     <td>
                                                         {{tr.theNganHang}}
                                                     </td>
-
+                                                    <td *ngIf="tr.trangThai==1">
+                                                        <button type="button" class="btn btn-inverse-info btn-icon" (click)="lock(tr.id)">
+                              <i class="bi bi-lock"></i></button>
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -173,8 +185,10 @@
                                                     </td>
 
                                                     <td>
-                                                        <button type="button" class="btn btn-inverse-info btn-icon" onclick="">
+                                                        <button type="button" class="btn btn-inverse-info btn-icon" (click)="duyet(tr.id)">
                               <i class="bi bi-check-circle-fill"></i></button>
+                                                        <button type="button" class="btn btn-inverse-info btn-icon" (click)="khongDuyet(tr.id)">
+                              <i class="bi bi-trash"></i></button>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -184,7 +198,64 @@
                             </div>
                         </div>
                     </mat-tab>
+                    <mat-tab label="Vô hiệu hóa">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <div class="table-lt">
+                                        <table class="table table-bordered align-middle text-nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-dark font-medium fs-4">STT</th>
+                                                    <th class="text-dark font-medium fs-4">Tên công ty</th>
+                                                    <th class="text-dark font-medium fs-4">Email</th>
+                                                    <th class="text-dark font-medium fs-4">Khu vực</th>
+                                                    <th class="text-dark font-medium fs-4">Văn phòng</th>
+                                                    <th class="text-dark font-medium fs-4">MST</th>
+                                                    <th class="text-dark font-medium fs-4">SĐT</th>
+                                                    <th class="text-dark font-medium fs-4">Thẻ ngân hàng</th>
+                                                    <th class="text-dark font-medium fs-4"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let tr of filterDNByStt(0); index as i">
+                                                    <td>
+                                                        {{ i + 1 }}
+                                                    </td>
+                                                    <td>
+                                                        {{tr.tencongty}}
+                                                    </td>
+                                                    <td>
+                                                        {{tr.email}}
+                                                    </td>
+                                                    <td>
+                                                        {{findNamePhanVung(tr.khuVuc)}}
+                                                    </td>
+                                                    <td>
+                                                        {{tr.vanPhong}}
+                                                    </td>
+                                                    <td>
+                                                        {{tr.mst}}
+                                                    </td>
+                                                    <td>
+                                                        {{tr.sdt}}
+                                                    </td>
+                                                    <td>
+                                                        {{tr.theNganHang}}
+                                                    </td>
 
+                                                    <td>
+                                                        <button type="button" class="btn btn-inverse-info btn-icon" (click)="unlock(tr.id)">
+                              <i class="bi bi-unlock"></i></button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
                 </mat-tab-group>
             </div>
         </div>
