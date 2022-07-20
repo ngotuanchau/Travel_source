@@ -206,6 +206,73 @@ namespace Travel.Controllers
         }
 
         [Authorize]
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        [Route("doanhnghiep_lock/{id:int}")]
+        [ActionName("doanhnghiep_lock")]
+        public async Task<IActionResult> doanhnghiep_lock([FromRoute] int id)
+        {
+            try
+            {
+
+                CongTy congTies = _context.CongTies.Where(t => t.TrangThai == 1 && t.Id == id).FirstOrDefault();
+                if (congTies == null)
+                {
+                    return NotFound(new
+                    {
+                        message = "Doanh nghiệp không tồn tại"
+                    });
+                }
+                congTies.TrangThai = 0;
+
+
+
+                return Ok(new { 
+                    message = "Đã lock doanh nghiệp"
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+        [Authorize]
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        [Route("doanhnghiep_unlock/{id:int}")]
+        [ActionName("doanhnghiep_unlock")]
+        public async Task<IActionResult> doanhnghiep_unlock([FromRoute] int id)
+        {
+            try
+            {
+
+                CongTy congTies = _context.CongTies.Where(t => t.TrangThai == 0 && t.Id == id).FirstOrDefault();
+                if (congTies == null)
+                {
+                    return NotFound(new
+                    {
+                        message = "Doanh nghiệp không tồn tại"
+                    });
+                }
+                congTies.TrangThai = 1;
+
+
+
+                return Ok(new
+                {
+                    message = "Đã un lock doanh nghiệp"
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+        [Authorize]
         [HttpPut]
         [Route("doanhnghiep_update/{id:int}")]
         [Authorize(Roles = "Business")]
