@@ -47,7 +47,11 @@ export class SignupBusinessComponent implements OnInit {
     matKhau: ["", [Validators.required, Validators.minLength(6)]],
     khuVuc: ["", Validators.required],
     vanPhong: ["", Validators.required],
-    sdt: ["", Validators.required],
+    sdt: [
+      "",
+      [Validators.required, Validators.minLength(10), Validators.maxLength(10)],
+    ],
+    mst: ["", Validators.required],
   });
   get b() {
     return this.infoBusiness.controls;

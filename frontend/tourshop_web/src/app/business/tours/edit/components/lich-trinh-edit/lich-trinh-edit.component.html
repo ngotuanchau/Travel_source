@@ -1,0 +1,151 @@
+<div class="col-12 grid-margin grid-child cdte">
+    <p class="card-description">Lịch trình</p>
+    <div class="card">
+        <div class="row pd">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Ngày</label>
+                <div class="col-sm-3">
+                    <input type="number" disabled class="form-control checkin_date " [(ngModel)]="ngay" placeholder="" min="1" [value]="ngay" max="{{sngay}}">
+                </div>
+            </div>
+        </div>
+        <div class="row pd">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Mô tả</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control checkin_date " [(ngModel)]="moTa" placeholder="">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group row lt">
+                <label class="col-sm-2 col-form-label">Sáng</label>
+                <div class="col-sm-9">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Buổi sáng</mat-label>
+                        <textarea rows="5" matInput placeholder="Lịch trình buổi sáng." [(ngModel)]="sang"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group row lt">
+                <label class="col-sm-2 col-form-label">Trưa</label>
+                <div class="col-sm-9">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Buổi trưa</mat-label>
+                        <textarea rows="5" matInput placeholder="Lịch trình buổi trưa." [(ngModel)]="trua"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group row lt">
+                <label class="col-sm-2 col-form-label">Chiều</label>
+                <div class="col-sm-9">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Buổi chiều</mat-label>
+                        <textarea rows="5" matInput placeholder="Lịch trình buổi chiều." [(ngModel)]="chieu"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group row lt">
+                <label class="col-sm-2 col-form-label">Tối</label>
+                <div class="col-sm-9">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Buổi tối</mat-label>
+                        <textarea rows="5" matInput placeholder="Lịch trình buổi tối." [(ngModel)]="toi"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row bt-lt">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-2" *ngIf="capNhat"><button [disabled]="disable" mat-flat-button color="primary" (click)=" onAdd()">Thêm</button>
+                </div>
+                <div class="col-sm-2" *ngIf="capNhat==false"><button mat-flat-button color="primary" (click)=" capNhatLT(id)">Cập nhật</button>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="table-lt">
+                <!-- Bảng lịch trình -->
+                <table class=" table table-bordered align-middle">
+                    <thead>
+                        <tr>
+                            <th class="text-dark font-medium fs-4 tt">Ngày</th>
+                            <th class="text-dark font-medium fs-4 ">Mô tả</th>
+                            <th class="text-dark font-medium fs-4 ">Sáng</th>
+                            <th class="text-dark font-medium fs-4 ">Trưa</th>
+                            <th class="text-dark font-medium fs-4 ">Chiều</th>
+                            <th class="text-dark font-medium fs-4 ">Tối</th>
+                            <th class="text-dark font-medium fs-4 tt"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let lt of listlichtrinh; index as i">
+                            <td class="tt">{{lt.ngay}}</td>
+                            <td>{{lt.moTa}}</td>
+                            <td>{{lt.sang}}
+                            </td>
+                            <td>
+                                {{ lt.trua }}
+                            </td>
+                            <td>
+                                {{lt.chieu}}
+                            </td>
+                            <td>
+                                {{lt.toi}}
+                            </td>
+                            <td class="tt">
+                                <button mat-icon-button color="warn" aria-label="" (click)=" onDelete(lt.id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+                                <button mat-icon-button color="warn" aria-label="" (click)="edit(lt.id)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let lt of newList">
+                            <td class="tt">{{lt.ngay}}</td>
+                            <td>{{lt.moTa}}</td>
+                            <td>{{lt.sang}}
+                            </td>
+                            <td>
+                                {{ lt.trua }}
+                            </td>
+                            <td>
+                                {{lt.chieu}}
+                            </td>
+                            <td>
+                                {{lt.toi}}
+                            </td>
+                            <td class="tt">
+                                <button mat-icon-button color="warn" aria-label="" (click)="onRemove(lt.ngay)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+                                <button mat-icon-button color="warn" aria-label="">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+    <!-- <tr *ngFor="let lt of lstLichTrinh; index as i">
+  <td>{{lt.ngay}} </td>
+  <td>{{lt.mota}}</td>
+  <td>{{lt.sang}}</td>
+  <td>{{lt.trua}} </td>
+  <td>{{lt.chieu}}</td>
+  <td class="tt">
+      <button mat-icon-button color="warn" aria-label="">
+<mat-icon>delete</mat-icon>
+</button>
+  </td>
+</tr> -->

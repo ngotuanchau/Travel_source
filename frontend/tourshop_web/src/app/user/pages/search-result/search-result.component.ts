@@ -195,7 +195,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.queryParamsSubscription.unsubscribe();
   }
-
   newtours: any;
   tours: any;
   phanvungs: any;

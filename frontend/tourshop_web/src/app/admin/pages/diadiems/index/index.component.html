@@ -119,12 +119,7 @@
                                                             <td *ngIf="tr.trangThai==1" style="color: green;">
                                                                 Hoạt động
                                                             </td>
-                                                            <td *ngIf="tr.trangThai==2" style="color: blue;">
-                                                                Chưa duyệt
-                                                            </td>
-                                                            <td *ngIf="tr.trangThai==0" style="color: red;">
-                                                                Ngừng hoạt động
-                                                            </td>
+
                                                             <td *ngIf="tr.trangThai==1">
                                                                 <button type="submit" class="btn btn-inverse-info btn-icon" (click)="capNhat(tr)">
                                   <i class="bi bi-pen"></i></button>
@@ -161,28 +156,9 @@
                                                             <td>
                                                                 {{tr.ten}}
                                                             </td>
-                                                            <td *ngIf="tr.trangThai==1" style="color: green;">
-                                                                Hoạt động
-                                                            </td>
-                                                            <td *ngIf="tr.trangThai==2" style="color: blue;">
-                                                                Chưa duyệt
-                                                            </td>
                                                             <td *ngIf="tr.trangThai==0" style="color: red;">
                                                                 Ngừng hoạt động
                                                             </td>
-                                                            <td *ngIf="tr.trangThai==2||tr.trangThai==1">
-                                                                <div *ngIf="tr.trangThai==1"><button type="button" class="btn btn-inverse-info btn-icon" onclick="">
-                                    <i class="bi bi-pen"></i></button>
-                                                                    <button type="button" class="btn btn-inverse-info btn-icon" (click)="xoaDiaDiem(tr.id)">
-                                    <i class="bi bi-trash"></i></button>
-                                                                </div>
-                                                                <div *ngIf="tr.trangThai==2"><button type="button" class="btn btn-inverse-info btn-icon" onclick="">
-                                    <i class="bi bi-check-circle-fill"></i></button>
-                                                                    <button type="button" class="btn btn-inverse-info btn-icon" (click)="huyDeXuat(tr.id)">
-                                    <i class="bi bi-trash"></i></button>
-                                                                </div>
-                                                            </td>
-
                                                         </tr>
                                                     </tbody>
                                                 </table>

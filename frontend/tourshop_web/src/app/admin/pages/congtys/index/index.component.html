@@ -60,10 +60,10 @@
                                                         Chưa duyệt
                                                     </td>
                                                     <td *ngIf="tr.trangThai==2">
-
-                                                        <button type="button" class="btn btn-inverse-info btn-icon" onclick="">
+                                                        <button type="button" class="btn btn-inverse-info btn-icon" (click)="duyet(tr.id)">
                               <i class="bi bi-check-circle-fill"></i></button>
-
+                                                        <button type="button" class="btn btn-inverse-info btn-icon" (click)="khongDuyet(tr.id)">
+                              <i class="bi bi-trash"></i></button>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -173,8 +173,10 @@
                                                     </td>
 
                                                     <td>
-                                                        <button type="button" class="btn btn-inverse-info btn-icon" onclick="">
+                                                        <button type="button" class="btn btn-inverse-info btn-icon" (click)="duyet(tr.id)">
                               <i class="bi bi-check-circle-fill"></i></button>
+                                                        <button type="button" class="btn btn-inverse-info btn-icon" (click)="khongDuyet(tr.id)">
+                              <i class="bi bi-trash"></i></button>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -184,7 +186,6 @@
                             </div>
                         </div>
                     </mat-tab>
-
                 </mat-tab-group>
             </div>
         </div>

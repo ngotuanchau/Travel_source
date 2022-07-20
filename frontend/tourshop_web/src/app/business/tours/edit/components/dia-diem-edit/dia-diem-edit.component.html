@@ -1,0 +1,60 @@
+<div class="col-12 grid-margin grid-child cdte">
+    <p class="card-description">Địa điểm du lịch</p>
+    <div class="card">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">STT</label>
+                    <div class="col-sm-9">
+                        <input type="number" disabled #stt (keyup)="getSTT(stt.value)" class="form-control" placeholder="1" min="1" value="1" [(ngModel)]="thutu" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Địa điểm</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" for="" required [(ngModel)]="dd">
+              <option *ngFor="let dd of diadiems" [value]="dd.id">{{dd.tendiadiem}}</option>
+            </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-3">
+                        <button mat-flat-button color="primary" (click)=" onAdd()">Thêm</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 ">
+                <table class=" table table-bordered align-middle text-nowrap ">
+                    <thead>
+                        <tr>
+                            <th class="text-dark font-medium fs-4 ">STT</th>
+                            <th class="text-dark font-medium fs-4 ">Tên địa điểm</th>
+                            <th class="text-dark font-medium fs-4 tt "></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let dd of listdiadiem">
+                            <td>{{dd.thutu}}</td>
+                            <td>{{findDDById(dd.diadiem) || '-'}} </td>
+                            <td class="tt ">
+                                <button mat-icon-button color="warn" aria-label="" (click)="onDelete(dd.id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let dd of newList">
+                            <td>{{dd.thutu}}</td>
+                            <td>{{findDDById(dd.diadiem) || '-'}} </td>
+                            <td class="tt ">
+                                <button mat-icon-button color="warn" aria-label="" (click)="onRemove(dd.thutu)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
