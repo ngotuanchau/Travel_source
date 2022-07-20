@@ -145,6 +145,58 @@ namespace Travel.Controllers
         [Authorize]
         [Authorize(Roles = "Admin")]
         [HttpGet]
+        [Route("user_lock/{id:int}")]
+        public async Task<IActionResult> user_lock([FromRoute] int id)
+        {
+            try
+            {
+                NguoiDung nguoiDung = _context.NguoiDungs.Where(u => u.TrangThai == 1&& u.Id == id).FirstOrDefault();
+                if (nguoiDung == null)
+                {
+                    return StatusCode(404, "User not found");
+                }
+                nguoiDung.TrangThai = 0;
+
+                return Ok(new { 
+                    message = "Đã lock user"
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+        [Authorize]
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        [Route("user_unlock/{id:int}")]
+        public async Task<IActionResult> user_unlock([FromRoute] int id)
+        {
+            try
+            {
+                NguoiDung nguoiDung = _context.NguoiDungs.Where(u => u.TrangThai == 0 && u.Id == id).FirstOrDefault();
+                if (nguoiDung == null)
+                {
+                    return StatusCode(404, "User not found");
+                }
+                nguoiDung.TrangThai = 1;
+
+                return Ok(new
+                {
+                    message = "Đã un lock user"
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+        [Authorize]
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
         [Route("user_get")]
         [ActionName("get_all_user")]
         public async Task<IActionResult> get_all_user()
