@@ -273,5 +273,39 @@ namespace Travel.Controllers
             }
 
         }
+
+        [Authorize]
+        [HttpPut]
+        [Route("admin/khoiphuc_diadiem/{id:int}")]
+        [Authorize(Roles = "Admin")]
+        [ActionName("khoiphuc_diadiem")]
+        public async Task<IActionResult> khoiphuc_diadiem([FromRoute] int id)
+        {
+
+            try
+            {
+                DiaDiem diaDiem = _context.DiaDiems.Where(d => d.TrangThai == 0).FirstOrDefault();
+                if (diaDiem == null)
+                {
+                    return NotFound(new
+                    {
+                        message = "Địa điểm không tồn tại"
+                    });
+                }
+                diaDiem.TrangThai = 1;
+                _context.SaveChanges();
+                return Ok(new
+                {
+                    message = "Khôi phục địa điểm thành công"
+                });
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Internal Server Error " });
+
+            }
+
+        }
     }
 }
