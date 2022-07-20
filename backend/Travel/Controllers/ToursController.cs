@@ -1302,13 +1302,25 @@ namespace Travel.Controllers
 
                 List<Tour_serialize> result = new List<Tour_serialize>();
                 List<Tour> tours = _context.Tours.Include(t => t.TheLoai).Include(t => t.CongTy).Include(t => t.PhanVung).Where(t => t.TrangThai == 1).OrderByDescending(t => t.NgayTao).ToList();
+                List<Tour> tours_cp = _context.Tours.Include(t => t.TheLoai).Include(t => t.CongTy).Include(t => t.PhanVung).Where(t => t.TrangThai == 1).OrderByDescending(t => t.NgayTao).ToList();
                 if (search_Serialize.diemdi != null && search_Serialize.diemdi != "")
                 {
                      tours = tours.Where(t => t.DiemDi == Convert.ToInt32(search_Serialize.diemdi)).ToList();
                 }
                 if (search_Serialize.diemden != null && search_Serialize.diemden != "")
                 {
-                    tours = tours.Where(t => t.DiemDen == Convert.ToInt32(search_Serialize.diemden)).ToList();
+                    for (int i = 0; i<tours_cp.Count(); i++)
+                    {
+                        int id = tours_cp[i].Id;
+                        List<DiaDiem_Tour> diaDiem_Tours = _context.DiaDiem_Tours.Where(d =>d.TourId == tours_cp[i].Id && d.DiaDiemId == Convert.ToInt32(search_Serialize.diemden)).ToList();
+                        Tour obj_tour = _context.Tours.Where(t => t.TrangThai == 1 && t.Id == tours_cp[i].Id && t.DiemDen == Convert.ToInt32(search_Serialize.diemden)).FirstOrDefault();
+                        if (obj_tour == null && diaDiem_Tours.Count() < 1)
+                        {
+                            tours.Remove(tours_cp[i]);
+                           
+                        }
+                    }
+                    //tours = tours.Where(t => t.DiemDen == Convert.ToInt32(search_Serialize.diemden)).ToList();
                 }
 
                 if (search_Serialize.khuvuc != null && search_Serialize.khuvuc != "")
