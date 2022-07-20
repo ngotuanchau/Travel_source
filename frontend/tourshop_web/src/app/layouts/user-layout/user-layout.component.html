@@ -9,13 +9,12 @@
                 <li class="nav-item active"><a [routerLink]="['./']" class="nav-link font-weight-normal text-light">Trang
             chủ</a>
                 </li>
-                <li class="nav-item"><a href="about.html" class="nav-link font-weight-normal text-light">Tours</a></li>
+                <li class="nav-item"><a [routerLink]="['./newtours']" class="nav-link font-weight-normal text-light"> Tour
+            mới</a></li>
 
                 <li class="nav-item" ngbDropdown placement="bottom-end">
                     <div *ngIf="loginStatus()">
                         <a ngbDropdownToggle class="nav-link waves-effect waves-dark pro-pic" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <!-- <img src="assets/images/users/{{avt}}" alt="user" class="rounded-circle" width="31" /> -->
-
                             <span class="ms-2">{{name}}</span>
                         </a>
                     </div>

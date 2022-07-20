@@ -147,7 +147,7 @@ export class NewtoursComponent implements OnInit {
     return ngay;
   }
   booking(id: any, ngay: any) {
-    this.routes.navigate(["../booking/" + id + "/" + ngay]);
+    this.routes.navigate(["../booking/", id, ngay]);
   }
   //format currency
   formatCurrency(money: number) {

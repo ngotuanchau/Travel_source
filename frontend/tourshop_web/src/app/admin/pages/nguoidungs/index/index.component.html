@@ -23,6 +23,7 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-dark font-medium fs-4">STT</th>
+                                                <th class="text-dark font-medium fs-4">Quyền</th>
                                                 <th class="text-dark font-medium fs-4">Username</th>
                                                 <th class="text-dark font-medium fs-4">Email</th>
                                                 <th class="text-dark font-medium fs-4">SĐT</th>
@@ -37,6 +38,12 @@
                                             <tr *ngFor="let tr of user; index as i">
                                                 <td>
                                                     {{ i + 1 }}
+                                                </td>
+                                                <td *ngIf="tr.isAdmin" style="font-weight:bold">
+                                                    Quản trị viên
+                                                </td>
+                                                <td *ngIf="!tr.isAdmin">
+                                                    Khách hàng
                                                 </td>
                                                 <td>
                                                     {{tr.tenNguoiDung}}
@@ -84,6 +91,7 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-dark font-medium fs-4">STT</th>
+                                                <th class="text-dark font-medium fs-4">Quyền</th>
                                                 <th class="text-dark font-medium fs-4">Username</th>
                                                 <th class="text-dark font-medium fs-4">Email</th>
                                                 <th class="text-dark font-medium fs-4">SĐT</th>
@@ -98,6 +106,12 @@
                                             <tr *ngFor="let tr of filterUserByStatus(1); index as i">
                                                 <td>
                                                     {{ i + 1 }}
+                                                </td>
+                                                <td *ngIf="tr.isAdmin" style="font-weight:bold">
+                                                    Quản trị viên
+                                                </td>
+                                                <td *ngIf="!tr.isAdmin">
+                                                    Khách hàng
                                                 </td>
                                                 <td>
                                                     {{tr.tenNguoiDung}}
@@ -136,6 +150,7 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-dark font-medium fs-4">STT</th>
+                                                <th class="text-dark font-medium fs-4">Quyền</th>
                                                 <th class="text-dark font-medium fs-4">Username</th>
                                                 <th class="text-dark font-medium fs-4">Email</th>
                                                 <th class="text-dark font-medium fs-4">SĐT</th>
@@ -150,6 +165,12 @@
                                             <tr *ngFor="let tr of filterUserByStatus(0); index as i">
                                                 <td>
                                                     {{ i + 1 }}
+                                                </td>
+                                                <td *ngIf="tr.isAdmin" style="font-weight:bold">
+                                                    Quản trị viên
+                                                </td>
+                                                <td *ngIf="!tr.isAdmin">
+                                                    Khách hàng
                                                 </td>
                                                 <td>
                                                     {{tr.tenNguoiDung}}

@@ -7,7 +7,8 @@ import { MatButtonModule } from "@angular/material/button";
 import { AnhTourComponent } from "./components/anh-tour/anh-tour.component";
 import { SlickCarouselModule } from "ngx-slick-carousel";
 import { DichVuComponent } from "./components/dich-vu/dich-vu.component";
-import { TourLienQuanComponent } from './components/tour-lien-quan/tour-lien-quan.component';
+import { TourLienQuanComponent } from "./components/tour-lien-quan/tour-lien-quan.component";
+import { RouterModule } from "@angular/router";
 @NgModule({
   declarations: [
     TourDetailComponent,
@@ -17,6 +18,6 @@ import { TourLienQuanComponent } from './components/tour-lien-quan/tour-lien-qua
     DichVuComponent,
     TourLienQuanComponent,
   ],
-  imports: [CommonModule, MatButtonModule, SlickCarouselModule],
+  imports: [CommonModule, MatButtonModule, SlickCarouselModule, RouterModule],
 })
 export class TourDetailModule {}
