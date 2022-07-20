@@ -35,13 +35,15 @@ namespace Travel.Controllers
             {
                 List<DiaDiem> diaDiems = _context.DiaDiems.Where(d => d.TrangThai == 1).ToList();
                 List<shortdiadiem_serialize> shortdiadiem_Serializes = new List<shortdiadiem_serialize>();
+                
                 foreach (var diadiem in diaDiems)
                 {
                     shortdiadiem_serialize sd = new shortdiadiem_serialize();
                     List<DiaDiem_Tour> diaDiem_Tours = _context.DiaDiem_Tours.Where(d => d.DiaDiemId == diadiem.Id).ToList();
+                    List<Tour> tours = _context.Tours.Where(d => d.DiemDen == diadiem.Id).ToList();
                     sd.id = diadiem.Id;
                     sd.tendiadiem = diadiem.Ten;
-                    sd.sotour = diaDiem_Tours.Count;
+                    sd.sotour = diaDiem_Tours.Count + tours.Count;
                     sd.trangthai = diadiem.TrangThai;
                     shortdiadiem_Serializes.Add(sd);
                 }
