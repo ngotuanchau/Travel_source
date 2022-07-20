@@ -36,7 +36,7 @@ namespace Travel.Controllers
             try
             {
 
-                List<CongTy> congTies = _context.CongTies.Where(t => t.TrangThai != 0).ToList();
+                List<CongTy> congTies = _context.CongTies.ToList();
                 List<Congty_serialize> congty_Serializes = new List<Congty_serialize>();
                 foreach (var congty in congTies)
                 {
