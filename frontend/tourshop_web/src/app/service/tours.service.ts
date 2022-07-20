@@ -104,4 +104,8 @@ export class ToursService {
   search(tour: any): Observable<any> {
     return this.http.post<any>(this.baseUrl + "/search_tour", tour);
   }
+  //update
+  update(id: any, tour: any): Observable<any> {
+    return this.http.put<any>(this.baseUrl + "/update/" + id, tour);
+  }
 }

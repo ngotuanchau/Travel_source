@@ -17,5 +17,5 @@ export enum FormField {
   nhungNgayKhoiHanh = "nhungNgayKhoiHanh",
   nhungdiadiem = "nhungdiadiem",
   lichtrinh = "lichtrinh",
+  anhtour = "anhtour",
 }
-

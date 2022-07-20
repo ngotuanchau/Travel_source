@@ -14,12 +14,12 @@ export class DiaDiemEditComponent implements OnInit {
   newList: any;
   oldList: any;
   get listDD() {
-    return this.form?.controls?.[this.name]?.value || [];
+    return this.listdiadiem.concat(this.newList).concat(this.oldList);
   }
 
-  set listDD(data) {
+  setlistNKH1ToForm() {
     this.form.patchValue({
-      [this.name]: data,
+      [this.name]: this.listDD,
     });
   }
 
@@ -73,6 +73,7 @@ export class DiaDiemEditComponent implements OnInit {
         thutu: this.thutu,
         diadiem: parseInt(this.dd),
       });
+      this.setlistNKH1ToForm();
     }
     //Lấy danh sách stt
     let thutus: any;
@@ -112,6 +113,7 @@ export class DiaDiemEditComponent implements OnInit {
 
   onRemove(stt: number) {
     this.newList = this.newList.filter((item: any) => item.thutu != stt);
+    this.setlistNKH1ToForm();
     this.thutu = stt;
     //Lấy danh sách stt
     let thutus: any;
@@ -162,7 +164,7 @@ export class DiaDiemEditComponent implements OnInit {
       }
     }
     this.listdiadiem = this.listdiadiem.filter((item: any) => item.id != id);
-
+    this.setlistNKH1ToForm();
     //Lấy danh sách stt
     let thutus: any;
     thutus = [];
