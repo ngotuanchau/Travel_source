@@ -36,4 +36,10 @@ export class NguoiDungsService {
   huyTour(id: any) {
     return this.http.delete<any>(this.baseUrl + "/user/huy_tourdat/" + id);
   }
+  lock(id: any): Observable<any> {
+    return this.http.get<any>(this.baseUrl + "/user_lock/" + id);
+  }
+  unlock(id: any): Observable<any> {
+    return this.http.get<any>(this.baseUrl + "/user_unlock/" + id);
+  }
 }

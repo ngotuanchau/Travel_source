@@ -41,4 +41,12 @@ export class DoanhNghiepsService {
   khongDuyetDN(id: any): Observable<any> {
     return this.http.put<any>(this.baseUrl + "/doanhnghiep_huyduyet/" + id, id);
   }
+
+  lock(id: any): Observable<any> {
+    return this.http.get<any>(this.baseUrl + "/doanhnghiep_lock/" + id);
+  }
+
+  unlock(id: any): Observable<any> {
+    return this.http.get<any>(this.baseUrl + "/doanhnghiep_unlock/" + id);
+  }
 }

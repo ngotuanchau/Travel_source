@@ -14,10 +14,6 @@ import { NguoiDungsDetailComponent } from "./pages/nguoidungs/detail/detail.comp
 import { NguoiDungsEditComponent } from "./pages/nguoidungs/edit/edit.component";
 import { NguoiDungsIndexComponent } from "./pages/nguoidungs/index/index.component";
 import { TheLoaiIndexComponent } from "./pages/theloais/index/index.component";
-import { ToursCreateComponent } from "./pages/tours/create/create.component";
-import { ToursDetailComponent } from "./pages/tours/detail/detail.component";
-import { ToursEditComponent } from "./pages/tours/edit/edit.component";
-import { ToursIndexComponent } from "./pages/tours/index/index.component";
 
 const routes: Routes = [
   {
@@ -29,23 +25,7 @@ const routes: Routes = [
     path: "dashboard",
     component: DashboardComponent,
   },
-  //Tour
-  {
-    path: "tour",
-    component: ToursIndexComponent,
-  },
-  {
-    path: "tour/create",
-    component: ToursCreateComponent,
-  },
-  {
-    path: "tour/update",
-    component: ToursEditComponent,
-  },
-  {
-    path: "tour/detail",
-    component: ToursDetailComponent,
-  },
+
   //The loai
   {
     path: "theloai",

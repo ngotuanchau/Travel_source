@@ -153,4 +153,9 @@ export class DiaDiemsIndexComponent implements OnInit {
     });
     this.hidden = true;
   }
+  khoiphuc(id: any) {
+    this.diadiemService.khoiPhuc(id).subscribe((res) => {
+      this.getAllDiaDiem();
+    });
+  }
 }

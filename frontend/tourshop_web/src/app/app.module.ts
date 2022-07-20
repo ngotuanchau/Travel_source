@@ -31,7 +31,6 @@ import { SidebarBusinessComponent } from "./shared/sidebar-business/sidebar.comp
 import { CookieService } from "ngx-cookie-service";
 import { TokenInterceptorService } from "./service/token-interceptor.service";
 import { NgToastModule } from "ng-angular-popup";
-
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelSpeed: 1,

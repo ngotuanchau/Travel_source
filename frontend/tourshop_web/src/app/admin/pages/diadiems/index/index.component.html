@@ -86,6 +86,8 @@
                                                                 <button type="button" class="btn btn-inverse-info btn-icon" (click)="xoaDiaDiem(tr.id)">
                                   <i class="bi bi-trash"></i></button>
                                                             </td>
+                                                            <td *ngIf="tr.trangThai==0"><button type="button" class="btn btn-inverse-info btn-icon" (click)="khoiphuc(tr.id)">
+                                  <i class="bi bi-arrow-clockwise"></i></button></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -159,6 +161,8 @@
                                                             <td *ngIf="tr.trangThai==0" style="color: red;">
                                                                 Ngừng hoạt động
                                                             </td>
+                                                            <td><button type="button" class="btn btn-inverse-info btn-icon" (click)="khoiphuc(tr.id)">
+                                  <i class="bi bi-arrow-clockwise"></i></button></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>

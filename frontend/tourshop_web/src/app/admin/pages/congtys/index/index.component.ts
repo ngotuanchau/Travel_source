@@ -60,4 +60,14 @@ export class CongTysIndexComponent {
       this.getAllDoanhNghiep();
     });
   }
+  lock(id: any) {
+    this.doanhnghiepService.lock(id).subscribe((res) => {
+      this.getAllDoanhNghiep();
+    });
+  }
+  unlock(id: any) {
+    this.doanhnghiepService.unlock(id).subscribe((res) => {
+      this.getAllDoanhNghiep();
+    });
+  }
 }
