@@ -73,7 +73,7 @@ export class LichSuDatTourComponent implements OnInit {
       (err) => {
         this.toast.error({
           detail: "Thông báo",
-          summary: "Không thể hủy tour",
+          summary: "Chỉ hủy Tour trước 5 ngày khi Tour khởi hành",
           duration: 3000,
         });
       }
