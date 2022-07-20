@@ -23,7 +23,7 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group row">
-                                <div class="col-sm-7"><button type="submit" [disabled]="(!form.valid) && (this.sodem-this.songay)<0 || (this.songay-this.sodem)<1" class="btn btn-primary mr-2 " (click)="onSubmit()"> Xác
+                                <div class="col-sm-7"><button type="submit" class="btn btn-primary mr-2 " (click)="onSubmit()"> Xác
                     nhận </button></div>
                                 <div class="col-sm-5 pd"><button class="btn btn-light ">Hủy</button>
                                 </div>
@@ -36,7 +36,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label pd">Số ngày</label>
                                 <div class="col-sm-7 pd">
-                                    <input [formControlName]="FormField.soNgay" #ngay (keyup)="getSoNgay(ngay.value)" type="text" (keypress)="numberOnly($event)" class="form-control" value="1" placeholder="" hint="ngày" />
+                                    <input [formControlName]="FormField.soNgay" #ngay (keyup)="getSoNgay(ngay.value)" type="text" (keypress)="numberOnly($event)" class="form-control" hint="ngày" />
                                     <!-- <div class="text-danger" *ngIf=""></div> -->
                                 </div>
                             </div>
@@ -61,7 +61,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Tối đa</label>
                                 <div class="col-sm-7">
-                                    <input [formControlName]="FormField.veToiDa" type="number" class="form-control" (keypress)="numberOnly($event)" step="1" value="1" min="1" placeholder="" />
+                                    <input [formControlName]="FormField.veToiDa" type="number" class="form-control" (keypress)="numberOnly($event)" step="1" value="1" min="1" />
                                     <div class="text-danger" *ngIf="isControlError(FormField.veToiDa, 'required')">
                                         Chưa nhập số vé tối đa
                                     </div>
