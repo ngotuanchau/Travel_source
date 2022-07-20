@@ -340,27 +340,30 @@ namespace Travel.Controllers
                 ThoiGian thoiGian = _context.ThoiGians.Where(t => t.Id == hoaDons.ThoiGianId).FirstOrDefault();
 
                 DateTime ngaykh = thoiGian.NgayDi;
-                DateTime now = DateTime.Now;
-
-                if (now.AddDays(5) > ngaykh)
-                {
-                    return BadRequest(new
-                    {
-                        message = "Không thể hủy"
-                    });
-                }    
+                DateTime now = DateTime.Now.Date;
                 if (hoaDons.TrangThai == 2 || hoaDons.TrangThai == 1)
                 {
-                    hoaDons.TrangThai =7;
+                    hoaDons.TrangThai = 7;
                 }
-                else if(hoaDons.TrangThai == 3 && (now.AddDays(5) == ngaykh || now.AddDays(6) == ngaykh))
+                else
                 {
-                    hoaDons.TrangThai = 8;
+                    if (now.AddDays(5) > ngaykh)
+                    {
+                        return BadRequest(new
+                        {
+                            message = "Không thể hủy"
+                        });
+                    }
+
+                    else if (hoaDons.TrangThai == 3 && (now.AddDays(5) == ngaykh || now.AddDays(6) == ngaykh))
+                    {
+                        hoaDons.TrangThai = 8;
+                    }
+                    else if (hoaDons.TrangThai == 3)
+                    {
+                        hoaDons.TrangThai = 10;
+                    }
                 }
-                else if(hoaDons.TrangThai == 3)
-                {
-                    hoaDons.TrangThai = 10;
-                }    
                 thoiGian.VeDaDat -= sovehuy;
                 _context.SaveChanges();
                 return Ok(new { 
