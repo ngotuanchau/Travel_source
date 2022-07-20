@@ -113,6 +113,29 @@ namespace Travel.Controllers
 
         [Authorize]
         [HttpDelete]
+        [Route("admin/get_all_theloai")]
+        [Authorize(Roles = "Admin")]
+        [ActionName("get_all_theloai")]
+        public async Task<IActionResult> get_all_theloai()
+        {
+
+            try
+            {
+                List<TheLoai> theLoais = _context.TheLoais.ToList();
+
+                return Ok(theLoais);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Internal Server Error " });
+
+            }
+
+        }
+
+        [Authorize]
+        [HttpDelete]
         [Route("admin/delete_theloai/{id:int}")]
         [Authorize(Roles = "Admin")]
         [ActionName("delete_theloai")]
