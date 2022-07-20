@@ -13,6 +13,10 @@ export class TheloaisService {
   getTheLoai(): Observable<any> {
     return this.http.get<any>(this.baseUrl + "/get_theloai");
   }
+  //Get all The loai Admin
+  getAllTheLoai(): Observable<any> {
+    return this.http.delete<any>(this.baseUrl + "/admin/get_all_theloai");
+  }
   //Create
   create(theloai: any): Observable<any> {
     return this.http.post<any>(this.baseUrl + "/admin/create_theloai", theloai);

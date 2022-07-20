@@ -29,8 +29,8 @@ export class TheLoaiIndexComponent implements OnInit {
   }
   getAllTheLoai() {
     this.theloais = [];
-    this.theloaiService.getTheLoai().subscribe((res) => {
-      this.theloais = res.listTheLoai;
+    this.theloaiService.getAllTheLoai().subscribe((res) => {
+      this.theloais = res;
     });
   }
   //Lọc địa điểm theo trạng thái
