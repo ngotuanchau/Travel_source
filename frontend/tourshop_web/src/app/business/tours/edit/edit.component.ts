@@ -59,7 +59,7 @@ export class ToursEditComponent implements OnInit {
     this.lstLuuTru = lstLuuTrus;
     this.lstPhuongTien = lstPhuongTiens;
     this.form = this.formBuilder.group({
-      [FormField.tentour]: [null, Validators.required], //1
+      [FormField.tentour]: ["", Validators.required], //1
       [FormField.theloai]: [1, Validators.required], //2
       [FormField.soNgay]: [1, Validators.required], //3
       [FormField.soDem]: [0, Validators.required], //4
@@ -219,6 +219,9 @@ export class ToursEditComponent implements OnInit {
     return parseInt(a);
   }
   onSubmit() {
+    if (this.form.value.tentour == "") {
+      this.form.value.tentour = this.tour.tentour;
+    }
     console.log(this.form.value);
   }
 }
