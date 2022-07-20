@@ -33,12 +33,25 @@
                 </div>
                 <div class="timeline">
                     <div class="outer">
+                        <div class="card dd">
+                            <div class="info">
+                                <h3 class="title">
+                                    <span> {{tour.tendiemdi}}</span>
+                                </h3>
+                            </div>
+                        </div>
                         <div class="card dd" *ngFor="let dd of diadiems">
                             <div class="info">
                                 <h3 class="title">
-                                    {{dd.thutu}}<span> - {{dd.tendiadiem}}</span>
+                                    <span> {{dd.tendiadiem}}</span>
                                 </h3>
-
+                            </div>
+                        </div>
+                        <div class="card dd">
+                            <div class="info">
+                                <h3 class="title">
+                                    <span> {{tour.tendiemden}}</span>
+                                </h3>
                             </div>
                         </div>
                     </div>

@@ -8,17 +8,11 @@ import { Component, Input, OnInit } from "@angular/core";
 export class AnhTourComponent implements OnInit {
   @Input() tour: any;
   @Input() hinhanh: any;
+  anhs: any;
+  default: any;
   constructor() {}
 
-  ngOnInit(): void {}
-  // getlstAnh() {
-  //   var lstanh = [];
-  //   for (let anh of this.hinhanh) {
-  //     var url = "http://localhost:3000/" + anh.tenanh;
-  //     lstanh.push({ url: url });
-  //   }
-  //   console.log("lstanh");
-  //   console.log(lstanh);
-  //   return lstanh;
-  // }
+  ngOnInit(): void {
+    console.log(this.hinhanh);
+  }
 }

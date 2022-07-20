@@ -5,6 +5,7 @@ import { ToursService } from "../../../../../service/tours.service";
 import { FormField } from "../../model";
 import { HttpClient } from "@angular/common/http";
 import { NgToastService } from "ng-angular-popup";
+import { Router } from "@angular/router";
 @Component({
   selector: "app-thong-tin-ve",
   templateUrl: "./thong-tin-ve.component.html",
@@ -30,7 +31,8 @@ export class ThongTinVeComponent implements OnInit {
     private tourService: ToursService,
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private toast: NgToastService
+    private toast: NgToastService,
+    private router: Router
   ) {
     this.form = this.formBuilder.group({
       [FormField.nguoidungid]: [null, [Validators.required]],
@@ -96,7 +98,7 @@ export class ThongTinVeComponent implements OnInit {
         });
       }
     });
-    this.form.reset();
+    this.router.navigate(["/"]);
   }
   formatCurrency(money: number) {
     return new Intl.NumberFormat("fr-FR", {

@@ -23,9 +23,7 @@
                                     <tr>
                                         <th class="text-dark font-medium fs-4">STT</th>
                                         <th class="text-dark font-medium fs-4">Tên thể loại</th>
-                                        <th class="text-dark font-medium fs-4">Số tour</th>
                                         <th class="text-dark font-medium fs-4">Trạng thái</th>
-                                        <th class="text-dark font-medium fs-4"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -36,22 +34,11 @@
                                         <td>
                                             {{tr.tenLoai}}
                                         </td>
-                                        <td></td>
                                         <td *ngIf="tr.trangThai==1" style="color:green">
                                             Hoạt động
                                         </td>
                                         <td *ngIf="tr.trangThai!=1" style="color:red">
                                             Ngừng hoạt động
-                                        </td>
-                                        <td>
-                                            <a [routerLink]="['detail']"><button type="button" class="btn btn-inverse-info btn-icon"
-                          onclick="">
-                          <i class="bi bi-eye"></i></button></a>
-                                            <a [routerLink]="['update']"><button type="button" class="btn btn-inverse-info btn-icon"
-                          onclick="">
-                          <i class="bi bi-pen"></i></button></a>
-                                            <button type="button" class="btn btn-inverse-info btn-icon" onclick="">
-                        <i class="bi bi-trash"></i></button>
                                         </td>
                                     </tr>
                                 </tbody>

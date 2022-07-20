@@ -53,10 +53,13 @@
                                                     <td>
                                                         {{tr.theNganHang}}
                                                     </td>
+                                                    <td *ngIf="tr.trangThai==0" style="color:red">
+                                                        Bị khóa
+                                                    </td>
                                                     <td *ngIf="tr.trangThai==1" style="color:green">
                                                         Hoạt động
                                                     </td>
-                                                    <td *ngIf="tr.trangThai==2" style="color:red">
+                                                    <td *ngIf="tr.trangThai==2" style="color:blue">
                                                         Chưa duyệt
                                                     </td>
                                                     <td *ngIf="tr.trangThai==0">
@@ -243,7 +246,6 @@
                                                     <td>
                                                         {{tr.theNganHang}}
                                                     </td>
-
                                                     <td>
                                                         <button type="button" class="btn btn-inverse-info btn-icon" (click)="unlock(tr.id)">
                               <i class="bi bi-unlock"></i></button>

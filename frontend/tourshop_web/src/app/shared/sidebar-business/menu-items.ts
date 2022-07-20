@@ -4,7 +4,7 @@ export const ROUTES: RouteInfo[] = [
   {
     path: "/dashboardDN",
     title: "DashBoard",
-    icon: "bi bi-layout-split",
+    icon: "bi bi-speedometer2",
     class: "",
     extralink: false,
     submenu: [],
@@ -25,12 +25,12 @@ export const ROUTES: RouteInfo[] = [
     extralink: false,
     submenu: [],
   },
-  {
-    path: "/dx-tours",
-    title: "Tour được đề xuất",
-    icon: "bi bi-speedometer2",
-    class: "",
-    extralink: false,
-    submenu: [],
-  },
+  // {
+  //   path: "/dx-tours",
+  //   title: "Tour được đề xuất",
+  //   icon: "bi bi-speedometer2",
+  //   class: "",
+  //   extralink: false,
+  //   submenu: [],
+  // },
 ];
