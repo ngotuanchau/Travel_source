@@ -21,7 +21,7 @@ export class DuLichAnToanComponent implements OnInit {
   getTheLoai() {
     this.theLoai = [];
     this.theLoaiService.getTheLoai().subscribe((res) => {
-      this.theLoai = res.listTheLoai;
+      this.theLoai = res.listTheLoai.slice(0, 4);
     });
   }
   ngOnInit(): void {
