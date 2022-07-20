@@ -21,19 +21,30 @@ export class NgayKhoiHanhEditComponent implements OnInit {
   giaTreNho: number;
   newList: any;
   deleteList: any;
-  oldList: any;
   ngOnInit(): void {
     this.newList = [];
     this.deleteList = [];
-    this.oldList = [];
-  }
-  get listNKH1() {
-    return this.lstNKH.concat(this.newList).concat(this.oldList);
   }
 
-  set listNKH1(data) {
+  get listNKH1() {
+    let list: any;
+    list = [];
+    for (let ng of this.lstNKH) {
+      list.push({
+        id: ng.id,
+        ngayKh: this.pipe.transform(ng.ngayKh, "dd/MM/yyyy"),
+        giaNguoiLon: ng.giaNguoiLon,
+        giaTreEn: ng.giaTreEn,
+        giaTreNho: ng.giaTreNho,
+        mode: ng.mode,
+      });
+    }
+
+    return list.concat(this.newList).concat(this.deleteList);
+  }
+  setlistNKH1ToForm() {
     this.form.patchValue({
-      [this.nhungNgayKhoiHanh]: data,
+      [this.nhungNgayKhoiHanh]: this.listNKH1,
     });
   }
   onAdd() {
@@ -60,6 +71,8 @@ export class NgayKhoiHanhEditComponent implements OnInit {
               giaTreNho: this.giaTreNho,
             });
             this.newList = list;
+            // console.log(this.listNKH1);
+            this.setlistNKH1ToForm();
           } else {
             this.toast.error({
               detail: "Cảnh báo",
@@ -98,7 +111,7 @@ export class NgayKhoiHanhEditComponent implements OnInit {
       if (nkh.id == id) {
         list.push({
           id: id,
-          ngayKh: nkh.ngayKh,
+          ngayKh: this.pipe.transform(nkh.ngayKh, "dd/MM/yyyy"),
           giaNguoiLon: nkh.giaNguoiLon,
           giaTreEn: nkh.giaTreEn,
           giaTreNho: nkh.giaTreNho,
@@ -109,11 +122,14 @@ export class NgayKhoiHanhEditComponent implements OnInit {
     }
     this.lstNKH = this.lstNKH.filter((item: any) => item.id != id);
     this.deleteList = list;
+    // console.log(this.listNKH1);
+    this.setlistNKH1ToForm();
     this.sort();
   }
   onRemove(ngayKh: Date) {
     this.newList = this.newList.filter((item: any) => item.ngayKh != ngayKh);
     this.sort();
+    this.setlistNKH1ToForm();
   }
   numberOnly(event: any): boolean {
     const charCode = event.which ? event.which : event.keyCode;

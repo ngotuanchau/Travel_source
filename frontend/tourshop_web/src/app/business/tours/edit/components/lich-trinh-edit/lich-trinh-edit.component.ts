@@ -14,11 +14,11 @@ export class LichTrinhEditComponent implements OnInit {
   @Input() name: string;
   constructor() {}
   get lstLT() {
-    return this.form?.controls?.[this.name]?.value || [];
+    return this.listlichtrinh.concat(this.oldList).concat(this.newList);
   }
-  set lstLT(data) {
+  setlistLichTrinhToForm() {
     this.form.patchValue({
-      [this.name]: data,
+      [this.lichtrinh]: this.lstLT,
     });
   }
   ngay: number = 1;
@@ -31,6 +31,7 @@ export class LichTrinhEditComponent implements OnInit {
   oldList: any;
   newList: any;
   capNhat: boolean = true;
+  max: number;
   ngOnInit(): void {
     this.newList = [];
     this.oldList = [];
@@ -48,7 +49,7 @@ export class LichTrinhEditComponent implements OnInit {
       toi: this.toi,
     });
     this.newList = list;
-
+    this.setlistLichTrinhToForm();
     //Lấy danh sách ngày
     let ngays: any;
     ngays = [];
@@ -89,6 +90,7 @@ export class LichTrinhEditComponent implements OnInit {
             return item;
           })
         ) + 1;
+      if (this.ngay > this.sngay) this.disable = true;
     }
     //console.log("Ngày tiếp theo: " + this.ngay);
     this.sort();
@@ -110,7 +112,7 @@ export class LichTrinhEditComponent implements OnInit {
   //Xóa lịch trình 1 ngày
   onRemove(ngay: number) {
     this.newList = this.newList.filter((item: any) => item.ngay != ngay);
-
+    this.setlistLichTrinhToForm();
     //Lấy danh sách ngày
     let ngays: any;
     ngays = [];
@@ -125,8 +127,6 @@ export class LichTrinhEditComponent implements OnInit {
     } else {
       this.disable = false;
     }
-    // console.log("Danh sách ngày:" + ngays);
-    // console.log("Số ngày" + this.sngay);
     //Ngày còn thiếu
     function missingItems(arr: any, n: any) {
       let missingItems: any;
@@ -134,7 +134,6 @@ export class LichTrinhEditComponent implements OnInit {
       for (let i = 1; i <= n; i++) if (!arr.includes(i)) missingItems.push(i);
       return missingItems;
     }
-    //console.log("Danh sach ngay thieu" + missingItems(ngays, this.sngay));
     //Gán ngay nho nhat cho input ngay
     if (missingItems(ngays, this.sngay).length > 0) {
       this.ngay = Math.min.apply(
@@ -143,6 +142,20 @@ export class LichTrinhEditComponent implements OnInit {
           return item;
         })
       );
+    } else {
+      this.ngay ==
+        Math.max.apply(
+          Math,
+          ngays.map(function (item: any) {
+            return item;
+          })
+        ) +
+          1;
+    }
+    if (this.ngay >= this.sngay) {
+      this.disable = true;
+    } else {
+      this.disable = false;
     }
   }
   //Xóa lịch trình 1 ngày
@@ -159,54 +172,19 @@ export class LichTrinhEditComponent implements OnInit {
           toi: lt.toi,
           mode: 2,
         });
+        this.ngay = lt.ngay;
         break;
       }
     }
-    // console.log("Danh sách cũ:");
-    // console.log(this.oldList);
-
+    this.disable = false;
     this.listlichtrinh = this.listlichtrinh.filter(
       (item: any) => item.id != id
     );
-    //Lấy danh sách ngày
-    let ngays: any;
-    ngays = [];
-    for (let i = 0; i < this.listlichtrinh.length; i++) {
-      ngays.push(this.listlichtrinh[i].ngay);
-    }
-    for (let i = 0; i < this.newList.length; i++) {
-      ngays.push(this.newList[i].ngay);
-    }
-    if (ngays.length == this.sngay) {
-      this.disable = true;
-    } else {
-      this.disable = false;
-    }
-    //console.log("Danh sách ngày:" + ngays);
-    //Ngày còn thiếu
-    function missingItems(arr: any, n: any) {
-      let missingItems: any;
-      missingItems = [];
-      for (let i = 1; i <= n; i++) if (!arr.includes(i)) missingItems.push(i);
-      return missingItems;
-    }
-    console.log("Danh sach ngay thieu" + missingItems(ngays, this.sngay));
-    //Gán ngay nho nhat cho input ngay
-    if (missingItems(ngays, this.sngay).length > 0) {
-      this.ngay = Math.min.apply(
-        Math,
-        missingItems(ngays, this.sngay).map(function (item: any) {
-          return item;
-        })
-      );
-    }
-
-    console.log("Ngày tiếp theo:" + this.ngay);
+    this.setlistLichTrinhToForm();
   }
   id: any;
   edit(id: any) {
     this.id = id;
-    alert(id);
     this.capNhat = false;
     for (let lt of this.listlichtrinh) {
       if (lt.id == id) {
@@ -223,26 +201,64 @@ export class LichTrinhEditComponent implements OnInit {
   capNhatLT(id: any) {
     for (let lt of this.listlichtrinh) {
       if (lt.id == id) {
-        this.oldList.push({
-          id: id,
-          ngay: this.ngay,
-          moTa: this.moTa,
-          sang: this.sang,
-          trua: this.trua,
-          chieu: this.chieu,
-          toi: this.toi,
-          mode: 1,
-        });
-        break;
+        (lt.mota = this.moTa),
+          (lt.sang = this.sang),
+          (lt.trua = this.trua),
+          (lt.chieu = this.chieu),
+          (lt.toi = this.toi),
+          (lt.mode = 1);
       }
     }
+    this.setlistLichTrinhToForm();
     this.capNhat = true;
-    this.ngay = 0;
+    //Lấy danh sách ngày
+    let ngays: any;
+    ngays = [];
+    for (let i = 0; i < this.listlichtrinh.length; i++) {
+      ngays.push(this.listlichtrinh[i].ngay);
+    }
+    for (let i = 0; i < this.newList.length; i++) {
+      ngays.push(this.newList[i].ngay);
+    }
+    if (ngays.length == this.sngay) {
+      this.disable = true;
+    } else {
+      this.disable = false;
+    }
+    //Ngày còn thiếu
+    function missingItems(arr: any, n: any) {
+      let missingItems: any;
+      missingItems = [];
+      for (let i = 1; i <= n; i++) if (!arr.includes(i)) missingItems.push(i);
+      return missingItems;
+    }
+    //Gán ngay nho nhat cho input ngay
+    if (missingItems(ngays, this.sngay).length > 0) {
+      this.ngay = Math.min.apply(
+        Math,
+        missingItems(ngays, this.sngay).map(function (item: any) {
+          return item;
+        })
+      );
+    } else {
+      this.ngay ==
+        Math.max.apply(
+          Math,
+          ngays.map(function (item: any) {
+            return item;
+          })
+        ) +
+          1;
+    }
+    if (this.ngay >= this.sngay) {
+      this.disable = true;
+    } else {
+      this.disable = false;
+    }
     this.sang = "";
     this.trua = "";
     this.chieu = "";
     this.toi = "";
     this.moTa = "";
-    // console.log(this.oldList);
   }
 }

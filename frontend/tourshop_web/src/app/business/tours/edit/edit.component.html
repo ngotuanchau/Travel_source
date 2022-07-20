@@ -13,7 +13,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Tên tour</label>
                                 <div class="col-sm-10">
-                                    <input [formControlName]="FormField.tentour" type="text" class="form-control" value="tên tour" placeholder="Tên tour" />
+                                    <input [formControlName]="FormField.tentour" type="text" class="form-control" [placeholder]="tour.tentour" />
                                     <div class="text-danger" *ngIf="isControlError(FormField.tentour, 'required')">
                                         Tên tour không được để trống
                                     </div>
@@ -36,7 +36,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label pd">Số ngày</label>
                                 <div class="col-sm-7 pd">
-                                    <input [formControlName]="FormField.soNgay" #ngay (keyup)="getSoNgay(ngay.value)" type="text" (keypress)="numberOnly($event)" class="form-control" hint="ngày" />
+                                    <input [(ngModel)]="songay" #ngay (keyup)="getSoNgay(ngay.value)" type="text" (keypress)="numberOnly($event)" class="form-control" [value]="tour.soNgay" />
                                     <!-- <div class="text-danger" *ngIf=""></div> -->
                                 </div>
                             </div>
@@ -46,12 +46,9 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label pd">Số đêm</label>
                                 <div class="col-sm-7 pd">
-                                    <input [(ngModel)]="sodem" #dem (keyup)="getSoDem(dem.value)" type="text" (keypress)="numberOnly($event)" min="1" class="form-control" value="0" placeholder="" />
+                                    <input [(ngModel)]="sodem" #dem (keyup)="getSoDem(dem.value)" type="text" (keypress)="numberOnly($event)" min="1" class="form-control" [value]="tour.soDem" placeholder="" />
                                     <div class="text-danger" *ngIf="(this.sodem-this.songay)>0 || (this.songay-this.sodem)>1">
                                         Số đêm không hợp lệ
-                                    </div>
-                                    <div class="form-group row">
-                                        {{this.songay}} ngày {{this.sodem}} đêm
                                     </div>
                                 </div>
 
@@ -61,7 +58,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Tối đa</label>
                                 <div class="col-sm-7">
-                                    <input [formControlName]="FormField.veToiDa" type="number" class="form-control" (keypress)="numberOnly($event)" step="1" value="1" min="1" />
+                                    <input [formControlName]="FormField.veToiDa" type="text" class="form-control" (keypress)="numberOnly($event)" [value]="tour.veToiDa" />
                                     <div class="text-danger" *ngIf="isControlError(FormField.veToiDa, 'required')">
                                         Chưa nhập số vé tối đa
                                     </div>
@@ -73,7 +70,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Tối thiểu</label>
                                 <div class="col-sm-7">
-                                    <input [formControlName]="FormField.veToiThieu" (keypress)="numberOnly($event)" type="number" class="form-control" min="1" value="0" placeholder="" />
+                                    <input [formControlName]="FormField.veToiThieu" (keypress)="numberOnly($event)" type="text" class="form-control" />
                                     <div class="text-danger" *ngIf="isControlError(FormField.veToiThieu, 'required')">
                                         Chưa nhập số vé tối thiểu
                                     </div>
@@ -90,22 +87,22 @@
                                 <div class="col-sm-9 form-field">
                                     <mat-form-field appearance="fill">
                                         <mat-label>Chọn điểm đi</mat-label>
-                                        <mat-select formControlName="diemDi">
-                                            <mat-option *ngFor="let dd of diadiems" [value]="dd.id">{{dd.tendiadiem}}
+                                        <mat-select [formControlName]="FormField.diemDi" [value]="tour.diemDi">
+                                            <mat-option *ngFor=" let dd of diadiems " [value]="dd.id ">{{dd.tendiadiem}}
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Điểm đến</label>
-                                <div class="col-sm-9 form-field">
+                        <div class="col-md-6 ">
+                            <div class="form-group row ">
+                                <label class="col-sm-3 col-form-label ">Điểm đến</label>
+                                <div class="col-sm-9 form-field ">
                                     <mat-form-field appearance="fill">
                                         <mat-label>Chọn điểm đến</mat-label>
-                                        <mat-select formControlName="diemDen">
-                                            <mat-option *ngFor="let dd of diadiems" [value]="dd.id">{{dd.tendiadiem}}
+                                        <mat-select [formControlName]="FormField.diemDen ">
+                                            <mat-option *ngFor="let dd of diadiems " [value]="dd.id ">{{dd.tendiadiem}}
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>
@@ -113,29 +110,29 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Thể loại</label>
-                                <div class="col-sm-9 form-field">
+                    <div class="row ">
+                        <div class="col-md-6 ">
+                            <div class="form-group row ">
+                                <label class="col-sm-3 col-form-label ">Thể loại</label>
+                                <div class="col-sm-9 form-field ">
                                     <mat-form-field appearance="fill">
                                         <mat-label>Chọn thể loại</mat-label>
-                                        <mat-select formControlName="theloai">
-                                            <mat-option *ngFor="let tl of theloais" [value]="tl.id">{{tl.tenLoai}}
+                                        <mat-select [formControlName]="FormField.theloai ">
+                                            <mat-option *ngFor="let tl of theloais " [value]="tl.id ">{{tl.tenLoai}}
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Khu vực</label>
-                                <div class="col-sm-9 form-field">
+                        <div class="col-md-6 ">
+                            <div class="form-group row ">
+                                <label class="col-sm-3 col-form-label ">Khu vực</label>
+                                <div class="col-sm-9 form-field ">
                                     <mat-form-field appearance="fill">
                                         <mat-label>Chọn khu vực</mat-label>
-                                        <mat-select formControlName="phanvung">
-                                            <mat-option *ngFor="let dd of phanvungs" [value]="dd.id">{{dd.tenVung}}
+                                        <mat-select [formControlName]="FormField.phanvung ">
+                                            <mat-option *ngFor="let dd of phanvungs " [value]="dd.id ">{{dd.tenVung}}
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>
@@ -144,24 +141,24 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 grid-margin grid-child desc">
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Mô tả</label>
-                        <div class="col-sm-9">
-                            <ckeditor formControlName="mota"></ckeditor>
+                <div class="col-12 grid-margin grid-child desc ">
+                    <div class="form-group row ">
+                        <label class="col-sm-2 col-form-label ">Mô tả</label>
+                        <div class="col-sm-9 ">
+                            <ckeditor [formControlName]="FormField.mota "></ckeditor>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 grid-margin grid-child cdte">
-                    <p class="card-description">Chi tiết dịch vụ</p>
+                <div class="col-12 grid-margin grid-child cdte ">
+                    <p class="card-description ">Chi tiết dịch vụ</p>
                     <div class="form-group row">
                         <div class="col-sm-4">
-                            <label class="col-form-label">Ẩm thực</label>
+                            <label class="col-form-label ">Ẩm thực</label>
                             <div class="text-danger" *ngIf="this.listAT==''">
                                 Chưa chọn dịch vụ ẩm thực
                             </div>
                             <div *ngFor="let at of lstAmThuc">
-                                <input type="checkbox" [value]="at.id" [checked]="at.completed" (change)="onChangeAT($event)"><label class="col-sm-1"></label><label>{{at.name}}</label>
+                                <input type="checkbox" [value]="at.id" [checked]="at.completed" (change)="onChangeAT($event) "><label class="col-sm-1"></label><label>{{at.name}}</label>
                             </div>
 
                         </div>
@@ -171,7 +168,7 @@
                                 Chưa chọn dịch vụ lưu trú
                             </div>
                             <div *ngFor="let at of lstLuuTru">
-                                <input type="checkbox" [value]="at.id" [checked]="at.completed" (change)="onChangeLT($event)"><label class="col-sm-1"></label><label>{{at.name}}</label>
+                                <input type="checkbox" [value]="at.id" [checked]="at.completed" (change)="onChangeLT($event) "><label class="col-sm-1"></label><label>{{at.name}}</label>
                             </div>
 
                         </div>
@@ -187,10 +184,10 @@
                         </div>
                     </div>
                 </div>
-                <app-ngay-khoi-hanh-edit [lstNKH]="this.lstNKH" [form]="this.form" [nhungNgayKhoiHanh]="FormField.nhungNgayKhoiHanh"></app-ngay-khoi-hanh-edit>
-                <app-lich-trinh-edit [listlichtrinh]="this.lichtrinh" [form]="this.form" [lichtrinh]="FormField.lichtrinh" [sngay]="this.songay">
+                <app-ngay-khoi-hanh-edit [lstNKH]="this.lstNKH " [form]="this.form " [nhungNgayKhoiHanh]="FormField.nhungNgayKhoiHanh "></app-ngay-khoi-hanh-edit>
+                <app-lich-trinh-edit [listlichtrinh]="this.lichtrinh " [form]="this.form " [lichtrinh]="FormField.lichtrinh " [sngay]="this.songay ">
                 </app-lich-trinh-edit>
-                <app-dia-diem-edit [name]="FormField.nhungdiadiem" [form]="this.form" [listdiadiem]="this.diadiem">
+                <app-dia-diem-edit [name]="FormField.nhungdiadiem " [form]="this.form " [listdiadiem]="this.diadiem ">
                 </app-dia-diem-edit>
                 <button class="btn btn-light ">Hủy</button>
             </form>
