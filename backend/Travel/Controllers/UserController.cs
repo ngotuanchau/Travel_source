@@ -150,12 +150,13 @@ namespace Travel.Controllers
         {
             try
             {
-                NguoiDung nguoiDung = _context.NguoiDungs.Where(u => u.TrangThai == 1&& u.Id == id).FirstOrDefault();
+                NguoiDung nguoiDung = _context.NguoiDungs.Where(u => u.TrangThai == 1 && u.Id == id).FirstOrDefault();
                 if (nguoiDung == null)
                 {
                     return StatusCode(404, "User not found");
                 }
                 nguoiDung.TrangThai = 0;
+                _context.SaveChanges();
 
                 return Ok(new { 
                     message = "Đã lock user"
@@ -182,7 +183,7 @@ namespace Travel.Controllers
                     return StatusCode(404, "User not found");
                 }
                 nguoiDung.TrangThai = 1;
-
+                _context.SaveChanges();
                 return Ok(new
                 {
                     message = "Đã un lock user"

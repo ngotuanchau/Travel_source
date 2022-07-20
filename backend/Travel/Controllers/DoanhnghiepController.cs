@@ -224,7 +224,7 @@ namespace Travel.Controllers
                     });
                 }
                 congTies.TrangThai = 0;
-
+                _context.SaveChanges();
 
 
                 return Ok(new { 
@@ -258,7 +258,7 @@ namespace Travel.Controllers
                 }
                 congTies.TrangThai = 1;
 
-
+                _context.SaveChanges();
 
                 return Ok(new
                 {
