@@ -166,7 +166,7 @@ namespace Travel.Controllers
 
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         [Route("doanhnghiep_get/{id:int}")]
         [ActionName("doanhnghiep_a_get")]

@@ -6,6 +6,7 @@ import { Status, lstStatus } from "../../../hoadon-status";
 import { tourStatus, lstTourStatus } from "../../../tour-status";
 import { NgToastService } from "ng-angular-popup";
 import * as moment from "moment";
+import { DoanhNghiepsService } from "../../../../../service/doanhnghieps.service";
 
 @Component({
   selector: "app-lich-su-dat-tour",
@@ -21,7 +22,8 @@ export class LichSuDatTourComponent implements OnInit {
   constructor(
     private userService: NguoiDungsService,
     private tourService: ToursService,
-    private toast: NgToastService
+    private toast: NgToastService,
+    private doanhNghiepService: DoanhNghiepsService
   ) {
     this.status = lstStatus;
     this.tourStatus = lstTourStatus;
@@ -29,6 +31,13 @@ export class LichSuDatTourComponent implements OnInit {
 
   ngOnInit(): void {
     this.getHoaDon();
+  }
+  idCongTy: any;
+  congty: any;
+  getCongTy(id: any) {
+    this.doanhNghiepService.getDoanhNghiep(id).subscribe((res) => {
+      this.congty = res;
+    });
   }
   getHoaDon() {
     this.lst_HD = [];

@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { ToursService } from "../../../service/tours.service";
 import { ActivatedRoute } from "@angular/router";
 import { DatePipe } from "@angular/common";
+import { DoanhNghiepsService } from "../../../service/doanhnghieps.service";
 @Component({
   selector: "app-tour-detail",
   templateUrl: "./tour-detail.component.html",
@@ -12,7 +13,8 @@ export class TourDetailComponent implements OnInit {
   constructor(
     private routes: Router,
     private tourService: ToursService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private doanhNghiepService: DoanhNghiepsService
   ) {}
   pipe = new DatePipe("en-US");
   id: any;
@@ -28,6 +30,7 @@ export class TourDetailComponent implements OnInit {
   datNgay() {
     this.routes.navigate(["../booking/" + this.id + "/" + this.ngay]);
   }
+
   ngayKHs: any;
   lichtrinh: any;
   diadiem: any;
@@ -36,10 +39,20 @@ export class TourDetailComponent implements OnInit {
   phuongtien: any;
   luutru: any;
   message: string;
+  idCongTy: any;
+  congty: any;
+  getCongTy(id: any) {
+    this.doanhNghiepService.getDoanhNghiep(id).subscribe((res) => {
+      this.congty = res;
+    });
+  }
   //Get detail
   getDetail(id: any) {
     this.tourService.getDetailTour(id).subscribe((res) => {
       this.tour = res;
+      //get id cong ty
+      this.idCongTy = this.tour.congty;
+      this.getCongTy(this.idCongTy);
       //Get array nkh
       this.ngayKHs = this.tour.nhungNgayKhoiHanh;
       //get array lichtrinh
