@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { ToursService } from "../../../service/tours.service";
-import { NgbNavChangeEvent } from "@ng-bootstrap/ng-bootstrap";
 import { Status, lstStatus } from "../hoadon-status";
+import { DoanhNghiepsService } from "../../../service/doanhnghieps.service";
 
 @Component({
   selector: "app-khach-dat-tour",
@@ -18,7 +18,8 @@ export class KhachDatTourComponent implements OnInit {
   hoadonStatus: Status[];
   constructor(
     private tourservice: ToursService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private doanhNghiepServeice: DoanhNghiepsService
   ) {}
 
   ngOnInit(): void {
@@ -69,7 +70,11 @@ export class KhachDatTourComponent implements OnInit {
   }
 
   //Huy
-  huy(id: any) {}
+  huy(id: any) {
+    this.doanhNghiepServeice.huyHoaDon(id).subscribe((res) => {
+      this.getUserByIdNHK();
+    });
+  }
   //Get status name by id
   getStatus(id: number) {
     return this.hoadonStatus.find((item: any) => item.id == id)?.name;
