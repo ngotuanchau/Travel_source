@@ -963,7 +963,6 @@ namespace Travel.Controllers
         [ActionName("confirm_tour_start")]
         public async Task<IActionResult> confirm_tour_start([FromRoute] int id)
         {
-            using var transaction = _context.Database.BeginTransaction();
             try
             {
                 ThoiGian thoiGian = _context.ThoiGians.Where(t => t.TrangThai == 2 && t.Id == id).FirstOrDefault();
@@ -975,13 +974,6 @@ namespace Travel.Controllers
                 thoiGian.TrangThai = 3;
                 _context.SaveChanges();
 
-                List<HoaDon> hoaDons = _context.HoaDons.Where(t => t.ThoiGianId == id && t.TrangThai == 3).ToList();
-                foreach (var hoadon in hoaDons)
-                {
-                    hoadon.TrangThai = 4;
-                    _context.SaveChanges();
-                }
-                transaction.Commit();
                 return Ok(new
                 {
                     message = "Success",
@@ -989,7 +981,6 @@ namespace Travel.Controllers
             }
             catch (Exception ex)
             {
-                transaction.Rollback();
                 Console.WriteLine(ex.Message);
                 return StatusCode(500, "Internal Server Error");
             }
