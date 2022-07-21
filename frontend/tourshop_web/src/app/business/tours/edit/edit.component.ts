@@ -22,6 +22,8 @@ import {
 } from "../dichvu-data";
 import { ToursService } from "../../../service/tours.service";
 import { HttpClient } from "@angular/common/http";
+import { forkJoin } from "rxjs";
+import { map } from "rxjs/operators";
 @Component({
   selector: "app-tours-edit",
   templateUrl: "./edit.component.html",
@@ -85,10 +87,13 @@ export class ToursEditComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe((params) => {
       this.idTour = params.get("id");
     });
-    this.getAllDiaDiem();
-    this.getPhanVung();
-    this.getTheLoai();
-    this.getTourDetail(this.idTour);
+    forkJoin([
+      this.getAllDiaDiem(),
+      this.getPhanVung(),
+      this.getTheLoai(),
+    ]).subscribe(() => {
+      this.getTourDetail(this.idTour);
+    });
   }
   isControlError(field: FormField, ...types: string[]) {
     const control = this.form.controls[field];
@@ -98,25 +103,40 @@ export class ToursEditComponent implements OnInit {
     return false;
   }
   getAllDiaDiem() {
-    this.diadiemService.getDiaDiem().subscribe((response) => {
-      this.diadiems = response.listDiaDiem;
-    });
+    return this.diadiemService.getDiaDiem().pipe(
+      map((response) => {
+        this.diadiems = response.listDiaDiem;
+      })
+    );
   }
   //Lay phan vung
   getPhanVung() {
-    this.phanvungService.getPhanVung().subscribe((response) => {
-      this.phanvungs = response.listPhanVung;
-    });
+    return this.phanvungService.getPhanVung().pipe(
+      map((response) => {
+        this.phanvungs = response.listPhanVung;
+      })
+    );
   }
   //Lay the loai
   getTheLoai() {
-    this.theloaiService.getTheLoai().subscribe((response) => {
-      this.theloais = response.listTheLoai;
-    });
+    return this.theloaiService.getTheLoai().pipe(
+      map((response) => {
+        this.theloais = response.listTheLoai;
+      })
+    );
   }
   getTourDetail(id: any) {
     this.tourService.getDetailTour(id).subscribe((response) => {
       this.tour = response;
+      this.form.patchValue({
+        [FormField.diemDi]: this.tour.diemDi,
+        [FormField.diemDen]: this.tour.diemDen,
+        [FormField.theloai]: this.tour.theloai,
+        [FormField.phanvung]: this.tour.phanvung,
+        [FormField.veToiDa]: this.tour.veToiDa,
+        [FormField.veToiThieu]: this.tour.veToiThieu,
+        [FormField.mota]: this.tour.mota,
+      });
       //Get array nkh
       this.lstNKH = this.tour.nhungNgayKhoiHanh;
       //get array lichtrinh

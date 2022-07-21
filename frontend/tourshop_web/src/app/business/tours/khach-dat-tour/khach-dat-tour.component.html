@@ -58,10 +58,10 @@
                                         <td *ngIf="u.trangThai==3" class="confirm">
                                             <button class="mb-4" (click)="cofirmHTThanhToan(u.id)">Hoàn thành<br> Thanh toán</button>
                                         </td>
-                                        <td *ngIf="u.trangThai==5||u.trangThai==8" class="confirm">
+                                        <td *ngIf="u.trangThai==5||u.trangThai==8 || u.trangThai == 10" class="confirm">
                                             <button class="mb-4" (click)="cofirmHoanTien(u.id)">Đã hoàn tiền</button>
                                         </td>
-                                        <td *ngIf="u.trangThai==4||u.trangThai==9||u.trangThai==6||u.trangThai==7" class="confirm">
+                                        <td *ngIf="u.trangThai==4||u.trangThai==9||u.trangThai==6||u.trangThai==7 || u.trangThai == 11" class="confirm">
                                         </td>
                                         <td>
                                             {{formatCurrency(u.tongTien)}}

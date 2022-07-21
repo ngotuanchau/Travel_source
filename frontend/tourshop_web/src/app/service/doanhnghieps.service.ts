@@ -13,6 +13,7 @@ export class DoanhNghiepsService {
   getAllBusiness(): Observable<any> {
     return this.http.get<any>(this.baseUrl + "/doanhnghiep_get");
   }
+
   getDoanhNghiep(id: any): Observable<any> {
     return this.http.get<any>(this.baseUrl + "/doanhnghiep_get/" + id);
   }
