@@ -178,7 +178,7 @@ namespace Travel.Controllers
                         message = "Tour không tồn tại"
                     });
                 }    
-                string tenanh = "default.png";
+
                 try
                 {
 
@@ -196,7 +196,6 @@ namespace Travel.Controllers
                     tour.LuuTru = tour_Serialize.LuuTru;
                     tour.PhuongTien = tour_Serialize.Phuongtien;
                     tour.MoTa = tour_Serialize.Mota;
-                    tour.AnhTour = tenanh;
                     tour.TrangThai = 1;
                 }
                 catch
@@ -542,7 +541,7 @@ namespace Travel.Controllers
                     tour_Serialize.Anhtour = tour.AnhTour;
 
                     // Get List Thoi Gian
-                    DateTime now = DateTime.Now;
+                    DateTime now = DateTime.Now.Date;
                     List<NhungNgayKhoiHanh> nhungNgayKhoiHanhs = new List<NhungNgayKhoiHanh>();
                     List<ThoiGian> thoiGians = _context.ThoiGians.Where(p => p.TourId == tour.Id && p.TrangThai == 1 && p.NgayDi > now).ToList();
                     foreach (var tg in thoiGians)
@@ -1426,7 +1425,7 @@ namespace Travel.Controllers
                 {
                     tours = tours.Where(t => t.LuuTru.Contains(search_Serialize.luutru)).ToList();
                 }
-                DateTime ngaykh = DateTime.Now;
+                DateTime ngaykh = DateTime.Now.Date;
                 if (search_Serialize.thoigiandi != null && search_Serialize.thoigiandi != "")
                 {
                     ngaykh = DateTime.ParseExact(search_Serialize.thoigiandi, "dd/MM/yyyy",
