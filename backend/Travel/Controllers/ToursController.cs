@@ -178,7 +178,7 @@ namespace Travel.Controllers
                         message = "Tour không tồn tại"
                     });
                 }    
-                string tenanh = "default.png";
+
                 try
                 {
 
@@ -196,7 +196,6 @@ namespace Travel.Controllers
                     tour.LuuTru = tour_Serialize.LuuTru;
                     tour.PhuongTien = tour_Serialize.Phuongtien;
                     tour.MoTa = tour_Serialize.Mota;
-                    tour.AnhTour = tenanh;
                     tour.TrangThai = 1;
                 }
                 catch
@@ -542,7 +541,7 @@ namespace Travel.Controllers
                     tour_Serialize.Anhtour = tour.AnhTour;
 
                     // Get List Thoi Gian
-                    DateTime now = DateTime.Now;
+                    DateTime now = DateTime.Now.Date;
                     List<NhungNgayKhoiHanh> nhungNgayKhoiHanhs = new List<NhungNgayKhoiHanh>();
                     List<ThoiGian> thoiGians = _context.ThoiGians.Where(p => p.TourId == tour.Id && p.TrangThai == 1 && p.NgayDi > now).ToList();
                     foreach (var tg in thoiGians)
@@ -963,7 +962,6 @@ namespace Travel.Controllers
         [ActionName("confirm_tour_start")]
         public async Task<IActionResult> confirm_tour_start([FromRoute] int id)
         {
-            using var transaction = _context.Database.BeginTransaction();
             try
             {
                 ThoiGian thoiGian = _context.ThoiGians.Where(t => t.TrangThai == 2 && t.Id == id).FirstOrDefault();
@@ -975,13 +973,6 @@ namespace Travel.Controllers
                 thoiGian.TrangThai = 3;
                 _context.SaveChanges();
 
-                List<HoaDon> hoaDons = _context.HoaDons.Where(t => t.ThoiGianId == id && t.TrangThai == 3).ToList();
-                foreach (var hoadon in hoaDons)
-                {
-                    hoadon.TrangThai = 4;
-                    _context.SaveChanges();
-                }
-                transaction.Commit();
                 return Ok(new
                 {
                     message = "Success",
@@ -989,7 +980,6 @@ namespace Travel.Controllers
             }
             catch (Exception ex)
             {
-                transaction.Rollback();
                 Console.WriteLine(ex.Message);
                 return StatusCode(500, "Internal Server Error");
             }
@@ -1435,7 +1425,7 @@ namespace Travel.Controllers
                 {
                     tours = tours.Where(t => t.LuuTru.Contains(search_Serialize.luutru)).ToList();
                 }
-                DateTime ngaykh = DateTime.Now;
+                DateTime ngaykh = DateTime.Now.Date;
                 if (search_Serialize.thoigiandi != null && search_Serialize.thoigiandi != "")
                 {
                     ngaykh = DateTime.ParseExact(search_Serialize.thoigiandi, "dd/MM/yyyy",
