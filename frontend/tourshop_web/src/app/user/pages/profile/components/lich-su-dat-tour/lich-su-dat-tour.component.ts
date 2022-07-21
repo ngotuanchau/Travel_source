@@ -107,7 +107,10 @@ export class LichSuDatTourComponent implements OnInit {
         hd.trangthaihoadon == 5 ||
         hd.trangthaihoadon == 6 ||
         hd.trangthaihoadon == 7 ||
-        hd.trangthaihoadon == 8
+        hd.trangthaihoadon == 8 ||
+        hd.trangthaihoadon == 9 ||
+        hd.trangthaihoadon == 10 ||
+        hd.trangthaihoadon == 11
       ) {
         list.push(hd);
       }

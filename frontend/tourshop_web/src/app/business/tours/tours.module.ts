@@ -30,6 +30,7 @@ import { MatSelectModule } from "@angular/material/select";
 import { NgayKhoiHanhEditComponent } from './edit/components/ngay-khoi-hanh-edit/ngay-khoi-hanh-edit.component';
 import { LichTrinhEditComponent } from './edit/components/lich-trinh-edit/lich-trinh-edit.component';
 import { DiaDiemEditComponent } from './edit/components/dia-diem-edit/dia-diem-edit.component';
+import { DichVuTourComponent } from './detail/components/dich-vu-tour/dich-vu-tour.component';
 @NgModule({
   declarations: [
     ToursIndexComponent,
@@ -49,6 +50,7 @@ import { DiaDiemEditComponent } from './edit/components/dia-diem-edit/dia-diem-e
     NgayKhoiHanhEditComponent,
     LichTrinhEditComponent,
     DiaDiemEditComponent,
+    DichVuTourComponent,
   ],
   imports: [
     CommonModule,

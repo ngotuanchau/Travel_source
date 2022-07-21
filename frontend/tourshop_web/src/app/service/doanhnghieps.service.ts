@@ -49,4 +49,9 @@ export class DoanhNghiepsService {
   unlock(id: any): Observable<any> {
     return this.http.get<any>(this.baseUrl + "/doanhnghiep_unlock/" + id);
   }
+  huyHoaDon(id: any): Observable<any> {
+    return this.http.delete<any>(
+      this.baseUrl + "/doanhnghiep/huy_hoadon/" + id
+    );
+  }
 }

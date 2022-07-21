@@ -49,16 +49,17 @@
                                             {{getStatus(u.trangThai)}}
                                         </td>
                                         <td *ngIf="u.trangThai==1" class="confirm">
-                                            <button (click)="confirmBookTour(u.id)">Xác nhận</button>
+                                            <button class="mb-4" (click)="confirmBookTour(u.id)">Xác nhận</button>
+                                            <button class="mb-4" (click)="huy(u.id)">Hủy</button>
                                         </td>
                                         <td *ngIf="u.trangThai==2" class="confirm">
-                                            <button (click)="confirmThanhToan(u.id)">Xác nhận Thanh toán</button>
+                                            <button class="mb-4" (click)="confirmThanhToan(u.id)">Xác nhận<br>Thanh toán</button><button class="mb-4" (click)="huy(u.id)">Hủy</button>
                                         </td>
                                         <td *ngIf="u.trangThai==3" class="confirm">
-                                            <button (click)="cofirmHTThanhToan(u.id)">Hoàn thành Thanh toán</button>
+                                            <button class="mb-4" (click)="cofirmHTThanhToan(u.id)">Hoàn thành<br> Thanh toán</button>
                                         </td>
                                         <td *ngIf="u.trangThai==5||u.trangThai==8" class="confirm">
-                                            <button (click)="cofirmHoanTien(u.id)">Đã hoàn tiền</button>
+                                            <button class="mb-4" (click)="cofirmHoanTien(u.id)">Đã hoàn tiền</button>
                                         </td>
                                         <td *ngIf="u.trangThai==4||u.trangThai==9||u.trangThai==6||u.trangThai==7" class="confirm">
                                         </td>

@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-sm-9">
+        <div class="row">
+            <div class="col-4">
+                <div class="dk-title">
+                    ẨM THỰC
+                </div>
+                <ul>
+                    <li *ngFor="let a of at">{{findDVById(a,this.lstAmThuc)}}</li>
+                </ul>
+            </div>
+            <div class="col-4">
+                <div class="dk-title">
+                    LƯU TRÚ
+                </div>
+                <ul>
+                    <li *ngFor="let a of lt">{{findDVById(a,this.lstLuuTru)}}</li>
+                </ul>
+            </div>
+            <div class="col-4">
+                <div class="dk-title">
+                    PHƯƠNG TIỆN
+                </div>
+                <ul>
+                    <li *ngFor="let a of pt">{{findDVById(a,this.lstPhuongTien)}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
