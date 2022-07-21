@@ -60,15 +60,15 @@ export class ToursEditComponent implements OnInit {
     this.lstPhuongTien = lstPhuongTiens;
     this.form = this.formBuilder.group({
       [FormField.tentour]: [""], //1
-      [FormField.theloai]: [1], //2
+      [FormField.theloai]: [0], //2
       [FormField.soNgay]: [1], //3
       [FormField.soDem]: [0], //4
       [FormField.veToiDa]: [1, Validators.required], //5
       [FormField.veToiThieu]: [1, Validators.required], //6
-      [FormField.diemDi]: [1], //7
-      [FormField.diemDen]: [1], //8
+      [FormField.diemDi]: [0], //7
+      [FormField.diemDen]: [0], //8
       [FormField.nhungdiadiem]: [[]], //9
-      [FormField.phanvung]: [1], //11
+      [FormField.phanvung]: [0], //11
       [FormField.mota]: [""], //12
       [FormField.amThuc]: [""], //13
       [FormField.luuTru]: [""], //14
@@ -140,7 +140,6 @@ export class ToursEditComponent implements OnInit {
   onChangeAT($event: any) {
     const id = $event.target.value;
     const isChecked = $event.target.checked;
-
     this.lstAmThuc = this.lstAmThuc.map((d) => {
       if (d.id == id) {
         d.completed = isChecked;
@@ -245,10 +244,10 @@ export class ToursEditComponent implements OnInit {
     if (this.form.value.diemDi == 1) {
       this.form.value.diemDi = this.tour.diemDi; //8
     }
-    if (this.form.value.diemDen == 1) {
+    if (this.form.value.diemDen == 0) {
       this.form.value.diemDen = this.tour.diemDen; //9
     }
-    if (this.form.value.phanvung == 1) {
+    if (this.form.value.phanvung == 0) {
       this.form.value.phanvung = this.tour.phanvung; //10
     }
     if (this.form.value.veToiDa == 0) {
@@ -275,7 +274,7 @@ export class ToursEditComponent implements OnInit {
     if (this.form.value.congty == null) {
       this.form.value.congty = this.tour.congty; //18
     }
-    if (this.form.value.theloai == 1) {
+    if (this.form.value.theloai == 0) {
       this.form.value.theloai = this.tour.theloai; //19
     }
     if (this.form.value.mota == "") {
