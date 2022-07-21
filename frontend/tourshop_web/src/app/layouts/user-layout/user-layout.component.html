@@ -1,6 +1,6 @@
 <nav class="navbar navbar__container navbar__background navbar-expand-lg ftco_navbar bg-dark bg-dark px-lg-4 scrolled awake" id="ftco-navbar">
     <div class="container container-fluid bg-none">
-        <a class="navbar-brand font-weight-bold  text-light" href="index.html">TourShop</a>
+        <a class="navbar-brand font-weight-bold  text-light" [routerLink]="['./']">TourShop</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="oi oi-menu"></span> Menu
     </button>
@@ -15,7 +15,7 @@
                 <li class="nav-item" ngbDropdown placement="bottom-end">
                     <div *ngIf="loginStatus()">
                         <a ngbDropdownToggle class="nav-link waves-effect waves-dark pro-pic" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="ms-2">{{name}}</span>
+                            <span class="ms-2">{{user.hoTen}}</span>
                         </a>
                     </div>
                     <div *ngIf="loginStatus()==false" class="dangnhap">

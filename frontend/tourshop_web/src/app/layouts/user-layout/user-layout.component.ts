@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { NguoiDungsService } from "../../service/nguoidungs.service";
 import { AuthService } from "../../service/auth.service";
 
 @Component({
@@ -11,12 +12,22 @@ export class UserLayoutComponent implements OnInit {
     if (this.service.IsLoggedIn()) return true;
     else return false;
   }
-  idLogin = localStorage.getItem("id");
+  idLogin: any;
   role: string;
-  name = localStorage.getItem("hoTen");
-  email = localStorage.getItem("email");
-  avt = localStorage.getItem("avt");
-  constructor(private service: AuthService) {}
+  user: any;
+  // name = localStorage.getItem("hoTen");
+  // email = localStorage.getItem("email");
+  // avt = localStorage.getItem("avt");
 
-  ngOnInit(): void {}
+  constructor(
+    private service: AuthService,
+    private nguoiDungService: NguoiDungsService
+  ) {}
+
+  ngOnInit(): void {
+    this.idLogin = localStorage.getItem("id");
+    this.nguoiDungService.getUser(this.idLogin).subscribe((res) => {
+      this.user = res;
+    });
+  }
 }
