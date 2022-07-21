@@ -400,11 +400,20 @@ namespace Travel.Controllers
                         {
                             sotour_dahuy++;
                         }
-                        List<HoaDon> hoaDons = _context.HoaDons.Where(h => h.ThoiGianId == thoigian.Id && h.TrangThai == 4).ToList();
+                        List<HoaDon> hoaDons = _context.HoaDons.Where(h => h.ThoiGianId == thoigian.Id && (h.TrangThai == 4 || h.TrangThai == 11)).ToList();
                         foreach (var hoadon in hoaDons)
                         {
-                            tongdoanhthu += hoadon.TongTien;
+                            if (hoadon.TrangThai == 4)
+                            {
+                                tongdoanhthu += hoadon.TongTien;
+                            }
+                            else
+                            {
+                                tongdoanhthu += (hoadon.TongTien * 80 / 100) * 20 / 100;
+                            }    
                         }
+
+
                     }
                 }
                 thongkedoanhnghiep_serialize tk = new thongkedoanhnghiep_serialize();
