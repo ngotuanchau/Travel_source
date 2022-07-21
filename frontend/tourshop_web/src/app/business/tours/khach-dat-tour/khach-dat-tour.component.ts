@@ -67,6 +67,9 @@ export class KhachDatTourComponent implements OnInit {
       }
     });
   }
+
+  //Huy
+  huy(id: any) {}
   //Get status name by id
   getStatus(id: number) {
     return this.hoadonStatus.find((item: any) => item.id == id)?.name;
@@ -99,7 +102,10 @@ export class KhachDatTourComponent implements OnInit {
         hd.trangthaihoadon == 5 ||
         hd.trangthaihoadon == 6 ||
         hd.trangthaihoadon == 7 ||
-        hd.trangthaihoadon == 8
+        hd.trangthaihoadon == 8 ||
+        hd.trangthaihoadon == 9 ||
+        hd.trangthaihoadon == 10 ||
+        hd.trangthaihoadon == 11
       ) {
         list.push(hd);
       }

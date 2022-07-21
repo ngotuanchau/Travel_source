@@ -16,12 +16,12 @@ export const lstStatus: Status[] = [
   },
   {
     id: 3,
-    name: "Đã thanh toán",
+    name: "Đã cọc (80%)",
     color: "color:blue",
   },
   {
     id: 4,
-    name: "Đã hoàn thành",
+    name: "Đã kết thúc",
     color: "color:gray",
   },
   {
@@ -46,12 +46,17 @@ export const lstStatus: Status[] = [
   },
   {
     id: 9,
-    name: "Đã được hoàn tiền",
-    color: "color:red",
+    name: "Đã hoàn tiền(100% tiền cọc)",
+    color: "color:black",
   },
   {
     id: 10,
-    name: "Được hủy bởi người dùng (Hoàn tiền 100%)",
+    name: "Đã hủy bởi người dùng (Hoàn tiền 100%)",
     color: "color:red",
+  },
+  {
+    id: 11,
+    name: "Đã hoàn tiền (80% tiền cọc)",
+    color: "color:blue",
   },
 ];

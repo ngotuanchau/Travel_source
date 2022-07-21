@@ -16,7 +16,7 @@ export const lstStatus: Status[] = [
   },
   {
     id: 3,
-    name: "Đã thanh toán",
+    name: "Đã cọc (80%)",
     color: "color:blue",
   },
   {
@@ -26,7 +26,7 @@ export const lstStatus: Status[] = [
   },
   {
     id: 5,
-    name: "Bị hủy bởi doanh nghiệp (Được hoàn tiền 100%)",
+    name: "Bị hủy bởi doanh nghiệp (Hoàn 100% tiền cọc)",
     color: "color:red",
   },
   {
@@ -41,12 +41,22 @@ export const lstStatus: Status[] = [
   },
   {
     id: 8,
-    name: "Đã hủy (Được hoàn tiền 80%)",
+    name: "Đã hủy (Được hoàn tiền 80% tiền cọc)",
     color: "color:red",
   },
   {
     id: 9,
-    name: "Đã được hoàn tiền",
+    name: "Đã hoàn tiền(100% tiền cọc)",
+    color: "color:black",
+  },
+  {
+    id: 10,
+    name: "Đã hủy bởi người dùng (Hoàn tiền 100% tiền cọc)",
     color: "color:red",
+  },
+  {
+    id: 11,
+    name: "Đã hoàn tiền (80% tiền cọc)",
+    color: "color:blue",
   },
 ];
