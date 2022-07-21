@@ -400,11 +400,20 @@ namespace Travel.Controllers
                         {
                             sotour_dahuy++;
                         }
-                        List<HoaDon> hoaDons = _context.HoaDons.Where(h => h.ThoiGianId == thoigian.Id && h.TrangThai == 4).ToList();
+                        List<HoaDon> hoaDons = _context.HoaDons.Where(h => h.ThoiGianId == thoigian.Id && (h.TrangThai == 4 || h.TrangThai == 11)).ToList();
                         foreach (var hoadon in hoaDons)
                         {
-                            tongdoanhthu += hoadon.TongTien;
+                            if (hoadon.TrangThai == 4)
+                            {
+                                tongdoanhthu += hoadon.TongTien;
+                            }
+                            else
+                            {
+                                tongdoanhthu += (hoadon.TongTien * 80 / 100) * 20 / 100;
+                            }    
                         }
+
+
                     }
                 }
                 thongkedoanhnghiep_serialize tk = new thongkedoanhnghiep_serialize();
@@ -417,6 +426,53 @@ namespace Travel.Controllers
                 tk.tongdoanhthu = tongdoanhthu;
                 tk.tongsotour = tongsotour;
                 return Ok(tk);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+        [Authorize]
+        [HttpDelete]
+        [Route("doanhnghiep/huy_hoadon/{id:int}")] //id hoadon
+        [Authorize(Roles = "Business")]
+        [ActionName("huy_hoadon")]
+        public async Task<IActionResult> huy_hoadon([FromRoute] int id)
+        {
+            try
+            {
+
+                HoaDon hoaDons = _context.HoaDons.Where(h => h.Id == id).FirstOrDefault();
+                if (hoaDons == null)
+                {
+                    return NotFound(new
+                    {
+                        message = "Hóa đơn không tồn tại"
+                    });
+                }
+                int sovehuy = hoaDons.TongSoVeTn + hoaDons.TongSoVeTe + hoaDons.TongSoVeNl;
+                ThoiGian thoiGian = _context.ThoiGians.Where(t => t.Id == hoaDons.ThoiGianId).FirstOrDefault();
+
+                if (hoaDons.TrangThai == 2 || hoaDons.TrangThai == 1)
+                {
+                    hoaDons.TrangThai = 6;
+                    thoiGian.VeDaDat -= sovehuy;
+                }
+                else
+                {
+                    return BadRequest(new
+                    {
+                        message = "không thể hủy"
+                    });
+                }
+                
+                _context.SaveChanges();
+                return Ok(new
+                {
+                    message = "Hủy tour thành công"
+                });
             }
             catch (Exception ex)
             {
