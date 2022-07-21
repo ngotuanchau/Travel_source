@@ -17,6 +17,12 @@
                                     <div class="text-danger" *ngIf="isControlError(FormField.tentour, 'required')">
                                         Tên tour không được để trống
                                     </div>
+                                    <div class="text-danger" *ngIf="this.form.controls[FormField.tentour].errors?.['minlength']">
+                                        Tên tour không được quá ngắn
+                                    </div>
+                                    <div class="text-danger" *ngIf="this.form.controls[FormField.tentour].errors?.['mãlength']">
+                                        Tên tour quá dài
+                                    </div>
                                 </div>
 
                             </div>

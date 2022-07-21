@@ -37,7 +37,14 @@ export class ToursCreateComponent {
     private route: Router
   ) {
     this.form = this.formBuilder.group({
-      [FormField.tentour]: [null, Validators.required], //1
+      [FormField.tentour]: [
+        null,
+        [
+          Validators.required,
+          Validators.minLength(15),
+          Validators.maxLength(200),
+        ],
+      ], //1
       [FormField.theloai]: [1, Validators.required], //2
       [FormField.soNgay]: [1, Validators.required], //3
       [FormField.soDem]: [0, Validators.required], //4
