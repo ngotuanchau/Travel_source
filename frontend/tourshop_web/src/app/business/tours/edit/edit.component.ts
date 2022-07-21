@@ -241,7 +241,7 @@ export class ToursEditComponent implements OnInit {
     if (this.form.value.soDem == 0) {
       this.form.value.soDem = this.tour.soDem; //7
     }
-    if (this.form.value.diemDi == 1) {
+    if (this.form.value.diemDi == 0) {
       this.form.value.diemDi = this.tour.diemDi; //8
     }
     if (this.form.value.diemDen == 0) {

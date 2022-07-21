@@ -246,4 +246,28 @@ export class NewtoursComponent implements OnInit {
   viewDetail(id: number) {
     this.routes.navigate(["/tour/detail/" + id]);
   }
+  findDateId(id: number) {
+    let idNgay: any;
+    var nkhs = this.tours.find((item: any) => item.id == id)?.nhungNgayKhoiHanh;
+    const today = new Date().toLocaleDateString();
+    //const thisDay = new Date(this.ngayKh).toLocaleDateString();
+
+    for (let n of nkhs) {
+      if (n.ngayKh > today) {
+        idNgay = n.id;
+        break;
+      }
+    }
+    return idNgay;
+  }
+  booking(id: any, ngay: any) {
+    this.routes.navigate(["/booking/", id, ngay]);
+  }
+  //format currency
+  formatCurrency(money: number) {
+    return new Intl.NumberFormat("fr-FR", {
+      style: "currency",
+      currency: "VND",
+    }).format(money);
+  }
 }
