@@ -906,12 +906,12 @@ namespace Travel.Controllers
         {
             try
             {
-                HoaDon hoaDon = _context.HoaDons.Include(h => h.NguoiDung).Include(t => t.Tour).Where(t => (t.TrangThai == 5 || t.TrangThai == 8) && t.Id == id).FirstOrDefault();
+                HoaDon hoaDon = _context.HoaDons.Include(h => h.NguoiDung).Include(t => t.Tour).Where(t => (t.TrangThai == 5 || t.TrangThai == 8 || t.TrangThai == 10) && t.Id == id).FirstOrDefault();
                 if (hoaDon == null)
                 {
                     return StatusCode(404, "Hóa đơn không hợp lệ");
                 }
-                if (hoaDon.TrangThai == 5)
+                if (hoaDon.TrangThai == 5 || hoaDon.TrangThai == 10)
                 {
                     hoaDon.TrangThai = 9;
                 }
